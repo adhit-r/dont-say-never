@@ -40,12 +40,12 @@ Grounded in Wegner's Ironic Process Theory (1994): actively suppressing a though
   - Compare P(eval) token probability under negative vs positive framing
   - This would give mechanistic evidence, not just behavioral
   
-- [ ] **Paper draft** (4-8 pages, workshop format)
-  - [ ] Introduction + Wegner theory background
-  - [ ] Methodology (clear experiment design)
-  - [ ] Results (Phase 1 + Phase 2 + multi-model + broader prompts)
-  - [ ] Discussion (when does framing matter? double-priming hypothesis)
-  - [ ] Limitations
+- [x] **Paper draft** (4-8 pages, workshop format)
+  - [x] Introduction + Wegner theory background
+  - [x] Methodology (clear experiment design)
+  - [x] Results (Phase 1 + Phase 2 + multi-model + broader prompts)
+  - [x] Discussion (when does framing matter? double-priming hypothesis)
+  - [x] Limitations
   
 - [ ] **Submission targets** (ordered by deadline)
   - AISEC @ CCS 2026 (AI + Security workshop, ~Aug deadline)
@@ -63,7 +63,7 @@ All existing data from CodeCoach Experiment 7:
 | `data/phase2-multi-prompt.json` | Phase 2: 180 trials (symlink to parent) |
 | `data/framing-templates/` | CLAUDE.md sections used in each condition |
 | `scripts/multi-model-framing.ts` | Multi-model replication script (TODO) |
-| `paper/framing-paper.tex` | Paper draft (TODO) |
+| `paper/framing-paper.tex` | Paper draft (workshop format, LaTeX) |
 
 ## Key Findings Summary
 
