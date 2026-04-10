@@ -4,7 +4,7 @@ This is a **standalone research paper repo** — NOT a software product. Do NOT 
 
 ## What this is
 
-A research paper: **"Do Safety Rules Backfire? An Empirical Study of How Rule Framing Affects LLM Code Security"**
+A research paper: **"Don't Say Never: How Prohibition-Framed Security Rules Backfire in LLM Coding Agents"**
 
 Author: Adhithya Rajasekaran
 

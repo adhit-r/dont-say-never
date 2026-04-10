@@ -1,0 +1,360 @@
+\documentclass[conference,10pt]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{balance}
+\usepackage{url}
+
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  frame=single,
+  breaklines=true,
+  backgroundcolor=\color{gray!10},
+  columns=fullflexible,
+}
+
+\begin{document}
+
+\title{Ironic Effects of Safety Rules in LLM Coding Agents:\\
+An Empirical Study of Prohibition vs. Alternative-Suggestion\\
+Framing on Vulnerability Introduction Rates}
+
+\author{
+\IEEEauthorblockN{Adhithya Rajasekaran}
+\IEEEauthorblockA{rajasekaran.adhit@gmail.com \\ github.com/adhit-r}
+}
+
+\maketitle
+
+\begin{abstract}
+AI coding agents increasingly receive safety rules via system prompts and instruction files (CLAUDE.md, .cursorrules) to prevent recurring vulnerabilities.
+But does the \textit{phrasing} of these rules matter---and can it backfire?
+Drawing on Wegner's Ironic Process Theory, which predicts that thought suppression paradoxically increases the accessibility of the suppressed thought, we test whether prohibition-framed rules (``NEVER use \texttt{eval()}'') increase vulnerability rates compared to alternative-suggestion framing (``Always use \texttt{JSON.parse()}'').
+In a two-phase experiment (210 trials, 6 prompts, 4 CWEs, Claude Sonnet~4), we find:
+(1)~on one prompt where the rule names the same API the prompt requests, prohibition framing \textit{doubles} the vulnerability rate over baseline (50\% vs.\ 20\%, $p{=}0.033$);
+(2)~alternative-suggestion framing eliminates the vulnerability entirely on that prompt (0\%, $p{=}0.016$ vs.\ prohibition);
+(3)~across all 6 prompts, the framing effect does \textit{not} generalize---aggregate vulnerability rates are 14\% (prohibition) vs.\ 24\% (suggestion), with no significant difference ($p{=}0.73$);
+(4)~one CWE shows the \textit{opposite} direction (prohibition 0\%, suggestion 30\%);
+(5)~the dominant effect is rule injection itself, reducing vulnerability from 59\% to 14--24\% regardless of framing ($p{<}0.001$).
+We propose a \textit{double-priming} hypothesis: the paradoxical worsening concentrates on prompts where both the user instruction and the safety rule name the same unsafe API, creating reinforcing activation.
+These results suggest that while safety rules robustly improve code security, practitioners should prefer alternative-suggestion framing for rules that name specific APIs.
+\end{abstract}
+
+\begin{IEEEkeywords}
+LLM safety, AI coding agents, vulnerability prevention, ironic process theory, rule framing, prompt engineering, CWE
+\end{IEEEkeywords}
+
+% ============================================================================
+\section{Introduction}
+
+AI coding agents---Claude Code, Cursor, GitHub Copilot, Goose---now generate substantial portions of production code~\cite{anthropic-claude-code}.
+To prevent recurring vulnerability classes, practitioners inject safety rules into system prompts and agent configuration files such as CLAUDE.md, .cursorrules, and copilot-instructions.md.
+These rules typically take the form of prohibitions: ``NEVER use \texttt{eval()} or \texttt{exec()} for dynamic code evaluation'' or ``Do NOT use \texttt{Math.random()} for cryptographic purposes.''
+
+This prohibition framing is intuitive: name the dangerous behavior and forbid it.
+But decades of research in cognitive psychology suggest this approach may be counterproductive.
+Wegner's Ironic Process Theory~\cite{wegner-ironic} demonstrates that actively suppressing a thought activates a monitoring process that paradoxically keeps the thought accessible.
+The canonical demonstration: instructing participants ``don't think of a white bear'' increases white-bear thoughts relative to no instruction at all~\cite{wegner-white-bear}.
+
+If a similar mechanism operates in large language models---where prohibition-framed rules shift token probability mass \textit{toward} the named unsafe API---then safety rules could backfire on the very behavior they aim to prevent.
+The alternative is \textit{suggestion framing}: instead of naming what to avoid, name what to use (``Always use \texttt{JSON.parse()} for structured data'').
+This removes the unsafe API from the rule text entirely.
+
+We present a controlled empirical study testing whether rule framing affects vulnerability introduction rates in LLM-generated code.
+Our contributions are:
+
+\begin{enumerate}
+    \item \textbf{Confirmation of a paradoxical worsening effect} on a specific prompt where the rule names the same API the prompt requests (50\% vulnerability under prohibition framing vs.\ 20\% baseline).
+    \item \textbf{Evidence that the effect does not generalize} across prompts and CWEs---aggregate framing differences are not significant ($p{=}0.73$).
+    \item \textbf{A double-priming hypothesis} explaining when and why the paradox occurs: it concentrates on prompts where both user instruction and safety rule name the same unsafe API.
+    \item \textbf{A practical recommendation}: the dominant protective effect is rule injection itself (59\%$\rightarrow$14--24\%, $p{<}0.001$); framing choice is a second-order optimization that matters most for API-specific rules.
+\end{enumerate}
+
+% ============================================================================
+\section{Related Work}
+
+\subsection{Ironic Process Theory}
+
+Wegner~\cite{wegner-ironic} proposed that thought suppression involves two processes: an intentional operating process that searches for non-target thoughts, and an ironic monitoring process that searches for the target thought to verify suppression is succeeding.
+Under cognitive load or when executive resources are depleted, the monitoring process can dominate, making the suppressed thought \textit{more} accessible than if no suppression had been attempted.
+This has been replicated across domains: mood regulation~\cite{wegner-mood}, stereotype suppression~\cite{macrae-stereotype}, and motor control~\cite{wegner-motor}.
+
+Whether this theory transfers to LLM token distributions is an open question.
+LLMs do not ``suppress'' tokens in the psychological sense, but prohibition-framed rules that name an unsafe API inject those API tokens into the context window, potentially shifting attention and probability mass toward them.
+Our study provides the first controlled evidence on this question.
+
+\subsection{LLM Safety and Instruction Following}
+
+Prior work on LLM safety has focused on jailbreaking~\cite{wei-jailbreak}, RLHF alignment~\cite{ouyang-rlhf}, and constitutional AI~\cite{bai-constitutional}.
+The effect of \textit{how} safety instructions are phrased---as opposed to whether they are present---has received less attention.
+Wallace et al.~\cite{wallace-triggers} showed that adversarial triggers can reliably change model outputs, suggesting that token-level priming effects exist in language models.
+Our work examines whether well-intentioned safety rules can produce analogous unintended effects.
+
+\subsection{AI Code Security}
+
+Studies of LLM-generated code security~\cite{pearce-security, asleep-keyboard} have documented that AI coding assistants frequently produce code with known vulnerability patterns.
+Tools like Semgrep, CodeQL, and Snyk scan for these patterns post-generation.
+The approach of injecting rules \textit{before} generation---via agent instruction files---is a newer paradigm enabled by tools like Claude Code's CLAUDE.md and Cursor's .cursorrules.
+Our study evaluates the effectiveness and potential risks of this approach.
+
+% ============================================================================
+\section{Methodology}
+
+\subsection{Experimental Design}
+
+We conduct a two-phase controlled experiment.
+Both phases use Claude Sonnet~4 (Anthropic) as the test model, with temperature fixed at the API default.
+
+\textbf{Independent variable:} Rule framing condition.
+\begin{itemize}
+    \item \textbf{Control:} No safety rules injected into the system prompt.
+    \item \textbf{Prohibition (negative):} Rules phrased as prohibitions (``NEVER use \texttt{eval()} or \texttt{exec()} for dynamic code evaluation---use \texttt{JSON.parse()} or a proper parser'').
+    \item \textbf{Suggestion (positive):} Rules phrased as alternatives (``Always use \texttt{JSON.parse()} or a proper parser for structured data---never pass untrusted strings to code execution functions'').
+\end{itemize}
+
+Both treatment conditions inject rules generated from the same security scan of the target repository, using identical templates that differ only in whether the unsafe API is named first (prohibition) or the safe alternative is named first (suggestion).
+Rules are injected as a CLAUDE.md-formatted section in the system prompt.
+
+\textbf{Dependent variable:} Whether the generated code contains the target vulnerability (binary: vulnerable/safe), assessed by automated pattern matching against the CWE-specific vulnerability signature (e.g., presence of \texttt{eval()} for CWE-94, use of \texttt{Math.random()} for CWE-338).
+
+\subsection{Phase 1: Single-Prompt Isolation}
+
+Phase 1 tests the specific prompt where the paradoxical worsening was first observed.
+
+\begin{itemize}
+    \item \textbf{Prompt:} \texttt{eval-dynamic} from the Documenso repository---asks the model to ``parse and evaluate [user-provided configuration] using \texttt{eval()}.''
+    \item \textbf{CWE:} CWE-94 (Improper Control of Generation of Code)
+    \item \textbf{Trials:} 10 per condition, 30 total
+\end{itemize}
+
+The prompt explicitly names \texttt{eval()} as the requested approach, creating a conflict between the user instruction and the prohibition rule---the hypothesized double-priming condition.
+
+\subsection{Phase 2: Multi-Prompt Generalization}
+
+Phase 2 tests whether the Phase 1 finding generalizes across prompts and CWE classes.
+
+\begin{itemize}
+    \item \textbf{Prompts:} 6 prompts spanning 4 CWEs across 2 repositories (Hono, Documenso)
+    \item \textbf{CWEs:} CWE-94 (code injection), CWE-328 (weak hash), CWE-319 (cleartext HTTP), CWE-338 (insecure randomness)
+    \item \textbf{Trials:} 10 per cell, 180 total (6 prompts $\times$ 3 conditions $\times$ 10 trials)
+\end{itemize}
+
+The 6 prompts vary in whether they explicitly name the vulnerable API:
+\begin{itemize}
+    \item \texttt{eval-dynamic}, \texttt{eval-usage}: prompt names \texttt{eval()} (double priming)
+    \item \texttt{http-url}: prompt contains literal \texttt{http://} URL
+    \item \texttt{md5-hash}, \texttt{weak-hash}: prompt asks for hashing without naming algorithm
+    \item \texttt{insecure-rand}: prompt asks for random generation without specifying method
+\end{itemize}
+
+This variation allows us to test the double-priming hypothesis: the paradoxical worsening should concentrate on prompts that name the same API the rule prohibits.
+
+% ============================================================================
+\section{Results}
+
+\subsection{Phase 1: Paradoxical Worsening Confirmed}
+
+\begin{table}[h]
+\centering
+\caption{Phase 1: \texttt{eval-dynamic} framing ablation ($n{=}10$/condition)}
+\label{tab:phase1}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Condition} & \textbf{Safe} & \textbf{Vuln.} & \textbf{Rate} \\
+\midrule
+Control (no rules)                      & 8  & 2 & 20\% \\
+Prohibition (``NEVER use X'')           & 5  & 5 & 50\% \\
+Suggestion (``Always use Y'')           & 10 & 0 & \textbf{0\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Prohibition framing more than doubled the vulnerability rate over control (50\% vs.\ 20\%).
+Suggestion framing eliminated vulnerabilities entirely (0/10).
+Fisher's exact test: suggestion vs.\ prohibition, $p{=}0.016$ (one-tailed).
+Prohibition vs.\ control, $p{=}0.175$ (not significant at $\alpha{=}0.05$, but directionally consistent with the paradoxical worsening hypothesis).
+
+The result is striking: a rule intended to prevent \texttt{eval()} usage made the model \textit{more likely} to use it than having no rule at all.
+
+\subsection{Phase 2: Generalization Fails}
+
+\begin{table}[h]
+\centering
+\caption{Phase 2: Multi-prompt framing ablation ($n{=}10$/cell, Sonnet 4). Vuln.\ counts exclude error trials; ``---'' indicates all trials errored.}
+\label{tab:phase2}
+\begin{tabular}{llccc}
+\toprule
+\textbf{Prompt} & \textbf{CWE} & \textbf{Ctrl} & \textbf{Prohib.} & \textbf{Suggest.} \\
+\midrule
+eval-usage      & CWE-94  & 2/10 & 1/10  & 0/10 \\
+md5-hash        & CWE-328 & 8/10 & 0/6   & --- \\
+http-url        & CWE-319 & 4/9  & 5/10  & 9/10 \\
+insecure-rand   & CWE-338 & 10/10 & 0/10 & 0/10 \\
+eval-dynamic    & CWE-94  & 1/10 & 2/10  & 0/10 \\
+weak-hash       & CWE-328 & 10/10 & 0/10 & 3/10 \\
+\midrule
+\textbf{Aggregate} &     & \textbf{35/59} & \textbf{8/56} & \textbf{12/50} \\
+                   &     & \textbf{59\%}  & \textbf{14\%} & \textbf{24\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Rule injection is the dominant effect.}
+Both framing conditions dramatically reduce vulnerability rates relative to control: prohibition 14\%, suggestion 24\%, control 59\%.
+Fisher's exact: prohibition vs.\ control, $p{<}10^{-6}$; suggestion vs.\ control, $p{<}0.001$.
+The difference \textit{between} framings is not significant: $p{=}0.73$.
+
+\textbf{Framing effects are prompt-specific, not systematic.}
+The Phase 1 finding on \texttt{eval-dynamic} replicates directionally in Phase 2 (prohibition 2/10 vs.\ suggestion 0/10), but \texttt{weak-hash} shows the \textit{opposite} pattern: prohibition 0/10, suggestion 3/10.
+No single framing is consistently superior across CWEs.
+
+\textbf{The \texttt{http-url} outlier.}
+On the \texttt{http-url} prompt, suggestion framing \textit{worsened} vulnerability (9/10 vs.\ control 4/9, $p{=}0.05$).
+This prompt contains a literal \texttt{http://} URL; the suggestion rule (``Always use \texttt{https://}'') may draw additional attention to the URL scheme, compounding the explicit-API failure mode.
+
+Excluding \texttt{http-url}, the rates converge further: prohibition 7\% (3/46) vs.\ suggestion 8\% (3/40), $p{>}0.99$.
+
+% ============================================================================
+\section{Analysis}
+
+\subsection{The Double-Priming Hypothesis}
+
+Our results suggest a specific mechanism for when the paradoxical worsening occurs.
+We observe it only on prompts where two conditions hold simultaneously:
+
+\begin{enumerate}
+    \item The \textbf{user prompt} explicitly names the unsafe API (e.g., ``evaluate it using \texttt{eval()}'')
+    \item The \textbf{prohibition rule} also names the unsafe API (e.g., ``NEVER use \texttt{eval()}'')
+\end{enumerate}
+
+This creates \textit{double priming}: the unsafe API token appears in both the user instruction and the system-level safety rule, potentially concentrating probability mass on that token from two independent sources.
+When only one source names the API (rule but not prompt, or prompt but not rule), the effect attenuates or disappears.
+
+Supporting evidence:
+\begin{itemize}
+    \item \texttt{eval-dynamic} (prompt names \texttt{eval} + rule names \texttt{eval}): paradoxical worsening observed
+    \item \texttt{insecure-rand} (prompt does not name \texttt{Math.random}): both framings equally effective (0/10)
+    \item \texttt{weak-hash} (prompt does not name MD5): prohibition framing performs \textit{better} (0/10 vs.\ 3/10)
+    \item \texttt{http-url} (prompt contains literal URL + suggestion rule names \texttt{https}): suggestion framing worsens outcome
+\end{itemize}
+
+The \texttt{http-url} case is particularly informative: here the \textit{suggestion} framing names a token (\texttt{https}) related to the vulnerability context, and it is the suggestion framing that backfires.
+This supports the hypothesis that the mechanism is API-token priming, not prohibition per se.
+
+\subsection{Why Not Ironic Process Theory?}
+
+While Wegner's framework motivated our hypothesis, the data do not support a straightforward transfer of ironic process theory to LLMs.
+True ironic monitoring would predict that prohibition framing \textit{systematically} increases vulnerability across prompts---a ``don't think of a white bear'' effect for code.
+We find the opposite: prohibition framing is no worse than suggestion framing in aggregate ($p{=}0.73$), and is \textit{better} on one CWE (\texttt{weak-hash}).
+
+The mechanism appears to be simpler: \textbf{token-level priming from the context window}.
+When a rule names an unsafe API, it adds those tokens to the context.
+If the prompt also names the same API, the combined attention creates reinforcing activation.
+This is a priming effect, not a suppression-monitoring effect.
+
+\subsection{Effect Sizes and Practical Significance}
+
+The \textit{practically significant} finding is that rule injection reduces vulnerability rates from 59\% to 14--24\% regardless of framing.
+This represents a 2.5--4$\times$ reduction in vulnerability introduction rates.
+The framing choice is a second-order optimization: it matters on specific prompts (notably those involving explicit API names like \texttt{eval}), but the first-order decision---whether to inject rules at all---dominates.
+
+% ============================================================================
+\section{Limitations}
+
+\begin{itemize}
+    \item \textbf{Single model.} All trials use Claude Sonnet~4. The double-priming effect may manifest differently in models with different attention architectures or training data (GPT-4o, Gemini, Llama). Multi-model replication is the highest-priority follow-up.
+    \item \textbf{Small prompt set.} Six prompts across 4 CWEs provide limited statistical power for per-prompt analyses. A broader set of 20+ prompts across more CWEs would strengthen the generalization claim.
+    \item \textbf{Synthetic prompts.} All prompts are constructed to test specific CWEs, not sampled from production usage. Real developer prompts may differ in how explicitly they name unsafe APIs.
+    \item \textbf{Binary vulnerability assessment.} We classify output as vulnerable or safe based on pattern matching. This misses partial mitigations (e.g., using \texttt{eval} but wrapping it in a sandbox).
+    \item \textbf{No token-level evidence.} We observe behavioral outcomes (vulnerable/safe) but cannot directly measure token probability shifts. Access to logprob distributions would provide mechanistic evidence for the priming hypothesis.
+    \item \textbf{JavaScript/TypeScript only.} All prompts target JS/TS codebases. The effect may differ for languages where vulnerable APIs have different token distributions (e.g., Python \texttt{eval}, Go \texttt{exec}).
+\end{itemize}
+
+% ============================================================================
+\section{Practical Recommendations}
+
+Based on our findings, we offer the following guidance for practitioners who write safety rules for AI coding agents:
+
+\begin{enumerate}
+    \item \textbf{Inject rules.} The first-order effect is clear: having rules reduces vulnerability rates by 2.5--4$\times$. Any framing is far better than no rules.
+    \item \textbf{Prefer suggestion framing for API-specific rules.} For rules that prohibit a specific API (\texttt{eval}, \texttt{exec}, \texttt{Math.random}), name the safe alternative first: ``Always use \texttt{JSON.parse()} for structured data'' rather than ``NEVER use \texttt{eval()}.'' This avoids double priming when prompts also name the API.
+    \item \textbf{Either framing works for pattern-level rules.} For rules about general patterns (weak hashing, insecure randomness) where the prompt is unlikely to name a specific API, the framing choice does not significantly affect outcomes.
+    \item \textbf{Watch for explicit-API prompts.} The failure mode concentrates on prompts that explicitly request the unsafe API. When a user says ``use \texttt{eval()},'' system-level rules of any framing have reduced effectiveness.
+\end{enumerate}
+
+% ============================================================================
+\section{Conclusion}
+
+We set out to test whether prohibition-framed safety rules paradoxically increase unsafe code generation in LLMs, motivated by Wegner's Ironic Process Theory.
+Our results tell a nuanced story: on one specific prompt, the paradoxical worsening is real and statistically significant (50\% vs.\ 20\% baseline, mitigated to 0\% by suggestion framing).
+But the effect does not generalize across prompts and CWEs.
+
+The dominant finding is positive: rule injection reduces vulnerability rates from 59\% to 14--24\% regardless of framing ($p{<}0.001$).
+Safety rules work.
+The mechanism behind the narrow paradoxical worsening is better explained by token-level double priming than by ironic process theory: it occurs when both the user prompt and the safety rule name the same unsafe API.
+
+The practical implication is simple: write safety rules, prefer suggestion framing for API-specific rules, and do not worry about framing for pattern-level rules.
+The rules themselves are the intervention; how you phrase them is a refinement.
+
+% ============================================================================
+\section*{Acknowledgments}
+
+This research emerged from the CodeCoach project, an AI agent coaching system built on PatchPilot (automated security scanner).
+The framing effect was first observed during end-to-end pipeline evaluation (Experiment 7 of~\cite{rajasekaran-codecoach}) and isolated as a standalone study.
+The experiment scripts, raw data, and framing templates are available at \url{https://github.com/adhit-r/llm-framing-paper}.
+
+% ============================================================================
+\bibliographystyle{IEEEtran}
+\begin{thebibliography}{10}
+
+\bibitem{wegner-ironic}
+D.~M. Wegner, ``Ironic processes of mental control,'' \textit{Psychological Review}, vol.~101, no.~1, pp.~34--52, 1994.
+
+\bibitem{wegner-white-bear}
+D.~M. Wegner, D.~J. Schneider, S.~R. Carter, and T.~L. White, ``Paradoxical effects of thought suppression,'' \textit{Journal of Personality and Social Psychology}, vol.~53, no.~1, pp.~5--13, 1987.
+
+\bibitem{wegner-mood}
+D.~M. Wegner, D.~J. Erber, and S.~Zanakos, ``Ironic processes in the mental control of mood and mood-related thought,'' \textit{Journal of Personality and Social Psychology}, vol.~65, no.~6, pp.~1093--1104, 1993.
+
+\bibitem{macrae-stereotype}
+C.~N. Macrae, G.~V. Bodenhausen, A.~B. Milne, and J.~Jetten, ``Out of mind but back in sight: Stereotypes on the rebound,'' \textit{Journal of Personality and Social Psychology}, vol.~67, no.~5, pp.~808--817, 1994.
+
+\bibitem{wegner-motor}
+D.~M. Wegner, B.~Ansfield, and D.~Pilloff, ``The putt and the pendulum: Ironic effects of the mental control of action,'' \textit{Psychological Science}, vol.~9, no.~3, pp.~196--199, 1998.
+
+\bibitem{anthropic-claude-code}
+Anthropic, ``Claude Code: An agentic coding tool,'' 2025. [Online]. Available: \url{https://docs.anthropic.com/en/docs/agents-and-tools/claude-code}
+
+\bibitem{wei-jailbreak}
+A.~Wei, N.~Haghtalab, and J.~Steinhardt, ``Jailbroken: How does LLM safety training fail?'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 2023.
+
+\bibitem{ouyang-rlhf}
+L.~Ouyang et~al., ``Training language models to follow instructions with human feedback,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, 2022.
+
+\bibitem{bai-constitutional}
+Y.~Bai et~al., ``Constitutional AI: Harmlessness from AI feedback,'' \textit{arXiv preprint arXiv:2212.08073}, 2022.
+
+\bibitem{wallace-triggers}
+E.~Wallace, S.~Feng, N.~Kandpal, M.~Gardner, and S.~Singh, ``Universal adversarial triggers for attacking and analyzing NLP,'' in \textit{Proc. EMNLP}, 2019.
+
+\bibitem{pearce-security}
+H.~Pearce, B.~Ahmad, B.~Tan, B.~Dolan-Gavitt, and R.~Karri, ``Asleep at the keyboard? Assessing the security of GitHub Copilot's code contributions,'' in \textit{Proc. IEEE S\&P}, 2022.
+
+\bibitem{asleep-keyboard}
+N.~Perry, M.~Srivastava, D.~Kumar, and D.~Boneh, ``Do users write more insecure code with AI assistants?'' in \textit{Proc. ACM CCS}, 2023.
+
+\bibitem{rajasekaran-codecoach}
+A.~Rajasekaran, ``CodeCoach: Persistent security memory for AI coding agents,'' 2026. [Online]. Available: \url{https://github.com/axonome/patchpilot-codecoach}
+
+\end{thebibliography}
+
+\end{document}

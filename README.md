@@ -1,6 +1,4 @@
-# Do Safety Rules Backfire?
-
-**An Empirical Study of How Rule Framing Affects LLM Code Security**
+# Don't Say Never: How Prohibition-Framed Security Rules Backfire in LLM Coding Agents
 
 **Author:** Adhithya Rajasekaran
 
