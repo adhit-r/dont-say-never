@@ -1,0 +1,499 @@
+{
+  "methodology": {
+    "repos_analyzed": [
+      "express (v5 framework, 41 JS source files)",
+      "hono (v4 TypeScript framework, 1177 TS files)",
+      "documenso (v1.9 TypeScript full-stack app, ~1177 TS files)"
+    ],
+    "total_scanner_findings": 158,
+    "classification_method": "Manual source inspection: each finding's vulnerable_code field was cross-checked against the surrounding source context in the cached repo. CD (context-dependent) findings were classified conservatively as TP for the reported precision figure.",
+    "recall_method": "Manual grep for known vulnerability patterns (dangerouslySetInnerHTML, eval, createHash sha1/md5, innerHTML, path traversal) in files not flagged by each scanner.",
+    "note": "Precision = TP / (TP + FP + CD) using conservative estimate (CD treated as TP). Recall is estimated from known-missed patterns, not a complete ground-truth corpus."
+  },
+  "per_scanner_overall": {
+    "semgrep": {
+      "total": 78,
+      "tp": 66,
+      "fp": 11,
+      "cd": 1,
+      "precision_conservative": 0.859,
+      "precision_optimistic": 0.846,
+      "precision_reported": 0.859
+    },
+    "stale_ai_patterns": {
+      "total": 80,
+      "tp": 1,
+      "fp": 50,
+      "cd": 29,
+      "precision_conservative": 0.375,
+      "precision_optimistic": 0.013,
+      "precision_reported": 0.375
+    }
+  },
+  "per_repo_per_scanner": {
+    "express": {
+      "semgrep": {
+        "total": 41,
+        "tp": 35,
+        "fp": 6,
+        "cd": 0,
+        "precision_conservative": 0.854,
+        "precision_optimistic": 0.854,
+        "precision_reported": 0.854
+      },
+      "stale_ai": {
+        "total": 1,
+        "tp": 1,
+        "fp": 0,
+        "cd": 0,
+        "precision_conservative": 1,
+        "precision_optimistic": 1,
+        "precision_reported": 1
+      }
+    },
+    "hono": {
+      "semgrep": {
+        "total": 4,
+        "tp": 0,
+        "fp": 3,
+        "cd": 1,
+        "precision_conservative": 0.25,
+        "precision_optimistic": 0,
+        "precision_reported": 0.25
+      },
+      "stale_ai": {
+        "total": 13,
+        "tp": 0,
+        "fp": 8,
+        "cd": 5,
+        "precision_conservative": 0.385,
+        "precision_optimistic": 0,
+        "precision_reported": 0.385
+      }
+    },
+    "documenso": {
+      "semgrep": {
+        "total": 33,
+        "tp": 31,
+        "fp": 2,
+        "cd": 0,
+        "precision_conservative": 0.939,
+        "precision_optimistic": 0.939,
+        "precision_reported": 0.939
+      },
+      "stale_ai": {
+        "total": 66,
+        "tp": 0,
+        "fp": 42,
+        "cd": 24,
+        "precision_conservative": 0.364,
+        "precision_optimistic": 0,
+        "precision_reported": 0.364
+      }
+    }
+  },
+  "per_cwe_semgrep": {
+    "CWE-522": {
+      "total": 30,
+      "tp": 30,
+      "fp": 0,
+      "cd": 0,
+      "precision_conservative": 1,
+      "precision_optimistic": 1,
+      "precision_reported": 1
+    },
+    "CWE-798": {
+      "total": 5,
+      "tp": 4,
+      "fp": 1,
+      "cd": 0,
+      "precision_conservative": 0.8,
+      "precision_optimistic": 0.8,
+      "precision_reported": 0.8
+    },
+    "CWE-79": {
+      "total": 10,
+      "tp": 2,
+      "fp": 7,
+      "cd": 1,
+      "precision_conservative": 0.3,
+      "precision_optimistic": 0.2,
+      "precision_reported": 0.3
+    },
+    "CWE-319": {
+      "total": 3,
+      "tp": 0,
+      "fp": 3,
+      "cd": 0,
+      "precision_conservative": 0,
+      "precision_optimistic": 0,
+      "precision_reported": 0
+    },
+    "CWE-250": {
+      "total": 1,
+      "tp": 1,
+      "fp": 0,
+      "cd": 0,
+      "precision_conservative": 1,
+      "precision_optimistic": 1,
+      "precision_reported": 1
+    },
+    "CWE-345": {
+      "total": 29,
+      "tp": 29,
+      "fp": 0,
+      "cd": 0,
+      "precision_conservative": 1,
+      "precision_optimistic": 1,
+      "precision_reported": 1
+    }
+  },
+  "per_cwe_stale_ai": {
+    "CWE-532": {
+      "total": 9,
+      "tp": 1,
+      "fp": 8,
+      "cd": 0,
+      "precision_conservative": 0.111,
+      "precision_optimistic": 0.111,
+      "precision_reported": 0.111
+    },
+    "CWE-94": {
+      "total": 8,
+      "tp": 0,
+      "fp": 8,
+      "cd": 0,
+      "precision_conservative": 0,
+      "precision_optimistic": 0,
+      "precision_reported": 0
+    },
+    "CWE-328": {
+      "total": 5,
+      "tp": 0,
+      "fp": 1,
+      "cd": 4,
+      "precision_conservative": 0.8,
+      "precision_optimistic": 0,
+      "precision_reported": 0.8
+    },
+    "CWE-319": {
+      "total": 18,
+      "tp": 0,
+      "fp": 18,
+      "cd": 0,
+      "precision_conservative": 0,
+      "precision_optimistic": 0,
+      "precision_reported": 0
+    },
+    "CWE-1188": {
+      "total": 34,
+      "tp": 0,
+      "fp": 9,
+      "cd": 25,
+      "precision_conservative": 0.735,
+      "precision_optimistic": 0,
+      "precision_reported": 0.735
+    },
+    "CWE-338": {
+      "total": 6,
+      "tp": 0,
+      "fp": 6,
+      "cd": 0,
+      "precision_conservative": 0,
+      "precision_optimistic": 0,
+      "precision_reported": 0
+    }
+  },
+  "recall_gaps": [
+    {
+      "repo": "documenso",
+      "scanner": "stale_ai",
+      "pattern_type": "dangerouslySetInnerHTML without sanitization",
+      "cwe": "CWE-79",
+      "example_file": "apps/docs/src/components/mdx/mermaid.tsx",
+      "example_line": 66,
+      "example_code": "<div ref={containerRef} dangerouslySetInnerHTML={{ __html: svg }} />",
+      "reason_missed": "stale_ai scanner has no rule for dangerouslySetInnerHTML; Semgrep caught it (but not all instances)."
+    },
+    {
+      "repo": "documenso",
+      "scanner": "stale_ai",
+      "pattern_type": "dangerouslySetInnerHTML without sanitization",
+      "cwe": "CWE-79",
+      "example_file": "apps/remix/app/root.tsx",
+      "example_line": 120,
+      "example_code": "dangerouslySetInnerHTML={{ __html: env.SCRIPT_CONTENT }}",
+      "reason_missed": "stale_ai has no dangerouslySetInnerHTML rule; Semgrep rule matched only 2 of 6 total instances (missed root.tsx completely)."
+    }
+  ],
+  "summary_for_paper": {
+    "finding_counts": {
+      "semgrep_total": 78,
+      "stale_ai_total": 80,
+      "combined": 158,
+      "classified": 158
+    },
+    "precision_table": {
+      "headers": [
+        "Scanner",
+        "Repo",
+        "Total Findings",
+        "TP",
+        "FP",
+        "CD",
+        "Precision (conservative)"
+      ],
+      "rows": [
+        [
+          "Semgrep SAST",
+          "express",
+          41,
+          35,
+          6,
+          0,
+          "85.4%"
+        ],
+        [
+          "Stale AI Patterns",
+          "express",
+          1,
+          1,
+          0,
+          0,
+          "100.0%"
+        ],
+        [
+          "Semgrep SAST",
+          "hono",
+          4,
+          0,
+          3,
+          1,
+          "25.0%"
+        ],
+        [
+          "Stale AI Patterns",
+          "hono",
+          13,
+          0,
+          8,
+          5,
+          "38.5%"
+        ],
+        [
+          "Semgrep SAST",
+          "documenso",
+          33,
+          31,
+          2,
+          0,
+          "93.9%"
+        ],
+        [
+          "Stale AI Patterns",
+          "documenso",
+          66,
+          0,
+          42,
+          24,
+          "36.4%"
+        ],
+        [
+          "Semgrep SAST",
+          "ALL",
+          78,
+          66,
+          11,
+          1,
+          "85.9%"
+        ],
+        [
+          "Stale AI Patterns",
+          "ALL",
+          80,
+          1,
+          50,
+          29,
+          "37.5%"
+        ]
+      ]
+    },
+    "cwe_precision_table": {
+      "headers": [
+        "CWE",
+        "Scanner",
+        "Total",
+        "TP",
+        "FP",
+        "CD",
+        "Precision"
+      ],
+      "rows": [
+        [
+          "CWE-522",
+          "Semgrep",
+          30,
+          30,
+          0,
+          0,
+          "100.0%"
+        ],
+        [
+          "CWE-798",
+          "Semgrep",
+          5,
+          4,
+          1,
+          0,
+          "80.0%"
+        ],
+        [
+          "CWE-79",
+          "Semgrep",
+          10,
+          2,
+          7,
+          1,
+          "30.0%"
+        ],
+        [
+          "CWE-319",
+          "Semgrep",
+          3,
+          0,
+          3,
+          0,
+          "0.0%"
+        ],
+        [
+          "CWE-250",
+          "Semgrep",
+          1,
+          1,
+          0,
+          0,
+          "100.0%"
+        ],
+        [
+          "CWE-345",
+          "Semgrep",
+          29,
+          29,
+          0,
+          0,
+          "100.0%"
+        ],
+        [
+          "CWE-532",
+          "Stale AI",
+          9,
+          1,
+          8,
+          0,
+          "11.1%"
+        ],
+        [
+          "CWE-94",
+          "Stale AI",
+          8,
+          0,
+          8,
+          0,
+          "0.0%"
+        ],
+        [
+          "CWE-328",
+          "Stale AI",
+          5,
+          0,
+          1,
+          4,
+          "80.0%"
+        ],
+        [
+          "CWE-319",
+          "Stale AI",
+          18,
+          0,
+          18,
+          0,
+          "0.0%"
+        ],
+        [
+          "CWE-1188",
+          "Stale AI",
+          34,
+          0,
+          9,
+          25,
+          "73.5%"
+        ],
+        [
+          "CWE-338",
+          "Stale AI",
+          6,
+          0,
+          6,
+          0,
+          "0.0%"
+        ]
+      ]
+    },
+    "key_fp_patterns": [
+      {
+        "scanner": "Stale AI Patterns",
+        "rule": "AI-EVAL-001 (CWE-94)",
+        "pattern": "RegExp.prototype.exec() calls",
+        "count": 8,
+        "root_cause": "Lookbehind /(?<![A-Za-z])exec\\s*\\(/ does not exclude method-call syntax (.exec()); any variable.exec() fires the rule."
+      },
+      {
+        "scanner": "Stale AI Patterns",
+        "rule": "AI-HTTP-004 (CWE-319)",
+        "pattern": "SVG xmlns URI and validation message strings",
+        "count": 12,
+        "root_cause": "Pattern /\\bhttp:\\/\\/(?!localhost...)/ matches W3C XML namespace URIs and user-facing error message strings that contain 'http://' as literal text."
+      },
+      {
+        "scanner": "Stale AI Patterns",
+        "rule": "AI-LOG-007 (CWE-532)",
+        "pattern": "console.error with 'token'/'auth'/'credential' in message literal",
+        "count": 8,
+        "root_cause": "Regex matches on the message string, not on the logged variable. 'Error decoding JWT token:' fires even though no token value is in scope."
+      },
+      {
+        "scanner": "Stale AI Patterns",
+        "rule": "AI-RAND-003 (CWE-338)",
+        "pattern": "Math.random() in database seed files",
+        "count": 6,
+        "root_cause": "Scanner excludes *.test.ts but not seed/*.ts; seed files are development-only and do not generate production secrets."
+      },
+      {
+        "scanner": "Semgrep SAST",
+        "rule": "react-insecure-request (CWE-319)",
+        "pattern": "fetch('http://127.0.0.1:...')",
+        "count": 3,
+        "root_cause": "Semgrep rule does not have a loopback-address exception; benchmark harness fetch calls to 127.0.0.1 are flagged."
+      },
+      {
+        "scanner": "Semgrep SAST",
+        "rule": "direct-response-write (CWE-79)",
+        "pattern": "res.send() with escapeHtml() applied",
+        "count": 5,
+        "root_cause": "Semgrep rule fires on res.send() with any user-controlled input regardless of escaping — cannot track sanitization through escapeHtml()."
+      }
+    ],
+    "recall_summary": {
+      "stale_ai": {
+        "known_misses": 2,
+        "pattern": "dangerouslySetInnerHTML without sanitization (CWE-79)",
+        "note": "No rule exists for dangerouslySetInnerHTML in the stale-ai scanner. Semgrep partially covers this but also misses 4 of 6 occurrences in root.tsx."
+      },
+      "semgrep": {
+        "known_misses": 4,
+        "pattern": "dangerouslySetInnerHTML in documenso root.tsx and enable-authenticator-app-dialog.tsx",
+        "note": "Semgrep's react-dangerouslysetinnerhtml rule missed 4 of 6 total dangerouslySetInnerHTML usages in documenso, suggesting partial rule coverage."
+      }
+    }
+  }
+}

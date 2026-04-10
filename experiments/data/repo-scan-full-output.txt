@@ -1,0 +1,100 @@
+================================================================================
+REAL-WORLD REPO SCANNING EXPERIMENT
+================================================================================
+Target repos: 8
+Scanners: stale AI patterns (offline), ghost dependencies (registry queries)
+
+
+[1/8] express — Classic Node.js web framework
+  Cloning https://github.com/expressjs/express.git...
+  Running stale AI pattern scanner...
+  Running ghost dependency scanner...
+  Results: 1 stale AI + 11 ghost deps = 12 findings → 11 rules (8648ms)
+
+[2/8] fastify — Fast web framework for Node.js
+  Cloning https://github.com/fastify/fastify.git...
+  Running stale AI pattern scanner...
+  Running ghost dependency scanner...
+  Results: 6 stale AI + 3 ghost deps = 9 findings → 4 rules (9017ms)
+
+[3/8] next-learn — Next.js learning examples
+  Cloning https://github.com/vercel/next-learn.git...
+  Running stale AI pattern scanner...
+  Running ghost dependency scanner...
+  Results: 2 stale AI + 7 ghost deps = 9 findings → 3 rules (14093ms)
+
+[4/8] hono — Lightweight web framework
+  Cloning https://github.com/honojs/hono.git...
+  Running stale AI pattern scanner...
+  Running ghost dependency scanner...
+  Results: 13 stale AI + 6 ghost deps = 19 findings → 9 rules (15741ms)
+
+[5/8] payload — Headless CMS with auth, DB
+  Cloning https://github.com/payloadcms/payload.git...
+  Results: 0 stale AI + 0 ghost deps = 0 findings → 0 rules (0ms)
+
+[6/8] cal.com — Scheduling platform, production app
+  Cloning https://github.com/calcom/cal.com.git...
+  Running stale AI pattern scanner...
+  Running ghost dependency scanner...
+  Results: 177 stale AI + 313 ghost deps = 490 findings → 51 rules (159373ms)
+
+[7/8] twenty — Open-source CRM
+  Cloning https://github.com/twentyhq/twenty.git...
+  Running stale AI pattern scanner...
+  Running ghost dependency scanner...
+  Results: 312 stale AI + 24 ghost deps = 336 findings → 26 rules (125088ms)
+
+[8/8] documenso — Open-source DocuSign alternative
+  Cloning https://github.com/documenso/documenso.git...
+  Running stale AI pattern scanner...
+  Running ghost dependency scanner...
+  Results: 66 stale AI + 53 ghost deps = 119 findings → 30 rules (72151ms)
+
+================================================================================
+PAPER-READY RESULTS TABLE
+================================================================================
+
+Table 1: Scan Results by Repository
+
+| Repository | Language | Stale AI | Ghost Deps | Total | Rules | Compression | Time |
+|------------|----------|----------|------------|-------|-------|-------------|------|
+| express | JavaScript | 1 | 11 | 12 | 11 | 8% | 8648ms |
+| fastify | JavaScript/TypeScript | 6 | 3 | 9 | 4 | 56% | 9017ms |
+| next-learn | TypeScript | 2 | 7 | 9 | 3 | 67% | 14093ms |
+| hono | TypeScript | 13 | 6 | 19 | 9 | 53% | 15741ms |
+| payload | TypeScript | CLONE FAILED | | | | | |
+| cal.com | TypeScript | 177 | 313 | 490 | 51 | 90% | 159373ms |
+| twenty | TypeScript | 312 | 24 | 336 | 26 | 92% | 125088ms |
+| documenso | TypeScript | 66 | 53 | 119 | 30 | 75% | 72151ms |
+| **Total** | | **577** | **417** | **994** | **134** | **87%** | |
+
+Table 2: CWE Coverage
+
+| CWE | Repos Affected |
+|-----|----------------|
+| CWE-1104 | 7/8 |
+| CWE-94 | 5/8 |
+| CWE-319 | 4/8 |
+| CWE-328 | 3/8 |
+| CWE-338 | 3/8 |
+
+Table 3: Rule Categories
+
+| Category | Total Rules |
+|----------|-------------|
+| ghost_dep | 119 |
+| ai_pattern | 15 |
+
+================================================================================
+SUMMARY STATISTICS
+================================================================================
+Repos scanned:       7/8
+Total findings:      994
+Total rules:         134
+Avg findings/repo:   142.0
+Avg rules/repo:      19.1
+CWE classes covered: 5
+Overall compression: 87%
+
+Full results saved to: /Users/adhi/axonome/patchpilot_codecoach/backend/experiments/output/repo-scan-results.json

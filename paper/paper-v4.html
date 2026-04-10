@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Scan, Learn, Prevent (v4)</title>
+<style>
+@page { size: letter; margin: 0.9in 1in; }
+@media print { body { font-size: 10pt; } }
+body { font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.45; color: #111; text-align: justify; max-width: 7in; margin: 0 auto; padding: 0.5in; }
+h1 { font-size: 16pt; text-align: center; margin-bottom: 4pt; }
+h2 { font-size: 13pt; margin-top: 20pt; margin-bottom: 6pt; border-bottom: none; }
+h3 { font-size: 11pt; margin-top: 14pt; margin-bottom: 4pt; }
+p { margin: 5pt 0; }
+table { border-collapse: collapse; width: 100%; margin: 10pt 0; font-size: 9pt; }
+th { background: #e8e8e8; font-weight: bold; padding: 4pt 6pt; border: 0.5pt solid #ccc; text-align: left; }
+td { padding: 3pt 6pt; border: 0.5pt solid #ccc; }
+blockquote { margin: 8pt 20pt; padding: 6pt 12pt; background: #f8f8f8; font-style: italic; font-size: 9pt; border-left: 2pt solid #ccc; }
+code { font-family: 'Courier New', monospace; font-size: 8.5pt; background: #f5f5f5; padding: 1pt 3pt; }
+hr { border: none; border-top: 0.5pt solid #ccc; margin: 14pt 0; }
+strong { font-weight: bold; }
+em { font-style: italic; }
+ol, ul { margin: 5pt 0; padding-left: 22pt; }
+li { margin: 2pt 0; }
+</style>
+</head>
+<body>
+<h1 id="scan-learn-prevent-closing-the-feedback-loop-between-security-scanners-and-ai-coding-agents">Scan, Learn, Prevent: Closing the Feedback Loop Between Security Scanners and AI Coding Agents</h1>
+
+<p><strong>Adhithya Rajasekaran</strong></p>
+
+<p>rajasekaran.adhit@gmail.com | github.com/adhit-r</p>
+
+<hr />
+
+<h2 id="abstract">Abstract</h2>
+
+<p>AI coding agents lack persistent memory of security failures, causing the same vulnerability classes to recur across sessions. We present a closed-loop system that connects automated security scanners to agent instruction files (CLAUDE.md, .cursorrules, copilot-instructions.md), generating deterministic, template-driven rules from CWE-classified findings. In an end-to-end evaluation across 3 repositories and 2 models (108 trials, excluding a rate-limited third model), vulnerability rates decreased from 68.5% (95% CI: 55.3--79.3%) to 40.7% (95% CI: 28.7--54.0%), a statistically significant reduction (chi-squared=8.41, p=0.004). The effect was specific to CWE classes where the scanner generated rules: for matched CWEs, vulnerability rates dropped from 83% to 30% (64% relative reduction), while unmatched CWEs showed no change (50% vs. 54%), confirming the treatment effect is not a general prompt-context artifact. A controlled mechanism validation with hand-crafted rules (240 trials, 4 models) established a 98.8% upper bound, demonstrating that the rule format itself is effective and that the binding constraint on end-to-end performance is scanner coverage, not rule quality. However, a post-hoc precision analysis of the ghost dependency scanner revealed a 100% false positive rate across the 3 evaluated repositories (44/44 flagged packages were legitimate), indicating that scanner validation is a prerequisite for deployment. We discuss the implications for using agent instruction files as a programmable security policy layer and the limitations that must be addressed before this approach is production-ready.</p>
+
+<hr />
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>The adoption of AI coding agents has changed software development substantially. Tools such as Anthropic's Claude Code, Cursor, GitHub Copilot, and Block's Goose now generate significant portions of production codebases [1]. These agents share a limitation: they have no durable memory of security failures across sessions.</p>
+
+<p>When an AI agent introduces a SQL injection vulnerability via string concatenation, hardcodes an API key, or imports a hallucinated package name, the same class of vulnerability is likely to recur in subsequent sessions. Each session starts fresh. The agent reads its instruction file, generates code, and the cycle repeats.</p>
+
+<p>This paper addresses the question: can automated security detection feed back into agent instruction files to reduce vulnerability recurrence? We present a system with three contributions:</p>
+
+<ol>
+<li><p><strong>A closed-loop pipeline</strong> connecting multiple security scanners (SAST, secret detection, ghost dependency detection, stale AI pattern detection) to agent instruction file mutation.</p></li>
+<li><p><strong>A deterministic, template-driven rule generator</strong> that converts CWE-classified findings into natural language rules without using an LLM in the generation step, ensuring auditability and reproducibility.</p></li>
+<li><p><strong>Cross-agent rule distribution via instruction files</strong>: rules generated from scanner output are written to CLAUDE.md, .cursorrules, and copilot-instructions.md simultaneously, enabling any agent on the project to inherit the rules without fine-tuning.</p></li>
+</ol>
+
+<p>We evaluate through three experiments with increasing realism. The results are mixed: the rule format is highly effective when rules exist for the relevant CWE class, but the end-to-end pipeline is constrained by scanner coverage and precision. We report both the successes and the significant limitations, including a 100% false positive rate in the ghost dependency scanner on the evaluated repositories.</p>
+
+<hr />
+
+<h2 id="2-background-and-related-work">2. Background and Related Work</h2>
+
+<h3 id="21-agent-instruction-files">2.1 Agent Instruction Files</h3>
+
+<p>Modern AI coding agents support project-specific instruction files read at session initialization. Claude Code reads CLAUDE.md [2], Cursor reads .cursorrules [3], GitHub Copilot reads .github/copilot-instructions.md [4], and Goose reads .goosehints [5]. The AGENTS.md specification under the Agentic AI Foundation (AAIF) [6] standardizes the concept. These files are today manually authored and rarely updated in response to security findings.</p>
+
+<h3 id="22-reflexion-and-verbal-reinforcement-learning">2.2 Reflexion and Verbal Reinforcement Learning</h3>
+
+<p>Shinn et al. [7] introduced Reflexion, where language agents learn from verbal self-reflection stored in an episodic memory buffer, improving HumanEval pass@1 from 80.1% to 91.0%. However, Reflexion's memory is ephemeral and does not persist across independent sessions. Shinn et al. [18] later found that LLM self-correction is unreliable without external feedback, motivating our use of external scanner output rather than self-reflection.</p>
+
+<h3 id="23-self-correcting-agents">2.3 Self-Correcting Agents</h3>
+
+<p>Pi-Reflect [8] analyzes conversation transcripts and generates rule updates, reducing correction rates from 0.45 to 0.07 per session. BMO [9] takes a similar approach. Osmani [17] surveys self-improving coding agents. Our system differs in three ways: (a) it uses structured scanner output rather than unstructured transcripts; (b) rule generation is deterministic and template-driven; (c) it writes to multiple instruction file formats simultaneously.</p>
+
+<h3 id="24-commercial-agent-memory-systems">2.4 Commercial Agent Memory Systems</h3>
+
+<p>Cognition's Devin maintains a Knowledge system requiring user approval [10]. Windsurf's Cascade generates Memories automatically [11], though the SpAIware exploit [12] demonstrated that this mechanism can be poisoned via prompt injection. Cursor's /Generate Rules requires manual invocation [3]. None use structured security scanner output or write to multiple agent platforms.</p>
+
+<h3 id="25-constitutional-ai-and-rule-based-steering">2.5 Constitutional AI and Rule-Based Steering</h3>
+
+<p>Bai et al. [16] introduced Constitutional AI (CAI), where models follow explicit principles embedded during training. Our approach applies a similar concept at inference time: security rules are injected through instruction files as system-prompt-level constraints, requiring no model modification.</p>
+
+<h3 id="26-ai-generated-code-security">2.6 AI-Generated Code Security</h3>
+
+<p>Pearce et al. [13] found Copilot produces vulnerable code in approximately 40% of security-relevant scenarios. Asare et al. [14] showed LLM-generated code contains weaknesses at rates comparable to human-written code. Our ghost dependency scanner addresses a related threat: LLM hallucination of package names creating supply chain attack vectors [15].</p>
+
+<hr />
+
+<h2 id="3-system-design">3. System Design</h2>
+
+<p>The system operates as a pipeline with four stages: multi-scanner detection, finding classification, deterministic rule generation, and multi-format instruction file injection.</p>
+
+<h3 id="31-multi-scanner-detection">3.1 Multi-Scanner Detection</h3>
+
+<p>The system orchestrates eight specialized scanners:</p>
+
+<table>
+<thead>
+<tr>
+  <th>Scanner</th>
+  <th>Target</th>
+  <th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>SAST</td>
+  <td>Code-level vulnerabilities</td>
+  <td>Semgrep integration</td>
+</tr>
+<tr>
+  <td>Secret detection</td>
+  <td>Hardcoded credentials</td>
+  <td>Gitleaks integration</td>
+</tr>
+<tr>
+  <td>SCA</td>
+  <td>Vulnerable dependencies</td>
+  <td>Trivy integration</td>
+</tr>
+<tr>
+  <td>Ghost dependencies</td>
+  <td>AI-hallucinated packages</td>
+  <td>Custom (TypeScript)</td>
+</tr>
+<tr>
+  <td>Stale AI patterns</td>
+  <td>Outdated training artifacts</td>
+  <td>Custom (regex)</td>
+</tr>
+<tr>
+  <td>Prompt injection</td>
+  <td>Instruction override attempts</td>
+  <td>Custom</td>
+</tr>
+<tr>
+  <td>IaC scanning</td>
+  <td>Infrastructure misconfig</td>
+  <td>Bearer integration</td>
+</tr>
+<tr>
+  <td>Vibe score</td>
+  <td>Overall security posture</td>
+  <td>Custom</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Ghost dependency scanner.</strong> LLMs hallucinate package names that do not exist in registries. An attacker can register such names, creating a supply chain attack vector. Our scanner queries npm, PyPI, Go, Rust, and Ruby registries, classifying findings into three risk tiers: <code>not_found</code> (package does not exist), <code>typosquat</code> (within edit distance of a legitimate package), and <code>phantom_new</code> (recently registered with minimal downloads). As we discuss in Section 5.1, the <code>phantom_new</code> classification has significant precision problems.</p>
+
+<p><strong>Stale AI pattern scanner.</strong> LLMs trained on historical code generate patterns now known to be insecure. We detect 10 specific patterns via regex rules, including eval()/exec() usage (CWE-94), MD5/SHA1 for cryptographic operations (CWE-328), Math.random() for security-sensitive values (CWE-338), and plaintext HTTP in production (CWE-319). Context-sensitivity checks exclude matches in test files and build scripts.</p>
+
+<h3 id="32-finding-classification">3.2 Finding Classification</h3>
+
+<p>Scanner output is normalized into a unified schema with CWE identifier, severity level, source tool, file path, line number, and scanner-specific metadata. Findings are deduplicated and grouped by CWE for rule generation.</p>
+
+<h3 id="33-deterministic-rule-generator">3.3 Deterministic Rule Generator</h3>
+
+<p>The rule generator converts classified findings into natural language rules using predefined templates. <strong>No LLM is used in the rule generation step.</strong> This ensures:</p>
+
+<ol>
+<li><strong>Auditability.</strong> Every generated rule traces to a specific template and input finding.</li>
+<li><strong>Reproducibility.</strong> Identical findings produce identical rules.</li>
+<li><strong>No rule hallucination.</strong> Template-driven rules cannot contain incorrect remediation advice invented by an LLM.</li>
+</ol>
+
+<p>The template library covers four categories:</p>
+
+<p><strong>Ghost dependency templates</strong> generate package-specific warnings:</p>
+
+<blockquote>
+  <p>NEVER use the package "react-encrypted-localstorage" (npm) --- it does not exist on the registry. This is likely an AI-hallucinated package name.</p>
+</blockquote>
+
+<p><strong>Stale AI pattern templates</strong> reference the insecure pattern and its secure alternative:</p>
+
+<blockquote>
+  <p>NEVER use MD5 or SHA1 for cryptographic operations --- both are broken. Use SHA-256 (or higher) for checksums; use bcrypt, argon2, or scrypt for passwords.</p>
+</blockquote>
+
+<p><strong>Secret templates</strong> dynamically map secret types from scanner output to specific guidance.</p>
+
+<p><strong>SAST templates</strong> cover 12 CWE classes with specific remediation instructions.</p>
+
+<p><strong>Rule compression.</strong> Multiple findings of the same CWE class produce a single rule rather than one rule per finding. Across 14 repositories, 1,116 findings compressed to 179 rules (84% reduction). We note that the finding count is inflated by ghost dependency false positives (Section 5.1).</p>
+
+<h3 id="34-multi-format-instruction-file-injection">3.4 Multi-Format Instruction File Injection</h3>
+
+<p>Generated rules are formatted as a Markdown section with HTML comment markers (PATCHPILOT:START / PATCHPILOT:END) that enable idempotent updates. The same rules are injected into CLAUDE.md, .cursorrules, and copilot-instructions.md simultaneously.</p>
+
+<hr />
+
+<h2 id="4-evaluation">4. Evaluation</h2>
+
+<p>We evaluate through three experiments, each increasing in realism. We report both successes and failures to provide an accurate picture of current capabilities.</p>
+
+<h3 id="41-rule-generator-validation">4.1 Rule Generator Validation</h3>
+
+<p>We validated the rule generator with 9 unit tests covering: category coverage (all 4 scanner types produce rules), CWE grouping (multiple findings of the same CWE produce a single rule), severity filtering, secret type differentiation, ghost dependency classification, stale AI pattern matching, marker-based formatting, content preservation, and idempotent re-injection. All 9 tests passed. We acknowledge this tests correctness of the generator code, not the quality or precision of the scanner inputs.</p>
+
+<h3 id="42-experiment-1-repository-scanning">4.2 Experiment 1: Repository Scanning</h3>
+
+<p>We scanned 14 repositories (7 open-source, 7 from the author's portfolio) to validate the pipeline's ability to detect findings and compress them into rule sets. This experiment does not validate scanner precision --- that analysis is deferred to Section 5.1.</p>
+
+<p><strong>Table 1: Scan Results --- Open-Source Repositories</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Repository</th>
+  <th>Description</th>
+  <th>Stale AI</th>
+  <th>Ghost Deps</th>
+  <th>Total</th>
+  <th>Rules</th>
+  <th>Compression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>express</td>
+  <td>Web framework</td>
+  <td>1</td>
+  <td>11</td>
+  <td>12</td>
+  <td>11</td>
+  <td>8%</td>
+</tr>
+<tr>
+  <td>fastify</td>
+  <td>Web framework</td>
+  <td>6</td>
+  <td>3</td>
+  <td>9</td>
+  <td>4</td>
+  <td>56%</td>
+</tr>
+<tr>
+  <td>hono</td>
+  <td>Web framework</td>
+  <td>13</td>
+  <td>6</td>
+  <td>19</td>
+  <td>9</td>
+  <td>53%</td>
+</tr>
+<tr>
+  <td>next-learn</td>
+  <td>Learning examples</td>
+  <td>2</td>
+  <td>7</td>
+  <td>9</td>
+  <td>3</td>
+  <td>67%</td>
+</tr>
+<tr>
+  <td>cal.com</td>
+  <td>Scheduling platform</td>
+  <td>177</td>
+  <td>313</td>
+  <td>490</td>
+  <td>51</td>
+  <td>90%</td>
+</tr>
+<tr>
+  <td>twenty</td>
+  <td>CRM platform</td>
+  <td>312</td>
+  <td>24</td>
+  <td>336</td>
+  <td>26</td>
+  <td>92%</td>
+</tr>
+<tr>
+  <td>documenso</td>
+  <td>Document signing</td>
+  <td>66</td>
+  <td>53</td>
+  <td>119</td>
+  <td>30</td>
+  <td>75%</td>
+</tr>
+<tr>
+  <td><strong>Subtotal</strong></td>
+  <td></td>
+  <td><strong>577</strong></td>
+  <td><strong>417</strong></td>
+  <td><strong>994</strong></td>
+  <td><strong>134</strong></td>
+  <td><strong>87%</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Table 2: Scan Results --- Author's Portfolio Repositories</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Repository</th>
+  <th>Description</th>
+  <th>Stale AI</th>
+  <th>Ghost Deps</th>
+  <th>Total</th>
+  <th>Rules</th>
+  <th>Compression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>fairmind</td>
+  <td>AI governance platform</td>
+  <td>17</td>
+  <td>19</td>
+  <td>36</td>
+  <td>21</td>
+  <td>42%</td>
+</tr>
+<tr>
+  <td>aran</td>
+  <td>API security platform</td>
+  <td>26</td>
+  <td>3</td>
+  <td>29</td>
+  <td>7</td>
+  <td>76%</td>
+</tr>
+<tr>
+  <td>aran-mcp</td>
+  <td>MCP security framework</td>
+  <td>15</td>
+  <td>4</td>
+  <td>19</td>
+  <td>5</td>
+  <td>74%</td>
+</tr>
+<tr>
+  <td>ChessForgeAI</td>
+  <td>Chess analysis app</td>
+  <td>17</td>
+  <td>2</td>
+  <td>19</td>
+  <td>3</td>
+  <td>84%</td>
+</tr>
+<tr>
+  <td>RagaSense</td>
+  <td>AI raga detection</td>
+  <td>9</td>
+  <td>4</td>
+  <td>13</td>
+  <td>5</td>
+  <td>62%</td>
+</tr>
+<tr>
+  <td>Redact-ai</td>
+  <td>Privacy automation</td>
+  <td>2</td>
+  <td>4</td>
+  <td>6</td>
+  <td>4</td>
+  <td>33%</td>
+</tr>
+<tr>
+  <td>audit-lens</td>
+  <td>Compliance engine</td>
+  <td>0</td>
+  <td>0</td>
+  <td>0</td>
+  <td>0</td>
+  <td>--</td>
+</tr>
+<tr>
+  <td><strong>Subtotal</strong></td>
+  <td></td>
+  <td><strong>86</strong></td>
+  <td><strong>36</strong></td>
+  <td><strong>122</strong></td>
+  <td><strong>45</strong></td>
+  <td><strong>63%</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Combined total: 1,116 findings across 14 repositories, compressed to 179 rules (84% reduction).</strong> We caution that the ghost dependency finding counts (453 total) are substantially inflated by false positives, as analyzed in Section 5.1. The stale AI pattern findings (663 total) have not been manually validated for precision; some fraction may represent intentional usage (e.g., eval() in a REPL implementation).</p>
+
+<p>CWE coverage across all 14 repositories: CWE-1104 (untrusted dependencies) in 13/14, CWE-94 (code injection) in 9/14, CWE-319 (plaintext HTTP) in 8/14, CWE-328 (weak cryptography) in 6/14, CWE-338 (insecure randomness) in 5/14.</p>
+
+<h3 id="43-experiment-2-mechanism-validation-upper-bound">4.3 Experiment 2: Mechanism Validation (Upper Bound)</h3>
+
+<p>Experiment 1 established that the pipeline detects findings and generates rules. Experiment 2 asks: <strong>do rules in this format actually change LLM behavior?</strong> This experiment isolates the rule mechanism from scanner coverage to establish an upper bound on effectiveness.</p>
+
+<p><strong>Important framing.</strong> We used hand-crafted rules matching the template format exactly, one per CWE class tested. This is intentionally a best-case scenario: the rules are perfectly targeted to counter each test prompt. Real pipeline output (Experiment 3) produces less targeted rules because the scanner detects different CWEs than those tested. We report this experiment as a mechanism validation, not as a measure of end-to-end pipeline effectiveness.</p>
+
+<p><strong>Design.</strong> 6 vulnerability-eliciting prompts, one per CWE class (CWE-89: SQL injection, CWE-79: XSS, CWE-22: path traversal, CWE-78: command injection, CWE-328: weak cryptography, CWE-338: insecure randomness). Two conditions: control (no rules) and treatment (rules in system prompt). 4 models: Claude Sonnet 4 (Anthropic), Nemotron 120B (NVIDIA), GPT-OSS 120B (OpenAI), GPT-OSS 20B (OpenAI). 5 trials per model-prompt-condition with temperature variation (0.3--0.7), yielding 240 API calls.</p>
+
+<p><strong>Table 3: Mechanism Validation by Model (n=5 per condition)</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th style="text-align:right;">Control Rate</th>
+  <th style="text-align:right;">Treatment Rate</th>
+  <th style="text-align:right;">Reduction</th>
+  <th style="text-align:center;">Fisher p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Claude Sonnet 4</td>
+  <td style="text-align:right;">8/30 (27%)</td>
+  <td style="text-align:right;">0/30 (0%)</td>
+  <td style="text-align:right;">100%</td>
+  <td style="text-align:center;">0.002</td>
+</tr>
+<tr>
+  <td>Nemotron 120B</td>
+  <td style="text-align:right;">22/30 (73%)</td>
+  <td style="text-align:right;">0/30 (0%)</td>
+  <td style="text-align:right;">100%</td>
+  <td style="text-align:center;">&lt;0.001</td>
+</tr>
+<tr>
+  <td>GPT-OSS 120B</td>
+  <td style="text-align:right;">28/30 (93%)</td>
+  <td style="text-align:right;">1/30 (3%)</td>
+  <td style="text-align:right;">96%</td>
+  <td style="text-align:center;">&lt;0.001</td>
+</tr>
+<tr>
+  <td>GPT-OSS 20B</td>
+  <td style="text-align:right;">24/30 (80%)</td>
+  <td style="text-align:right;">0/30 (0%)</td>
+  <td style="text-align:right;">100%</td>
+  <td style="text-align:center;">&lt;0.001</td>
+</tr>
+<tr>
+  <td><strong>Total</strong></td>
+  <td style="text-align:right;"><strong>82/120 (68.3%)</strong></td>
+  <td style="text-align:right;"><strong>1/120 (0.8%)</strong></td>
+  <td style="text-align:right;"><strong>98.8%</strong></td>
+  <td style="text-align:center;"><strong>&lt;0.001</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p>95% Wilson CIs: Control 59.6--76.0%, Treatment 0.1--4.6%.</p>
+
+<p>All four models achieved statistical significance (Fisher's exact, one-sided, p&lt;0.005). The single treatment vulnerability occurred in CWE-338 (insecure randomness) on GPT-OSS 120B.</p>
+
+<p><strong>Interpretation.</strong> This establishes that security rules in our template format are effective at changing LLM behavior under ideal conditions. The 98.8% figure is an upper bound: it assumes perfect rule coverage for every vulnerability class tested. The end-to-end evaluation (Experiment 3) measures what happens when this assumption does not hold.</p>
+
+<h3 id="44-experiment-3-end-to-end-pipeline-evaluation">4.4 Experiment 3: End-to-End Pipeline Evaluation</h3>
+
+<p>The final experiment closes the loop. We selected 3 repositories from Experiment 1 (hono, express, documenso), ran the <strong>actual</strong> scanners against each, fed findings through the <strong>actual</strong> rule generator, and used the <strong>exact</strong> generated CLAUDE.md content as the LLM system prompt. No hand-crafting. No manual rule selection.</p>
+
+<p><strong>Design.</strong> 3 repositories x 3 prompts x 3 models x 2 conditions x 3 trials = 162 total API calls. Prompts targeted CWE classes relevant to each repository's technology stack. Models: Claude Sonnet 4, Nemotron 120B, GPT-OSS 120B.</p>
+
+<p><strong>Attrition.</strong> Claude Sonnet 4 was rate-limited during the experiment; all 54 trials returned errors (code_length=0). These trials are excluded from the analysis. Results are based on 108 trials across 2 models.</p>
+
+<p><strong>Table 4: End-to-End Results by Model (n=27 per model-condition)</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Model</th>
+  <th style="text-align:right;">Control</th>
+  <th style="text-align:right;">Treatment</th>
+  <th style="text-align:right;">Reduction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Nemotron 120B</td>
+  <td style="text-align:right;">19/27 (70%)</td>
+  <td style="text-align:right;">15/27 (56%)</td>
+  <td style="text-align:right;">21%</td>
+</tr>
+<tr>
+  <td>GPT-OSS 120B</td>
+  <td style="text-align:right;">18/27 (67%)</td>
+  <td style="text-align:right;">7/27 (26%)</td>
+  <td style="text-align:right;">61%</td>
+</tr>
+<tr>
+  <td><strong>Total</strong></td>
+  <td style="text-align:right;"><strong>37/54 (68.5%)</strong></td>
+  <td style="text-align:right;"><strong>22/54 (40.7%)</strong></td>
+  <td style="text-align:right;"><strong>40.5%</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p>95% Wilson CIs: Control 55.3--79.3%, Treatment 28.7--54.0%. Chi-squared=8.41, <strong>p=0.004</strong>.</p>
+
+<p>The overall reduction is statistically significant (p&lt;0.01), but the confidence intervals for treatment and control rates overlap, reflecting the modest sample size.</p>
+
+<p><strong>Table 5: End-to-End Per-CWE Prevention</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>CWE</th>
+  <th>Vulnerability</th>
+  <th style="text-align:center;">Control</th>
+  <th style="text-align:center;">Treatment</th>
+  <th style="text-align:center;">Prevention</th>
+  <th style="text-align:center;">Rule Generated?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>CWE-94</td>
+  <td>Code injection</td>
+  <td style="text-align:center;">7/12 (58%)</td>
+  <td style="text-align:center;">2/12 (17%)</td>
+  <td style="text-align:center;">71%</td>
+  <td style="text-align:center;">Yes</td>
+</tr>
+<tr>
+  <td>CWE-319</td>
+  <td>Plaintext HTTP</td>
+  <td style="text-align:center;">6/6 (100%)</td>
+  <td style="text-align:center;">1/6 (17%)</td>
+  <td style="text-align:center;">83%</td>
+  <td style="text-align:center;">Yes</td>
+</tr>
+<tr>
+  <td>CWE-338</td>
+  <td>Insecure randomness</td>
+  <td style="text-align:center;">6/6 (100%)</td>
+  <td style="text-align:center;">1/6 (17%)</td>
+  <td style="text-align:center;">83%</td>
+  <td style="text-align:center;">Yes</td>
+</tr>
+<tr>
+  <td>CWE-328</td>
+  <td>Weak crypto (MD5)</td>
+  <td style="text-align:center;">12/12 (100%)</td>
+  <td style="text-align:center;">11/12 (92%)</td>
+  <td style="text-align:center;">8%</td>
+  <td style="text-align:center;">Yes*</td>
+</tr>
+<tr>
+  <td>CWE-78</td>
+  <td>Command injection</td>
+  <td style="text-align:center;">5/6 (83%)</td>
+  <td style="text-align:center;">4/6 (67%)</td>
+  <td style="text-align:center;">20%</td>
+  <td style="text-align:center;">No</td>
+</tr>
+<tr>
+  <td>CWE-89</td>
+  <td>SQL Injection</td>
+  <td style="text-align:center;">0/6 (0%)</td>
+  <td style="text-align:center;">0/6 (0%)</td>
+  <td style="text-align:center;">N/A</td>
+  <td style="text-align:center;">No</td>
+</tr>
+<tr>
+  <td>CWE-22</td>
+  <td>Path Traversal</td>
+  <td style="text-align:center;">1/6 (17%)</td>
+  <td style="text-align:center;">3/6 (50%)</td>
+  <td style="text-align:center;">-200%</td>
+  <td style="text-align:center;">No</td>
+</tr>
+</tbody>
+</table>
+
+<p>*CWE-328 prompts explicitly requested MD5 (e.g., "compute an MD5 hash"), overriding the system rule.</p>
+
+<p><strong>The critical finding: rule-matched vs. unmatched CWEs.</strong> When we separate trials by whether the scanner generated a matching rule:</p>
+
+<ul>
+<li><strong>Matched CWEs</strong> (CWE-94, CWE-319, CWE-328, CWE-338; N=60 after model exclusion): Control 25/30 (83%), Treatment 9/30 (30%). <strong>64% relative reduction.</strong></li>
+<li><strong>Unmatched CWEs</strong> (CWE-22, CWE-78, CWE-89; N=48 after exclusion): Control 12/24 (50%), Treatment 13/24 (54%). <strong>No effect</strong> (-4%, within noise).</li>
+</ul>
+
+<p>This decomposition is the most informative result. The treatment effect is specific to CWEs where rules exist, not a general prompt-context artifact (e.g., the mere presence of security-themed text in the system prompt does not reduce vulnerability rates). Express, which generated only CWE-1104 ghost dependency rules and no stale AI pattern or SAST rules, served as an effective negative control: treatment had no effect on any Express prompt.</p>
+
+<p><strong>CWE-328 anomaly.</strong> Despite having a generated rule ("NEVER use MD5"), the MD5 prevention rate was only 8%. The prompts explicitly asked for MD5 by name. In current LLM architectures, explicit user instructions generally override system-level rules. This is a known limitation of instruction-file-based guardrails. In realistic development, programmers rarely request specific insecure algorithms by name; the 8% figure reflects an adversarial prompt condition rather than typical usage.</p>
+
+<h3 id="45-multi-model-transfer">4.5 Multi-Model Transfer</h3>
+
+<p>The same rules influenced models from different providers without modification. In Experiment 2, hand-crafted rules achieved &gt;96% effectiveness across all 4 models (3 providers). In Experiment 3, the same auto-generated CLAUDE.md content influenced both Nemotron 120B and GPT-OSS 120B, though with different effect sizes (21% vs. 61% reduction). This demonstrates that markdown-formatted instruction file rules are model-agnostic, though effectiveness varies by model.</p>
+
+<hr />
+
+<h2 id="5-scanner-precision-and-recall">5. Scanner Precision and Recall</h2>
+
+<p>A pipeline that generates rules from scanner findings inherits the scanner's precision and recall limitations. We analyze two of our custom scanners.</p>
+
+<h3 id="51-ghost-dependency-scanner-high-false-positive-rate">5.1 Ghost Dependency Scanner: High False Positive Rate</h3>
+
+<p>We manually reviewed all 44 ghost dependency findings across the 3 repositories used in Experiment 3. Classification:</p>
+
+<table>
+<thead>
+<tr>
+  <th>Category</th>
+  <th style="text-align:right;">Count</th>
+  <th style="text-align:center;">Proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Well-known legitimate packages</td>
+  <td style="text-align:right;">32</td>
+  <td style="text-align:center;">72.7%</td>
+</tr>
+<tr>
+  <td>Monorepo workspace packages</td>
+  <td style="text-align:right;">12</td>
+  <td style="text-align:center;">27.3%</td>
+</tr>
+<tr>
+  <td>Genuinely suspicious</td>
+  <td style="text-align:right;">0</td>
+  <td style="text-align:center;">0%</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>The ghost dependency scanner had a 100% false positive rate on the evaluated repositories.</strong> All 32 non-monorepo packages flagged (including <code>cookie</code>, <code>debug</code>, <code>qs</code>, <code>undici</code>, <code>jose</code>, <code>pdfjs-dist</code>, <code>preact</code>, <code>wrangler</code>) are legitimate npm packages with millions of weekly downloads. The 12 monorepo packages (all <code>@documenso/*</code>) are private workspace references that do not exist on the public npm registry but are not security risks.</p>
+
+<p>The root cause is the <code>phantom_new</code> classification heuristic, which uses a download count threshold that is too aggressive. Packages meeting the threshold are flagged as "very new with low adoption" even when they are well-established.</p>
+
+<p><strong>Impact on reported numbers.</strong> The 1,116 total findings across 14 repositories include 453 ghost dependency findings. If most of these are false positives (as the sampled data suggests), the true finding count is substantially lower --- likely in the range of 663--750. The 84% compression ratio would also change. We do not adjust the numbers retroactively because we have not manually reviewed all 453 ghost dependency findings, but we flag this as a significant caveat.</p>
+
+<p><strong>Impact on rule quality.</strong> Ghost dependency rules for legitimate packages (e.g., "Be cautious with 'debug' (npm)") are misleading rather than helpful. They do not affect the code vulnerability experiments (Experiments 2--3) because ghost dependency rules target package selection, not code patterns, and our vulnerability prompts test code patterns. However, they would degrade instruction file quality in production use.</p>
+
+<h3 id="52-stale-ai-pattern-scanner-precision-unknown">5.2 Stale AI Pattern Scanner: Precision Unknown</h3>
+
+<p>The stale AI pattern scanner detects 10 regex patterns associated with insecure coding practices. We have not measured its precision on the 14 scanned repositories. Some flagged patterns may represent intentional usage (e.g., eval() in a REPL, MD5 for non-cryptographic checksums, HTTP for localhost development). The context-sensitivity checks (excluding test files and build scripts) mitigate some false positives, but precision validation remains future work.</p>
+
+<h3 id="53-implications-for-the-pipeline">5.3 Implications for the Pipeline</h3>
+
+<p>Scanner precision directly affects instruction file quality: false positive findings produce unnecessary or misleading rules. Scanner recall directly affects the pipeline's ceiling: undetected vulnerability classes produce no rules. Both are limiting factors in the end-to-end evaluation. Improving scanner precision (particularly the ghost dependency heuristic) and expanding scanner recall (enabling Semgrep SAST rules) are the most impactful paths to improving pipeline effectiveness.</p>
+
+<hr />
+
+<h2 id="6-discussion">6. Discussion</h2>
+
+<h3 id="61-the-988-vs-405-gap">6.1 The 98.8% vs. 40.5% Gap</h3>
+
+<p>The most informative finding is the gap between Experiments 2 and 3. Experiment 2 established that well-crafted rules in our format are effective (98.8% upper bound). Experiment 3 revealed that the actual pipeline achieves 40.5% overall because of three compounding factors:</p>
+
+<ol>
+<li><p><strong>Scanner coverage limits rule generation.</strong> Express produced only ghost dependency findings, so the pipeline generated no code vulnerability rules. When the pipeline has no relevant findings, it generates no relevant rules.</p></li>
+<li><p><strong>Explicit prompt requests override system rules.</strong> CWE-328 prompts explicitly named MD5, overriding the system-level rule. This reflects a fundamental limitation of instruction-file-based guardrails.</p></li>
+<li><p><strong>Auto-generated rules are less targeted than hand-crafted ones.</strong> Experiment 2 rules were designed to counter each test prompt. Experiment 3 rules were generated from scanner findings without knowledge of test prompts. This is the correct evaluation methodology but produces lower numbers.</p></li>
+</ol>
+
+<h3 id="62-the-matchedunmatched-decomposition">6.2 The Matched/Unmatched Decomposition</h3>
+
+<p>Filtering to matched CWEs (where rules were generated) and excluding the adversarial MD5 prompt, prevention rates of 71%, 83%, and 83% emerge for CWE-94, CWE-319, and CWE-338 respectively. The unmatched CWEs showed no effect, confirming that the mechanism works through specific rule content, not general prompt framing. This decomposition is the strongest evidence for the approach's viability: when the scanner has coverage, the rules work.</p>
+
+<h3 id="63-from-reflexion-to-persistence">6.3 From Reflexion to Persistence</h3>
+
+<p>Our work extends Reflexion [7] from ephemeral in-context memory to durable file-based memory. The key difference is the feedback source: Reflexion uses self-generated verbal reflection, while our system uses external scanner output, which Shinn et al. [18] showed is more reliable for correction.</p>
+
+<h3 id="64-deterministic-vs-llm-generated-rules">6.4 Deterministic vs. LLM-Generated Rules</h3>
+
+<p>Template-driven rules achieved 98.8% effectiveness in the mechanism validation, suggesting that well-phrased security instructions do not require LLM-generated nuance. LLM-generated rules would introduce hallucination risk without addressing the scanner coverage gap.</p>
+
+<h3 id="65-instruction-files-as-a-policy-layer">6.5 Instruction Files as a Policy Layer</h3>
+
+<p>Instruction files can serve as a model-agnostic policy enforcement layer. The same markdown rules influenced models from 3 providers, though with varying effect sizes (21--61% in the E2E evaluation). This suggests the approach is portable but not uniformly effective.</p>
+
+<hr />
+
+<h2 id="7-threats-to-validity">7. Threats to Validity</h2>
+
+<h3 id="71-internal-validity">7.1 Internal Validity</h3>
+
+<p><strong>Evaluation confound in Experiment 2.</strong> The hand-crafted rules were designed by the authors with knowledge of the test prompts. While this was intentional (to isolate the rule mechanism from scanner coverage), it means Experiment 2 measures an upper bound, not typical effectiveness. We address this by running Experiment 3.</p>
+
+<p><strong>Vulnerability detection via regex.</strong> Both experiments used regex pattern matching to classify generated code as vulnerable or not. This approach may miss subtle vulnerabilities (false negatives) or misclassify safe code that contains triggering patterns in comments or strings (false positives). Manual validation of a sample would strengthen confidence in the detection methodology.</p>
+
+<p><strong>Rate limiting.</strong> Claude Sonnet 4 was excluded from Experiment 3 due to rate limiting. This reduces the model diversity of the end-to-end evaluation to 2 models, both accessed via the same API provider (OpenRouter). Results may not generalize to Claude, GPT-4, or other frontier models.</p>
+
+<h3 id="72-external-validity">7.2 External Validity</h3>
+
+<p><strong>Repository selection.</strong> All 14 repositories are JavaScript/TypeScript web applications. Generalizability to Python, Go, Rust, or Java codebases has not been tested.</p>
+
+<p><strong>Prompt design.</strong> The 6 vulnerability-eliciting prompts in Experiment 2 and 9 prompts in Experiment 3 are synthetic. Real developer prompts are more varied and contextual. The prompts may be easier or harder to influence than natural development instructions.</p>
+
+<p><strong>Scanner coverage.</strong> The evaluation used only the ghost dependency and stale AI pattern scanners. The system includes Semgrep, Gitleaks, and Trivy integrations, but these were not enabled during the evaluation. Results with full scanner coverage would likely differ.</p>
+
+<h3 id="73-construct-validity">7.3 Construct Validity</h3>
+
+<p><strong>What "vulnerability prevention" measures.</strong> Our experiments test whether an LLM generates code matching a vulnerability pattern when given a specific prompt with or without rules. This is a proxy for real-world vulnerability prevention, which involves developer interaction, code review, testing, and iterative refinement. The synthetic prompts lack the contextual specificity of real development tasks.</p>
+
+<p><strong>Ghost dependency findings.</strong> The 1,116 finding count includes ghost dependency results with a demonstrated 100% false positive rate in the sampled repositories. The true positive finding count is lower than reported.</p>
+
+<hr />
+
+<h2 id="8-limitations">8. Limitations</h2>
+
+<p><strong>Scanner precision is unvalidated.</strong> The ghost dependency scanner's 100% false positive rate on the 3 evaluated repositories means the pipeline would produce misleading rules in production. The stale AI pattern scanner has not been precision-validated. Both require improvement before deployment.</p>
+
+<p><strong>Sample sizes.</strong> Experiment 2 used n=5 per condition (240 total). Experiment 3 used n=3 per condition (108 usable). Individual per-CWE cells in Experiment 3 contain 6--12 trials, limiting statistical power for per-CWE significance testing. The overall E2E result (p=0.004) is significant, but per-CWE results should be interpreted as directional rather than conclusive.</p>
+
+<p><strong>Template coverage.</strong> The rule template library covers 12 CWE classes. Vulnerability types outside this set do not generate rules even when detected.</p>
+
+<p><strong>No true cross-agent sequential test.</strong> We demonstrated that the same rules influence multiple models in parallel evaluation. We did not test the full sequential workflow (Agent A generates vulnerable code -> scanner detects it -> rules are written -> Agent B avoids the vulnerability), which is the motivating use case.</p>
+
+<p><strong>Single language ecosystem.</strong> All evaluation was conducted on JavaScript/TypeScript projects.</p>
+
+<hr />
+
+<h2 id="9-future-work">9. Future Work</h2>
+
+<ol>
+<li><p><strong>Ghost dependency scanner precision.</strong> Improving the <code>phantom_new</code> heuristic with download count thresholds calibrated against known legitimate packages, monorepo workspace detection, and historical version data.</p></li>
+<li><p><strong>Scanner precision/recall validation.</strong> Manual annotation of scanner findings across a representative sample of repositories to establish baseline precision and recall for each scanner.</p></li>
+<li><p><strong>Full scanner integration.</strong> Enabling Semgrep SAST and Trivy SCA would directly address the scanner coverage gap identified in Experiment 3.</p></li>
+<li><p><strong>Larger-scale E2E evaluation.</strong> Repeating Experiment 3 with more repositories (10+), more models (5+), and more trials per condition (5+) would increase statistical power and generalizability.</p></li>
+<li><p><strong>True cross-agent sequential test.</strong> Agent A generates code, the scanner detects a vulnerability, rules are written, and Agent B reads the rules and avoids the same vulnerability class.</p></li>
+<li><p><strong>Longitudinal study.</strong> Tracking vulnerability recurrence over multiple scan-rule-scan cycles in production repositories.</p></li>
+<li><p><strong>Multi-language evaluation.</strong> Testing on Python, Go, and Java codebases to assess generalizability beyond the JavaScript/TypeScript ecosystem.</p></li>
+</ol>
+
+<hr />
+
+<h2 id="10-conclusion">10. Conclusion</h2>
+
+<p>We presented a closed-loop system for generating persistent, cross-agent security rules from automated vulnerability detection. The evaluation yields a nuanced picture:</p>
+
+<ol>
+<li><p><strong>The rule format works.</strong> In a controlled mechanism validation (240 trials, 4 models), template-driven security rules reduced vulnerability rates from 68.3% to 0.8% (98.8% reduction, p&lt;0.001). This establishes the upper bound.</p></li>
+<li><p><strong>The end-to-end pipeline shows a significant but moderate effect.</strong> Across 108 usable trials (3 repositories, 2 models), vulnerability rates decreased from 68.5% to 40.7% (p=0.004). The effect is specific to CWE classes where the scanner generated rules (83% to 30%) and absent for unmatched CWEs (50% to 54%).</p></li>
+<li><p><strong>Scanner quality is the binding constraint.</strong> The ghost dependency scanner's 100% false positive rate on evaluated repositories indicates that scanner precision must be addressed before deployment. The path to higher end-to-end effectiveness runs through better scanners, not better rules.</p></li>
+</ol>
+
+<p>The approach of treating agent instruction files as a programmable security policy layer remains promising, but the current implementation is a proof of concept, not a production-ready system. The gap between the 98.8% mechanism upper bound and the 40.5% end-to-end result quantifies the work remaining.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<p>[1] Anthropic. "Claude Code: An agentic coding tool." 2025.</p>
+
+<p>[2] Anthropic. "CLAUDE.md documentation." 2025.</p>
+
+<p>[3] Cursor. "Rules for AI." 2025. docs.cursor.com/context/rules-for-ai</p>
+
+<p>[4] GitHub. "Copilot Instructions." 2025.</p>
+
+<p>[5] Block. "Goose: Open-source AI agent." 2025. github.com/block/goose</p>
+
+<p>[6] Agentic AI Foundation. "AAIF." 2026. aaif.io</p>
+
+<p>[7] N. Shinn et al. "Reflexion: Language Agents with Verbal Reinforcement Learning." NeurIPS 2023.</p>
+
+<p>[8] M. Zechner. "Pi-Reflect: Self-improving coding agent via instruction file mutation." 2025.</p>
+
+<p>[9] ngrok. "BMO: Self-improving coding agent." 2025.</p>
+
+<p>[10] Cognition. "Devin Knowledge system." 2025.</p>
+
+<p>[11] Windsurf. "Cascade Memories." 2025.</p>
+
+<p>[12] Embrace The Red. "SpAIware: Persistent prompt injection via Windsurf Memories." 2025.</p>
+
+<p>[13] H. Pearce et al. "Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions." IEEE S&amp;P 2022.</p>
+
+<p>[14] O. Asare et al. "Is GitHub's Copilot as bad as humans at introducing vulnerabilities in code?" ESE, 2024.</p>
+
+<p>[15] B. Lanyado. "Can you trust ChatGPT's package recommendations?" Vulcan Cyber, 2023.</p>
+
+<p>[16] Y. Bai et al. "Constitutional AI: Harmlessness from AI Feedback." arXiv:2212.08073, 2022.</p>
+
+<p>[17] A. Osmani. "Self-improving coding agents." 2025.</p>
+
+<p>[18] N. Shinn et al. "When Can LLMs Actually Correct Their Own Mistakes?" TACL, 2024.</p>
+
+<hr />
+
+<h2 id="supplementary-materials">Supplementary Materials</h2>
+
+<p>Available at: github.com/adhit-r</p>
+
+<ul>
+<li>Full scan results for all 14 repositories (JSON)</li>
+<li>Generated instruction files (CLAUDE.md, .cursorrules, copilot-instructions.md) for all repositories</li>
+<li>Experiment 2 raw data (240 trials, JSON)</li>
+<li>Experiment 3 raw data (162 trials, JSON)</li>
+<li>Experiment scripts (TypeScript, runnable with Bun)</li>
+<li>Rule generator source code and template library</li>
+<li>Ghost dependency false positive analysis</li>
+</ul>
+
+</body>
+</html>

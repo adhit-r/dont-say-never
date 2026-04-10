@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "run_at": "2026-04-09T17:35:53.858Z",
+    "fixes_applied": [
+      "AI-EVAL-001: lookbehind now excludes method calls (RegExp.exec)",
+      "AI-HTTP-004: skip W3C/Adobe/Schema namespace URIs and error message strings",
+      "AI-LOG-007: require identifier arg, not literal string",
+      "AI-RAND-003/011/014: skip seed/fixture/mock/demo files"
+    ],
+    "before_source": "research/experiments/data/scanner-precision-recall.json"
+  },
+  "per_repo": [
+    {
+      "repo": "express",
+      "before": {
+        "total": 1,
+        "tp": 1,
+        "fp": 0,
+        "cd": 0,
+        "precision_conservative": 1
+      },
+      "after": {
+        "total": 0,
+        "by_rule": {},
+        "by_cwe": {}
+      },
+      "delta": {
+        "findings_removed": 1,
+        "fp_reduction_estimate": 0,
+        "removal_pct": 1
+      }
+    },
+    {
+      "repo": "hono",
+      "before": {
+        "total": 13,
+        "tp": 0,
+        "fp": 8,
+        "cd": 5,
+        "precision_conservative": 0.38461538461538464
+      },
+      "after": {
+        "total": 6,
+        "by_rule": {
+          "AI-HASH-002": 5,
+          "AI-CFG-009": 1
+        },
+        "by_cwe": {
+          "CWE-328": 5,
+          "CWE-1188": 1
+        }
+      },
+      "delta": {
+        "findings_removed": 7,
+        "fp_reduction_estimate": 7,
+        "removal_pct": 0.5384615384615384
+      }
+    },
+    {
+      "repo": "documenso",
+      "before": {
+        "total": 66,
+        "tp": 0,
+        "fp": 42,
+        "cd": 24,
+        "precision_conservative": 0.36363636363636365
+      },
+      "after": {
+        "total": 45,
+        "by_rule": {
+          "AI-HTTP-004": 6,
+          "AI-EVAL-001": 2,
+          "AI-LOG-007": 4,
+          "AI-CFG-009": 33
+        },
+        "by_cwe": {
+          "CWE-319": 6,
+          "CWE-94": 2,
+          "CWE-532": 4,
+          "CWE-1188": 33
+        }
+      },
+      "delta": {
+        "findings_removed": 21,
+        "fp_reduction_estimate": 21,
+        "removal_pct": 0.3181818181818182
+      }
+    }
+  ],
+  "overall": {
+    "total_before": 80,
+    "total_after": 51,
+    "removed": 29,
+    "removal_pct": 0.3625
+  }
+}

@@ -1,0 +1,1442 @@
+{
+  "express": {
+    "semgrep": [
+      {
+        "file": "examples/auth/index.js",
+        "line": 22,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-default-name",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Don’t use the default session cookie name Using the default session cookie name can open your app to attacks. The security issue posed is similar to X-Powered-By: a potential attacker can use it to fingerprint the server and target attacks accordingly."
+      },
+      {
+        "file": "examples/auth/index.js",
+        "line": 22,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-domain",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `domain` not set. It indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested. If they match, then check the path attribute next."
+      },
+      {
+        "file": "examples/auth/index.js",
+        "line": 22,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-expires",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `expires` not set. Use it to set expiration date for persistent cookies."
+      },
+      {
+        "file": "examples/auth/index.js",
+        "line": 22,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-httponly",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `httpOnly` not set. It ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks."
+      },
+      {
+        "file": "examples/auth/index.js",
+        "line": 22,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-path",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `path` not set. It indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request."
+      },
+      {
+        "file": "examples/auth/index.js",
+        "line": 22,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-secure",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `secure` not set. It ensures the browser only sends the cookie over HTTPS."
+      },
+      {
+        "file": "examples/auth/index.js",
+        "line": 25,
+        "rule": "javascript.express.security.audit.express-session-hardcoded-secret.express-session-hardcoded-secret",
+        "cwe": "CWE-798",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module)."
+      },
+      {
+        "file": "examples/cookie-sessions/index.js",
+        "line": 13,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-default-name",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Don’t use the default session cookie name Using the default session cookie name can open your app to attacks. The security issue posed is similar to X-Powered-By: a potential attacker can use it to fingerprint the server and target attacks accordingly."
+      },
+      {
+        "file": "examples/cookie-sessions/index.js",
+        "line": 13,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-domain",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `domain` not set. It indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested. If they match, then check the path attribute next."
+      },
+      {
+        "file": "examples/cookie-sessions/index.js",
+        "line": 13,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-expires",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `expires` not set. Use it to set expiration date for persistent cookies."
+      },
+      {
+        "file": "examples/cookie-sessions/index.js",
+        "line": 13,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-httponly",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `httpOnly` not set. It ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks."
+      },
+      {
+        "file": "examples/cookie-sessions/index.js",
+        "line": 13,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-path",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `path` not set. It indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request."
+      },
+      {
+        "file": "examples/cookie-sessions/index.js",
+        "line": 13,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-secure",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `secure` not set. It ensures the browser only sends the cookie over HTTPS."
+      },
+      {
+        "file": "examples/mvc/index.js",
+        "line": 40,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-default-name",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Don’t use the default session cookie name Using the default session cookie name can open your app to attacks. The security issue posed is similar to X-Powered-By: a potential attacker can use it to fingerprint the server and target attacks accordingly."
+      },
+      {
+        "file": "examples/mvc/index.js",
+        "line": 40,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-domain",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `domain` not set. It indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested. If they match, then check the path attribute next."
+      },
+      {
+        "file": "examples/mvc/index.js",
+        "line": 40,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-expires",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `expires` not set. Use it to set expiration date for persistent cookies."
+      },
+      {
+        "file": "examples/mvc/index.js",
+        "line": 40,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-httponly",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `httpOnly` not set. It ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks."
+      },
+      {
+        "file": "examples/mvc/index.js",
+        "line": 40,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-path",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `path` not set. It indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request."
+      },
+      {
+        "file": "examples/mvc/index.js",
+        "line": 40,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-secure",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `secure` not set. It ensures the browser only sends the cookie over HTTPS."
+      },
+      {
+        "file": "examples/mvc/index.js",
+        "line": 43,
+        "rule": "javascript.express.security.audit.express-session-hardcoded-secret.express-session-hardcoded-secret",
+        "cwe": "CWE-798",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module)."
+      },
+      {
+        "file": "examples/params/index.js",
+        "line": 67,
+        "rule": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML."
+      },
+      {
+        "file": "examples/resource/index.js",
+        "line": 46,
+        "rule": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML."
+      },
+      {
+        "file": "examples/route-map/index.js",
+        "line": 37,
+        "rule": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML."
+      },
+      {
+        "file": "examples/route-map/index.js",
+        "line": 47,
+        "rule": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML."
+      },
+      {
+        "file": "examples/route-map/index.js",
+        "line": 51,
+        "rule": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML."
+      },
+      {
+        "file": "examples/session/index.js",
+        "line": 16,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-default-name",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Don’t use the default session cookie name Using the default session cookie name can open your app to attacks. The security issue posed is similar to X-Powered-By: a potential attacker can use it to fingerprint the server and target attacks accordingly."
+      },
+      {
+        "file": "examples/session/index.js",
+        "line": 16,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-domain",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `domain` not set. It indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested. If they match, then check the path attribute next."
+      },
+      {
+        "file": "examples/session/index.js",
+        "line": 16,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-expires",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `expires` not set. Use it to set expiration date for persistent cookies."
+      },
+      {
+        "file": "examples/session/index.js",
+        "line": 16,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-httponly",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `httpOnly` not set. It ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks."
+      },
+      {
+        "file": "examples/session/index.js",
+        "line": 16,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-path",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `path` not set. It indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request."
+      },
+      {
+        "file": "examples/session/index.js",
+        "line": 16,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-secure",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `secure` not set. It ensures the browser only sends the cookie over HTTPS."
+      },
+      {
+        "file": "examples/session/index.js",
+        "line": 19,
+        "rule": "javascript.express.security.audit.express-session-hardcoded-secret.express-session-hardcoded-secret",
+        "cwe": "CWE-798",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module)."
+      },
+      {
+        "file": "examples/session/redis.js",
+        "line": 20,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-default-name",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Don’t use the default session cookie name Using the default session cookie name can open your app to attacks. The security issue posed is similar to X-Powered-By: a potential attacker can use it to fingerprint the server and target attacks accordingly."
+      },
+      {
+        "file": "examples/session/redis.js",
+        "line": 20,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-domain",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `domain` not set. It indicates the domain of the cookie; use it to compare against the domain of the server in which the URL is being requested. If they match, then check the path attribute next."
+      },
+      {
+        "file": "examples/session/redis.js",
+        "line": 20,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-expires",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `expires` not set. Use it to set expiration date for persistent cookies."
+      },
+      {
+        "file": "examples/session/redis.js",
+        "line": 20,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-httponly",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `httpOnly` not set. It ensures the cookie is sent only over HTTP(S), not client JavaScript, helping to protect against cross-site scripting attacks."
+      },
+      {
+        "file": "examples/session/redis.js",
+        "line": 20,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-path",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `path` not set. It indicates the path of the cookie; use it to compare against the request path. If this and domain match, then send the cookie in the request."
+      },
+      {
+        "file": "examples/session/redis.js",
+        "line": 20,
+        "rule": "javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-secure",
+        "cwe": "CWE-522",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Default session middleware settings: `secure` not set. It ensures the browser only sends the cookie over HTTPS."
+      },
+      {
+        "file": "examples/session/redis.js",
+        "line": 23,
+        "rule": "javascript.express.security.audit.express-session-hardcoded-secret.express-session-hardcoded-secret",
+        "cwe": "CWE-798",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module)."
+      },
+      {
+        "file": "examples/vhost/index.js",
+        "line": 30,
+        "rule": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML."
+      },
+      {
+        "file": "examples/web-service/index.js",
+        "line": 89,
+        "rule": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML."
+      }
+    ],
+    "stale_ai": [
+      {
+        "file": "examples/auth/index.js",
+        "line": 61,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "if (!module.parent) console.log('authenticating %s:%s', name, pass);",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      }
+    ]
+  },
+  "hono": {
+    "semgrep": [
+      {
+        "file": "benchmarks/http-server/benchmark.ts",
+        "line": 137,
+        "rule": "typescript.react.security.react-insecure-request.react-insecure-request",
+        "cwe": "CWE-319",
+        "severity": "CRITICAL",
+        "code": "requires login",
+        "msg": "Unencrypted request over HTTP detected."
+      },
+      {
+        "file": "benchmarks/http-server/benchmark.ts",
+        "line": 142,
+        "rule": "typescript.react.security.react-insecure-request.react-insecure-request",
+        "cwe": "CWE-319",
+        "severity": "CRITICAL",
+        "code": "requires login",
+        "msg": "Unencrypted request over HTTP detected."
+      },
+      {
+        "file": "benchmarks/http-server/benchmark.ts",
+        "line": 148,
+        "rule": "typescript.react.security.react-insecure-request.react-insecure-request",
+        "cwe": "CWE-319",
+        "severity": "CRITICAL",
+        "code": "requires login",
+        "msg": "Unencrypted request over HTTP detected."
+      },
+      {
+        "file": "src/jsx/components.ts",
+        "line": 203,
+        "rule": "javascript.lang.security.audit.unknown-value-with-script-tag.unknown-value-with-script-tag",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Cannot determine what 'callbacks' is and it is used with a '<script>' tag. This could be susceptible to cross-site scripting (XSS). Ensure 'callbacks' is not externally controlled, or sanitize this data."
+      }
+    ],
+    "stale_ai": [
+      {
+        "file": "src/utils/basic-auth.ts",
+        "line": 10,
+        "rule": "AI-EVAL-001",
+        "cwe": "CWE-94",
+        "severity": "high",
+        "code": "const match = CREDENTIALS_REGEXP.exec(req.headers.get('Authorization') || '')",
+        "msg": "eval() and exec() execute arbitrary code from strings. AI models trained on older tutorials frequently generate these patterns. Replace with safe alternatives: JSON.parse for data, Function constructors only under strict sandboxing, or subprocess.run with a fixed argument list."
+      },
+      {
+        "file": "src/utils/basic-auth.ts",
+        "line": 18,
+        "rule": "AI-EVAL-001",
+        "cwe": "CWE-94",
+        "severity": "high",
+        "code": "userPass = USER_PASS_REGEXP.exec(utf8Decoder.decode(decodeBase64(match[1])))",
+        "msg": "eval() and exec() execute arbitrary code from strings. AI models trained on older tutorials frequently generate these patterns. Replace with safe alternatives: JSON.parse for data, Function constructors only under strict sandboxing, or subprocess.run with a fixed argument list."
+      },
+      {
+        "file": "src/utils/headers.ts",
+        "line": 78,
+        "rule": "AI-HASH-002",
+        "cwe": "CWE-328",
+        "severity": "high",
+        "code": "| 'Content-MD5'",
+        "msg": "MD5 and SHA1 are cryptographically broken — collisions can be computed in seconds on commodity hardware. AI code generators frequently suggest them because legacy examples are overrepresented in training data. Use SHA-256 or SHA-3 for checksums; use bcrypt/argon2/scrypt for passwords."
+      },
+      {
+        "file": "src/utils/crypto.ts",
+        "line": 21,
+        "rule": "AI-HASH-002",
+        "cwe": "CWE-328",
+        "severity": "high",
+        "code": "export const sha1 = async (data: Data): Promise<string | null> => {",
+        "msg": "MD5 and SHA1 are cryptographically broken — collisions can be computed in seconds on commodity hardware. AI code generators frequently suggest them because legacy examples are overrepresented in training data. Use SHA-256 or SHA-3 for checksums; use bcrypt/argon2/scrypt for passwords."
+      },
+      {
+        "file": "src/utils/crypto.ts",
+        "line": 22,
+        "rule": "AI-HASH-002",
+        "cwe": "CWE-328",
+        "severity": "high",
+        "code": "const algorithm: Algorithm = { name: 'SHA-1', alias: 'sha1' }",
+        "msg": "MD5 and SHA1 are cryptographically broken — collisions can be computed in seconds on commodity hardware. AI code generators frequently suggest them because legacy examples are overrepresented in training data. Use SHA-256 or SHA-3 for checksums; use bcrypt/argon2/scrypt for passwords."
+      },
+      {
+        "file": "src/utils/crypto.ts",
+        "line": 27,
+        "rule": "AI-HASH-002",
+        "cwe": "CWE-328",
+        "severity": "high",
+        "code": "export const md5 = async (data: Data): Promise<string | null> => {",
+        "msg": "MD5 and SHA1 are cryptographically broken — collisions can be computed in seconds on commodity hardware. AI code generators frequently suggest them because legacy examples are overrepresented in training data. Use SHA-256 or SHA-3 for checksums; use bcrypt/argon2/scrypt for passwords."
+      },
+      {
+        "file": "src/utils/crypto.ts",
+        "line": 28,
+        "rule": "AI-HASH-002",
+        "cwe": "CWE-328",
+        "severity": "high",
+        "code": "const algorithm: Algorithm = { name: 'MD5', alias: 'md5' }",
+        "msg": "MD5 and SHA1 are cryptographically broken — collisions can be computed in seconds on commodity hardware. AI code generators frequently suggest them because legacy examples are overrepresented in training data. Use SHA-256 or SHA-3 for checksums; use bcrypt/argon2/scrypt for passwords."
+      },
+      {
+        "file": "src/helper/css/common.ts",
+        "line": 204,
+        "rule": "AI-EVAL-001",
+        "cwe": "CWE-94",
+        "severity": "high",
+        "code": "const isPseudoGlobal = isPseudoGlobalSelectorRe.exec(thisStyleString)",
+        "msg": "eval() and exec() execute arbitrary code from strings. AI models trained on older tutorials frequently generate these patterns. Replace with safe alternatives: JSON.parse for data, Function constructors only under strict sandboxing, or subprocess.run with a fixed argument list."
+      },
+      {
+        "file": "src/helper/ssg/ssg.ts",
+        "line": 211,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "const baseURL = 'http://localhost'",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "src/jsx/dom/render.ts",
+        "line": 677,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "value: ((node as NodeObject).n = `http://www.w3.org/${ns}`),",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "src/router/pattern-router/router.ts",
+        "line": 51,
+        "rule": "AI-EVAL-001",
+        "cwe": "CWE-94",
+        "severity": "high",
+        "code": "const match = pattern.exec(path)",
+        "msg": "eval() and exec() execute arbitrary code from strings. AI models trained on older tutorials frequently generate these patterns. Replace with safe alternatives: JSON.parse for data, Function constructors only under strict sandboxing, or subprocess.run with a fixed argument list."
+      },
+      {
+        "file": "src/router/linear-router/router.ts",
+        "line": 97,
+        "rule": "AI-EVAL-001",
+        "cwe": "CWE-94",
+        "severity": "high",
+        "code": "const match = new RegExp(pattern, 'd').exec(restPath) as RegExpMatchArrayWithIndices",
+        "msg": "eval() and exec() execute arbitrary code from strings. AI models trained on older tutorials frequently generate these patterns. Replace with safe alternatives: JSON.parse for data, Function constructors only under strict sandboxing, or subprocess.run with a fixed argument list."
+      },
+      {
+        "file": "src/router/trie-router/node.ts",
+        "line": 185,
+        "rule": "AI-EVAL-001",
+        "cwe": "CWE-94",
+        "severity": "high",
+        "code": "const m = matcher.exec(restPathString)",
+        "msg": "eval() and exec() execute arbitrary code from strings. AI models trained on older tutorials frequently generate these patterns. Replace with safe alternatives: JSON.parse for data, Function constructors only under strict sandboxing, or subprocess.run with a fixed argument list."
+      }
+    ]
+  },
+  "documenso": {
+    "semgrep": [
+      {
+        "file": "apps/docs/content/docs/self-hosting/configuration/storage.mdx",
+        "line": 331,
+        "rule": "generic.secrets.security.detected-private-key.detected-private-key",
+        "cwe": "CWE-798",
+        "severity": "CRITICAL",
+        "code": "requires login",
+        "msg": "Private Key detected. This is a sensitive credential and should not be hardcoded here. Instead, store this in a separate, private file."
+      },
+      {
+        "file": "apps/remix/Dockerfile",
+        "line": 22,
+        "rule": "dockerfile.security.missing-user.missing-user",
+        "cwe": "CWE-250",
+        "severity": "CRITICAL",
+        "code": "requires login",
+        "msg": "By not specifying a USER, a program in the container may run as 'root'. This is a security hazard. If an attacker can control a process running as root, they may have control over the container. Ensure that the last USER in a Dockerfile is a USER other than 'root'."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-direct-template-client-page.tsx",
+        "line": 155,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-direct-template-client-page.tsx",
+        "line": 185,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-direct-template-client-page.tsx",
+        "line": 245,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-direct-template-client-page.tsx",
+        "line": 261,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-direct-template-client-page.tsx",
+        "line": 326,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v1.tsx",
+        "line": 151,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v1.tsx",
+        "line": 167,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v1.tsx",
+        "line": 188,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v1.tsx",
+        "line": 257,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v2.tsx",
+        "line": 52,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v2.tsx",
+        "line": 64,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v2.tsx",
+        "line": 76,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v2.tsx",
+        "line": 88,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v2.tsx",
+        "line": 100,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-signing-page-v2.tsx",
+        "line": 118,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-document-waiting-for-turn.tsx",
+        "line": 10,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/embed/embed-recipient-expired.tsx",
+        "line": 10,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/components/general/app-banner.tsx",
+        "line": 19,
+        "rule": "typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detection of dangerouslySetInnerHTML from non-constant definition. This can inadvertently expose users to cross-site scripting (XSS) attacks if this comes from user-provided input. If you have to use dangerouslySetInnerHTML, consider using a sanitization library such as DOMPurify to sanitize your HTML."
+      },
+      {
+        "file": "apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx",
+        "line": 396,
+        "rule": "typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml",
+        "cwe": "CWE-79",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "Detection of dangerouslySetInnerHTML from non-constant definition. This can inadvertently expose users to cross-site scripting (XSS) attacks if this comes from user-provided input. If you have to use dangerouslySetInnerHTML, consider using a sanitization library such as DOMPurify to sanitize your HTML."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/authoring+/document.create.tsx",
+        "line": 112,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/authoring+/document.edit.$id.tsx",
+        "line": 261,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/authoring+/template.create.tsx",
+        "line": 102,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/authoring+/template.edit.$id.tsx",
+        "line": 260,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/authoring_.completed.create.tsx",
+        "line": 24,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/multisign+/_index.tsx",
+        "line": 112,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/multisign+/_index.tsx",
+        "line": 134,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/multisign+/_index.tsx",
+        "line": 152,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/multisign+/_index.tsx",
+        "line": 165,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v1+/multisign+/_index.tsx",
+        "line": 178,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v2+/authoring+/envelope.create._index.tsx",
+        "line": 271,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      },
+      {
+        "file": "apps/remix/app/routes/embed+/v2+/authoring+/envelope.edit.$id.tsx",
+        "line": 286,
+        "rule": "javascript.browser.security.wildcard-postmessage-configuration.wildcard-postmessage-configuration",
+        "cwe": "CWE-345",
+        "severity": "HIGH",
+        "code": "requires login",
+        "msg": "The target origin of the window.postMessage() API is set to \"*\". This could allow for information disclosure due to the possibility of any origin allowed to receive the message."
+      }
+    ],
+    "stale_ai": [
+      {
+        "file": "packages/ui/primitives/signature-pad/signature-pad-dialog.tsx",
+        "line": 75,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "xmlns=\"http://www.w3.org/2000/svg\"",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/ui/primitives/template-flow/add-template-settings.types.tsx",
+        "line": 47,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "'Please enter a valid URL, make sure you include http:// or https:// part of the url.',",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/ui/primitives/multiselect.tsx",
+        "line": 284,
+        "rule": "AI-EVAL-001",
+        "cwe": "CWE-94",
+        "severity": "high",
+        "code": "void exec();",
+        "msg": "eval() and exec() execute arbitrary code from strings. AI models trained on older tutorials frequently generate these patterns. Replace with safe alternatives: JSON.parse for data, Function constructors only under strict sandboxing, or subprocess.run with a fixed argument list."
+      },
+      {
+        "file": "packages/ui/primitives/multiselect.tsx",
+        "line": 310,
+        "rule": "AI-EVAL-001",
+        "cwe": "CWE-94",
+        "severity": "high",
+        "code": "void exec();",
+        "msg": "eval() and exec() execute arbitrary code from strings. AI models trained on older tutorials frequently generate these patterns. Replace with safe alternatives: JSON.parse for data, Function constructors only under strict sandboxing, or subprocess.run with a fixed argument list."
+      },
+      {
+        "file": "packages/ui/primitives/document-flow/add-settings.types.ts",
+        "line": 40,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "'Please enter a valid URL, make sure you include http:// or https:// part of the url.',",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/ui/icons/verified.tsx",
+        "line": 14,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "xmlns=\"http://www.w3.org/2000/svg\"",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/ui/icons/signature.tsx",
+        "line": 17,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "xmlns=\"http://www.w3.org/2000/svg\"",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/trpc/server/document-router/access-auth-request-2fa-email.ts",
+        "line": 94,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "console.error('Error sending access auth 2FA email:', error);",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      },
+      {
+        "file": "packages/ee/server-only/lib/link-organisation-account.ts",
+        "line": 73,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "console.error('Invalid token metadata', tokenMetadata.error);",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      },
+      {
+        "file": "packages/prisma/seed/templates.ts",
+        "line": 132,
+        "rule": "AI-RAND-003",
+        "cwe": "CWE-338",
+        "severity": "medium",
+        "code": "token: Math.random().toString().slice(2, 7),",
+        "msg": "Math.random() is a pseudo-random number generator not suitable for cryptographic use. AI models often use it for token, session ID, or key generation because simple examples dominate training data. Use crypto.randomBytes() or crypto.randomUUID() in Node.js, or secrets.token_hex() in Python."
+      },
+      {
+        "file": "packages/prisma/seed/templates.ts",
+        "line": 192,
+        "rule": "AI-RAND-003",
+        "cwe": "CWE-338",
+        "severity": "medium",
+        "code": "token: Math.random().toString().slice(2, 7),",
+        "msg": "Math.random() is a pseudo-random number generator not suitable for cryptographic use. AI models often use it for token, session ID, or key generation because simple examples dominate training data. Use crypto.randomBytes() or crypto.randomUUID() in Node.js, or secrets.token_hex() in Python."
+      },
+      {
+        "file": "packages/prisma/seed/templates.ts",
+        "line": 215,
+        "rule": "AI-RAND-003",
+        "cwe": "CWE-338",
+        "severity": "medium",
+        "code": "token: Math.random().toString(),",
+        "msg": "Math.random() is a pseudo-random number generator not suitable for cryptographic use. AI models often use it for token, session ID, or key generation because simple examples dominate training data. Use crypto.randomBytes() or crypto.randomUUID() in Node.js, or secrets.token_hex() in Python."
+      },
+      {
+        "file": "packages/prisma/seed/initial-seed.ts",
+        "line": 105,
+        "rule": "AI-RAND-003",
+        "cwe": "CWE-338",
+        "severity": "medium",
+        "code": "token: Math.random().toString(36).slice(2, 9),",
+        "msg": "Math.random() is a pseudo-random number generator not suitable for cryptographic use. AI models often use it for token, session ID, or key generation because simple examples dominate training data. Use crypto.randomBytes() or crypto.randomUUID() in Node.js, or secrets.token_hex() in Python."
+      },
+      {
+        "file": "packages/prisma/seed/initial-seed.ts",
+        "line": 144,
+        "rule": "AI-RAND-003",
+        "cwe": "CWE-338",
+        "severity": "medium",
+        "code": "token: Math.random().toString(36).slice(2, 9),",
+        "msg": "Math.random() is a pseudo-random number generator not suitable for cryptographic use. AI models often use it for token, session ID, or key generation because simple examples dominate training data. Use crypto.randomBytes() or crypto.randomUUID() in Node.js, or secrets.token_hex() in Python."
+      },
+      {
+        "file": "packages/prisma/seed/initial-seed.ts",
+        "line": 366,
+        "rule": "AI-RAND-003",
+        "cwe": "CWE-338",
+        "severity": "medium",
+        "code": "token: directTemplateToken ?? Math.random().toString(),",
+        "msg": "Math.random() is a pseudo-random number generator not suitable for cryptographic use. AI models often use it for token, session ID, or key generation because simple examples dominate training data. Use crypto.randomBytes() or crypto.randomUUID() in Node.js, or secrets.token_hex() in Python."
+      },
+      {
+        "file": "packages/lib/types/document-meta.ts",
+        "line": 79,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "message: 'Please enter a valid URL, make sure you include http:// or https:// part of the url.',",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/lib/server-only/license/license-client.ts",
+        "line": 117,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "console.warn('[License] Found unauthorized flag usage.');",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      },
+      {
+        "file": "packages/lib/server-only/license/license-client.ts",
+        "line": 142,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "console.log(`[License] Unauthorized Flag Usage: ${unauthorizedFlagUsage ? 'Yes' : 'No'}`);",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      },
+      {
+        "file": "packages/lib/server-only/license/license-client.ts",
+        "line": 240,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "console.error('[License] Failed to check unauthorized flag usage:', error);",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      },
+      {
+        "file": "packages/lib/server-only/telemetry/telemetry-client.ts",
+        "line": 58,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "console.log('[Telemetry] Telemetry credentials not configured. Telemetry will not be sent.');",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      },
+      {
+        "file": "packages/lib/server-only/webhooks/assert-webhook-url.ts",
+        "line": 28,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "address.includes(':') ? `http://[${address}]` : `http://${address}`;",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/lib/server-only/webhooks/is-private-url.ts",
+        "line": 75,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "return isPrivateUrl(`http://${v4Mapped[1]}`);",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/lib/server-only/embedding-presign/verify-embedding-presign-token.ts",
+        "line": 23,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "console.error('Error decoding JWT token:', error);",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      },
+      {
+        "file": "packages/lib/server-only/embedding-presign/verify-embedding-presign-token.ts",
+        "line": 122,
+        "rule": "AI-LOG-007",
+        "cwe": "CWE-532",
+        "severity": "high",
+        "code": "console.error('Error verifying JWT token:', error);",
+        "msg": "Logging sensitive values (passwords, tokens, secrets) inserts credentials into log files, CI output, and observability platforms where they may persist indefinitely. AI code generators frequently emit debug logging lines that reference these variables. Remove the log or redact the value before logging."
+      },
+      {
+        "file": "packages/lib/schemas/common.ts",
+        "line": 11,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "message: 'Please enter a valid URL, make sure you include http:// or https:// part of the url.',",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "packages/api/v1/examples/03-update-a-field.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/api/v1/examples/05-add-a-recipient.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/api/v1/examples/07-remove-a-recipient.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/api/v1/examples/06-update-a-recipient.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/api/v1/examples/04-remove-a-field.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/api/v1/examples/08-get-a-document.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/api/v1/examples/09-paginate-all-documents.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/api/v1/examples/01-create-and-send-document.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/api/v1/examples/02-add-a-field.ts",
+        "line": 7,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "baseUrl: 'http://localhost:3000/api/v1',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/template-components/template-access-auth-2fa.tsx",
+        "line": 19,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/team-email-removed.tsx",
+        "line": 21,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-recipient-signed.tsx",
+        "line": 20,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/organisation-invite.tsx",
+        "line": 30,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-pending.tsx",
+        "line": 14,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-self-signed.tsx",
+        "line": 14,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/recipient-expired.tsx",
+        "line": 17,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/access-auth-2fa.tsx",
+        "line": 24,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-cancel.tsx",
+        "line": 16,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/confirm-email.tsx",
+        "line": 12,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-completed.tsx",
+        "line": 17,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/team-delete.tsx",
+        "line": 18,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-invite.tsx",
+        "line": 31,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-rejected.tsx",
+        "line": 22,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/organisation-join.tsx",
+        "line": 20,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/recipient-removed-from-document.tsx",
+        "line": 16,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/organisation-leave.tsx",
+        "line": 20,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-created-from-direct-template.tsx",
+        "line": 26,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-rejection-confirmed.tsx",
+        "line": 22,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/reset-password.tsx",
+        "line": 16,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/document-super-delete.tsx",
+        "line": 16,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/forgot-password.tsx",
+        "line": 14,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/organisation-account-link-confirmation.tsx",
+        "line": 32,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "packages/email/templates/confirm-team-email.tsx",
+        "line": 33,
+        "rule": "AI-CFG-009",
+        "cwe": "CWE-1188",
+        "severity": "low",
+        "code": "assetBaseUrl = 'http://localhost:3002',",
+        "msg": "Hardcoding localhost in configuration causes production deployments to silently fail or connect to the wrong service. AI models frequently initialize config variables to localhost as a default. Use environment variables (process.env.API_URL) or a config library that enforces environment separation."
+      },
+      {
+        "file": "apps/docs/src/components/ai/page-actions.tsx",
+        "line": 103,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "xmlns=\"http://www.w3.org/2000/svg\"",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "apps/docs/src/components/ai/page-actions.tsx",
+        "line": 120,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "xmlns=\"http://www.w3.org/2000/svg\"",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "apps/docs/src/lib/layout.shared.tsx",
+        "line": 8,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 84 84\" className=\"size-6\">",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "apps/remix/app/components/general/background.tsx",
+        "line": 7,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 1440 1081\" {...props}>",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "apps/remix/app/components/general/branding-logo-icon.tsx",
+        "line": 7,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 84 84\" {...props}>",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx",
+        "line": 135,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "'Please enter a valid URL, make sure you include http:// or https:// part of the url.',",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "apps/remix/app/components/general/branding-logo.tsx",
+        "line": 7,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 2248 320\" {...props}>",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      },
+      {
+        "file": "apps/remix/app/components/dialogs/organisation-email-domain-create-dialog.tsx",
+        "line": 169,
+        "rule": "AI-HTTP-004",
+        "cwe": "CWE-319",
+        "severity": "medium",
+        "code": "Enter the domain you want to use for sending emails (without http:// or",
+        "msg": "Plaintext HTTP transmits data without encryption, exposing it to MitM attacks. AI models trained on old tutorials and README files frequently emit http:// URLs in production code. All server-to-server calls must use HTTPS; enforce TLS verification at the HTTP client level."
+      }
+    ]
+  }
+}

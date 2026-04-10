@@ -1,0 +1,647 @@
+[
+  {
+    "id": "ghost:npm:@documenso/prisma",
+    "title": "\"@documenso/prisma\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/prisma\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:89:CWE-1104",
+      "packages/auth/package.json:14:CWE-1104",
+      "packages/trpc/package.json:14:CWE-1104",
+      "packages/ee/package.json:18:CWE-1104",
+      "packages/lib/package.json:31:CWE-1104",
+      "packages/api/package.json:19:CWE-1104",
+      "packages/app-tests/package.json:16:CWE-1104",
+      "apps/openpage-api/package.json:13:CWE-1104",
+      "apps/remix/package.json:23:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/prisma",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:ai",
+    "title": "\"ai\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"ai\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:94:CWE-1104",
+      "packages/lib/package.json:46:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "ai",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:posthog-node",
+    "title": "\"posthog-node\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"posthog-node\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:98:CWE-1104",
+      "packages/lib/package.json:63:CWE-1104",
+      "apps/remix/package.json:59:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "posthog-node",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@trpc/server",
+    "title": "\"@trpc/server\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@trpc/server\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:57:CWE-1104",
+      "packages/trpc/package.json:19:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@trpc/server",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:pdfjs-dist",
+    "title": "\"pdfjs-dist\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"pdfjs-dist\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:69:CWE-1104",
+      "packages/ui/package.json:69:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "pdfjs-dist",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:superjson",
+    "title": "\"superjson\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"superjson\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:79:CWE-1104",
+      "packages/trpc/package.json:23:CWE-1104",
+      "packages/api/package.json:25:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "superjson",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:vite-plugin-static-copy",
+    "title": "\"vite-plugin-static-copy\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"vite-plugin-static-copy\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:83:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "vite-plugin-static-copy",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/lib",
+    "title": "\"@documenso/lib\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/lib\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/ui/package.json:29:CWE-1104",
+      "packages/auth/package.json:13:CWE-1104",
+      "packages/trpc/package.json:13:CWE-1104",
+      "packages/ee/package.json:17:CWE-1104",
+      "packages/api/package.json:18:CWE-1104",
+      "packages/app-tests/package.json:15:CWE-1104",
+      "apps/remix/package.json:22:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/lib",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/tsconfig",
+    "title": "\"@documenso/tsconfig\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/tsconfig\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/signing/package.json:20:CWE-1104",
+      "packages/email/package.json:45:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/tsconfig",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:formidable",
+    "title": "\"formidable\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"formidable\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/trpc/package.json:21:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "formidable",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:kysely",
+    "title": "\"kysely\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"kysely\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/prisma/package.json:25:CWE-1104",
+      "packages/lib/package.json:53:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "kysely",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/assets",
+    "title": "\"@documenso/assets\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/assets\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/lib/package.json:29:CWE-1104",
+      "apps/remix/package.json:19:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/assets",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/email",
+    "title": "\"@documenso/email\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/email\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/lib/package.json:30:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/email",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/signing",
+    "title": "\"@documenso/signing\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/signing\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/lib/package.json:32:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/signing",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:csv-parse",
+    "title": "\"csv-parse\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"csv-parse\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/lib/package.json:48:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "csv-parse",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:jose",
+    "title": "\"jose\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"jose\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/lib/package.json:51:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "jose",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:posthog-js",
+    "title": "\"posthog-js\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"posthog-js\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/lib/package.json:62:CWE-1104",
+      "apps/remix/package.json:58:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "posthog-js",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/tailwind-config",
+    "title": "\"@documenso/tailwind-config\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/tailwind-config\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/email/package.json:19:CWE-1104",
+      "apps/remix/package.json:24:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/tailwind-config",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:mermaid",
+    "title": "\"mermaid\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"mermaid\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/docs/package.json:18:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "mermaid",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/api",
+    "title": "\"@documenso/api\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/api\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/remix/package.json:18:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/api",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/auth",
+    "title": "\"@documenso/auth\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/auth\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/remix/package.json:20:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/auth",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/ee",
+    "title": "\"@documenso/ee\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/ee\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/remix/package.json:21:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/ee",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/trpc",
+    "title": "\"@documenso/trpc\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/trpc\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/remix/package.json:25:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/trpc",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@documenso/ui",
+    "title": "\"@documenso/ui\" does not exist on npm",
+    "rule": "NEVER use the package \"@documenso/ui\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/remix/package.json:26:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@documenso/ui",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@hono/node-server",
+    "title": "\"@hono/node-server\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@hono/node-server\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/remix/package.json:29:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@hono/node-server",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@react-router/node",
+    "title": "\"@react-router/node\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@react-router/node\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/remix/package.json:39:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@react-router/node",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:papaparse",
+    "title": "\"papaparse\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"papaparse\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/remix/package.json:57:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "papaparse",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ai-pattern:AI-HTTP-004",
+    "title": "Always use HTTPS for external service calls",
+    "rule": "NEVER make production API calls over plain http://. Always use https:// to prevent man-in-the-middle attacks and credential leakage.",
+    "category": "ai_pattern",
+    "severity": "medium",
+    "cwes": [
+      "CWE-319"
+    ],
+    "finding_ids": [
+      "packages/ui/primitives/signature-pad/signature-pad-dialog.tsx:75:CWE-319",
+      "packages/ui/primitives/template-flow/add-template-settings.types.tsx:47:CWE-319",
+      "packages/ui/primitives/document-flow/add-settings.types.ts:40:CWE-319",
+      "packages/ui/icons/verified.tsx:14:CWE-319",
+      "packages/ui/icons/signature.tsx:17:CWE-319",
+      "packages/lib/types/document-meta.ts:79:CWE-319",
+      "packages/lib/server-only/webhooks/assert-webhook-url.ts:28:CWE-319",
+      "packages/lib/server-only/webhooks/is-private-url.ts:75:CWE-319",
+      "packages/lib/schemas/common.ts:11:CWE-319",
+      "apps/docs/src/components/ai/page-actions.tsx:103:CWE-319",
+      "apps/docs/src/components/ai/page-actions.tsx:120:CWE-319",
+      "apps/docs/src/lib/layout.shared.tsx:8:CWE-319",
+      "apps/remix/app/components/general/background.tsx:7:CWE-319",
+      "apps/remix/app/components/general/branding-logo-icon.tsx:7:CWE-319",
+      "apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx:135:CWE-319",
+      "apps/remix/app/components/general/branding-logo.tsx:7:CWE-319",
+      "apps/remix/app/components/dialogs/organisation-email-domain-create-dialog.tsx:169:CWE-319"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-HTTP-004"
+  },
+  {
+    "id": "ai-pattern:AI-EVAL-001",
+    "title": "Never use eval() or exec() for dynamic code",
+    "rule": "NEVER use eval() or exec() to execute dynamic strings as code — it enables remote code execution. Use JSON.parse() for data, fixed subprocess argument lists for shell commands.",
+    "category": "ai_pattern",
+    "severity": "high",
+    "cwes": [
+      "CWE-94"
+    ],
+    "finding_ids": [
+      "packages/ui/primitives/multiselect.tsx:284:CWE-94",
+      "packages/ui/primitives/multiselect.tsx:310:CWE-94"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-EVAL-001"
+  },
+  {
+    "id": "ai-pattern:AI-RAND-003",
+    "title": "Never use Math.random() for security values",
+    "rule": "NEVER use Math.random() for security tokens, session IDs, nonces, or keys — it is not cryptographically secure. Use crypto.randomBytes() or crypto.randomUUID() in Node.js; secrets.token_hex() in Python.",
+    "category": "ai_pattern",
+    "severity": "medium",
+    "cwes": [
+      "CWE-338"
+    ],
+    "finding_ids": [
+      "packages/prisma/seed/templates.ts:132:CWE-338",
+      "packages/prisma/seed/templates.ts:192:CWE-338",
+      "packages/prisma/seed/templates.ts:215:CWE-338",
+      "packages/prisma/seed/initial-seed.ts:105:CWE-338",
+      "packages/prisma/seed/initial-seed.ts:144:CWE-338",
+      "packages/prisma/seed/initial-seed.ts:366:CWE-338"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-RAND-003"
+  }
+]

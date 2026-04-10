@@ -1,0 +1,1413 @@
+[
+  {
+    "id": "ghost:npm:@calcom/lib",
+    "title": "\"@calcom/lib\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/lib\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/ui/package.json:77:CWE-1104",
+      "packages/app-store-cli/package.json:21:CWE-1104",
+      "packages/emails/package.json:11:CWE-1104",
+      "packages/platform/libraries/package.json:22:CWE-1104",
+      "packages/features/auth/package.json:12:CWE-1104",
+      "packages/features/ee/package.json:10:CWE-1104",
+      "packages/features/package.json:20:CWE-1104",
+      "packages/app-store/attio/package.json:8:CWE-1104",
+      "packages/app-store/mock-payment-app/package.json:8:CWE-1104",
+      "packages/app-store/weather_in_your_calendar/package.json:9:CWE-1104",
+      "packages/app-store/riverside/package.json:9:CWE-1104",
+      "packages/app-store/caldavcalendar/package.json:9:CWE-1104",
+      "packages/app-store/ping/package.json:9:CWE-1104",
+      "packages/app-store/demodesk/package.json:8:CWE-1104",
+      "packages/app-store/exchange2016calendar/package.json:8:CWE-1104",
+      "packages/app-store/databuddy/package.json:9:CWE-1104",
+      "packages/app-store/discord/package.json:8:CWE-1104",
+      "packages/app-store/basecamp3/package.json:8:CWE-1104",
+      "packages/app-store/plausible/package.json:9:CWE-1104",
+      "packages/app-store/zoomvideo/package.json:8:CWE-1104",
+      "packages/app-store/btcpayserver/package.json:8:CWE-1104",
+      "packages/app-store/umami/package.json:8:CWE-1104",
+      "packages/app-store/feishucalendar/package.json:9:CWE-1104",
+      "packages/app-store/sirius_video/package.json:9:CWE-1104",
+      "packages/app-store/sendgrid/package.json:9:CWE-1104",
+      "packages/app-store/shimmervideo/package.json:8:CWE-1104",
+      "packages/app-store/twipla/package.json:8:CWE-1104",
+      "packages/app-store/exchangecalendar/package.json:9:CWE-1104",
+      "packages/app-store/zapier/package.json:9:CWE-1104",
+      "packages/app-store/huddle01video/package.json:8:CWE-1104",
+      "packages/app-store/jitsivideo/package.json:8:CWE-1104",
+      "packages/app-store/stripepayment/package.json:17:CWE-1104",
+      "packages/app-store/famulor/package.json:8:CWE-1104",
+      "packages/app-store/office365video/package.json:8:CWE-1104",
+      "packages/app-store/linear/package.json:8:CWE-1104",
+      "packages/app-store/office365calendar/package.json:9:CWE-1104",
+      "packages/app-store/sylapsvideo/package.json:9:CWE-1104",
+      "packages/app-store/roam/package.json:8:CWE-1104",
+      "packages/app-store/salesroom/package.json:8:CWE-1104",
+      "packages/app-store/intercom/package.json:8:CWE-1104",
+      "packages/app-store/jelly/package.json:8:CWE-1104",
+      "packages/app-store/tandemvideo/package.json:8:CWE-1104",
+      "packages/app-store/alby/package.json:8:CWE-1104",
+      "packages/app-store/horizon-workrooms/package.json:8:CWE-1104",
+      "packages/app-store/dub/package.json:8:CWE-1104",
+      "packages/app-store/hubspot/package.json:8:CWE-1104",
+      "packages/app-store/metapixel/package.json:8:CWE-1104",
+      "packages/app-store/ga4/package.json:9:CWE-1104",
+      "packages/app-store/mirotalk/package.json:8:CWE-1104",
+      "packages/app-store/zoho-bigin/package.json:8:CWE-1104",
+      "packages/app-store/campfire/package.json:9:CWE-1104",
+      "packages/app-store/package.json:31:CWE-1104",
+      "packages/app-store/webex/package.json:8:CWE-1104",
+      "packages/app-store/pipedrive-crm/package.json:8:CWE-1104",
+      "packages/app-store/make/package.json:9:CWE-1104",
+      "packages/app-store/paypal/package.json:8:CWE-1104",
+      "packages/app-store/telegram/package.json:9:CWE-1104",
+      "packages/app-store/closecom/package.json:13:CWE-1104",
+      "packages/app-store/fathom/package.json:9:CWE-1104",
+      "packages/app-store/facetime/package.json:9:CWE-1104",
+      "packages/app-store/whereby/package.json:9:CWE-1104",
+      "packages/app-store/templates/booking-pages-tag/package.json:8:CWE-1104",
+      "packages/app-store/templates/basic/package.json:8:CWE-1104",
+      "packages/app-store/templates/event-type-location-video-static/package.json:8:CWE-1104",
+      "packages/app-store/templates/general-app-settings/package.json:8:CWE-1104",
+      "packages/app-store/templates/event-type-app-card/package.json:8:CWE-1104",
+      "packages/app-store/eightxeight/package.json:8:CWE-1104",
+      "packages/app-store/salesforce/package.json:17:CWE-1104",
+      "packages/app-store/routing-forms/package.json:9:CWE-1104",
+      "packages/app-store/dialpad/package.json:8:CWE-1104",
+      "packages/app-store/posthog/package.json:8:CWE-1104",
+      "packages/app-store/larkcalendar/package.json:9:CWE-1104",
+      "packages/app-store/dailyvideo/package.json:8:CWE-1104",
+      "packages/app-store/skype/package.json:8:CWE-1104",
+      "packages/app-store/gtm/package.json:8:CWE-1104",
+      "packages/app-store/qr_code/package.json:9:CWE-1104",
+      "packages/app-store/nextcloudtalk/package.json:8:CWE-1104",
+      "packages/app-store/exchange2013calendar/package.json:8:CWE-1104",
+      "packages/app-store/signal/package.json:9:CWE-1104",
+      "packages/app-store/lyra/package.json:9:CWE-1104",
+      "packages/app-store/hitpay/package.json:10:CWE-1104",
+      "packages/app-store/whatsapp/package.json:9:CWE-1104",
+      "packages/app-store/insihts/package.json:8:CWE-1104",
+      "packages/app-store/matomo/package.json:8:CWE-1104",
+      "packages/app-store/ics-feedcalendar/package.json:8:CWE-1104",
+      "packages/app-store/zohocrm/package.json:7:CWE-1104",
+      "packages/app-store/element-call/package.json:8:CWE-1104",
+      "packages/testing/package.json:19:CWE-1104",
+      "apps/web/package.json:42:CWE-1104",
+      "apps/api/v1/package.json:32:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/lib",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/config",
+    "title": "\"@calcom/config\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/config\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/ui/package.json:123:CWE-1104",
+      "packages/lib/package.json:13:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/config",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/tsconfig",
+    "title": "\"@calcom/tsconfig\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/tsconfig\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/ui/package.json:124:CWE-1104",
+      "packages/emails/package.json:20:CWE-1104",
+      "packages/features/ee/package.json:26:CWE-1104",
+      "packages/testing/package.json:24:CWE-1104",
+      "packages/lib/package.json:36:CWE-1104",
+      "packages/i18n/package.json:18:CWE-1104",
+      "apps/web/package.json:47:CWE-1104",
+      "apps/api/v1/package.json:22:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/tsconfig",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/i18n",
+    "title": "\"@calcom/i18n\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/i18n\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/trpc/package.json:17:CWE-1104",
+      "packages/platform/atoms/package.json:21:CWE-1104",
+      "packages/platform/libraries/package.json:21:CWE-1104",
+      "packages/features/auth/package.json:11:CWE-1104",
+      "packages/features/ee/package.json:9:CWE-1104",
+      "packages/features/ee/billing/package.json:8:CWE-1104",
+      "packages/features/package.json:19:CWE-1104",
+      "packages/app-store/vital/package.json:9:CWE-1104",
+      "packages/app-store/package.json:30:CWE-1104",
+      "packages/app-store/wipemycalother/package.json:9:CWE-1104",
+      "packages/testing/package.json:18:CWE-1104",
+      "packages/lib/package.json:15:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/i18n",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@trpc/server",
+    "title": "\"@trpc/server\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@trpc/server\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/trpc/package.json:22:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@trpc/server",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:cookie",
+    "title": "\"cookie\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"cookie\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/trpc/package.json:23:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "cookie",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:superjson",
+    "title": "\"superjson\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"superjson\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/trpc/package.json:24:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "superjson",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/dayjs",
+    "title": "\"@calcom/dayjs\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/dayjs\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/emails/package.json:10:CWE-1104",
+      "packages/features/auth/package.json:10:CWE-1104",
+      "packages/features/package.json:18:CWE-1104",
+      "packages/app-store/stripepayment/package.json:14:CWE-1104",
+      "packages/app-store/package.json:28:CWE-1104",
+      "packages/lib/package.json:14:CWE-1104",
+      "apps/web/package.json:37:CWE-1104",
+      "apps/api/v1/package.json:29:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/dayjs",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/testing",
+    "title": "\"@calcom/testing\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/testing\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/emails/package.json:19:CWE-1104",
+      "packages/features/package.json:52:CWE-1104",
+      "packages/app-store/package.json:46:CWE-1104",
+      "apps/api/v1/package.json:21:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/testing",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/types",
+    "title": "\"@calcom/types\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/types\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/emails/package.json:21:CWE-1104",
+      "packages/app-store/attio/package.json:11:CWE-1104",
+      "packages/app-store/googlevideo/package.json:12:CWE-1104",
+      "packages/app-store/mock-payment-app/package.json:11:CWE-1104",
+      "packages/app-store/weather_in_your_calendar/package.json:12:CWE-1104",
+      "packages/app-store/riverside/package.json:12:CWE-1104",
+      "packages/app-store/zohocalendar/package.json:12:CWE-1104",
+      "packages/app-store/caldavcalendar/package.json:19:CWE-1104",
+      "packages/app-store/ping/package.json:12:CWE-1104",
+      "packages/app-store/demodesk/package.json:11:CWE-1104",
+      "packages/app-store/exchange2016calendar/package.json:19:CWE-1104",
+      "packages/app-store/databuddy/package.json:12:CWE-1104",
+      "packages/app-store/discord/package.json:11:CWE-1104",
+      "packages/app-store/basecamp3/package.json:11:CWE-1104",
+      "packages/app-store/plausible/package.json:12:CWE-1104",
+      "packages/app-store/zoomvideo/package.json:12:CWE-1104",
+      "packages/app-store/btcpayserver/package.json:11:CWE-1104",
+      "packages/app-store/umami/package.json:11:CWE-1104",
+      "packages/app-store/feishucalendar/package.json:13:CWE-1104",
+      "packages/app-store/sirius_video/package.json:12:CWE-1104",
+      "packages/app-store/sendgrid/package.json:14:CWE-1104",
+      "packages/app-store/shimmervideo/package.json:11:CWE-1104",
+      "packages/app-store/twipla/package.json:11:CWE-1104",
+      "packages/app-store/exchangecalendar/package.json:15:CWE-1104",
+      "packages/app-store/zapier/package.json:13:CWE-1104",
+      "packages/app-store/huddle01video/package.json:11:CWE-1104",
+      "packages/app-store/jitsivideo/package.json:11:CWE-1104",
+      "packages/app-store/stripepayment/package.json:19:CWE-1104",
+      "packages/app-store/vital/package.json:15:CWE-1104",
+      "packages/app-store/famulor/package.json:11:CWE-1104",
+      "packages/app-store/office365video/package.json:12:CWE-1104",
+      "packages/app-store/linear/package.json:11:CWE-1104",
+      "packages/app-store/office365calendar/package.json:15:CWE-1104",
+      "packages/app-store/sylapsvideo/package.json:12:CWE-1104",
+      "packages/app-store/roam/package.json:11:CWE-1104",
+      "packages/app-store/salesroom/package.json:11:CWE-1104",
+      "packages/app-store/intercom/package.json:11:CWE-1104",
+      "packages/app-store/jelly/package.json:11:CWE-1104",
+      "packages/app-store/giphy/package.json:12:CWE-1104",
+      "packages/app-store/tandemvideo/package.json:12:CWE-1104",
+      "packages/app-store/alby/package.json:16:CWE-1104",
+      "packages/app-store/horizon-workrooms/package.json:11:CWE-1104",
+      "packages/app-store/dub/package.json:12:CWE-1104",
+      "packages/app-store/hubspot/package.json:13:CWE-1104",
+      "packages/app-store/metapixel/package.json:11:CWE-1104",
+      "packages/app-store/ga4/package.json:12:CWE-1104",
+      "packages/app-store/mirotalk/package.json:11:CWE-1104",
+      "packages/app-store/zoho-bigin/package.json:11:CWE-1104",
+      "packages/app-store/campfire/package.json:12:CWE-1104",
+      "packages/app-store/package.json:47:CWE-1104",
+      "packages/app-store/webex/package.json:11:CWE-1104",
+      "packages/app-store/pipedrive-crm/package.json:11:CWE-1104",
+      "packages/app-store/make/package.json:12:CWE-1104",
+      "packages/app-store/paypal/package.json:11:CWE-1104",
+      "packages/app-store/telegram/package.json:12:CWE-1104",
+      "packages/app-store/closecom/package.json:17:CWE-1104",
+      "packages/app-store/fathom/package.json:12:CWE-1104",
+      "packages/app-store/facetime/package.json:12:CWE-1104",
+      "packages/app-store/whereby/package.json:12:CWE-1104",
+      "packages/app-store/templates/booking-pages-tag/package.json:11:CWE-1104",
+      "packages/app-store/templates/basic/package.json:11:CWE-1104",
+      "packages/app-store/templates/event-type-location-video-static/package.json:11:CWE-1104",
+      "packages/app-store/templates/general-app-settings/package.json:11:CWE-1104",
+      "packages/app-store/templates/event-type-app-card/package.json:11:CWE-1104",
+      "packages/app-store/eightxeight/package.json:11:CWE-1104",
+      "packages/app-store/salesforce/package.json:25:CWE-1104",
+      "packages/app-store/routing-forms/package.json:19:CWE-1104",
+      "packages/app-store/dialpad/package.json:11:CWE-1104",
+      "packages/app-store/posthog/package.json:11:CWE-1104",
+      "packages/app-store/googlecalendar/package.json:13:CWE-1104",
+      "packages/app-store/larkcalendar/package.json:13:CWE-1104",
+      "packages/app-store/dailyvideo/package.json:12:CWE-1104",
+      "packages/app-store/skype/package.json:11:CWE-1104",
+      "packages/app-store/gtm/package.json:11:CWE-1104",
+      "packages/app-store/wipemycalother/package.json:14:CWE-1104",
+      "packages/app-store/applecalendar/package.json:13:CWE-1104",
+      "packages/app-store/qr_code/package.json:12:CWE-1104",
+      "packages/app-store/nextcloudtalk/package.json:11:CWE-1104",
+      "packages/app-store/exchange2013calendar/package.json:19:CWE-1104",
+      "packages/app-store/signal/package.json:12:CWE-1104",
+      "packages/app-store/lyra/package.json:13:CWE-1104",
+      "packages/app-store/hitpay/package.json:14:CWE-1104",
+      "packages/app-store/whatsapp/package.json:12:CWE-1104",
+      "packages/app-store/insihts/package.json:11:CWE-1104",
+      "packages/app-store/matomo/package.json:11:CWE-1104",
+      "packages/app-store/ics-feedcalendar/package.json:18:CWE-1104",
+      "packages/app-store/zohocrm/package.json:11:CWE-1104",
+      "packages/app-store/element-call/package.json:11:CWE-1104",
+      "packages/lib/package.json:37:CWE-1104",
+      "apps/api/v1/package.json:23:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/types",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@radix-ui/react-dialog-atoms",
+    "title": "\"@radix-ui/react-dialog-atoms\" does not exist on npm",
+    "rule": "NEVER use the package \"@radix-ui/react-dialog-atoms\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/atoms/package.json:82:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@radix-ui/react-dialog-atoms",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@radix-ui/react-popover-atoms",
+    "title": "\"@radix-ui/react-popover-atoms\" does not exist on npm",
+    "rule": "NEVER use the package \"@radix-ui/react-popover-atoms\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/atoms/package.json:83:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@radix-ui/react-popover-atoms",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@radix-ui/react-tooltip-atoms",
+    "title": "\"@radix-ui/react-tooltip-atoms\" does not exist on npm",
+    "rule": "NEVER use the package \"@radix-ui/react-tooltip-atoms\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/atoms/package.json:87:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@radix-ui/react-tooltip-atoms",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:dompurify",
+    "title": "\"dompurify\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"dompurify\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/atoms/package.json:91:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "dompurify",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:marked",
+    "title": "\"marked\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"marked\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/atoms/package.json:92:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "marked",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/platform-constants",
+    "title": "\"@calcom/platform-constants\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/platform-constants\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/types/package.json:14:CWE-1104",
+      "packages/platform/enums/package.json:25:CWE-1104",
+      "packages/platform/utils/package.json:14:CWE-1104",
+      "apps/api/v2/package.json:43:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/platform-constants",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/platform-enums",
+    "title": "\"@calcom/platform-enums\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/platform-enums\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/types/package.json:15:CWE-1104",
+      "apps/web/package.json:43:CWE-1104",
+      "apps/api/v2/package.json:44:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/platform-enums",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@nestjs/common",
+    "title": "\"@nestjs/common\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@nestjs/common\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/types/package.json:16:CWE-1104",
+      "apps/api/v2/package.json:53:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@nestjs/common",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:class-transformer",
+    "title": "\"class-transformer\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"class-transformer\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/types/package.json:18:CWE-1104",
+      "apps/api/v2/package.json:68:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "class-transformer",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:class-validator",
+    "title": "\"class-validator\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"class-validator\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/types/package.json:19:CWE-1104",
+      "apps/api/v2/package.json:69:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "class-validator",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/features",
+    "title": "\"@calcom/features\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/features\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/libraries/package.json:20:CWE-1104",
+      "packages/app-store/stripepayment/package.json:16:CWE-1104",
+      "packages/app-store/package.json:29:CWE-1104",
+      "apps/web/package.json:41:CWE-1104",
+      "apps/api/v1/package.json:31:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/features",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/platform-types",
+    "title": "\"@calcom/platform-types\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/platform-types\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/platform/utils/package.json:15:CWE-1104",
+      "apps/web/package.json:44:CWE-1104",
+      "apps/api/v2/package.json:46:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/platform-types",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/prisma",
+    "title": "\"@calcom/prisma\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/prisma\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/features/auth/package.json:13:CWE-1104",
+      "packages/app-store/googlevideo/package.json:9:CWE-1104",
+      "packages/app-store/zohocalendar/package.json:9:CWE-1104",
+      "packages/app-store/caldavcalendar/package.json:10:CWE-1104",
+      "packages/app-store/exchange2016calendar/package.json:9:CWE-1104",
+      "packages/app-store/zoomvideo/package.json:9:CWE-1104",
+      "packages/app-store/feishucalendar/package.json:10:CWE-1104",
+      "packages/app-store/sendgrid/package.json:10:CWE-1104",
+      "packages/app-store/exchangecalendar/package.json:10:CWE-1104",
+      "packages/app-store/stripepayment/package.json:18:CWE-1104",
+      "packages/app-store/vital/package.json:10:CWE-1104",
+      "packages/app-store/office365video/package.json:9:CWE-1104",
+      "packages/app-store/office365calendar/package.json:10:CWE-1104",
+      "packages/app-store/giphy/package.json:9:CWE-1104",
+      "packages/app-store/tandemvideo/package.json:9:CWE-1104",
+      "packages/app-store/hubspot/package.json:9:CWE-1104",
+      "packages/app-store/closecom/package.json:14:CWE-1104",
+      "packages/app-store/salesforce/package.json:18:CWE-1104",
+      "packages/app-store/googlecalendar/package.json:9:CWE-1104",
+      "packages/app-store/larkcalendar/package.json:10:CWE-1104",
+      "packages/app-store/dailyvideo/package.json:9:CWE-1104",
+      "packages/app-store/wipemycalother/package.json:10:CWE-1104",
+      "packages/app-store/applecalendar/package.json:9:CWE-1104",
+      "packages/app-store/exchange2013calendar/package.json:9:CWE-1104",
+      "packages/app-store/lyra/package.json:10:CWE-1104",
+      "packages/app-store/hitpay/package.json:11:CWE-1104",
+      "packages/app-store/ics-feedcalendar/package.json:9:CWE-1104",
+      "packages/app-store/zohocrm/package.json:8:CWE-1104",
+      "packages/testing/package.json:20:CWE-1104",
+      "apps/web/package.json:45:CWE-1104",
+      "apps/api/v1/package.json:33:CWE-1104",
+      "apps/api/v2/package.json:48:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/prisma",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/trpc",
+    "title": "\"@calcom/trpc\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/trpc\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/features/auth/package.json:14:CWE-1104",
+      "packages/features/package.json:21:CWE-1104",
+      "apps/web/package.json:46:CWE-1104",
+      "apps/api/v1/package.json:34:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/trpc",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/ui",
+    "title": "\"@calcom/ui\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/ui\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/features/auth/package.json:15:CWE-1104",
+      "packages/features/ee/package.json:11:CWE-1104",
+      "packages/features/package.json:22:CWE-1104",
+      "packages/app-store/caldavcalendar/package.json:11:CWE-1104",
+      "packages/app-store/exchange2016calendar/package.json:10:CWE-1104",
+      "packages/app-store/package.json:33:CWE-1104",
+      "packages/app-store/exchange2013calendar/package.json:10:CWE-1104",
+      "packages/app-store/ics-feedcalendar/package.json:10:CWE-1104",
+      "apps/web/package.json:48:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/ui",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:handlebars",
+    "title": "\"handlebars\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"handlebars\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/features/auth/package.json:18:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "handlebars",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:jose",
+    "title": "\"jose\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"jose\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/features/auth/package.json:19:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "jose",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:next-auth",
+    "title": "\"next-auth\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"next-auth\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/features/auth/package.json:21:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "next-auth",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@coss/ui",
+    "title": "\"@coss/ui\" does not exist on npm",
+    "rule": "NEVER use the package \"@coss/ui\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/features/package.json:23:CWE-1104",
+      "apps/web/package.json:49:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@coss/ui",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/emails",
+    "title": "\"@calcom/emails\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/emails\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/app-store/stripepayment/package.json:15:CWE-1104",
+      "apps/api/v1/package.json:30:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/emails",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:dub-package",
+    "title": "\"dub-package\" does not exist on npm",
+    "rule": "NEVER use the package \"dub-package\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/app-store/dub/package.json:9:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "dub-package",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/dailyvideo",
+    "title": "\"@calcom/dailyvideo\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/dailyvideo\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/app-store/package.json:27:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/dailyvideo",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/office365video",
+    "title": "\"@calcom/office365video\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/office365video\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/app-store/package.json:32:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/office365video",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/zoomvideo",
+    "title": "\"@calcom/zoomvideo\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/zoomvideo\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/app-store/package.json:34:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/zoomvideo",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:json-logic-js",
+    "title": "\"json-logic-js\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"json-logic-js\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/app-store/routing-forms/package.json:11:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "json-logic-js",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:i18next",
+    "title": "\"i18next\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"i18next\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/lib/package.json:22:CWE-1104",
+      "packages/i18n/package.json:15:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "i18next",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:kysely",
+    "title": "\"kysely\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"kysely\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/kysely/package.json:6:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "kysely",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/app-store-cli",
+    "title": "\"@calcom/app-store-cli\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/app-store-cli\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/web/package.json:36:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/app-store-cli",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@sentry/nextjs",
+    "title": "\"@sentry/nextjs\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@sentry/nextjs\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/v1/package.json:36:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@sentry/nextjs",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@calcom/platform-utils",
+    "title": "\"@calcom/platform-utils\" does not exist on npm",
+    "rule": "NEVER use the package \"@calcom/platform-utils\" (npm) — it does not exist on the registry. This is likely an AI-hallucinated package name. An attacker can register it at any time. Remove this dependency and find a verified alternative.",
+    "category": "ghost_dep",
+    "severity": "critical",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/v2/package.json:47:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@calcom/platform-utils",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@nestjs/core",
+    "title": "\"@nestjs/core\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@nestjs/core\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/v2/package.json:55:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@nestjs/core",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@sentry/nestjs",
+    "title": "\"@sentry/nestjs\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@sentry/nestjs\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/v2/package.json:61:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@sentry/nestjs",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@sentry/node",
+    "title": "\"@sentry/node\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@sentry/node\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/v2/package.json:62:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@sentry/node",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:googleapis",
+    "title": "\"googleapis\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"googleapis\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/v2/package.json:73:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "googleapis",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:connect",
+    "title": "\"connect\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"connect\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/package.json:13:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "connect",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:http",
+    "title": "\"http\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"http\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/package.json:14:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "http",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:http-proxy-middleware",
+    "title": "\"http-proxy-middleware\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"http-proxy-middleware\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "apps/api/package.json:15:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "http-proxy-middleware",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ai-pattern:AI-HASH-002",
+    "title": "Never use MD5/SHA1 for security operations",
+    "rule": "NEVER use MD5 or SHA1 for cryptographic operations — both are broken. Use SHA-256 (or higher) for checksums; use bcrypt, argon2, or scrypt for passwords.",
+    "category": "ai_pattern",
+    "severity": "high",
+    "cwes": [
+      "CWE-328"
+    ],
+    "finding_ids": [
+      ".yarn/releases/yarn-4.12.0.cjs:4:CWE-328",
+      ".yarn/releases/yarn-4.12.0.cjs:395:CWE-328",
+      ".yarn/releases/yarn-4.12.0.cjs:398:CWE-328",
+      ".yarn/releases/yarn-4.12.0.cjs:693:CWE-328",
+      ".yarn/releases/yarn-4.12.0.cjs:696:CWE-328",
+      "packages/trpc/server/routers/viewer/organizations/verifyCode.handler.ts:54:CWE-328",
+      "packages/trpc/server/routers/viewer/organizations/setPassword.handler.ts:36:CWE-328",
+      "packages/trpc/server/routers/viewer/workflows/verifyEmailCode.handler.ts:24:CWE-328",
+      "packages/trpc/server/routers/viewer/me/get.handler.ts:110:CWE-328",
+      "packages/features/insights/services/InsightsBookingBaseService.ts:1:CWE-328",
+      "packages/features/insights/services/InsightsBookingBaseService.ts:916:CWE-328",
+      "packages/features/insights/services/InsightsBookingBaseService.ts:980:CWE-328",
+      "packages/features/insights/services/InsightsBookingBaseService.ts:1056:CWE-328",
+      "packages/features/auth/lib/verifyEmail.ts:105:CWE-328",
+      "packages/features/auth/lib/verifyCodeUnAuthenticated.ts:17:CWE-328",
+      "apps/web/app/api/sync/helpscout/route.ts:42:CWE-328",
+      "apps/web/scripts/copy-app-store-static.js:35:CWE-328",
+      "apps/api/v1/next.config.js:46:CWE-328",
+      "apps/api/v1/lib/helpers/addRequestid.ts:14:CWE-328",
+      "apps/api/v2/src/vercel-webhook.guard.ts:44:CWE-328"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-HASH-002"
+  },
+  {
+    "id": "ai-pattern:AI-RAND-003",
+    "title": "Never use Math.random() for security values",
+    "rule": "NEVER use Math.random() for security tokens, session IDs, nonces, or keys — it is not cryptographically secure. Use crypto.randomBytes() or crypto.randomUUID() in Node.js; secrets.token_hex() in Python.",
+    "category": "ai_pattern",
+    "severity": "medium",
+    "cwes": [
+      "CWE-338"
+    ],
+    "finding_ids": [
+      ".yarn/releases/yarn-4.12.0.cjs:9:CWE-338",
+      ".yarn/releases/yarn-4.12.0.cjs:142:CWE-338",
+      ".yarn/releases/yarn-4.12.0.cjs:249:CWE-338",
+      ".yarn/releases/yarn-4.12.0.cjs:284:CWE-338",
+      ".yarn/releases/yarn-4.12.0.cjs:292:CWE-338",
+      ".yarn/releases/yarn-4.12.0.cjs:322:CWE-338",
+      ".yarn/releases/yarn-4.12.0.cjs:398:CWE-338",
+      "scripts/seed-insights.ts:148:CWE-338",
+      "scripts/seed-insights.ts:626:CWE-338",
+      "scripts/seed-utils.ts:758:CWE-338",
+      "scripts/seed-utils.ts:801:CWE-338",
+      "packages/lib/components/ServerTrans.tsx:313:CWE-338",
+      "apps/web/playwright/signup.e2e.ts:205:CWE-338",
+      "apps/web/playwright/fixtures/bookings.ts:45:CWE-338",
+      "apps/web/modules/insights/components/UserStatsTable.tsx:33:CWE-338",
+      "apps/web/modules/insights/views/insights-call-history-view.tsx:95:CWE-338",
+      "apps/web/modules/bookings/components/AvailableTimes.tsx:338:CWE-338"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-RAND-003"
+  },
+  {
+    "id": "ai-pattern:AI-EVAL-001",
+    "title": "Never use eval() or exec() for dynamic code",
+    "rule": "NEVER use eval() or exec() to execute dynamic strings as code — it enables remote code execution. Use JSON.parse() for data, fixed subprocess argument lists for shell commands.",
+    "category": "ai_pattern",
+    "severity": "high",
+    "cwes": [
+      "CWE-94"
+    ],
+    "finding_ids": [
+      ".yarn/releases/yarn-4.12.0.cjs:17:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:18:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:19:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:37:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:38:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:131:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:132:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:138:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:140:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:141:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:146:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:164:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:218:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:247:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:254:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:255:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:266:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:298:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:299:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:303:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:308:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:395:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:400:CWE-94",
+      ".yarn/releases/yarn-4.12.0.cjs:535:CWE-94",
+      "packages/ui/components/editor/plugins/AutoLinkPlugin.tsx:11:CWE-94",
+      "packages/ui/components/editor/plugins/AutoLinkPlugin.tsx:22:CWE-94",
+      "packages/ui/components/editor/plugins/AddVariablesPlugin.tsx:28:CWE-94",
+      "packages/app-store-cli/src/utils/execSync.ts:10:CWE-94",
+      "packages/config/theme/generateColor.ts:5:CWE-94",
+      "packages/prisma/auto-migrations.ts:34:CWE-94",
+      "packages/app-store/giphy/api/get.ts:32:CWE-94",
+      "packages/app-store/BookingPageTagManager.tsx:110:CWE-94",
+      "packages/lib/components/ServerTrans.tsx:250:CWE-94",
+      "packages/lib/components/ServerTrans.tsx:351:CWE-94",
+      "packages/lib/getBrandColours.tsx:47:CWE-94"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-EVAL-001"
+  },
+  {
+    "id": "ai-pattern:AI-HTTP-004",
+    "title": "Always use HTTPS for external service calls",
+    "rule": "NEVER make production API calls over plain http://. Always use https:// to prevent man-in-the-middle attacks and credential leakage.",
+    "category": "ai_pattern",
+    "severity": "medium",
+    "cwes": [
+      "CWE-319"
+    ],
+    "finding_ids": [
+      ".yarn/releases/yarn-4.12.0.cjs:146:CWE-319",
+      "packages/ui/components/card/Card.tsx:217:CWE-319",
+      "packages/ui/components/button/Button.tsx:293:CWE-319",
+      "packages/ui/components/divider/Divider.tsx:19:CWE-319",
+      "packages/ui/components/icon/SatSymbol.tsx:13:CWE-319",
+      "packages/ui/components/icon/Spinner.tsx:10:CWE-319",
+      "packages/ui/scripts/build-icons.mjs:121:CWE-319",
+      "packages/trpc/server/routers/viewer/organizations/create.handler.ts:166:CWE-319",
+      "packages/emails/src/renderEmail.ts:17:CWE-319",
+      "packages/emails/src/templates/AdminOrganizationNotificationEmail.tsx:71:CWE-319",
+      "packages/features/calendars/weeklyview/components/spinner/Spinner.tsx:9:CWE-319",
+      "packages/features/embed/lib/hooks/index.tsx:18:CWE-319",
+      "packages/features/embed/lib/hooks/index.tsx:91:CWE-319",
+      "packages/features/embed/lib/hooks/index.tsx:117:CWE-319",
+      "packages/features/embed/lib/hooks/index.tsx:195:CWE-319",
+      "packages/features/ee/organizations/lib/server/orgCreationUtils.ts:345:CWE-319",
+      "packages/features/ee/organizations/lib/orgDomains.ts:144:CWE-319",
+      "packages/features/ee/organizations/lib/orgDomains.ts:154:CWE-319",
+      "packages/coss-ui/src/components/combobox.tsx:222:CWE-319",
+      "packages/coss-ui/src/components/menu.tsx:146:CWE-319",
+      "packages/coss-ui/src/components/menu.tsx:186:CWE-319",
+      "packages/coss-ui/src/components/number-field.tsx:145:CWE-319",
+      "packages/coss-ui/src/components/checkbox.tsx:33:CWE-319",
+      "packages/coss-ui/src/components/checkbox.tsx:48:CWE-319",
+      "packages/coss-ui/src/components/select.tsx:192:CWE-319",
+      "packages/app-store/giphy/components/SearchDialog.tsx:157:CWE-319",
+      "packages/app-store/salesforce/lib/utils/getAllPossibleWebsiteValuesFromEmailDomain.ts:5:CWE-319",
+      "packages/app-store/salesforce/lib/utils/getAllPossibleWebsiteValuesFromEmailDomain.ts:6:CWE-319",
+      "packages/lib/constants.ts:8:CWE-319",
+      "packages/embeds/embed-core/src/FloatingButton/FloatingButtonHtml.ts:26:CWE-319",
+      "packages/embeds/embed-core/src/lib/utils.ts:138:CWE-319",
+      "apps/web/app/(use-page-wrapper)/settings/(settings-layout)/organizations/roles/_components/FingerprintAnimation.tsx:12:CWE-319",
+      "apps/web/playwright/dynamic-booking-pages.e2e.ts:152:CWE-319",
+      "apps/web/components/ui/UsernameAvailability/PremiumTextfield.tsx:208:CWE-319",
+      "apps/web/components/AddToHomescreen.tsx:24:CWE-319",
+      "apps/web/lib/handleOrgRedirect.ts:195:CWE-319",
+      "apps/web/modules/settings/my-account/components/MailIcon.tsx:8:CWE-319",
+      "apps/web/modules/settings/my-account/components/CompanyEmailOrganizationBanner.tsx:43:CWE-319",
+      "apps/web/modules/embed/components/RoutingFormEmbed.tsx:29:CWE-319",
+      "apps/web/modules/bookings/views/bookings-single-view.tsx:986:CWE-319",
+      "apps/web/modules/bookings/views/bookings-single-view.tsx:1001:CWE-319",
+      "apps/web/modules/bookings/views/bookings-single-view.tsx:1016:CWE-319",
+      "apps/web/modules/bookings/views/bookings-single-view.tsx:1031:CWE-319",
+      "apps/web/modules/auth/verify-view.tsx:93:CWE-319",
+      "apps/web/modules/shell/user-dropdown/DownloadIcons.tsx:8:CWE-319",
+      "apps/web/modules/shell/user-dropdown/DownloadIcons.tsx:23:CWE-319",
+      "apps/web/modules/shell/user-dropdown/DownloadIcons.tsx:165:CWE-319",
+      "apps/web/modules/shell/user-dropdown/DownloadIcons.tsx:228:CWE-319",
+      "apps/web/modules/shell/user-dropdown/DownloadIcons.tsx:302:CWE-319",
+      "apps/web/modules/shell/user-dropdown/DownloadIcons.tsx:446:CWE-319",
+      "apps/web/modules/shell/user-dropdown/DownloadIcons.tsx:560:CWE-319",
+      "apps/web/modules/shell/user-dropdown/DownloadIcons.tsx:585:CWE-319",
+      "apps/web/modules/ee/teams/components/CreateANewTeamForm.tsx:149:CWE-319",
+      "apps/web/modules/ee/teams/components/GoogleWorkspaceInviteButton.tsx:13:CWE-319",
+      "apps/web/modules/onboarding/components/InviteOptions.tsx:9:CWE-319",
+      "apps/web/modules/onboarding/teams/details/validated-team-slug.tsx:89:CWE-319",
+      "apps/web/next.config.ts:98:CWE-319",
+      "apps/web/next.config.ts:99:CWE-319",
+      "apps/api/v2/src/ee/calendars/input/create-ics.input.ts:37:CWE-319",
+      "apps/api/v2/src/modules/organizations/teams/invite/outputs/invite.output.ts:15:CWE-319",
+      "apps/api/v2/src/modules/teams/invite/outputs/invite.output.ts:22:CWE-319"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-HTTP-004"
+  }
+]

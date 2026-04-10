@@ -1,0 +1,778 @@
+[
+  {
+    "id": "ghost:npm:file-type",
+    "title": "\"file-type\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"file-type\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:18:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "file-type",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:googleapis",
+    "title": "\"googleapis\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"googleapis\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:21:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "googleapis",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:immer",
+    "title": "\"immer\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"immer\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:23:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "immer",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:lodash.merge",
+    "title": "\"lodash.merge\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"lodash.merge\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:37:CWE-1104",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/seed-dependencies/package.json:35:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "lodash.merge",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:next-mdx-remote",
+    "title": "\"next-mdx-remote\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"next-mdx-remote\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-website/package.json:26:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "next-mdx-remote",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@azure/msal-node",
+    "title": "\"@azure/msal-node\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@azure/msal-node\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-server/package.json:31:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@azure/msal-node",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@nestjs/common",
+    "title": "\"@nestjs/common\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@nestjs/common\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-server/package.json:55:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@nestjs/common",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@nestjs/core",
+    "title": "\"@nestjs/core\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@nestjs/core\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-server/package.json:57:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@nestjs/core",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:graphql",
+    "title": "\"graphql\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"graphql\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-sdk/package.json:64:CWE-1104",
+      "packages/twenty-client-sdk/package.json:46:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "graphql",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:preact",
+    "title": "\"preact\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"preact\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-sdk/package.json:69:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "preact",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:class-validator",
+    "title": "\"class-validator\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"class-validator\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-shared/package.json:33:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "class-validator",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:expr-eval-fork",
+    "title": "\"expr-eval-fork\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"expr-eval-fork\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-shared/package.json:34:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "expr-eval-fork",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:handlebars",
+    "title": "\"handlebars\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"handlebars\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-shared/package.json:35:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "handlebars",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:qs",
+    "title": "\"qs\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"qs\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-shared/package.json:38:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "qs",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:storybook",
+    "title": "\"storybook\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"storybook\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-front-component-renderer/package.json:43:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "storybook",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:zapier-platform-core",
+    "title": "\"zapier-platform-core\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"zapier-platform-core\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-zapier/package.json:19:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "zapier-platform-core",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:zapier-platform-cli",
+    "title": "\"zapier-platform-cli\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"zapier-platform-cli\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-zapier/package.json:29:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "zapier-platform-cli",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:codemirror",
+    "title": "\"codemirror\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"codemirror\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-companion/package.json:48:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "codemirror",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:marked",
+    "title": "\"marked\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"marked\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-companion/package.json:54:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "marked",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:simplemde",
+    "title": "\"simplemde\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"simplemde\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-companion/package.json:59:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "simplemde",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:electron",
+    "title": "\"electron\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"electron\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-companion/package.json:36:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "electron",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:@tiptap/extension-link",
+    "title": "\"@tiptap/extension-link\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@tiptap/extension-link\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "packages/twenty-front/package.json:68:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@tiptap/extension-link",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ai-pattern:AI-HASH-002",
+    "title": "Never use MD5/SHA1 for security operations",
+    "rule": "NEVER use MD5 or SHA1 for cryptographic operations — both are broken. Use SHA-256 (or higher) for checksums; use bcrypt, argon2, or scrypt for passwords.",
+    "category": "ai_pattern",
+    "severity": "high",
+    "cwes": [
+      "CWE-328"
+    ],
+    "finding_ids": [
+      ".yarn/releases/yarn-4.13.0.cjs:4:CWE-328",
+      ".yarn/releases/yarn-4.13.0.cjs:395:CWE-328",
+      ".yarn/releases/yarn-4.13.0.cjs:398:CWE-328",
+      ".yarn/releases/yarn-4.13.0.cjs:691:CWE-328",
+      ".yarn/releases/yarn-4.13.0.cjs:694:CWE-328",
+      "packages/twenty-website/src/middleware.ts:14:CWE-328",
+      "packages/twenty-server/src/utils/anonymize.ts:5:CWE-328",
+      "packages/twenty-server/src/engine/metadata-modules/logic-function/services/logic-function-from-source.service.ts:333:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/logic-function/logic-function-resource/logic-function-resource.service.ts:118:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/two-factor-authentication/strategies/otp/totp/constants/totp.strategy.constants.ts:6:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/two-factor-authentication/strategies/otp/totp/constants/totp.strategy.constants.ts:20:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/two-factor-authentication/strategies/otp/totp/constants/totp.strategy.constants.ts:38:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:4:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:395:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:398:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:693:CWE-328",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:696:CWE-328",
+      "packages/twenty-server/src/engine/workspace-manager/standard-objects-prefill-data/services/prefill-front-component.service.ts:108:CWE-328",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:4:CWE-328",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:395:CWE-328",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:398:CWE-328",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:693:CWE-328",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:696:CWE-328"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-HASH-002"
+  },
+  {
+    "id": "ai-pattern:AI-RAND-003",
+    "title": "Never use Math.random() for security values",
+    "rule": "NEVER use Math.random() for security tokens, session IDs, nonces, or keys — it is not cryptographically secure. Use crypto.randomBytes() or crypto.randomUUID() in Node.js; secrets.token_hex() in Python.",
+    "category": "ai_pattern",
+    "severity": "medium",
+    "cwes": [
+      "CWE-338"
+    ],
+    "finding_ids": [
+      ".yarn/releases/yarn-4.13.0.cjs:9:CWE-338",
+      ".yarn/releases/yarn-4.13.0.cjs:142:CWE-338",
+      ".yarn/releases/yarn-4.13.0.cjs:249:CWE-338",
+      ".yarn/releases/yarn-4.13.0.cjs:284:CWE-338",
+      ".yarn/releases/yarn-4.13.0.cjs:292:CWE-338",
+      ".yarn/releases/yarn-4.13.0.cjs:322:CWE-338",
+      ".yarn/releases/yarn-4.13.0.cjs:398:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:5:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:6:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:8:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:33:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:41:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:5:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:6:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:8:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:33:CWE-338",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:41:CWE-338",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:9:CWE-338",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:142:CWE-338",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:249:CWE-338",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:284:CWE-338",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:292:CWE-338",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:322:CWE-338",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:398:CWE-338",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:9:CWE-338",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:142:CWE-338",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:249:CWE-338",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:284:CWE-338",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:292:CWE-338",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:322:CWE-338",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:398:CWE-338"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-RAND-003"
+  },
+  {
+    "id": "ai-pattern:AI-EVAL-001",
+    "title": "Never use eval() or exec() for dynamic code",
+    "rule": "NEVER use eval() or exec() to execute dynamic strings as code — it enables remote code execution. Use JSON.parse() for data, fixed subprocess argument lists for shell commands.",
+    "category": "ai_pattern",
+    "severity": "high",
+    "cwes": [
+      "CWE-94"
+    ],
+    "finding_ids": [
+      ".yarn/releases/yarn-4.13.0.cjs:17:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:18:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:19:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:37:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:38:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:131:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:132:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:138:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:140:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:141:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:146:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:164:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:218:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:247:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:254:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:255:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:266:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:298:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:299:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:303:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:308:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:395:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:400:CWE-94",
+      ".yarn/releases/yarn-4.13.0.cjs:535:CWE-94",
+      "packages/twenty-oxlint-rules/rules/no-angle-bracket-placeholders.ts:134:CWE-94",
+      "packages/twenty-oxlint-rules/rules/no-angle-bracket-placeholders.ts:163:CWE-94",
+      "packages/twenty-server/src/database/clickHouse/clickHouse.service.ts:208:CWE-94",
+      "packages/twenty-server/src/database/clickHouse/clickHouse.service.ts:226:CWE-94",
+      "packages/twenty-server/src/modules/messaging/message-import-manager/drivers/imap/utils/parse-message-id.util.ts:9:CWE-94",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:41:CWE-94",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:57:CWE-94",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:61:CWE-94",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:41:CWE-94",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:57:CWE-94",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:61:CWE-94",
+      "packages/twenty-server/src/engine/metadata-modules/ai/ai-models/utils/extract-config-variable-name.util.ts:10:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/file-storage/drivers/s3.driver.ts:471:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/cache-storage/services/cache-storage.service.ts:236:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/cache-storage/services/cache-storage.service.ts:339:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:17:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:18:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:19:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:37:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:38:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:131:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:132:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:138:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:140:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:141:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:146:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:164:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:218:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:247:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:254:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:255:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:266:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:298:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:299:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:303:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:308:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:395:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:400:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:535:CWE-94",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/utils/parse-available-packages-from-package-json-and-yarn-lock.util.ts:19:CWE-94",
+      "packages/twenty-server/src/engine/api/common/common-args-processors/data-arg-processor/validator-utils/validate-rich-text-field-or-throw.util.ts:21:CWE-94",
+      "packages/twenty-shared/src/utils/filter/dates/utils/relativeDateFilterStringifiedSchema.ts:15:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:17:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:18:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:19:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:37:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:38:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:131:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:132:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:138:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:140:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:141:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:146:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:164:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:218:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:247:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:254:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:255:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:266:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:298:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:299:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:303:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:308:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:395:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:400:CWE-94",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:535:CWE-94",
+      "packages/twenty-front/src/modules/ai/components/LazyMarkdownRenderer.tsx:32:CWE-94",
+      "packages/twenty-front/src/modules/ai/components/RecordLink.tsx:58:CWE-94"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-EVAL-001"
+  },
+  {
+    "id": "ai-pattern:AI-HTTP-004",
+    "title": "Always use HTTPS for external service calls",
+    "rule": "NEVER make production API calls over plain http://. Always use https:// to prevent man-in-the-middle attacks and credential leakage.",
+    "category": "ai_pattern",
+    "severity": "medium",
+    "cwes": [
+      "CWE-319"
+    ],
+    "finding_ids": [
+      ".yarn/releases/yarn-4.13.0.cjs:146:CWE-319",
+      "packages/twenty-ui/src/display/checkmark/components/AnimatedCheckmark.tsx:24:CWE-319",
+      "packages/twenty-ui/src/display/icon/components/ThinkingOrbitLoaderIcon.tsx:14:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/layout/articles/ArticleEditContent.tsx:92:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/icons/SvgIcons.tsx:26:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/icons/SvgIcons.tsx:42:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/icons/SvgIcons.tsx:63:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/icons/SvgIcons.tsx:84:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/icons/SvgIcons.tsx:113:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/icons/SvgIcons.tsx:141:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/icons/SvgIcons.tsx:170:CWE-319",
+      "packages/twenty-website/src/app/_components/ui/icons/SvgIcons.tsx:187:CWE-319",
+      "packages/twenty-website/src/app/api/contributors/[slug]/og.png/route.tsx:67:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:1:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:5:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:8:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:11:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/hello-world/index.mjs:30:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:1:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:5:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:8:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:11:CWE-319",
+      "packages/twenty-server/src/engine/metadata-modules/front-component/constants/seed-project/show-notification/index.mjs:30:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/xlsx/recalc.py:37:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/pptx/rearrange.py:105:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/pptx/rearrange.py:116:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/pptx/inventory.py:168:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/docx.py:18:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/redlining.py:19:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/pptx.py:15:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:70:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:71:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:75:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:78:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:81:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:89:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:90:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:91:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:92:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:93:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:94:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:95:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:96:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:97:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:98:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:99:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:100:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:101:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:102:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/code-interpreter/sandbox-scripts/docx/validation/base.py:103:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/twenty-config/config-variables.ts:451:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/application/application-package/constants/yarn-engine/.yarn/releases/yarn-4.9.2.cjs:146:CWE-319",
+      "packages/twenty-server/src/engine/core-modules/application/application-marketplace/utils/resolve-manifest-asset-urls.util.ts:4:CWE-319",
+      "packages/twenty-sdk/src/cli/utilities/auth/callback-server.ts:14:CWE-319",
+      "packages/twenty-shared/src/utils/url/absoluteUrlSchema.ts:11:CWE-319",
+      "packages/twenty-shared/src/utils/url/ensureAbsoluteUrl.ts:5:CWE-319",
+      "packages/twenty-website-new/src/sections/Footer/FooterShape.tsx:26:CWE-319",
+      "packages/twenty-website-new/src/sections/TrustedBy/components/ClientCount/ClientCountShape.tsx:47:CWE-319",
+      "packages/twenty-website-new/src/sections/TrustedBy/components/ClientCount/ClientCountShape.tsx:61:CWE-319",
+      "packages/twenty-website-new/src/sections/TrustedBy/components/ClientCount/ClientCountShape.tsx:86:CWE-319",
+      "packages/twenty-website-new/src/sections/EngagementBand/EngagementBandShape.tsx:28:CWE-319",
+      "packages/twenty-website-new/src/sections/Plans/components/SelfHostToggle/SelfHostToggle.tsx:42:CWE-319",
+      "packages/twenty-website-new/src/sections/Signoff/SignoffShape.tsx:26:CWE-319",
+      "packages/twenty-website-new/src/sections/Problem/components/Visual/Visual.tsx:10:CWE-319",
+      "packages/twenty-website-new/src/sections/Problem/components/Visual/Visual.tsx:12:CWE-319",
+      "packages/twenty-website-new/src/sections/Helped/HelpedCardShape.tsx:33:CWE-319",
+      "packages/twenty-website-new/src/sections/ThreeCards/components/IllustrationCard/CardShape.tsx:33:CWE-319",
+      "packages/twenty-website-new/src/icons/clients/Evergreen.tsx:21:CWE-319",
+      "packages/twenty-website-new/src/icons/clients/Beagle.tsx:24:CWE-319",
+      "packages/twenty-website-new/src/icons/clients/Zapier.tsx:21:CWE-319",
+      "packages/twenty-website-new/src/icons/clients/Realytics.tsx:21:CWE-319",
+      "packages/twenty-website-new/src/icons/clients/Flexport.tsx:23:CWE-319",
+      "packages/twenty-website-new/src/icons/informative/Check.tsx:10:CWE-319",
+      "packages/twenty-website-new/src/icons/informative/Search.tsx:10:CWE-319",
+      "packages/twenty-website-new/src/icons/informative/Eye.tsx:12:CWE-319",
+      "packages/twenty-website-new/src/icons/informative/Users.tsx:19:CWE-319",
+      "packages/twenty-website-new/src/icons/informative/Edit.tsx:16:CWE-319",
+      "packages/twenty-website-new/src/icons/social/X.tsx:16:CWE-319",
+      "packages/twenty-website-new/src/icons/social/GitHub.tsx:16:CWE-319",
+      "packages/twenty-website-new/src/icons/social/LinkedIn.tsx:16:CWE-319",
+      "packages/twenty-website-new/src/icons/social/Discord.tsx:16:CWE-319",
+      "packages/twenty-website-new/src/icons/logo/Logo.tsx:21:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/ArrowRight.tsx:17:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/Plus.tsx:15:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/ArrowRightUp.tsx:19:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/RectangleFill.tsx:13:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/Minus.tsx:15:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/ArrowLeft.tsx:17:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/Menu.tsx:15:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/Close.tsx:15:CWE-319",
+      "packages/twenty-website-new/src/icons/functional/RectangleOutline.tsx:16:CWE-319",
+      "packages/twenty-website-new/src/design-system/components/Button/ButtonShape.tsx:46:CWE-319",
+      "packages/twenty-website-new/src/design-system/components/Button/ButtonShape.tsx:54:CWE-319",
+      "packages/twenty-website-new/src/design-system/components/Button/ButtonShape.tsx:65:CWE-319",
+      "packages/twenty-companion/src/renderer.js:234:CWE-319",
+      "packages/twenty-companion/src/renderer.js:242:CWE-319",
+      "packages/twenty-companion/src/renderer.js:261:CWE-319",
+      "packages/twenty-companion/src/renderer.js:352:CWE-319",
+      "packages/twenty-companion/src/renderer.js:436:CWE-319",
+      "packages/twenty-companion/src/renderer.js:938:CWE-319",
+      "packages/twenty-companion/src/renderer.js:972:CWE-319",
+      "packages/twenty-companion/src/renderer.js:1016:CWE-319",
+      "packages/twenty-companion/src/renderer.js:1032:CWE-319",
+      "packages/twenty-companion/src/renderer.js:1052:CWE-319",
+      "packages/twenty-companion/src/renderer.js:1542:CWE-319",
+      "packages/twenty-companion/src/renderer.js:1631:CWE-319",
+      "packages/twenty-companion/src/renderer.js:1690:CWE-319",
+      "packages/twenty-companion/src/renderer.js:1994:CWE-319",
+      "packages/twenty-companion/src/main.js:1885:CWE-319",
+      "packages/twenty-apps/internal/self-hosting/.yarn/releases/yarn-4.9.2.cjs:146:CWE-319",
+      "packages/twenty-front/src/config/index.ts:9:CWE-319",
+      "packages/twenty-front/src/modules/ui/layout/page-header/components/PageHeaderToggleSidePanelButton.tsx:48:CWE-319",
+      "packages/twenty-front/src/modules/ui/navigation/navigation-drawer/components/NavigationDrawerItem.tsx:296:CWE-319",
+      "packages/twenty-front/src/modules/workflow/workflow-diagram/components/WorkflowDiagramConnector.tsx:7:CWE-319",
+      "packages/twenty-front/src/modules/navigation-menu-item/display/link/utils/getLinkFaviconUrl.ts:11:CWE-319",
+      "packages/twenty-front/src/modules/navigation-menu-item/display/link/utils/getLinkNavigationMenuItemComputedLink.ts:7:CWE-319"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-HTTP-004"
+  }
+]

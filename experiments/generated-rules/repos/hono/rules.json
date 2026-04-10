@@ -1,0 +1,188 @@
+[
+  {
+    "id": "ghost:npm:@hono/node-server",
+    "title": "\"@hono/node-server\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"@hono/node-server\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:660:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "@hono/node-server",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:undici",
+    "title": "\"undici\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"undici\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:681:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "undici",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:wrangler",
+    "title": "\"wrangler\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"wrangler\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:684:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "wrangler",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:find-my-way",
+    "title": "\"find-my-way\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"find-my-way\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "benchmarks/routers/package.json:15:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "find-my-way",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:qs",
+    "title": "\"qs\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"qs\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "benchmarks/query-param/package.json:14:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "qs",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:preact",
+    "title": "\"preact\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"preact\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "benchmarks/jsx/package.json:23:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "preact",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ai-pattern:AI-EVAL-001",
+    "title": "Never use eval() or exec() for dynamic code",
+    "rule": "NEVER use eval() or exec() to execute dynamic strings as code — it enables remote code execution. Use JSON.parse() for data, fixed subprocess argument lists for shell commands.",
+    "category": "ai_pattern",
+    "severity": "high",
+    "cwes": [
+      "CWE-94"
+    ],
+    "finding_ids": [
+      "src/utils/basic-auth.ts:10:CWE-94",
+      "src/utils/basic-auth.ts:18:CWE-94",
+      "src/helper/css/common.ts:204:CWE-94",
+      "src/router/pattern-router/router.ts:51:CWE-94",
+      "src/router/linear-router/router.ts:97:CWE-94",
+      "src/router/trie-router/node.ts:185:CWE-94"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-EVAL-001"
+  },
+  {
+    "id": "ai-pattern:AI-HASH-002",
+    "title": "Never use MD5/SHA1 for security operations",
+    "rule": "NEVER use MD5 or SHA1 for cryptographic operations — both are broken. Use SHA-256 (or higher) for checksums; use bcrypt, argon2, or scrypt for passwords.",
+    "category": "ai_pattern",
+    "severity": "high",
+    "cwes": [
+      "CWE-328"
+    ],
+    "finding_ids": [
+      "src/utils/headers.ts:78:CWE-328",
+      "src/utils/crypto.ts:21:CWE-328",
+      "src/utils/crypto.ts:22:CWE-328",
+      "src/utils/crypto.ts:27:CWE-328",
+      "src/utils/crypto.ts:28:CWE-328"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-HASH-002"
+  },
+  {
+    "id": "ai-pattern:AI-HTTP-004",
+    "title": "Always use HTTPS for external service calls",
+    "rule": "NEVER make production API calls over plain http://. Always use https:// to prevent man-in-the-middle attacks and credential leakage.",
+    "category": "ai_pattern",
+    "severity": "medium",
+    "cwes": [
+      "CWE-319"
+    ],
+    "finding_ids": [
+      "src/jsx/dom/render.ts:677:CWE-319"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-HTTP-004"
+  }
+]

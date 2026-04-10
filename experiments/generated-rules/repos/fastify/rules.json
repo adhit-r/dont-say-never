@@ -1,0 +1,86 @@
+[
+  {
+    "id": "ghost:npm:find-my-way",
+    "title": "\"find-my-way\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"find-my-way\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:213:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "find-my-way",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:semver",
+    "title": "\"semver\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"semver\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:219:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "semver",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:node-forge",
+    "title": "\"node-forge\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"node-forge\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:195:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "node-forge",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ai-pattern:AI-EVAL-001",
+    "title": "Never use eval() or exec() for dynamic code",
+    "rule": "NEVER use eval() or exec() to execute dynamic strings as code — it enables remote code execution. Use JSON.parse() for data, fixed subprocess argument lists for shell commands.",
+    "category": "ai_pattern",
+    "severity": "high",
+    "cwes": [
+      "CWE-94"
+    ],
+    "finding_ids": [
+      "scripts/validate-ecosystem-links.js:35:CWE-94",
+      ".github/scripts/lint-ecosystem.js:49:CWE-94",
+      "lib/content-type.js:107:CWE-94",
+      "lib/content-type.js:114:CWE-94",
+      "lib/content-type.js:125:CWE-94",
+      "lib/request.js:260:CWE-94"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "rule_id": "AI-EVAL-001"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ghost:npm:remark-html",
+    "title": "\"remark-html\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"remark-html\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "basics/demo/package.json:15:CWE-1104",
+      "basics/api-routes-starter/package.json:15:CWE-1104",
+      "basics/typescript-final/package.json:15:CWE-1104",
+      "basics/basics-final/package.json:15:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "remark-html",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:next-auth",
+    "title": "\"next-auth\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"next-auth\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "dashboard/starter-example/package.json:15:CWE-1104",
+      "dashboard/final-example/package.json:15:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "next-auth",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:eslint-config-prettier",
+    "title": "\"eslint-config-prettier\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"eslint-config-prettier\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:18:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "eslint-config-prettier",
+    "ecosystem": "npm"
+  }
+]

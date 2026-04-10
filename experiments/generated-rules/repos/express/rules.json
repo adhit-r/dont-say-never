@@ -1,0 +1,222 @@
+[
+  {
+    "id": "ghost:npm:cookie",
+    "title": "\"cookie\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"cookie\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:39:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "cookie",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:cookie-signature",
+    "title": "\"cookie-signature\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"cookie-signature\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:40:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "cookie-signature",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:debug",
+    "title": "\"debug\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"debug\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:41:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "debug",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:fresh",
+    "title": "\"fresh\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"fresh\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:47:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "fresh",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:qs",
+    "title": "\"qs\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"qs\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:55:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "qs",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:send",
+    "title": "\"send\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"send\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:58:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "send",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:serve-static",
+    "title": "\"serve-static\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"serve-static\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:59:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "serve-static",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:ejs",
+    "title": "\"ejs\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"ejs\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:69:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "ejs",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:hbs",
+    "title": "\"hbs\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"hbs\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "medium",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:72:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "hbs",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:marked",
+    "title": "\"marked\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"marked\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:73:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "marked",
+    "ecosystem": "npm"
+  },
+  {
+    "id": "ghost:npm:method-override",
+    "title": "\"method-override\" is suspicious — very new with low adoption",
+    "rule": "Be cautious with \"method-override\" (npm) — it was published very recently and has very low download counts. Verify this is the intended package before shipping it to production.",
+    "category": "ghost_dep",
+    "severity": "high",
+    "cwes": [
+      "CWE-1104"
+    ],
+    "finding_ids": [
+      "package.json:74:CWE-1104"
+    ],
+    "target_files": [
+      "CLAUDE.md",
+      ".cursorrules",
+      ".github/copilot-instructions.md"
+    ],
+    "package_name": "method-override",
+    "ecosystem": "npm"
+  }
+]

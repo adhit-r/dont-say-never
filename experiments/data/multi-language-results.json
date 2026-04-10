@@ -1,0 +1,444 @@
+{
+  "metadata": {
+    "run_at": "2026-04-09T16:42:03.225Z",
+    "semgrep_available": true,
+    "targets": [
+      {
+        "language": "python",
+        "name": "flask",
+        "slug": "pallets/flask",
+        "clone_depth": 1
+      },
+      {
+        "language": "python",
+        "name": "fastapi",
+        "slug": "fastapi/fastapi",
+        "clone_depth": 1
+      },
+      {
+        "language": "python",
+        "name": "requests",
+        "slug": "psf/requests",
+        "clone_depth": 1
+      },
+      {
+        "language": "go",
+        "name": "gin",
+        "slug": "gin-gonic/gin",
+        "clone_depth": 1
+      },
+      {
+        "language": "go",
+        "name": "echo",
+        "slug": "labstack/echo",
+        "clone_depth": 1
+      },
+      {
+        "language": "go",
+        "name": "cobra",
+        "slug": "spf13/cobra",
+        "clone_depth": 1
+      }
+    ],
+    "new_patterns_added": [
+      "AI-PYRAND-011",
+      "AI-SHELL-012",
+      "AI-YAML-013",
+      "AI-GORAND-014",
+      "AI-GOEXEC-015",
+      "AI-GOTLS-016"
+    ]
+  },
+  "results": [
+    {
+      "language": "python",
+      "repo": "flask",
+      "slug": "pallets/flask",
+      "file_counts": {
+        "py": 83,
+        "go": 0,
+        "total": 236
+      },
+      "stale_ai": {
+        "total_findings": 6,
+        "by_rule": {
+          "AI-HASH-002": 2,
+          "AI-EVAL-001": 2,
+          "AI-HTTP-004": 2
+        },
+        "by_cwe": {
+          "CWE-328": 2,
+          "CWE-94": 2,
+          "CWE-319": 2
+        }
+      },
+      "semgrep": {
+        "available": true,
+        "configs_used": [
+          "p/owasp-top-ten",
+          "p/secrets",
+          "p/security-audit",
+          "p/python"
+        ],
+        "total_findings": 8,
+        "by_cwe": {
+          "CWE-290": 1,
+          "CWE-79": 4,
+          "CWE-95": 2,
+          "CWE-327": 1
+        }
+      },
+      "rules_generated": {
+        "count": 5,
+        "cwes_covered": [
+          "CWE-319",
+          "CWE-327",
+          "CWE-328",
+          "CWE-79",
+          "CWE-94"
+        ],
+        "categories": {
+          "ghost_dep": 0,
+          "ai_pattern": 3,
+          "secret": 0,
+          "sast": 2
+        },
+        "rule_ids": [
+          "ai-pattern:AI-HASH-002",
+          "ai-pattern:AI-EVAL-001",
+          "ai-pattern:AI-HTTP-004",
+          "sast:CWE-79",
+          "sast:CWE-327"
+        ],
+        "rule_titles": [
+          "Never use MD5/SHA1 for security operations",
+          "Never use eval() or exec() for dynamic code",
+          "Always use HTTPS for external service calls",
+          "Prevent cross-site scripting (XSS)",
+          "Use strong cryptographic algorithms"
+        ]
+      },
+      "formatted_section_chars": 1481
+    },
+    {
+      "language": "python",
+      "repo": "fastapi",
+      "slug": "fastapi/fastapi",
+      "file_counts": {
+        "py": 1121,
+        "go": 0,
+        "total": 2985
+      },
+      "stale_ai": {
+        "total_findings": 6,
+        "by_rule": {
+          "AI-HTTP-004": 1,
+          "AI-EVAL-001": 4,
+          "AI-PYRAND-011": 1
+        },
+        "by_cwe": {
+          "CWE-319": 1,
+          "CWE-94": 4,
+          "CWE-338": 1
+        }
+      },
+      "semgrep": {
+        "available": true,
+        "configs_used": [
+          "p/owasp-top-ten",
+          "p/secrets",
+          "p/security-audit",
+          "p/python",
+          "p/javascript",
+          "p/nodejs"
+        ],
+        "total_findings": 5,
+        "by_cwe": {
+          "CWE-522": 4,
+          "CWE-79": 1
+        }
+      },
+      "rules_generated": {
+        "count": 4,
+        "cwes_covered": [
+          "CWE-319",
+          "CWE-338",
+          "CWE-79",
+          "CWE-94"
+        ],
+        "categories": {
+          "ghost_dep": 0,
+          "ai_pattern": 3,
+          "secret": 0,
+          "sast": 1
+        },
+        "rule_ids": [
+          "ai-pattern:AI-HTTP-004",
+          "ai-pattern:AI-EVAL-001",
+          "ai-pattern:AI-PYRAND-011",
+          "sast:CWE-79"
+        ],
+        "rule_titles": [
+          "Always use HTTPS for external service calls",
+          "Never use eval() or exec() for dynamic code",
+          "Never use Python random module for security values",
+          "Prevent cross-site scripting (XSS)"
+        ]
+      },
+      "formatted_section_chars": 1409
+    },
+    {
+      "language": "python",
+      "repo": "requests",
+      "slug": "psf/requests",
+      "file_counts": {
+        "py": 36,
+        "go": 0,
+        "total": 131
+      },
+      "stale_ai": {
+        "total_findings": 9,
+        "by_rule": {
+          "AI-HASH-002": 6,
+          "AI-HTTP-004": 3
+        },
+        "by_cwe": {
+          "CWE-328": 6,
+          "CWE-319": 3
+        }
+      },
+      "semgrep": {
+        "available": true,
+        "configs_used": [
+          "p/owasp-top-ten",
+          "p/secrets",
+          "p/security-audit",
+          "p/python"
+        ],
+        "total_findings": 16,
+        "by_cwe": {
+          "CWE-79": 13,
+          "CWE-327": 3
+        }
+      },
+      "rules_generated": {
+        "count": 4,
+        "cwes_covered": [
+          "CWE-319",
+          "CWE-327",
+          "CWE-328",
+          "CWE-79"
+        ],
+        "categories": {
+          "ghost_dep": 0,
+          "ai_pattern": 2,
+          "secret": 0,
+          "sast": 2
+        },
+        "rule_ids": [
+          "ai-pattern:AI-HASH-002",
+          "ai-pattern:AI-HTTP-004",
+          "sast:CWE-79",
+          "sast:CWE-327"
+        ],
+        "rule_titles": [
+          "Never use MD5/SHA1 for security operations",
+          "Always use HTTPS for external service calls",
+          "Prevent cross-site scripting (XSS)",
+          "Use strong cryptographic algorithms"
+        ]
+      },
+      "formatted_section_chars": 1240
+    },
+    {
+      "language": "go",
+      "repo": "gin",
+      "slug": "gin-gonic/gin",
+      "file_counts": {
+        "py": 0,
+        "go": 99,
+        "total": 130
+      },
+      "stale_ai": {
+        "total_findings": 0,
+        "by_rule": {},
+        "by_cwe": {}
+      },
+      "semgrep": {
+        "available": true,
+        "configs_used": [
+          "p/owasp-top-ten",
+          "p/secrets",
+          "p/security-audit",
+          "p/golang"
+        ],
+        "total_findings": 7,
+        "by_cwe": {
+          "CWE-1004": 1,
+          "CWE-614": 1,
+          "CWE-242": 4,
+          "CWE-798": 1
+        }
+      },
+      "rules_generated": {
+        "count": 1,
+        "cwes_covered": [
+          "CWE-798"
+        ],
+        "categories": {
+          "ghost_dep": 0,
+          "ai_pattern": 0,
+          "secret": 1,
+          "sast": 0
+        },
+        "rule_ids": [
+          "sast:CWE-798"
+        ],
+        "rule_titles": [
+          "Never hardcode credentials"
+        ]
+      },
+      "formatted_section_chars": 507
+    },
+    {
+      "language": "go",
+      "repo": "echo",
+      "slug": "labstack/echo",
+      "file_counts": {
+        "py": 0,
+        "go": 90,
+        "total": 120
+      },
+      "stale_ai": {
+        "total_findings": 0,
+        "by_rule": {},
+        "by_cwe": {}
+      },
+      "semgrep": {
+        "available": true,
+        "configs_used": [
+          "p/owasp-top-ten",
+          "p/secrets",
+          "p/security-audit",
+          "p/golang"
+        ],
+        "total_findings": 4,
+        "by_cwe": {
+          "CWE-798": 1,
+          "CWE-1004": 1,
+          "CWE-614": 1,
+          "CWE-338": 1
+        }
+      },
+      "rules_generated": {
+        "count": 2,
+        "cwes_covered": [
+          "CWE-338",
+          "CWE-798"
+        ],
+        "categories": {
+          "ghost_dep": 0,
+          "ai_pattern": 0,
+          "secret": 1,
+          "sast": 1
+        },
+        "rule_ids": [
+          "sast:CWE-798",
+          "sast:CWE-338"
+        ],
+        "rule_titles": [
+          "Never hardcode credentials",
+          "Use cryptographically secure randomness"
+        ]
+      },
+      "formatted_section_chars": 766
+    },
+    {
+      "language": "go",
+      "repo": "cobra",
+      "slug": "spf13/cobra",
+      "file_counts": {
+        "py": 0,
+        "go": 36,
+        "total": 66
+      },
+      "stale_ai": {
+        "total_findings": 0,
+        "by_rule": {},
+        "by_cwe": {}
+      },
+      "semgrep": {
+        "available": true,
+        "configs_used": [
+          "p/owasp-top-ten",
+          "p/secrets",
+          "p/security-audit",
+          "p/golang"
+        ],
+        "total_findings": 0,
+        "by_cwe": {}
+      },
+      "rules_generated": {
+        "count": 0,
+        "cwes_covered": [],
+        "categories": {
+          "ghost_dep": 0,
+          "ai_pattern": 0,
+          "secret": 0,
+          "sast": 0
+        },
+        "rule_ids": [],
+        "rule_titles": []
+      },
+      "formatted_section_chars": 271
+    }
+  ],
+  "summary": {
+    "by_language": {
+      "python": {
+        "repos_scanned": 3,
+        "avg_stale_ai_findings": 7,
+        "avg_semgrep_findings": 9.7,
+        "avg_rules": 4.3,
+        "all_cwes_detected": [
+          "CWE-319",
+          "CWE-327",
+          "CWE-328",
+          "CWE-338",
+          "CWE-79",
+          "CWE-94"
+        ],
+        "all_rule_ids_fired": [
+          "ai-pattern:AI-EVAL-001",
+          "ai-pattern:AI-HASH-002",
+          "ai-pattern:AI-HTTP-004",
+          "ai-pattern:AI-PYRAND-011",
+          "sast:CWE-327",
+          "sast:CWE-79"
+        ]
+      },
+      "go": {
+        "repos_scanned": 3,
+        "avg_stale_ai_findings": 0,
+        "avg_semgrep_findings": 3.7,
+        "avg_rules": 1,
+        "all_cwes_detected": [
+          "CWE-338",
+          "CWE-798"
+        ],
+        "all_rule_ids_fired": [
+          "sast:CWE-338",
+          "sast:CWE-798"
+        ]
+      }
+    },
+    "overall": {
+      "total_repos": 6,
+      "total_findings": 61,
+      "total_rules_generated": 16,
+      "new_rule_ids_fired": [
+        "AI-PYRAND-011"
+      ]
+    }
+  }
+}
