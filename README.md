@@ -1,8 +1,10 @@
-# Do Safety Rules Prime Unsafe Behavior?
+# Do Safety Rules Backfire?
 
-**Working title:** Do Safety Rules Prime Unsafe Behavior? An Empirical Study of Prohibition vs. Alternative-Suggestion Framing in LLM Code Generation
+**An Empirical Study of How Rule Framing Affects LLM Code Security**
 
 **Author:** Adhithya Rajasekaran
+
+> **Origin:** This research emerged from [CodeCoach](https://github.com/axonome/patchpilot-codecoach), an AI agent coaching system built on top of PatchPilot (security scanner). During Experiment 7 of the CodeCoach evaluation, we discovered that prohibition-framed safety rules ("NEVER use eval()") paradoxically increased the probability of the unsafe behavior on certain prompts. This standalone paper isolates and investigates that finding.
 
 ## Research Question
 
