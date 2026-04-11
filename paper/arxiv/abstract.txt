@@ -1,0 +1,13 @@
+While developing a closed-loop system that automatically generates security rules from scanner output and injects them into AI coding agent instruction files (CLAUDE.md, AGENTS.md, .cursorrules), we observed a paradoxical effect: a prohibition-framed rule ("NEVER use eval()") increased vulnerability rates on one prompt compared to having no rule at all — the opposite of the rule's intent.
+
+This paper systematically investigates that effect across 645 trials spanning three models (Claude Sonnet 4, GPT-5, Gemma 4 31B), six vulnerability-eliciting prompts, and four CWE classes, comparing prohibition framing ("NEVER use eval()") against alternative-suggestion framing ("Always use JSON.parse()").
+
+We find three principal results:
+
+(1) Both framings substantially reduce vulnerabilities on aggregate (baseline 58% to 13–23%), confirming that auto-generated rules work.
+
+(2) Which framing backfires is model-dependent: prohibition framing increases vulnerability on Claude Sonnet 4 (50% vs. 20% control, p=0.016), while alternative-suggestion framing backfires on Gemma 4 31B across three prompts (aggregate: 47% vs. 40% control). GPT-5 exhibits no backfire under either framing.
+
+(3) The backfire requires a double-priming interaction — when user prompts do not name the insecure API, neither framing causes harm (0/225 trials).
+
+We connect this finding to Wegner's Ironic Process Theory and to recent work on adversarial priming attacks, observing that well-intentioned prohibition rules inadvertently create the same activation pattern an adversary would deliberately construct. These findings have direct implications for the design of auto-generated security policies in AI coding agent workflows.

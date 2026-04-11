@@ -1,6 +1,10 @@
 # Don't Say Never: How Prohibition-Framed Security Rules Backfire in LLM Coding Agents
 
-**Author:** Adhithya Rajasekaran
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19509466.svg)](https://doi.org/10.5281/zenodo.19509466)
+
+**Author:** [Adhithya Rajasekaran](https://orcid.org/0009-0004-1682-7958) (adhithya@axonome.xyz)
+
+**Paper:** [Zenodo](https://doi.org/10.5281/zenodo.19509466) | [OpenAIRE](https://explore.openaire.eu/search/result?pid=10.5281%2Fzenodo.19509466) | [ORCID](https://orcid.org/0009-0004-1682-7958)
 
 > **Origin:** This research emerged from [CodeCoach](https://github.com/axonome/patchpilot-codecoach), an AI agent coaching system built on top of PatchPilot (security scanner). During Experiment 7 of the CodeCoach evaluation, we discovered that prohibition-framed safety rules ("NEVER use eval()") paradoxically increased the probability of the unsafe behavior on certain prompts. This standalone paper isolates and investigates that finding.
 

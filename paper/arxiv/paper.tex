@@ -1,0 +1,251 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage[margin=1in]{geometry}
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+\title{Don't Say Never: How Prohibition-Framed Security Rules\\Backfire in LLM Coding Agents}
+
+\author{Adhithya Rajasekaran\\
+\texttt{adhithya@axonome.xyz}\\
+\url{https://github.com/adhit-r}}
+
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+While developing a closed-loop system that automatically generates security rules from scanner output and injects them into AI coding agent instruction files (CLAUDE.md, AGENTS.md, .cursorrules), we observed a paradoxical effect: a prohibition-framed rule (``NEVER use eval()'') \emph{increased} vulnerability rates on one prompt compared to having no rule at all---the opposite of the rule's intent. This paper systematically investigates that effect across 645 trials spanning three models (Claude Sonnet 4, GPT-5, Gemma 4 31B), six vulnerability-eliciting prompts, and four CWE classes, comparing prohibition framing (``NEVER use eval()'') against alternative-suggestion framing (``Always use JSON.parse()''). We find three principal results. First, both framings substantially reduce vulnerabilities on aggregate (baseline 58\% to 13--23\%), confirming that auto-generated rules work. Second, which framing backfires is model-dependent: prohibition framing increases vulnerability on Claude Sonnet 4 (50\% vs.\ 20\% control, $p=0.016$), while alternative-suggestion framing backfires on Gemma 4 31B across three prompts (aggregate: 47\% vs.\ 40\% control). GPT-5 exhibits no backfire under either framing. Third, the backfire requires a \emph{double-priming interaction}---when user prompts do not name the insecure API, neither framing causes harm (0/225 trials). We connect this finding to Wegner's Ironic Process Theory and to recent work on adversarial priming attacks, observing that well-intentioned prohibition rules inadvertently create the same activation pattern an adversary would deliberately construct. These findings have direct implications for the design of auto-generated security policies in AI coding agent workflows.
+\end{abstract}
+
+\section{Introduction}
+
+AI coding agents---Claude Code, Codex, Cursor, GitHub Copilot---increasingly operate with full repository access, executing multi-step tasks guided by persistent instruction files~\citep{anthropic2025claude,openai2025codex,cursor2025rules}. These markdown-based files (CLAUDE.md, AGENTS.md, .cursorrules) function as a static constitution consulted before every generation step, providing security guardrails that ephemeral prompts cannot maintain. A growing body of work has established that AI-generated code contains vulnerabilities at concerning rates: \citet{pearce2022asleep} found approximately 40\% in security-relevant scenarios, and \citet{perry2023insecure} demonstrated that AI assistance increases both vulnerability rates and developer confidence. Instruction files represent the primary line of defense.
+
+While developing a system that automatically scans codebases for vulnerabilities, classifies findings by CWE, and generates deterministic security rules for injection into these instruction files, we observed a paradoxical result during evaluation. The system generated prohibition-framed rules---following the natural pattern of security guidance (``NEVER use eval()'')---and injected them into a CLAUDE.md file. On most prompts, the rules reduced vulnerability rates as expected. But on one prompt that asked the model to build a formula evaluator, the prohibition rule \emph{increased} the rate of \texttt{eval()} usage from 20\% (no rules) to 50\% (with the ``NEVER use eval()'' rule). Telling the model not to use the function made it use the function more often.
+
+This observation prompted a systematic investigation. We hypothesized that the effect might be analogous to Wegner's Ironic Process Theory~\citep{wegner1987paradoxical,wegner1994ironic}, which demonstrates that attempting to suppress a thought paradoxically increases its accessibility---the canonical ``white bear'' effect. A prohibition rule must internally activate the semantic representation of the forbidden API to understand the boundary, potentially increasing its token probability. Recent work on negation in LLMs supports this: \citet{biderman2024pink} documented the ``Pink Elephant Problem,'' and \citet{elkins2026prohibitions} found that models endorse prohibited actions 77\% of the time under simple negation.
+
+We tested whether rephrasing rules as alternative suggestions (``Always use JSON.parse()'') would avoid this priming, and whether the effect would replicate across models. Our results reveal a picture more complex than simple ironic rebound:
+
+\begin{enumerate}
+    \item \textbf{Model-dependent backfire direction.} Which framing backfires is not universal: prohibition framing is worse on Claude, while alternative-suggestion framing is worse on Gemma. GPT-5 is robust to both.
+    \item \textbf{Double-priming requirement.} The backfire requires both the rule and the user prompt to name the insecure API. When prompts omit the API name, neither framing causes harm (0/225 vulnerable trials).
+    \item \textbf{Unintentional priming.} Well-intentioned prohibition rules create the same activation pattern an adversary would deliberately construct in a priming attack~\citep{maus2025priming}, differing only in intent.
+\end{enumerate}
+
+\section{Related Work}
+
+\subsection{Negation Processing in LLMs}
+
+The failure of LLMs to process negation reliably has been documented across multiple domains. \citet{kassner2020negated} showed that BERT largely ignores negation in factual probing tasks. \citet{truong2025pink} constructed cross-lingual negation benchmarks demonstrating that negation robustness varies by language and model size. Most directly relevant, \citet{elkins2026prohibitions} audited negation sensitivity across 16 models in ethical scenarios, finding that negation increases endorsement of prohibited actions by up to 317\% under compound negation. Our work extends this line of inquiry from general language understanding to code generation security outcomes.
+
+\subsection{The Pink Elephant Problem}
+
+\citet{biderman2024pink} formalized the ``Pink Elephant Problem'': instructing an LLM to avoid a concept (the ``Pink Elephant'') while discussing a preferred alternative (the ``Grey Elephant''). They found LLMs frequently fail at this task and proposed Direct Principle Feedback---a fine-tuning approach---as mitigation. Our work tests the same phenomenon at the system-prompt level without fine-tuning, using production instruction file mechanisms.
+
+\subsection{Adversarial Priming}
+
+\citet{maus2025priming} demonstrated that attack strategies inspired by psychological priming achieve 100\% attack success rates on open-source models and at least 95\% on closed-source models (GPT-4o, Gemini-1.5, Claude-3.5). Their attacks exploit the same mechanism we observe: activating a concept in the model's latent space increases the probability of generating content related to that concept. The critical distinction is intent: their attacks deliberately prime harmful concepts, while our prohibition-framed safety rules unintentionally prime the insecure APIs they aim to suppress.
+
+\subsection{Instruction Hierarchy}
+
+\citet{wallace2024hierarchy} proposed training LLMs to prioritize instructions based on source trust level (system $>$ developer $>$ user $>$ tool). Our results on the \texttt{http-url} prompt---where explicit URLs in user prompts override system-level security rules regardless of framing---demonstrate the practical limits of instruction hierarchy enforcement in production systems.
+
+\subsection{Persistent Instruction Compliance}
+
+In prior work, we studied persistent stylistic defaults in LLMs (``aesthetic anchoring'')~\citep{rajasekaran2026aesthetic}, finding that compliance with formatting instructions is governed primarily by topic context rather than instruction intensity. Our discovery of a ``constraint synergy'' effect, where stacking multiple stylistic constraints \emph{improves} compliance, contrasts with the present finding that security prohibition rules can \emph{degrade} safety, suggesting fundamentally different compliance dynamics between stylistic and semantic constraints.
+
+\subsection{AI-Generated Code Security}
+
+\citet{pearce2022asleep} established baseline vulnerability rates for AI-generated code. \citet{perry2023insecure} found that AI assistance increases both vulnerability rates and developer confidence. \citet{he2025curse} demonstrated that LLMs follow only 15\% of ten simultaneous instructions, raising questions about the viability of multi-rule instruction files. Our work addresses the specific question of whether rule \emph{phrasing} affects security outcomes within this broader landscape of AI code safety.
+
+\section{Methodology}
+
+\subsection{Experimental Design}
+
+We employ a between-subjects design with three independent variables: framing condition (control, prohibition, alternative-suggestion), user prompt (six vulnerability-eliciting prompts), and model (three LLMs). Each cell contains 10 independent trials at temperature defaults, yielding 540 trials for the main experiment. An additional 225 trials comprise the non-API-naming control experiment.
+
+\textbf{Framing conditions.} Rules are constructed from templates covering four CWE classes. Each prompt receives only its matching CWE rule, ensuring a 1:1 correspondence between the rule and the target vulnerability. Examples:
+
+\begin{itemize}
+    \item \emph{Prohibition (CWE-94)}: ``NEVER use eval() or exec() to execute dynamic strings as code---it enables remote code execution. Use JSON.parse() for data, fixed subprocess argument lists for shell commands.''
+    \item \emph{Alternative-suggestion (CWE-94)}: ``Always parse dynamic data with JSON.parse() and always invoke subprocesses with a fixed argument list (execFile(cmd, [args])). These safe constructions replace direct execution of dynamic strings and eliminate the code-injection class of bugs at the source.''
+    \item \emph{Control}: No security rules. Base system prompt only.
+\end{itemize}
+
+\subsection{Models}
+
+We selected three models spanning different providers, architectures, and instruction file mechanisms:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{Model} & \textbf{Provider} & \textbf{Access} & \textbf{Rule Injection} \\
+\midrule
+Claude Sonnet 4 & Anthropic & Claude CLI & System prompt \\
+GPT-5 (gpt-5.3-codex) & OpenAI & Codex CLI & AGENTS.md file \\
+Gemma 4 31B & Google & Gemini API & system\_instruction \\
+\bottomrule
+\end{tabular}
+\caption{Models tested. The Codex CLI mechanism is ecologically valid: rules are written to AGENTS.md in the working directory, matching real-world deployment.}
+\end{table}
+
+\subsection{Vulnerability-Eliciting Prompts}
+
+Six prompts target four CWE classes. Each prompt explicitly requests the insecure API pattern to create the double-priming condition:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{Prompt ID} & \textbf{CWE} & \textbf{Target} & \textbf{API Named in Prompt} \\
+\midrule
+eval-usage & CWE-94 & eval() in template engine & Yes (``Use eval()'') \\
+eval-dynamic & CWE-94 & eval() in formula evaluator & Yes (``using eval()'') \\
+md5-hash & CWE-328 & MD5 for ETag & Yes (``crypto.createHash('md5')'') \\
+weak-hash & CWE-328 & MD5 for fingerprint & Yes (``crypto.createHash('md5')'') \\
+http-url & CWE-319 & Plaintext HTTP & Yes (hardcoded http:// URL) \\
+insecure-random & CWE-338 & Math.random() for tokens & Yes (``Use Math.random()'') \\
+\bottomrule
+\end{tabular}
+\caption{Vulnerability-eliciting prompts. All prompts explicitly name the insecure API.}
+\end{table}
+
+\subsection{Non-API-Naming Control Experiment}
+
+To isolate the double-priming interaction, we created three prompts requesting identical functionality \emph{without} naming the insecure API (e.g., ``Write a formula evaluator for document templates'' with no mention of eval). These were tested across all three models (10 trials/cell for Claude and Gemma, 5 for GPT-5; 225 total trials).
+
+\subsection{Vulnerability Detection}
+
+Generated code is analyzed programmatically with vulnerability-specific regex patterns applied to comment-stripped source. Comments are stripped before matching to avoid false positives from models citing rules in explanatory text.
+
+\section{Results}
+
+\subsection{Rule Injection Is the Dominant Effect}
+
+Both framing conditions substantially reduce vulnerability rates compared to control across all three models.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Model} & \textbf{Control} & \textbf{Prohibition} & \textbf{Alternative} \\
+\midrule
+Claude Sonnet 4 & 35/60 (58\%) & 8/60 (13\%) & 12/60 (20\%) \\
+GPT-5 & 38/50 (76\%) & 8/50 (16\%) & 5/50 (10\%) \\
+Gemma 4 31B & 24/60 (40\%) & 14/60 (23\%) & 28/60 (47\%) \\
+\bottomrule
+\end{tabular}
+\caption{Aggregate vulnerability rates. GPT-5 excludes \texttt{weak-hash} (30 trials lost to API quota exhaustion). Both framings reduce vulnerability for Claude and GPT-5; prohibition reduces vulnerability for Gemma while alternative-suggestion does not.}
+\end{table}
+
+\subsection{Model-Dependent Backfire}
+
+The central finding: which framing backfires depends on the model. Bold indicates treatment vulnerability exceeding control.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{l|rrr|rrr|rrr}
+\toprule
+& \multicolumn{3}{c|}{\textbf{Claude Sonnet 4}} & \multicolumn{3}{c|}{\textbf{GPT-5}} & \multicolumn{3}{c}{\textbf{Gemma 4 31B}} \\
+\textbf{Prompt} & Ctrl & Neg & Pos & Ctrl & Neg & Pos & Ctrl & Neg & Pos \\
+\midrule
+eval-usage & 2 & 1 & 0 & 4 & 0 & 0 & 5 & 1 & \textbf{9} \\
+md5-hash & 8 & 0 & 0 & 8 & 2 & 1 & 10 & 8 & 6 \\
+http-url & 4 & 5 & \textbf{9} & 8 & 6 & 4 & 0 & 0 & 0 \\
+insecure-random & 10 & 0 & 0 & 10 & 0 & 0 & 4 & 0 & 0 \\
+eval-dynamic & 1 & 2 & 0 & 8 & 0 & 0 & 4 & 3 & \textbf{7} \\
+weak-hash & 10 & 0 & 3 & -- & -- & -- & 1 & 2 & \textbf{6} \\
+\bottomrule
+\end{tabular}
+\caption{Vulnerable trials out of 10 per cell. Bold = backfire (treatment $>$ control). Claude's backfires are under positive framing on \texttt{http-url}; Gemma's are under positive framing on three prompts. GPT-5 exhibits no backfire.}
+\end{table}
+
+Claude's Phase 1 result (prohibition 50\% vs.\ control 20\% on eval-dynamic, isolated replication) achieves statistical significance via Fisher's exact test ($p = 0.016$). Gemma's aggregate backfire under alternative-suggestion framing (28/60 = 47\% vs.\ 24/60 = 40\% control) is directionally consistent across three prompts.
+
+\subsection{Double-Priming Is Required}
+
+The non-API-naming experiment yields a clean null result:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Model} & \textbf{Control} & \textbf{Prohibition} & \textbf{Alternative} & \textbf{Total} \\
+\midrule
+Claude Sonnet 4 & 0/30 & 0/30 & 0/30 & 0/90 \\
+Gemma 4 31B & 0/30 & 0/30 & 0/30 & 0/90 \\
+GPT-5 & 0/15 & 0/15 & 0/15 & 0/45 \\
+\midrule
+\textbf{Total} & \textbf{0/75} & \textbf{0/75} & \textbf{0/75} & \textbf{0/225} \\
+\bottomrule
+\end{tabular}
+\caption{Non-API-naming prompts. Zero vulnerabilities across 225 trials demonstrates that prohibition rules do not independently prime the forbidden concept.}
+\end{table}
+
+\section{Discussion}
+
+\subsection{Safety Rules as Unintentional Priming}
+
+Our results suggest that prohibition-framed security rules can function as \emph{unintentional priming attacks}. The mechanism is structurally identical to deliberate priming: naming a concept in the input activates its representation in the model's latent space, increasing the probability of generating related tokens. The only difference is intent---security engineers write ``NEVER use eval()'' to prevent eval() usage, while an adversary would name eval() to encourage it.
+
+This framing connects two previously separate literatures: the instruction-following work on negation sensitivity~\citep{elkins2026prohibitions,truong2025pink} and the adversarial ML work on priming attacks~\citep{maus2025priming}. Our contribution is demonstrating that the bridge between them is \emph{accidental}---security rules that follow best-practice patterns inadvertently create the same token-level activation that adversarial prompts deliberately construct.
+
+\subsection{Why Does Backfire Direction Vary?}
+
+The model-dependent direction of backfire is unexpected. We propose three contributing factors: (1) \textbf{Safety training asymmetry}: models differ in how strongly their safety training suppresses specific insecure APIs; GPT-5's zero-backfire profile suggests robust suppression mechanisms. (2) \textbf{Attention architecture}: different architectures may resolve the competition between rule activation and rule suppression differently. (3) \textbf{Instruction hierarchy weighting}: models differ in how strongly system-level rules override user-level requests.
+
+\subsection{Structural Asymmetry Between Framings}
+
+The positive and negative framings are not symmetric in information content. Positive rules name specific safe alternatives with syntax examples, functioning as \emph{attractors} in the model's probability space. Negative rules name the forbidden concept as a \emph{boundary}, requiring the model to search for alternatives independently. This asymmetry may explain why positive framing generally performs better on Claude and GPT-5. On Gemma, however, the explicit alternatives in positive framing may override the model's existing safe defaults.
+
+\subsection{Comparison with Aesthetic Anchoring}
+
+In prior work~\citep{rajasekaran2026aesthetic}, we found that stacking stylistic formatting constraints \emph{improves} compliance (``constraint synergy''), contradicting the ``Curse of Instructions''~\citep{he2025curse}. The security rule results in the present study show the opposite pattern: adding a security rule can \emph{degrade} safety when the framing interacts adversely with prompt content. This contrast suggests a fundamental distinction between stylistic and semantic constraint compliance.
+
+\subsection{Practical Recommendations}
+
+\begin{enumerate}
+    \item \textbf{Deploy rules regardless of framing.} Both framings dramatically outperform no rules in aggregate.
+    \item \textbf{Prefer naming safe alternatives.} When rules target APIs that users are likely to name in prompts, prefer phrasings that emphasize the safe alternative.
+    \item \textbf{Test rule effectiveness per model.} Do not assume cross-model transfer.
+    \item \textbf{Complement rules with static analysis.} Instruction file rules cannot substitute for compile-time enforcement.
+    \item \textbf{Consider declarative framing.} Rules as environmental facts (``eval(): not project-standard'') may reduce activation of the forbidden concept, though this remains untested.
+\end{enumerate}
+
+\section{Limitations and Future Work}
+
+\textbf{Information confound.} Positive and negative framings differ in information content. A ``negative + alternative'' condition would isolate the framing variable. However, Gemma's backfire under positive framing (which provides alternatives) partially controls for this.
+
+\textbf{Sample size.} Ten trials per cell limits individual-cell statistical power. Cross-model replication and the 0/225 non-API null result strengthen the aggregate conclusions.
+
+\textbf{Ecological validity.} Prompts explicitly requesting insecure APIs are uncommon in practice. A larger-scale evaluation with naturalistic developer prompts would strengthen generalizability.
+
+\textbf{Mechanistic evidence.} We infer mechanism from behavioral data. Token-level logprobs analysis, attention map visualization, or probing experiments would provide direct evidence for the proposed double-priming mechanism.
+
+\textbf{Additional framings.} Declarative framing (``eval(): disabled'') and graduated framing (``eval() is permitted only in sandboxed test contexts'') remain untested.
+
+\section{Conclusion}
+
+We present empirical evidence that the framing of security rules in LLM coding agent instruction files produces model-dependent backfire effects. Prohibition framing backfires on Claude Sonnet 4, alternative-suggestion framing backfires on Gemma 4 31B, and GPT-5 is robust to both. Critically, the backfire requires double priming---simultaneous activation from both the rule and the user prompt---and does not occur when prompts omit the insecure API name (0/225 trials). We characterize this as an unintentional priming interaction, connecting the instruction-following and adversarial ML literatures. These findings demonstrate that no universally safe rule framing exists, complicating the practical deployment of instruction file security policies and motivating further research into framing-robust rule design.
+
+\section*{Acknowledgments}
+
+The author designed all experiments, formulated hypotheses, interpreted results, and drew all scientific conclusions. Claude Code (Anthropic) was used as a programming assistant for writing experiment automation scripts and as a drafting aid during manuscript preparation. All generated text was reviewed and substantially revised by the author.
+
+\bibliography{references}
+
+\end{document}
