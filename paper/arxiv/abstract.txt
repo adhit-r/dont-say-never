@@ -1,13 +1,11 @@
-While developing a closed-loop system that automatically generates security rules from scanner output and injects them into AI coding agent instruction files (CLAUDE.md, AGENTS.md, .cursorrules), we observed a paradoxical effect: a prohibition-framed rule ("NEVER use eval()") increased vulnerability rates on one prompt compared to having no rule at all — the opposite of the rule's intent.
+System-prompt rules are widely used to steer LLM coding agents away from insecure patterns. A popular heuristic — rooted in Wegner's ironic-process theory and reinforced by prompt-engineering folklore — holds that prohibition framing ("NEVER use eval()") activates the forbidden behavior, while positive alternatives ("Always use JSON.parse()") avoid this rebound. A 645-trial pilot across three models appeared to support the prediction on one (model, prompt) cell. We report a pre-specified replication at 3x the scale.
 
-This paper systematically investigates that effect across 645 trials spanning three models (Claude Sonnet 4, GPT-5, Gemma 4 31B), six vulnerability-eliciting prompts, and four CWE classes, comparing prohibition framing ("NEVER use eval()") against alternative-suggestion framing ("Always use JSON.parse()").
+Across 6 models (Claude Opus 4.6, Sonnet 4.6, Haiku 4.5, Opus 4.1, Gemma 4 31B, GPT-5.4 Mini), 6 vulnerability-eliciting prompts spanning 4 CWE classes, and 20 trials per cell (n = 2,004 valid trials), we find:
 
-We find three principal results:
+(1) Rule injection reliably reduces vulnerability. Baseline rates of 45-87% fall to 0-38% (Fisher's exact p < 0.001 in all 6 models, Cohen's h = 0.37-1.54).
 
-(1) Both framings substantially reduce vulnerabilities on aggregate (baseline 58% to 13–23%), confirming that auto-generated rules work.
+(2) Framing polarity does not matter in the direction predicted by Wegner. In 5 of 6 models, positive framing is statistically equal to or worse than negative framing. Gemma 4 31B shows a significant reversal (p < 0.001): "always use https://" produces more plaintext http:// code than "never use http://".
 
-(2) Which framing backfires is model-dependent: prohibition framing increases vulnerability on Claude Sonnet 4 (50% vs. 20% control, p=0.016), while alternative-suggestion framing backfires on Gemma 4 31B across three prompts (aggregate: 47% vs. 40% control). GPT-5 exhibits no backfire under either framing.
+(3) The pilot's isolated 50%-vs-20% prohibition backfire on Claude Sonnet 4 does not reproduce across 36 (model, prompt) cells in the broader replication.
 
-(3) The backfire requires a double-priming interaction — when user prompts do not name the insecure API, neither framing causes harm (0/225 trials).
-
-We connect this finding to Wegner's Ironic Process Theory and to recent work on adversarial priming attacks, observing that well-intentioned prohibition rules inadvertently create the same activation pattern an adversary would deliberately construct. These findings have direct implications for the design of auto-generated security policies in AI coding agent workflows.
+We conclude that rule injection is a robust mechanism for reducing LLM-generated code vulnerability; framing polarity is a model- and prompt-dependent second-order factor that does not obey Wegner-based intuitions. We release the full 2,004-trial dataset and orchestration code, and document a data-collection incident in an appendix as a methodological note on AI-assisted research workflows.
