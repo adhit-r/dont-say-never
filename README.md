@@ -1,85 +1,78 @@
-# Don't Say Never: How Prohibition-Framed Security Rules Backfire in LLM Coding Agents
+# Rules Work, Polarity Doesn't: A Multi-Model Replication of Security Rule Framing Effects in LLM Coding Agents
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19509466.svg)](https://doi.org/10.5281/zenodo.19509466)
 
 **Author:** [Adhithya Rajasekaran](https://orcid.org/0009-0004-1682-7958) (adhithya@axonome.xyz)
 
-**Paper:** [Zenodo](https://doi.org/10.5281/zenodo.19509466) | [OpenAIRE](https://explore.openaire.eu/search/result?pid=10.5281%2Fzenodo.19509466) | [ORCID](https://orcid.org/0009-0004-1682-7958)
+**Pilot paper:** [Don't Say Never (Zenodo)](https://doi.org/10.5281/zenodo.19509466) — superseded by the present replication.
 
-> **Origin:** This research emerged from [CodeCoach](https://github.com/axonome/patchpilot-codecoach), an AI agent coaching system built on top of PatchPilot (security scanner). During Experiment 7 of the CodeCoach evaluation, we discovered that prohibition-framed safety rules ("NEVER use eval()") paradoxically increased the probability of the unsafe behavior on certain prompts. This standalone paper isolates and investigates that finding.
+## TL;DR
 
-## Research Question
+System-prompt security rules ("NEVER use eval()" or "Always use JSON.parse()") reliably reduce vulnerable code generation across 6 LLMs — but whether you phrase the rule as a prohibition or an alternative suggestion makes no consistent difference. The popular intuition that prohibition framing backfires (Wegner's ironic-process theory applied to LLMs) does not replicate at scale.
 
-When LLM coding agents receive system-prompt safety rules, does phrasing those rules as prohibitions ("NEVER use eval()") paradoxically increase the probability of the unsafe behavior compared to alternative-suggestion framing ("Always use JSON.parse()")?
+## Key Findings
 
-## Hypothesis
+| # | Finding | Evidence |
+|---|---------|----------|
+| 1 | **Rule injection works.** | Control baselines of 45–87% fall to 0–38% under either framing. Fisher's exact p < 0.001 in all 6 models; Cohen's h = 0.37–1.54. |
+| 2 | **Polarity doesn't matter in the predicted direction.** | In 5/6 models, positive framing is statistically equal to or *worse* than negative. Only Haiku 4.5 trends in the Wegner-predicted direction (non-significantly). |
+| 3 | **One model shows a significant reversal.** | Gemma 4 31B: negative 14.2%, positive 38.3% (p < 0.001). "Always use `https://`" produces *more* plaintext `http://` code than "never use `http://`". |
+| 4 | **The pilot's backfire does not replicate.** | Across 36 (model, prompt) cells, no cell reproduces the pilot's 50%-vs-20% prohibition backfire. |
 
-Grounded in Wegner's Ironic Process Theory (1994): actively suppressing a thought requires a monitoring process that keeps the thought accessible. If this transfers to LLM token distributions, prohibition-framed rules that name the unsafe API may shift probability mass toward that API — especially when the user prompt also names it (double priming).
+## Experimental Design
 
-## Status
+- **Models (6):** Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5, Claude Opus 4.1, Gemma 4 31B, GPT-5.4 Mini
+- **Prompts (6):** eval-usage, md5-hash, http-url, insecure-random, eval-dynamic, weak-hash
+- **CWE classes (4):** CWE-94 (code injection), CWE-328 (weak hash), CWE-319 (cleartext HTTP), CWE-338 (weak PRNG)
+- **Conditions (3):** control (no rule), negative framing ("NEVER use X"), positive framing ("Always use Y")
+- **Trials:** 20 per cell → ideal n = 2,160; valid n = 2,004 after filtering error-outs
 
-### Done (from CodeCoach Experiment 7)
-- [x] Phase 1: single-prompt isolation on eval-dynamic (30 trials, Sonnet 4)
-  - Control 20%, Negative 50%, Positive 0% — p=0.016 (Fisher's exact)
-- [x] Phase 2: multi-prompt generalization (180 trials, 6 prompts, Sonnet 4)
-  - Aggregate: Control 59%, Negative 14%, Positive 24%
-  - Framing effect is prompt-specific, not systematic
-  - Rule injection itself is the dominant effect (both framings p<0.001 vs control)
+## Figures
 
-### TODO for standalone paper
-- [ ] **Multi-model replication** (highest priority)
-  - Run Phase 1 (eval-dynamic, 10 trials × 3 conditions) on:
-    - [ ] GPT-4o (via OpenRouter or direct API)
-    - [ ] Gemini 2.5 Pro (via Google AI Studio API)
-    - [ ] Llama 3.1 70B (via OpenRouter)
-  - Script: `scripts/multi-model-framing.ts` (to be written)
-  - Estimated cost: ~$5-10 total (30 calls × 3 models)
-  
-- [ ] **Broader prompt set** (medium priority)
-  - Add 10+ prompts beyond the 6 E2E prompts
-  - Include prompts that DON'T name the insecure API (pure priming test)
-  - Include prompts from other languages (Python eval, Go exec)
-  
-- [ ] **Token-level analysis** (if API supports logprobs)
-  - Compare P(eval) token probability under negative vs positive framing
-  - This would give mechanistic evidence, not just behavioral
-  
-- [x] **Paper draft** (4-8 pages, workshop format)
-  - [x] Introduction + Wegner theory background
-  - [x] Methodology (clear experiment design)
-  - [x] Results (Phase 1 + Phase 2 + multi-model + broader prompts)
-  - [x] Discussion (when does framing matter? double-priming hypothesis)
-  - [x] Limitations
-  
-- [ ] **Submission targets** (ordered by deadline)
-  - AISEC @ CCS 2026 (AI + Security workshop, ~Aug deadline)
-  - SCORED @ CCS 2026 (Software supply chain, ~Aug deadline)
-  - NeurIPS SoLaR 2026 (Socially responsible LLMs, ~Sep deadline)
-  - EMNLP Safety Workshop 2026 (~Sep deadline)
+| Figure | Description |
+|--------|-------------|
+| ![Rule injection bars](figures/fig-rule-injection-bars.png) | Aggregate vulnerability rates by model × condition. Gray (control) towers over red (negative) and green (positive) in every model. |
+| ![Polarity heatmap](figures/fig-polarity-heatmap.png) | Per-cell delta: positive − negative framing. Red = positive worse. No consistent blue (positive better) pattern. |
+| ![Per-prompt grid](figures/fig-per-prompt-grid.png) | 6-panel breakdown showing prompt-level heterogeneity. |
+| ![Baseline heatmap](figures/fig-control-baseline-heatmap.png) | Control (no-rule) baselines vary dramatically across models and prompts. |
 
-## Data Inventory
+## Repository Structure
 
-All existing data from CodeCoach Experiment 7:
+```
+paper/
+  arxiv/          — LaTeX draft (paper.tex, abstract.txt, references.bib)
+  aisec-ccs/      — Markdown draft for AISec @ CCS
+  neurips-solar/  — Markdown draft for NeurIPS SoLaR
+experiments/
+  data/replication/  — 6-model JSON result files (2,004 valid trials)
+  analysis/          — Statistical analysis output
+  scripts/           — Orchestration script (comprehensive-replication.py)
+figures/               — Generated PNGs + generation scripts
+framing-templates/     — Negative vs positive framing rule templates
+incidents/
+  2026-04-15-copilot-quota/  — Data-collection incident documentation
+```
 
-| File | Description |
-|------|-------------|
-| `data/phase1-eval-dynamic.json` | Phase 1: 30 trials (symlink to parent) |
-| `data/phase2-multi-prompt.json` | Phase 2: 180 trials (symlink to parent) |
-| `data/framing-templates/` | CLAUDE.md sections used in each condition |
-| `scripts/multi-model-framing.ts` | Multi-model replication script (TODO) |
-| `paper/framing-paper.tex` | Paper draft (workshop format, LaTeX) |
+## Reproducing
 
-## Key Findings Summary
+```bash
+# Generate figures (requires python3 with matplotlib, scipy, numpy)
+python3 figures/generate-replication-figures.py
 
-1. **Eval-dynamic paradox is real** — negative framing (50%) is worse than no rules (20%) on this specific prompt
-2. **Positive framing mitigates it** — 0/10 vulnerable on eval-dynamic (p=0.016)
-3. **Effect does NOT generalize** — across 6 prompts, both framings are equivalent (p=0.73)
-4. **weak-hash is a counterexample** — negative framing 0/10, positive 3/10 (opposite direction)
-5. **The dominant effect is rule injection itself** — 59% → 14-24% regardless of framing
-6. **http-url is a different failure mode** — explicit API in prompt overrides any system rule
+# Run the full replication (requires API keys for Claude CLI, Gemini, OpenRouter)
+python3 experiments/scripts/comprehensive-replication.py
+```
 
-## Paper Angle
+## Submission Targets
 
-Not "positive framing is always better" (disproven by our own data). Instead:
+- **AISec @ CCS 2026** — AI + Security workshop (Aug deadline)
+- **NeurIPS SoLaR 2026** — Socially Responsible LLMs (Sep deadline)
+- **TMLR** — Transactions on Machine Learning Research (rolling)
 
-**"When do safety rules backfire?"** — An empirical characterization of the conditions under which prohibition-framed rules increase unsafe behavior, with evidence that the effect concentrates on prompts that name the same API the rule prohibits (double priming). The practical recommendation: use alternative-suggestion framing for rules where the CWE involves a specific API name (eval, exec), and either framing for rules where the CWE involves a pattern (weak hash, insecure random).
+## Origin
+
+This research emerged from [CodeCoach](https://github.com/axonome/patchpilot-codecoach) Experiment 7. A 645-trial pilot appeared to show prohibition-framed rules backfiring via Wegner's ironic-process theory. This repository contains the 3× scale replication that shows the effect does not generalise: rule injection is the robust finding, not framing polarity.
+
+## License
+
+Data and code: MIT. Paper drafts: CC-BY 4.0.
