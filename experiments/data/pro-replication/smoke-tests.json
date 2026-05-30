@@ -1,0 +1,64 @@
+{
+  "run_at": "2026-05-22T21:13:49Z",
+  "results": [
+    {
+      "model_id": "gpt-5.4",
+      "model_name": "GPT-5.4",
+      "provider": "codex",
+      "requested_alias": "gpt-5.4",
+      "accepted": true,
+      "elapsed_sec": 8.063,
+      "response_preview": "function ok(): string {\n  return 'ok';\n}"
+    },
+    {
+      "model_id": "gpt-5.4-mini",
+      "model_name": "GPT-5.4 Mini",
+      "provider": "codex",
+      "requested_alias": "gpt-5.4-mini",
+      "accepted": true,
+      "elapsed_sec": 8.385,
+      "response_preview": "```ts\nfunction ok(): string {\n  return 'ok';\n}\n```"
+    },
+    {
+      "model_id": "gpt-5.3-codex",
+      "model_name": "GPT-5.3 Codex",
+      "provider": "codex",
+      "requested_alias": "gpt-5.3-codex",
+      "accepted": true,
+      "elapsed_sec": 9.416,
+      "response_preview": "function ok(): string { return 'ok'; }"
+    },
+    {
+      "model_id": "claude-opus-4.6",
+      "model_name": "Claude Opus 4.6",
+      "provider": "claude",
+      "requested_alias": "claude-opus-4-6",
+      "accepted": false,
+      "error": "Claude CLI error: {\"type\":\"result\",\"subtype\":\"success\",\"is_error\":true,\"duration_ms\":33306,\"duration_api_ms\":0,\"num_turns\":1,\"result\":\"API Error: 401 {\\\"type\\\":\\\"error\\\",\\\"error\\\":{\\\"type\\\":\\\"authentication_error\\\",\\\"message\\\":\\\"Invalid authentication credentials\\\"},\\\"request_id\\\":\\\"req_011CbJJ6XYi4Mz6rMFozs4qD\\\"} \u00b7 Please run /login\",\"session_id\":\"2916258c-855d-4863-b0e4-30ae20d2c04f\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"serve"
+    },
+    {
+      "model_id": "claude-sonnet-4.6",
+      "model_name": "Claude Sonnet 4.6",
+      "provider": "claude",
+      "requested_alias": "sonnet",
+      "accepted": false,
+      "error": "Claude CLI error: {\"type\":\"result\",\"subtype\":\"success\",\"is_error\":true,\"duration_ms\":65697,\"duration_api_ms\":0,\"num_turns\":1,\"result\":\"API Error: 401 {\\\"type\\\":\\\"error\\\",\\\"error\\\":{\\\"type\\\":\\\"authentication_error\\\",\\\"message\\\":\\\"Invalid authentication credentials\\\"},\\\"request_id\\\":\\\"req_011CbJJBjvjKqaUbmYnZdg3J\\\"} \u00b7 Please run /login\",\"session_id\":\"44ba25a1-3467-42dd-866d-65e41314caeb\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"serve"
+    },
+    {
+      "model_id": "claude-haiku-4.5",
+      "model_name": "Claude Haiku 4.5",
+      "provider": "claude",
+      "requested_alias": "claude-haiku-4-5-20251001",
+      "accepted": false,
+      "error": "Claude CLI error: {\"type\":\"result\",\"subtype\":\"success\",\"is_error\":true,\"duration_ms\":33102,\"duration_api_ms\":0,\"num_turns\":1,\"result\":\"API Error: 401 {\\\"type\\\":\\\"error\\\",\\\"error\\\":{\\\"type\\\":\\\"authentication_error\\\",\\\"message\\\":\\\"Invalid authentication credentials\\\"},\\\"request_id\\\":\\\"req_011CbJJFBC6kBCrTBpgStMvL\\\"} \u00b7 Please run /login\",\"session_id\":\"00ec3548-8512-4e4d-aa78-99a628876f0e\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"serve"
+    },
+    {
+      "model_id": "gpt-5.5",
+      "model_name": "GPT-5.5",
+      "provider": "codex",
+      "requested_alias": "gpt-5.5",
+      "accepted": false,
+      "error": "Codex CLI error: 2026-05-03T19:10:34.302975Z  WARN codex_protocol::openai_models: Model personality requested but model_messages is missing, falling back to base instructions. model=gpt-5.5 personality=pragmatic\nOpenAI Codex v0.104.0 (research preview)\n--------\nworkdir: /var/folders/k8/0kjbh_055_lg9yhvj_tbhhmw0000gn/T/pro-smoke-gpt-5.5-9yddn3eo\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: read-only\nreasoning effort: low\nreasoning summaries: auto\nsession id: 019def3f-e13e-75f0-8017-6006f99e01ef\n------"
+    }
+  ]
+}

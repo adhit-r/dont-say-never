@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security Rules Work: A Multi-Model Study of LLM Coding Agent Guardrails</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    :root {
+      --ink: #111827;
+      --muted: #4b5563;
+      --line: #d7dde5;
+      --panel: #f7f9fc;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --warn: #b45309;
+      --good: #166534;
+      --bad: #991b1b;
+      --paper: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #e5e7eb;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.28;
+    }
+
+    .poster {
+      width: 297mm;
+      height: 210mm;
+      margin: 0 auto;
+      background: var(--paper);
+      padding: 12mm;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 6mm;
+    }
+
+    header {
+      border-bottom: 1.6mm solid var(--accent);
+      padding-bottom: 4mm;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8mm;
+      align-items: end;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 210mm;
+      font-size: 24pt;
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .authors {
+      margin-top: 2.5mm;
+      color: var(--muted);
+      font-size: 9.5pt;
+    }
+
+    .badge {
+      border: 0.5mm solid var(--accent);
+      color: var(--accent-dark);
+      padding: 3mm 4mm;
+      font-weight: 700;
+      font-size: 10pt;
+      text-align: center;
+      min-width: 42mm;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 0.92fr 1.22fr 0.92fr;
+      gap: 5mm;
+      min-height: 0;
+    }
+
+    section {
+      border: 0.35mm solid var(--line);
+      padding: 4mm;
+      background: #fff;
+      min-height: 0;
+    }
+
+    .stack {
+      display: grid;
+      gap: 4mm;
+      min-height: 0;
+    }
+
+    h2 {
+      margin: 0 0 2.6mm;
+      font-size: 13pt;
+      line-height: 1.05;
+      color: var(--accent-dark);
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 3mm 0 1.5mm;
+      font-size: 10.5pt;
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 0 0 2.4mm;
+      font-size: 8.9pt;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 4mm;
+    }
+
+    li {
+      margin: 0 0 1.6mm;
+      font-size: 8.9pt;
+    }
+
+    .callout {
+      background: var(--panel);
+      border-left: 1.2mm solid var(--accent);
+      padding: 3mm;
+      margin-top: 3mm;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    .question {
+      font-size: 12.5pt;
+      line-height: 1.18;
+      font-weight: 700;
+      margin-bottom: 3mm;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5mm;
+      margin-top: 2.5mm;
+    }
+
+    .metric {
+      background: var(--panel);
+      border: 0.3mm solid var(--line);
+      padding: 2.7mm;
+      min-height: 18mm;
+    }
+
+    .metric .value {
+      display: block;
+      font-size: 18pt;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--accent-dark);
+    }
+
+    .metric .label {
+      display: block;
+      margin-top: 1.4mm;
+      color: var(--muted);
+      font-size: 7.8pt;
+      line-height: 1.2;
+    }
+
+    .figure-panel {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 2mm;
+      min-height: 0;
+    }
+
+    .figure-panel img {
+      width: 100%;
+      height: auto;
+      max-height: 79mm;
+      object-fit: contain;
+      border: 0.3mm solid var(--line);
+      background: #fff;
+    }
+
+    .figure-caption {
+      font-size: 7.6pt;
+      color: var(--muted);
+      margin-top: 1mm;
+    }
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.5pt;
+      margin-top: 1.6mm;
+    }
+
+    .result-table th,
+    .result-table td {
+      border-bottom: 0.25mm solid var(--line);
+      padding: 1.15mm 0.8mm;
+      text-align: right;
+      vertical-align: top;
+    }
+
+    .result-table th:first-child,
+    .result-table td:first-child {
+      text-align: left;
+    }
+
+    .result-table th {
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .takeaway {
+      display: grid;
+      gap: 2.4mm;
+    }
+
+    .takeaway-item {
+      border: 0.35mm solid var(--line);
+      padding: 2.8mm;
+      background: var(--panel);
+    }
+
+    .takeaway-item strong {
+      display: block;
+      font-size: 10pt;
+      margin-bottom: 1.2mm;
+      color: var(--ink);
+    }
+
+    .takeaway-item span {
+      display: block;
+      font-size: 8.2pt;
+      color: var(--muted);
+    }
+
+    .good {
+      color: var(--good);
+      font-weight: 700;
+    }
+
+    .bad {
+      color: var(--bad);
+      font-weight: 700;
+    }
+
+    .warn {
+      color: var(--warn);
+      font-weight: 700;
+    }
+
+    footer {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 5mm;
+      color: var(--muted);
+      font-size: 7.5pt;
+      border-top: 0.35mm solid var(--line);
+      padding-top: 3mm;
+    }
+
+    footer strong {
+      color: var(--ink);
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    @media screen {
+      .poster {
+        box-shadow: 0 16px 42px rgba(15, 23, 42, 0.18);
+      }
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <header>
+      <div>
+        <h1>Security Rules Work: A Multi-Model Study of LLM Coding Agent Guardrails</h1>
+        <div class="authors">
+          Adhithya Rajasekaran · Axonome · adhithya@axonome.xyz · ORCID 0009-0004-1682-7958
+        </div>
+      </div>
+      <div class="badge">SOUPS 2026<br>Poster Draft</div>
+    </header>
+
+    <main class="main">
+      <div class="stack">
+        <section>
+          <h2>Question</h2>
+          <div class="question">When developers write security rules for AI coding agents, does wording matter?</div>
+          <p>
+            Prompt-engineering folklore says negative rules such as <code>NEVER use eval()</code> can backfire by making the forbidden API more salient. We tested whether this holds for LLM coding agents.
+          </p>
+          <div class="callout">
+            Short answer: rules help. Prohibition wording itself is not the main problem.
+          </div>
+        </section>
+
+        <section>
+          <h2>Study Design</h2>
+          <div class="metric-grid">
+            <div class="metric">
+              <span class="value">6</span>
+              <span class="label">models: 3 GPT/Codex + 3 Claude</span>
+            </div>
+            <div class="metric">
+              <span class="value">6</span>
+              <span class="label">security prompts across 4 CWE classes</span>
+            </div>
+            <div class="metric">
+              <span class="value">2,160</span>
+              <span class="label">valid trials, zero final errors</span>
+            </div>
+          </div>
+          <h3>Conditions</h3>
+          <ul>
+            <li><strong>Control:</strong> task prompt only.</li>
+            <li><strong>Negative rule:</strong> prohibit insecure pattern.</li>
+            <li><strong>Positive rule:</strong> suggest safer alternative.</li>
+          </ul>
+          <h3>Security classes</h3>
+          <p>CWE-94 code execution, CWE-328 weak hashing, CWE-319 plaintext HTTP, CWE-338 insecure randomness.</p>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="figure-panel">
+          <div>
+            <h2>Main Result: Rules Reduce Vulnerable Code</h2>
+            <p>Every model generated fewer vulnerable outputs when a relevant security rule was present.</p>
+          </div>
+          <div>
+            <img src="../../figures/fig-pro-gpt-vs-claude-bars.png" alt="Aggregate vulnerability rates by model and framing condition">
+            <div class="figure-caption">Control vs. negative-framed and positive-framed security rules, pooled over six prompts.</div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Aggregate Counts</h2>
+          <table class="result-table" aria-label="Aggregate vulnerability counts">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Control</th>
+                <th>Negative</th>
+                <th>Positive</th>
+                <th>Any rule p</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>GPT-5.4</td><td>66/120</td><td>18/120</td><td>24/120</td><td>8.41e-13</td></tr>
+              <tr><td>GPT-5.4 Mini</td><td>82/120</td><td>27/120</td><td>27/120</td><td>4.10e-17</td></tr>
+              <tr><td>GPT-5.3 Codex</td><td>81/120</td><td>15/120</td><td>12/120</td><td>1.52e-27</td></tr>
+              <tr><td>Claude Opus 4.6</td><td>58/120</td><td>0/120</td><td>4/120</td><td>3.35e-28</td></tr>
+              <tr><td>Claude Sonnet 4.6</td><td>54/120</td><td>18/120</td><td>30/120</td><td>1.77e-06</td></tr>
+              <tr><td>Claude Haiku 4.5</td><td>104/120</td><td>31/120</td><td>24/120</td><td>3.26e-32</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="figure-panel">
+          <div>
+            <h2>Polarity Does Not Generalize</h2>
+            <p>Positive framing is not consistently safer than prohibition framing. The direction changes by model and prompt.</p>
+          </div>
+          <div>
+            <img src="../../figures/fig-pro-polarity-heatmap.png" alt="Heatmap of positive minus negative vulnerability rates">
+            <div class="figure-caption">Red: positive framing produced more vulnerable code. Blue: positive framing produced less.</div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Takeaways</h2>
+          <div class="takeaway">
+            <div class="takeaway-item">
+              <strong class="good">Add rules for known CWE classes.</strong>
+              <span>Rule presence is the robust effect across all six models.</span>
+            </div>
+            <div class="takeaway-item">
+              <strong class="warn">Do not rely on wording folklore.</strong>
+              <span>Negative-vs-positive framing is not significant for any model in aggregate.</span>
+            </div>
+            <div class="takeaway-item">
+              <strong class="bad">Measure against the target agent stack.</strong>
+              <span>Model-specific behavior is large enough to change the best rule wording locally.</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div><strong>Ethics.</strong> No human subjects were studied. The experiment analyzes model-generated code under synthetic security prompts.</div>
+      <div><strong>Artifacts.</strong> Dataset, runner, figures, and drafts are in the project repository.</div>
+      <div><strong>Poster format.</strong> A4 landscape draft with high-contrast sans-serif text for SOUPS review submission.</div>
+    </footer>
+  </article>
+</body>
+</html>

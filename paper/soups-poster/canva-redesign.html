@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security Rules Work: A Multi-Model Study of LLM Coding Agent Guardrails</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    :root {
+      --ink: #111827;
+      --subtle: #475569;
+      --quiet: #64748b;
+      --line: #d9e1e8;
+      --paper: #ffffff;
+      --mist: #f3f7f8;
+      --teal: #0f766e;
+      --teal-dark: #134e4a;
+      --blue: #1d4ed8;
+      --red: #b91c1c;
+      --amber: #92400e;
+      --green: #166534;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #d8dee6;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .poster {
+      width: 297mm;
+      height: 210mm;
+      margin: 0 auto;
+      background: var(--paper);
+      display: grid;
+      grid-template-rows: 32mm 1fr 16mm;
+      overflow: hidden;
+    }
+
+    .top {
+      display: grid;
+      grid-template-columns: 1fr 59mm;
+      border-bottom: 1.4mm solid var(--teal);
+      padding: 8mm 10mm 5mm;
+      gap: 8mm;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 23pt;
+      line-height: 1.03;
+      letter-spacing: 0;
+      max-width: 205mm;
+    }
+
+    .meta {
+      margin-top: 2.4mm;
+      color: var(--subtle);
+      font-size: 8.8pt;
+      line-height: 1.25;
+    }
+
+    .tag {
+      border: 0.35mm solid var(--teal);
+      padding: 3mm;
+      align-self: end;
+      text-align: left;
+      font-size: 8.5pt;
+      color: var(--teal-dark);
+      background: var(--mist);
+    }
+
+    .tag strong {
+      display: block;
+      font-size: 13pt;
+      line-height: 1.05;
+      margin-bottom: 1.2mm;
+      color: var(--teal-dark);
+    }
+
+    .content {
+      padding: 6mm 10mm 5mm;
+      display: grid;
+      grid-template-columns: 69mm 1fr 69mm;
+      gap: 5mm;
+      min-height: 0;
+    }
+
+    .col {
+      display: grid;
+      gap: 4mm;
+      min-height: 0;
+    }
+
+    .panel {
+      border: 0.3mm solid var(--line);
+      background: #fff;
+      padding: 3.7mm;
+      min-height: 0;
+    }
+
+    .panel.tint {
+      background: var(--mist);
+    }
+
+    h2 {
+      margin: 0 0 2.4mm;
+      font-size: 12.2pt;
+      line-height: 1.08;
+      letter-spacing: 0;
+      color: var(--teal-dark);
+    }
+
+    h3 {
+      margin: 2.2mm 0 1.1mm;
+      font-size: 9.1pt;
+      line-height: 1.12;
+    }
+
+    p, li {
+      font-size: 8.25pt;
+      line-height: 1.28;
+      color: var(--ink);
+      margin: 0 0 1.8mm;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 4.1mm;
+    }
+
+    .lead {
+      font-size: 11pt;
+      line-height: 1.18;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2.6mm;
+    }
+
+    .mini {
+      color: var(--subtle);
+      font-size: 7.45pt;
+      line-height: 1.22;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.4mm;
+      margin-top: 2.6mm;
+    }
+
+    .metric {
+      border-top: 1mm solid var(--teal);
+      background: #fff;
+      padding: 2.5mm;
+      min-height: 18mm;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 17pt;
+      line-height: 1;
+      color: var(--teal-dark);
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 1.4mm;
+      color: var(--subtle);
+      font-size: 7.25pt;
+      line-height: 1.18;
+    }
+
+    .flow {
+      display: grid;
+      gap: 2mm;
+      margin-top: 2mm;
+    }
+
+    .flow-item {
+      display: grid;
+      grid-template-columns: 8mm 1fr;
+      gap: 2mm;
+      align-items: start;
+    }
+
+    .num {
+      width: 7mm;
+      height: 7mm;
+      border-radius: 50%;
+      background: var(--teal-dark);
+      color: #fff;
+      font-size: 7pt;
+      line-height: 7mm;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .fig {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 1.8mm;
+    }
+
+    .fig img {
+      width: 100%;
+      max-height: 63mm;
+      object-fit: contain;
+      border: 0.25mm solid var(--line);
+      background: #fff;
+    }
+
+    .caption {
+      font-size: 7pt;
+      line-height: 1.18;
+      color: var(--quiet);
+    }
+
+    .result-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.4mm;
+    }
+
+    .result {
+      border: 0.3mm solid var(--line);
+      padding: 2.5mm;
+      background: var(--mist);
+    }
+
+    .result strong {
+      display: block;
+      font-size: 8.7pt;
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 1mm;
+    }
+
+    .result span {
+      display: block;
+      font-size: 7.3pt;
+      line-height: 1.2;
+      color: var(--subtle);
+    }
+
+    .takeaway {
+      display: grid;
+      gap: 2.2mm;
+    }
+
+    .takeaway div {
+      padding: 2.7mm;
+      border-left: 1mm solid var(--teal);
+      background: var(--mist);
+    }
+
+    .takeaway strong {
+      display: block;
+      font-size: 9pt;
+      margin-bottom: 0.8mm;
+    }
+
+    .takeaway span {
+      color: var(--subtle);
+      font-size: 7.6pt;
+      line-height: 1.22;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 6.75pt;
+      line-height: 1.12;
+    }
+
+    .table th,
+    .table td {
+      border-bottom: 0.23mm solid var(--line);
+      padding: 0.95mm 0.7mm;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .table th:first-child,
+    .table td:first-child {
+      text-align: left;
+      white-space: normal;
+    }
+
+    .table th {
+      color: var(--teal-dark);
+      font-weight: 700;
+    }
+
+    .green { color: var(--green); }
+    .red { color: var(--red); }
+    .amber { color: var(--amber); }
+
+    .foot {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 5mm;
+      padding: 3mm 10mm 4mm;
+      border-top: 0.3mm solid var(--line);
+      color: var(--subtle);
+      font-size: 7pt;
+      line-height: 1.22;
+    }
+
+    .foot strong {
+      color: var(--ink);
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.92em;
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <header class="top">
+      <div>
+        <h1>Security Rules Work: A Multi-Model Study of LLM Coding Agent Guardrails</h1>
+        <div class="meta">
+          Adhithya Rajasekaran · Axonome · adhithya@axonome.xyz · ORCID 0009-0004-1682-7958
+        </div>
+      </div>
+      <div class="tag">
+        <strong>SOUPS 2026</strong>
+        Draft poster · usable security for AI coding workflows
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="col">
+        <div class="panel tint">
+          <h2>Problem</h2>
+          <p class="lead">Developers now write security policy as natural-language rules for AI coding agents.</p>
+          <p>Common advice says prohibition phrasing can backfire by making unsafe APIs more salient. We tested whether that advice holds for coding-agent guardrails.</p>
+        </div>
+
+        <div class="panel">
+          <h2>Experiment</h2>
+          <div class="metrics">
+            <div class="metric"><strong>6</strong><span>models: 3 GPT/Codex + 3 Claude</span></div>
+            <div class="metric"><strong>6</strong><span>prompts across 4 CWE classes</span></div>
+            <div class="metric"><strong>2,160</strong><span>valid trials, zero final errors</span></div>
+          </div>
+          <div class="flow">
+            <div class="flow-item"><div class="num">1</div><p>Ask each model to solve a security-relevant coding task.</p></div>
+            <div class="flow-item"><div class="num">2</div><p>Compare no rule, prohibition-framed rule, and positive-alternative rule.</p></div>
+            <div class="flow-item"><div class="num">3</div><p>Detect CWE-specific vulnerable output after stripping comments.</p></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Model Set</h2>
+          <table class="table">
+            <thead><tr><th>Stack</th><th>Models</th><th>Trials</th></tr></thead>
+            <tbody>
+              <tr><td>OpenAI Codex/GPT</td><td>GPT-5.4, 5.4 Mini, 5.3 Codex</td><td>1,080</td></tr>
+              <tr><td>Anthropic Claude</td><td>Opus 4.6, Sonnet 4.6, Haiku 4.5</td><td>1,080</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="col">
+        <div class="panel fig">
+          <div>
+            <h2>Main Finding</h2>
+            <p class="lead">Security rules reduced vulnerable code on every model.</p>
+          </div>
+          <img src="../../figures/fig-pro-gpt-vs-claude-bars.png" alt="Aggregate vulnerability rates by model and condition">
+          <div class="caption">Control vs. negative-framed and positive-framed rules, pooled over six prompts and 20 trials per cell.</div>
+        </div>
+
+        <div class="panel">
+          <h2>Rule Effect Summary</h2>
+          <table class="table">
+            <thead><tr><th>Model</th><th>Control</th><th>Negative</th><th>Positive</th></tr></thead>
+            <tbody>
+              <tr><td>GPT-5.4</td><td>66/120</td><td>18/120</td><td>24/120</td></tr>
+              <tr><td>GPT-5.4 Mini</td><td>82/120</td><td>27/120</td><td>27/120</td></tr>
+              <tr><td>GPT-5.3 Codex</td><td>81/120</td><td>15/120</td><td>12/120</td></tr>
+              <tr><td>Claude Opus 4.6</td><td>58/120</td><td>0/120</td><td>4/120</td></tr>
+              <tr><td>Claude Sonnet 4.6</td><td>54/120</td><td>18/120</td><td>30/120</td></tr>
+              <tr><td>Claude Haiku 4.5</td><td>104/120</td><td>31/120</td><td>24/120</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="col">
+        <div class="panel fig">
+          <div>
+            <h2>What Did Not Replicate</h2>
+            <p>Positive framing was not reliably safer than prohibition framing.</p>
+          </div>
+          <img src="../../figures/fig-pro-polarity-heatmap.png" alt="Polarity heatmap">
+          <div class="caption">Positive minus negative vulnerability rate. Red means positive framing was worse; blue means it was better.</div>
+        </div>
+
+        <div class="panel tint">
+          <h2>Interpretation</h2>
+          <div class="result-strip">
+            <div class="result"><strong class="green">Rule presence matters.</strong><span>Every model improved when a relevant security rule was present.</span></div>
+            <div class="result"><strong class="amber">Polarity is unstable.</strong><span>No model showed a significant aggregate positive-framing advantage.</span></div>
+            <div class="result"><strong class="red">Model choice matters.</strong><span>Claude Opus 4.6: 62/360 vulnerable; Claude Haiku 4.5: 159/360.</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Practitioner Takeaways</h2>
+          <div class="takeaway">
+            <div><strong>Add targeted rules for known CWE classes.</strong><span>Coverage beats wording optimization.</span></div>
+            <div><strong>Measure prompts against your actual agent stack.</strong><span>Local polarity effects exist, but they do not generalize.</span></div>
+            <div><strong>Treat instruction files as security-critical artifacts.</strong><span>They are a usable guardrail layer, not a proof of safety.</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div><strong>Ethics.</strong> No human subjects were studied. The experiment uses synthetic prompts and model-generated code.</div>
+      <div><strong>Detection.</strong> CWE-specific regex detectors over comment-stripped generated source.</div>
+      <div><strong>Artifacts.</strong> Dataset, scripts, figures, and poster sources are in the project repository.</div>
+    </footer>
+  </article>
+</body>
+</html>

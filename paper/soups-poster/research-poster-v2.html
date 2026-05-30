@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Security Rules Work: SOUPS Poster</title>
+  <style>
+    @page { size: A4 landscape; margin: 0; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e5e7eb;
+      color: #111827;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .page {
+      width: 297mm;
+      height: 210mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 7mm 9mm 6mm;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 3.5mm;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10mm;
+      align-items: start;
+      border-bottom: 1.4mm solid #0f766e;
+      padding-bottom: 3mm;
+    }
+    h1 {
+      margin: 0;
+      font-size: 22pt;
+      line-height: 1.03;
+      letter-spacing: 0;
+      max-width: 212mm;
+    }
+    .authors {
+      margin-top: 2mm;
+      color: #475569;
+      font-size: 7.7pt;
+      line-height: 1.35;
+    }
+    .badge {
+      border: 0.45mm solid #0f766e;
+      color: #134e4a;
+      padding: 2.6mm 3.3mm;
+      min-width: 32mm;
+      text-align: center;
+      font-weight: 700;
+      font-size: 10pt;
+      line-height: 1.15;
+    }
+    main {
+      display: grid;
+      grid-template-columns: 66mm 1fr 72mm;
+      gap: 4mm;
+      min-height: 0;
+    }
+    .panel {
+      border: 0.35mm solid #d9e1e8;
+      border-radius: 2mm;
+      padding: 3mm;
+      background: #ffffff;
+    }
+    .stack {
+      display: grid;
+      gap: 2.6mm;
+      align-content: start;
+    }
+    h2 {
+      margin: 0 0 2.2mm;
+      font-size: 10.8pt;
+      line-height: 1.1;
+      color: #134e4a;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 1.6mm;
+      font-size: 8.8pt;
+      line-height: 1.15;
+      color: #111827;
+    }
+    p, li {
+      margin: 0;
+      font-size: 7.1pt;
+      line-height: 1.32;
+      color: #1f2937;
+    }
+    ul { margin: 1mm 0 0; padding-left: 3.6mm; }
+    li { margin-bottom: 0.55mm; }
+    .answer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6mm;
+      margin-top: 1.8mm;
+    }
+    .answer div {
+      border-left: 1mm solid #0f766e;
+      background: #f0fdfa;
+      padding: 1.6mm 1.8mm;
+    }
+    .answer strong {
+      display: block;
+      font-size: 7.8pt;
+      margin-bottom: 0.6mm;
+      color: #134e4a;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4mm;
+      margin-top: 1.4mm;
+    }
+    .metric {
+      border: 0.25mm solid #d9e1e8;
+      padding: 1.4mm;
+      min-height: 9.8mm;
+    }
+    .metric b {
+      display: block;
+      font-size: 11pt;
+      color: #111827;
+      line-height: 1;
+    }
+    .metric span {
+      display: block;
+      margin-top: 0.8mm;
+      font-size: 6.2pt;
+      color: #475569;
+      line-height: 1.18;
+    }
+    .pipeline {
+      display: grid;
+      gap: 1mm;
+      margin-top: 1mm;
+    }
+    .pipe-row {
+      display: grid;
+      grid-template-columns: 1fr 5mm 1fr;
+      align-items: center;
+      gap: 1.5mm;
+    }
+    .box {
+      border: 0.25mm solid #94a3b8;
+      background: #f8fafc;
+      padding: 1.8mm;
+      min-height: 9mm;
+      font-size: 6.1pt;
+      line-height: 1.2;
+    }
+    .arrow {
+      text-align: center;
+      color: #0f766e;
+      font-weight: 700;
+      font-size: 10pt;
+    }
+    .chart-panel {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 2mm;
+    }
+    .claim {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4mm;
+      align-items: center;
+      background: #f8fafc;
+      border: 0.3mm solid #cbd5e1;
+      padding: 2.4mm;
+    }
+    .claim strong {
+      display: block;
+      font-size: 11.5pt;
+      color: #111827;
+      line-height: 1.1;
+    }
+    .claim span {
+      display: block;
+      margin-top: 0.8mm;
+      color: #475569;
+      font-size: 6.8pt;
+      line-height: 1.25;
+    }
+    .big-number {
+      min-width: 30mm;
+      text-align: center;
+      color: #0f766e;
+      font-size: 19pt;
+      line-height: 0.9;
+      font-weight: 800;
+    }
+    .big-number small {
+      display: block;
+      color: #475569;
+      font-size: 6.6pt;
+      font-weight: 600;
+      margin-top: 1.5mm;
+    }
+    .bar-chart {
+      padding-top: 1mm;
+    }
+    .legend {
+      display: flex;
+      gap: 4mm;
+      align-items: center;
+      margin-bottom: 2mm;
+      font-size: 7pt;
+      color: #475569;
+    }
+    .swatch { width: 5mm; height: 2.2mm; display: inline-block; margin-right: 1mm; vertical-align: -0.4mm; }
+    .model-row {
+      display: grid;
+      grid-template-columns: 30mm 1fr 9mm;
+      gap: 2mm;
+      align-items: center;
+      margin: 1.45mm 0;
+    }
+    .model-name {
+      font-size: 7.2pt;
+      line-height: 1.12;
+      color: #111827;
+      font-weight: 700;
+    }
+    .bars {
+      display: grid;
+      gap: 0.8mm;
+      padding-right: 1mm;
+    }
+    .track {
+      height: 3.25mm;
+      background: #f1f5f9;
+      border: 0.15mm solid #e2e8f0;
+      position: relative;
+    }
+    .fill {
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .control { background: #64748b; }
+    .negative { background: #0f766e; }
+    .positive { background: #f59e0b; }
+    .rate {
+      font-size: 6.7pt;
+      color: #475569;
+      line-height: 1.15;
+      text-align: right;
+    }
+    .axis {
+      display: grid;
+      grid-template-columns: 30mm 1fr 9mm;
+      gap: 2mm;
+      margin-top: 1.5mm;
+      color: #64748b;
+      font-size: 6pt;
+    }
+    .axis-line {
+      display: flex;
+      justify-content: space-between;
+      border-top: 0.2mm solid #cbd5e1;
+      padding-top: 0.8mm;
+    }
+    .heatmap {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2mm;
+      font-size: 6.4pt;
+    }
+    .heatmap th, .heatmap td {
+      border: 0.22mm solid #d9e1e8;
+      padding: 1.1mm 1.2mm;
+      text-align: center;
+      line-height: 1.14;
+    }
+    .heatmap th {
+      background: #f8fafc;
+      color: #334155;
+      font-size: 6.5pt;
+    }
+    .heatmap td:first-child {
+      text-align: left;
+      font-weight: 700;
+      color: #111827;
+    }
+    .worse { background: #fee2e2; color: #991b1b; }
+    .better { background: #dcfce7; color: #166534; }
+    .same { background: #f1f5f9; color: #334155; }
+    .takeaway {
+      display: grid;
+      gap: 1.35mm;
+    }
+    .takeaway-item {
+      border-left: 1mm solid #0f766e;
+      padding: 1.1mm 1.5mm;
+      background: #f8fafc;
+    }
+    .takeaway-item strong {
+      display: block;
+      font-size: 7.4pt;
+      margin-bottom: 0.4mm;
+    }
+    .note {
+      font-size: 6.2pt;
+      color: #475569;
+      line-height: 1.25;
+    }
+    footer {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 4mm;
+      padding-top: 2mm;
+      border-top: 0.35mm solid #d9e1e8;
+      color: #475569;
+      font-size: 6pt;
+      line-height: 1.25;
+    }
+    footer strong { color: #111827; }
+    code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.95em;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <header>
+      <div>
+        <h1>Security Rules Work: A Multi-Model Study of LLM Coding Agent Guardrails</h1>
+        <div class="authors">Adhithya Rajasekaran · Axonome · adhithya@axonome.xyz · ORCID 0009-0004-1682-7958</div>
+      </div>
+      <div class="badge">SOUPS 2026<br>Poster Draft</div>
+    </header>
+
+    <main>
+      <section class="stack">
+        <div class="panel">
+          <h2>Why This Study Exists</h2>
+          <p>In CodeCoach, scanner findings were converted into persistent coding-agent rules. One pilot case looked paradoxical: a prohibition against an unsafe pattern made one model produce that pattern more often.</p>
+          <div class="answer">
+            <div>
+              <strong>Pilot signal</strong>
+              <p>A narrow “do not do X” failure motivated the larger study.</p>
+            </div>
+            <div>
+              <strong>Replication question</strong>
+              <p>Does rule wording generalize across models and CWEs?</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Experiment</h2>
+          <div class="metric-grid">
+            <div class="metric"><b>2,160</b><span>valid model trials</span></div>
+            <div class="metric"><b>6</b><span>frontier coding models</span></div>
+            <div class="metric"><b>6</b><span>security prompts</span></div>
+            <div class="metric"><b>3</b><span>conditions per prompt</span></div>
+          </div>
+          <ul>
+            <li><strong>Control:</strong> no rule injected.</li>
+            <li><strong>Negative:</strong> prohibition-framed rule.</li>
+            <li><strong>Positive:</strong> safe alternative-framed rule.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h2>CodeCoach Pipeline</h2>
+          <div class="pipeline">
+            <div class="pipe-row">
+              <div class="box"><strong>Scanner</strong><br>Detects insecure code pattern.</div>
+              <div class="arrow">→</div>
+              <div class="box"><strong>Rule file</strong><br>Writes persistent project guidance.</div>
+            </div>
+            <div class="pipe-row">
+              <div class="box"><strong>Coding agent</strong><br>Reads rule before generation.</div>
+              <div class="arrow">→</div>
+              <div class="box"><strong>Detector</strong><br>Checks generated code for CWE pattern.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel chart-panel">
+        <div>
+          <h2>Main Result</h2>
+          <div class="claim">
+            <div>
+              <strong>Rules reduce vulnerable code on every model.</strong>
+              <span>The reliable effect is the presence of a targeted rule. The polarity of that rule is not consistently predictive.</span>
+            </div>
+            <div class="big-number">6/6<small>models improved with rules</small></div>
+          </div>
+        </div>
+
+        <div class="bar-chart">
+          <h3>Vulnerability rate by model and condition</h3>
+          <div class="legend">
+            <span><span class="swatch control"></span>Control</span>
+            <span><span class="swatch negative"></span>Negative rule</span>
+            <span><span class="swatch positive"></span>Positive rule</span>
+          </div>
+
+          <div class="model-row">
+            <div class="model-name">GPT-5.4</div>
+            <div class="bars">
+              <div class="track"><div class="fill control" style="width:55%"></div></div>
+              <div class="track"><div class="fill negative" style="width:15%"></div></div>
+              <div class="track"><div class="fill positive" style="width:20%"></div></div>
+            </div>
+            <div class="rate">66<br>18<br>24</div>
+          </div>
+          <div class="model-row">
+            <div class="model-name">GPT-5.4 Mini</div>
+            <div class="bars">
+              <div class="track"><div class="fill control" style="width:68.3%"></div></div>
+              <div class="track"><div class="fill negative" style="width:22.5%"></div></div>
+              <div class="track"><div class="fill positive" style="width:22.5%"></div></div>
+            </div>
+            <div class="rate">82<br>27<br>27</div>
+          </div>
+          <div class="model-row">
+            <div class="model-name">GPT-5.3 Codex</div>
+            <div class="bars">
+              <div class="track"><div class="fill control" style="width:67.5%"></div></div>
+              <div class="track"><div class="fill negative" style="width:12.5%"></div></div>
+              <div class="track"><div class="fill positive" style="width:10%"></div></div>
+            </div>
+            <div class="rate">81<br>15<br>12</div>
+          </div>
+          <div class="model-row">
+            <div class="model-name">Claude Opus 4.6</div>
+            <div class="bars">
+              <div class="track"><div class="fill control" style="width:48.3%"></div></div>
+              <div class="track"><div class="fill negative" style="width:0%"></div></div>
+              <div class="track"><div class="fill positive" style="width:3.3%"></div></div>
+            </div>
+            <div class="rate">58<br>0<br>4</div>
+          </div>
+          <div class="model-row">
+            <div class="model-name">Claude Sonnet 4.6</div>
+            <div class="bars">
+              <div class="track"><div class="fill control" style="width:45%"></div></div>
+              <div class="track"><div class="fill negative" style="width:15%"></div></div>
+              <div class="track"><div class="fill positive" style="width:25%"></div></div>
+            </div>
+            <div class="rate">54<br>18<br>30</div>
+          </div>
+          <div class="model-row">
+            <div class="model-name">Claude Haiku 4.5</div>
+            <div class="bars">
+              <div class="track"><div class="fill control" style="width:86.7%"></div></div>
+              <div class="track"><div class="fill negative" style="width:25.8%"></div></div>
+              <div class="track"><div class="fill positive" style="width:20%"></div></div>
+            </div>
+            <div class="rate">104<br>31<br>24</div>
+          </div>
+          <div class="axis"><div></div><div class="axis-line"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div><div></div></div>
+        </div>
+
+        <p class="note">Numbers at right are vulnerable outputs out of 120 trials per condition. Lower is better. Rule effects are statistically strong for every model; polarity effects are mixed.</p>
+      </section>
+
+      <section class="stack">
+        <div class="panel">
+          <h2>Polarity Is Not Stable</h2>
+          <p>Positive wording was not a universal safety improvement. Sometimes it helped, sometimes it tied, and sometimes it was worse.</p>
+          <table class="heatmap" aria-label="positive minus negative vulnerability rates">
+            <thead>
+              <tr><th>Model</th><th>Positive vs negative</th><th>Interpretation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>GPT-5.4</td><td class="worse">+5.0 pp</td><td>positive worse</td></tr>
+              <tr><td>GPT-5.4 Mini</td><td class="same">0.0 pp</td><td>tie</td></tr>
+              <tr><td>GPT-5.3 Codex</td><td class="better">-2.5 pp</td><td>positive better</td></tr>
+              <tr><td>Claude Opus 4.6</td><td class="worse">+3.3 pp</td><td>positive worse</td></tr>
+              <tr><td>Claude Sonnet 4.6</td><td class="worse">+10.0 pp</td><td>positive worse</td></tr>
+              <tr><td>Claude Haiku 4.5</td><td class="better">-5.8 pp</td><td>positive better</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <h2>Interpretation</h2>
+          <div class="takeaway">
+            <div class="takeaway-item">
+              <strong>The pilot was real but narrow.</strong>
+              <p>A single paradoxical case motivated the study; the larger replication shows it is not the general rule.</p>
+            </div>
+            <div class="takeaway-item">
+              <strong>Persistent rules are useful guardrails.</strong>
+              <p>Across GPT and Claude stacks, targeted security rules lowered vulnerable outputs.</p>
+            </div>
+            <div class="takeaway-item">
+              <strong>Wording is model- and prompt-dependent.</strong>
+              <p>Teams should evaluate rule files against their own prompts, not rely on a universal phrasing heuristic.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>For Practitioners</h2>
+          <ul>
+            <li>Keep rule files short, targeted, and security-reviewed.</li>
+            <li>Prefer measurable guardrail tests over prompt folklore.</li>
+            <li>Treat <code>AGENTS.md</code> and <code>CLAUDE.md</code> as security-critical configuration.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div><strong>Security scope.</strong> Prompts cover CWE-style insecure code: dynamic execution, weak hashing, cleartext HTTP URLs, and insecure randomness.</div>
+      <div><strong>Ethics.</strong> No human subjects were studied. The dataset contains synthetic prompts and generated code outputs.</div>
+      <div><strong>Artifact.</strong> Paper and replication package: github.com/adhit-r/dont-say-never · DOI: 10.5281/zenodo.19509466</div>
+    </footer>
+  </section>
+</body>
+</html>
