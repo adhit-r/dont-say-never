@@ -50,7 +50,7 @@ Current validation slice:
 - Patched detector on labeled reruns: 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: strong replication with a 60-row full-output detector-validation slice. Before archival submission, use the patched detector from the start in the non-API or four-arm extension.
+Current paper status: strong replication with a 60-row full-output detector-validation slice and a completed 1,080-trial non-API extension using the patched detector. Before archival submission, the remaining empirical upgrade is a four-arm decomposition if the venue requires cleaner causal isolation of polarity from information content.
 
 ## Main Artifacts
 
@@ -97,9 +97,9 @@ Required before submission:
 
 - Resolve venue choice.
 - Decide whether the bidirectional instruction-decay incident is a main contribution or an appendix/second paper.
-- Use the patched detector for the next non-API or four-arm extension.
+- If strengthening further, run the four-arm decomposition with the patched detector to isolate polarity from information content.
 - Verify every cited work exists and is accurately described.
-- Rebuild the PDF with the final figures.
+- Fix LaTeX overfull table/reference warnings before submission.
 - Freeze repository artifacts and publish Zenodo v2.
 
 ## Origin
