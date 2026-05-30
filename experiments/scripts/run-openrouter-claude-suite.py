@@ -260,7 +260,7 @@ def run_cell(pro, api_key: str, suite: str, model_id: str, prompt, condition: st
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--suite", choices=["non-api", "cross-language"], default="non-api")
+    parser.add_argument("--suite", choices=["non-api", "four-arm-addons", "cross-language"], default="non-api")
     parser.add_argument("--model", choices=sorted(MODEL_MAP))
     parser.add_argument("--cells-per-run", type=int, default=1)
     parser.add_argument("--max-cost-usd", type=float, default=3.0)
