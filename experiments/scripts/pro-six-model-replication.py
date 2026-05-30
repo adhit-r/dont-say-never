@@ -332,6 +332,7 @@ CROSS_LANGUAGE_PROMPTS = [
 PROMPTS_BY_SUITE = {
     "main": MAIN_PROMPTS,
     "four-arm": MAIN_PROMPTS,
+    "four-arm-addons": MAIN_PROMPTS,
     "non-api": NON_API_PROMPTS,
     "cross-language": CROSS_LANGUAGE_PROMPTS,
 }
@@ -340,6 +341,7 @@ PROMPTS_BY_SUITE = {
 CONDITIONS_BY_SUITE = {
     "main": ["control", "negative-framing", "positive-framing"],
     "four-arm": ["control", "pure-negative", "pure-positive", "combined"],
+    "four-arm-addons": ["pure-negative", "pure-positive", "combined"],
     "non-api": ["control", "negative-framing", "positive-framing"],
     "cross-language": ["control", "negative-framing", "positive-framing"],
 }
