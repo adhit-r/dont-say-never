@@ -128,7 +128,7 @@ def prior_cost(suite: str) -> float:
     return total
 
 
-def call_openrouter(api_key: str, model_id: str, system: str, user_prompt: str) -> tuple[str, dict]:
+def call_openrouter(api_key: str, model_id: str, system: str, user_prompt: str, max_tokens: int) -> tuple[str, dict]:
     payload = {
         "model": MODEL_MAP[model_id]["openrouter_id"],
         "messages": [
@@ -136,7 +136,7 @@ def call_openrouter(api_key: str, model_id: str, system: str, user_prompt: str) 
             {"role": "user", "content": user_prompt},
         ],
         "temperature": 0.7,
-        "max_tokens": 1200,
+        "max_tokens": max_tokens,
     }
     req = urllib.request.Request(
         OPENROUTER_URL,
@@ -178,7 +178,18 @@ def next_cells(pro, suite: str, results: list[dict]) -> list[tuple[object, str]]
     return cells
 
 
-def run_cell(pro, api_key: str, suite: str, model_id: str, prompt, condition: str, results: list[dict], spent: float, max_cost: float) -> float:
+def run_cell(
+    pro,
+    api_key: str,
+    suite: str,
+    model_id: str,
+    prompt,
+    condition: str,
+    results: list[dict],
+    spent: float,
+    max_cost: float,
+    max_tokens: int,
+) -> float:
     done = valid_count(results, prompt.id, condition)
     print(f"{suite:10s} {model_id:20s} {prompt.id:18s} {condition:18s} ", end="", flush=True)
     while done < TRIALS_PER_CELL:
@@ -186,7 +197,7 @@ def run_cell(pro, api_key: str, suite: str, model_id: str, prompt, condition: st
             raise RuntimeError(f"OpenRouter cost cap reached: ${spent:.4f} >= ${max_cost:.4f}")
         started = time.time()
         try:
-            raw, meta = call_openrouter(api_key, model_id, pro.build_system_prompt(prompt, condition), prompt.prompt)
+            raw, meta = call_openrouter(api_key, model_id, pro.build_system_prompt(prompt, condition), prompt.prompt, max_tokens)
             code = pro.extract_code(raw)
             vuln = prompt.detector(code)
             cost = estimate_cost(model_id, meta.get("usage"))
@@ -211,6 +222,7 @@ def run_cell(pro, api_key: str, suite: str, model_id: str, prompt, condition: st
                 "raw_response": raw,
                 "usage": meta.get("usage"),
                 "estimated_cost_usd": cost,
+                "max_tokens": max_tokens,
             }
             results.append(row)
             append_jsonl(
@@ -227,6 +239,7 @@ def run_cell(pro, api_key: str, suite: str, model_id: str, prompt, condition: st
                     "vulnerable": vuln,
                     "elapsed_sec": round(time.time() - started, 3),
                     "estimated_cost_usd": cost,
+                    "max_tokens": max_tokens,
                     "cumulative_estimated_cost_usd": spent,
                 },
             )
@@ -247,6 +260,7 @@ def run_cell(pro, api_key: str, suite: str, model_id: str, prompt, condition: st
                     "status": "error",
                     "elapsed_sec": round(time.time() - started, 3),
                     "error": str(exc)[:800],
+                    "max_tokens": max_tokens,
                     "cumulative_estimated_cost_usd": spent,
                 },
             )
@@ -264,6 +278,7 @@ def main() -> None:
     parser.add_argument("--model", choices=sorted(MODEL_MAP))
     parser.add_argument("--cells-per-run", type=int, default=1)
     parser.add_argument("--max-cost-usd", type=float, default=3.0)
+    parser.add_argument("--max-tokens", type=int, default=1200)
     parser.add_argument("--api-key-env", default="OPENROUTER_API_KEY")
     parser.add_argument("--estimate-only", action="store_true")
     args = parser.parse_args()
@@ -293,7 +308,18 @@ def main() -> None:
     spent = prior_cost(args.suite)
     for model_id, (prompt, condition) in selected:
         results = load_results(args.suite, model_id)
-        spent = run_cell(pro, api_key, args.suite, model_id, prompt, condition, results, spent, args.max_cost_usd)
+        spent = run_cell(
+            pro,
+            api_key,
+            args.suite,
+            model_id,
+            prompt,
+            condition,
+            results,
+            spent,
+            args.max_cost_usd,
+            args.max_tokens,
+        )
 
     for model_id in model_ids:
         results = load_results(args.suite, model_id)
