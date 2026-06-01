@@ -194,6 +194,8 @@ This turns the paper from "regex-counted prompt outputs" into a more defensible 
 
 Priority: high if aiming TMLR or a stronger conference.
 
+Current status: completed.
+
 Reviewer objection addressed:
 
 > "Negative and positive rules differ in information content. You did not isolate polarity."
@@ -207,28 +209,22 @@ Four conditions:
 3. Pure positive: names only the safe alternative.
 4. Combined: names both the forbidden construct and the safe alternative.
 
-Recommended design:
+Completed design:
 
 - Reuse existing control where possible.
-- Add 3 new arms x 6 models x 6 prompts x 20 trials = 2,160 additional trials.
-
-Budget-reduced design:
-
-- 3 models only:
-  - GPT-5.4
-  - Claude Opus 4.6
-  - Claude Haiku 4.5
-- 6 prompts x 3 new arms x 20 = 1,080 additional trials.
+- Added 3 new arms x 6 models x 6 prompts x 20 trials = 2,160 add-on rows.
+- Combined with reused control rows from the main suite.
 
 Deliverables:
 
-- `experiments/data/four-arm/`
+- `experiments/data/pro-replication/four-arm-addons/`
+- `experiments/analysis/four-arm-extension-summary.md`
 - `figures/fig-four-arm-decomposition.png`
 - paper section: "Polarity vs Information Content"
 
 Paper impact:
 
-This is the single cleanest way to strengthen the causal interpretation.
+This is the single cleanest way to strengthen the causal interpretation. The completed result supports the information-content account: combined rules are strongest, while pure-positive guidance is not uniformly safer than pure-negative guidance.
 
 ## Work Package D: Non-API Prompt Replication
 

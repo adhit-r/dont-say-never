@@ -16,7 +16,7 @@ The robust finding is simpler:
 
 > Targeted security rules reduce vulnerable code generation across all six tested coding agents. The polarity of the rule, prohibition vs safe-alternative framing, is not a reliable general-purpose safety lever.
 
-The repository also includes a completed **1,080-trial non-API-naming extension**. It shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`.
+The repository also includes a completed **1,080-trial non-API-naming extension** and a completed **2,160-row four-arm decomposition**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance.
 
 ## Final Dataset
 
@@ -50,7 +50,7 @@ Current validation slice:
 - Patched detector on labeled reruns: 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: strong replication with a 60-row full-output detector-validation slice and a completed 1,080-trial non-API extension using the patched detector. Before archival submission, the remaining empirical upgrade is a four-arm decomposition if the venue requires cleaner causal isolation of polarity from information content.
+Current paper status: strong replication with a 60-row full-output detector-validation slice, a completed 1,080-trial non-API extension, and a completed four-arm decomposition using the patched detector.
 
 ## Main Artifacts
 
@@ -61,14 +61,17 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Standalone abstract | `paper/arxiv/abstract.txt` |
 | Final replication data | `experiments/data/pro-replication/main/` |
 | Non-API extension data | `experiments/data/pro-replication/non-api/` |
+| Four-arm add-on data | `experiments/data/pro-replication/four-arm-addons/` |
 | Final runner | `experiments/scripts/pro-six-model-replication.py` |
 | Non-API analysis | `experiments/analysis/non-api-extension-summary.md` |
+| Four-arm analysis | `experiments/analysis/four-arm-extension-summary.md` |
 | Detector validation artifacts | `experiments/validation/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
 | Aggregate figure | `figures/fig-pro-gpt-vs-claude-bars.png` |
 | Polarity heatmap | `figures/fig-pro-polarity-heatmap.png` |
 | Control baseline heatmap | `figures/fig-pro-control-baseline-heatmap.png` |
 | Non-API figure | `figures/fig-pro-non-api-control.png` |
+| Four-arm decomposition figure | `figures/fig-four-arm-decomposition.png` |
 | Incident evidence archive | `incidents/2026-04-15-copilot-quota/` |
 
 ## Reproducing Figures
@@ -97,7 +100,7 @@ Required before submission:
 
 - Resolve venue choice.
 - Decide whether the bidirectional instruction-decay incident is a main contribution or an appendix/second paper.
-- If strengthening further, run the four-arm decomposition with the patched detector to isolate polarity from information content.
+- Integrate the completed four-arm decomposition into the manuscript's results/discussion.
 - Verify every cited work exists and is accurately described.
 - Fix LaTeX overfull table/reference warnings before submission.
 - Freeze repository artifacts and publish Zenodo v2.
