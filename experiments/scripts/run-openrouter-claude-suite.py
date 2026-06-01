@@ -189,9 +189,11 @@ def run_cell(
     spent: float,
     max_cost: float,
     max_tokens: int,
+    max_consecutive_errors: int,
 ) -> float:
     done = valid_count(results, prompt.id, condition)
     print(f"{suite:10s} {model_id:20s} {prompt.id:18s} {condition:18s} ", end="", flush=True)
+    consecutive_errors = 0
     while done < TRIALS_PER_CELL:
         if spent >= max_cost:
             raise RuntimeError(f"OpenRouter cost cap reached: ${spent:.4f} >= ${max_cost:.4f}")
@@ -246,7 +248,9 @@ def run_cell(
             save_results(pro, suite, model_id, results, "in-progress")
             print("V" if vuln else "S", end="", flush=True)
             done += 1
+            consecutive_errors = 0
         except Exception as exc:
+            consecutive_errors += 1
             append_jsonl(
                 LEDGER_PATH,
                 {
@@ -265,6 +269,9 @@ def run_cell(
                 },
             )
             print("E", end="", flush=True)
+            if consecutive_errors >= max_consecutive_errors:
+                print(f" stopped-after-{consecutive_errors}-errors", flush=True)
+                break
             time.sleep(5)
         time.sleep(INTER_TRIAL_SEC)
     print(f" ${spent:.4f}")
@@ -279,6 +286,7 @@ def main() -> None:
     parser.add_argument("--cells-per-run", type=int, default=1)
     parser.add_argument("--max-cost-usd", type=float, default=3.0)
     parser.add_argument("--max-tokens", type=int, default=1200)
+    parser.add_argument("--max-consecutive-errors", type=int, default=8)
     parser.add_argument("--api-key-env", default="OPENROUTER_API_KEY")
     parser.add_argument("--estimate-only", action="store_true")
     args = parser.parse_args()
@@ -319,6 +327,7 @@ def main() -> None:
             spent,
             args.max_cost_usd,
             args.max_tokens,
+            args.max_consecutive_errors,
         )
 
     for model_id in model_ids:
