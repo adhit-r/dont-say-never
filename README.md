@@ -16,7 +16,7 @@ The robust finding is simpler:
 
 > Targeted security rules reduce vulnerable code generation across all six tested coding agents. The polarity of the rule, prohibition vs safe-alternative framing, is not a reliable general-purpose safety lever.
 
-The repository also includes a completed **1,080-trial non-API-naming extension** and a completed **2,160-row four-arm decomposition**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance.
+The repository also includes a completed **1,080-trial non-API-naming extension**, a completed **2,160-row four-arm decomposition**, and a bounded **1,200-row cross-language extension** across five completed models. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension stress-tests Python and Go portability, with GPT-5.3 Codex excluded due to route errors.
 
 ## Final Dataset
 
@@ -50,7 +50,7 @@ Current validation slice:
 - Patched detector on labeled reruns: 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: strong replication with a 60-row full-output detector-validation slice, a completed 1,080-trial non-API extension, and a completed four-arm decomposition using the patched detector.
+Current paper status: strong replication with a 60-row full-output detector-validation slice, a completed 1,080-trial non-API extension, a completed four-arm decomposition using the patched detector, and a bounded 1,200-row cross-language extension.
 
 ## Main Artifacts
 
@@ -62,9 +62,11 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Final replication data | `experiments/data/pro-replication/main/` |
 | Non-API extension data | `experiments/data/pro-replication/non-api/` |
 | Four-arm add-on data | `experiments/data/pro-replication/four-arm-addons/` |
+| Cross-language extension data | `experiments/data/pro-replication/cross-language/` |
 | Final runner | `experiments/scripts/pro-six-model-replication.py` |
 | Non-API analysis | `experiments/analysis/non-api-extension-summary.md` |
 | Four-arm analysis | `experiments/analysis/four-arm-extension-summary.md` |
+| Cross-language analysis | `experiments/analysis/cross-language-extension-summary.md` |
 | Detector validation artifacts | `experiments/validation/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
 | Aggregate figure | `figures/fig-pro-gpt-vs-claude-bars.png` |
@@ -72,6 +74,10 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Control baseline heatmap | `figures/fig-pro-control-baseline-heatmap.png` |
 | Non-API figure | `figures/fig-pro-non-api-control.png` |
 | Four-arm decomposition figure | `figures/fig-four-arm-decomposition.png` |
+| Four-arm model heatmap | `figures/fig-four-arm-model-heatmap.png` |
+| Rule-design takeaway figure | `figures/fig-rule-design-takeaway.png` |
+| Evidence-stack infographic | `figures/fig-evidence-stack-infographic.png` |
+| Cross-language figure | `figures/fig-pro-cross-language.png` |
 | Incident evidence archive | `incidents/2026-04-15-copilot-quota/` |
 
 ## Reproducing Figures

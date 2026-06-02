@@ -33,7 +33,7 @@ System-prompt rules are widely used to steer LLM coding agents away from insecur
 \section{Introduction}
 \label{sec:intro}
 
-AI coding agents---Claude Code, Codex, Cursor, GitHub Copilot, Goose---execute multi-step tasks guided by persistent instruction files~\citep{anthropic2025claude,openai2025codex,cursor2025rules}. These markdown files (\texttt{CLAUDE.md}, \texttt{AGENTS.md}, \texttt{.cursorrules}) function as static constitutions consulted before each generation step. As AI-generated code carries vulnerabilities at concerning rates~\citep{pearce2022asleep,perry2023insecure}, instruction files have become the primary line of defense against recurring insecure patterns.
+AI coding agents---Claude Code, Codex, Cursor, GitHub Copilot, Goose---execute multi-step tasks guided by persistent instruction files~\citep{anthropic2025claude,openai2025codex,cursor2025rules,github2026copilot_docs,goose2026docs}. These markdown files (\texttt{CLAUDE.md}, \texttt{AGENTS.md}, \texttt{.cursorrules}) function as static constitutions consulted before each generation step. As AI-generated code carries vulnerabilities at concerning rates~\citep{pearce2022asleep,perry2023insecure}, instruction files have become the primary line of defense against recurring insecure patterns.
 
 This raises a design question: \emph{how should security rules be phrased?} Common advice in technical writing and prompt engineering discourages negative framing, borrowing an intuition from cognitive psychology. Wegner's ironic-process theory~\citep{wegner1987paradoxical,wegner1994ironic} shows that humans told to \emph{not} think of a white bear exhibit \emph{increased} white-bear thoughts. Recent LLM work on negation sensitivity~\citep{elkins2026prohibitions}, the ``Pink Elephant'' problem~\citep{biderman2024pink,truong2025pink}, and adversarial priming~\citep{maus2025priming} provides plausible mechanistic grounds to expect the same pattern in language models.
 
@@ -180,6 +180,11 @@ After validating the patched detector, we ran an ecological-validity extension t
 \label{sec:fourarm-method}
 
 The main replication compares negative framing against positive framing, but those conditions differ in both polarity and information content: negative rules name forbidden constructs, while positive rules name safe alternatives. To isolate this confound, we ran a four-arm extension with the same 6 models, 6 prompts, and 20 trials per cell. The extension reuses the main-suite control rows and adds three new arms: \emph{pure negative} (forbidden construct only), \emph{pure positive} (safe alternative only), and \emph{combined} (both forbidden construct and safe alternative). This adds 2{,}160 valid add-on rows. GPT-family add-ons ran through Codex CLI; Claude-family add-ons ran through OpenRouter because Claude CLI authentication was unavailable. All four-arm Claude rows completed after the OpenRouter key limit was raised.
+
+\subsection{Cross-Language Extension}
+\label{sec:crosslang-method}
+
+We also ran a bounded cross-language extension covering three Python prompts (dynamic execution, MD5 hashing, insecure random token generation) and one Go prompt (shell-command construction). The extension uses the main three conditions: control, negative framing, and positive framing. Five models completed all 240 planned rows each; GPT-5.3 Codex failed the first cross-language cell after three Codex route errors and is excluded from cross-language conclusions. The current cross-language rules deliberately reuse the main CWE rule templates, which are partly JavaScript-oriented. We therefore treat this as a portability stress test rather than a final language-specific secure-coding benchmark.
 
 \section{Results}
 \label{sec:results}
@@ -336,9 +341,28 @@ Pooled        & 445/720 (61.8\%) & 75/720 (10.4\%) & 139/720 (19.3\%) & 43/720 (
 \label{fig:fourarm}
 \end{figure}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{fig-four-arm-model-heatmap.png}
+\caption{Four-arm decomposition by model. The aggregate result is not driven by one model: in every tested model, adding a rule lowers vulnerability relative to control, but the relative ordering of pure-negative, pure-positive, and combined rules varies locally.}
+\label{fig:fourarm-heatmap}
+\end{figure}
+
 The four-arm result strengthens the main replication's null result. If prohibition wording were intrinsically dangerous, pure-negative rules should underperform pure-positive rules. Instead, pure-negative rules outperform pure-positive rules in both provider stacks: 3.6\% vs.\ 8.3\% for GPT-family models and 17.2\% vs.\ 30.3\% for Claude-family models. The strongest arm is combined framing, with 43/720 vulnerable outputs (6.0\%) compared with 75/720 (10.4\%) for pure negative and 139/720 (19.3\%) for pure positive.
 
 The effect is still not a universal law. GPT-5.4 Mini on \texttt{md5-hash} is 14/20 vulnerable under pure-positive rules while pure-negative and combined are both 0/20. Claude Haiku 4.5 is the broadest positive-framing outlier, including 20/20 vulnerable outputs on \texttt{md5-hash} pure-positive and 20/20 on \texttt{eval-dynamic} pure-positive, compared with 5/20 under pure-negative and 5/20 under combined for \texttt{eval-dynamic}. Claude Sonnet 4.6 splits by prompt: \texttt{eval-usage} is worse under pure-positive (11/20) than pure-negative (0/20), while \texttt{http-url} flips direction (10/20 pure-negative, 0/20 pure-positive). The correct claim is therefore bounded: content composition materially changes vulnerability rates, combined rules often repair omissions in single-sided rules, and positive polarity alone is not a reliable safety mechanism.
+
+\subsection{Cross-Language Extension}
+\label{sec:crosslang}
+
+The cross-language extension completed for five models (GPT-5.4, GPT-5.4 Mini, Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5), for 1{,}200 valid rows. GPT-5.3 Codex failed the first cross-language cell with route errors and is excluded from the cross-language aggregate. Across completed models, control vulnerability is 355/400 (88.8\%), negative framing reduces this to 115/400 (28.8\%), and positive framing reduces it to 153/400 (38.2\%). This supports the rule-presence claim outside TypeScript-like prompts, but also exposes portability limits: Python MD5 and insecure-random cells remain high-risk because the current rule templates still name JavaScript/Node safe alternatives in places.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{fig-pro-cross-language.png}
+\caption{Cross-language extension across five completed models. GPT-5.3 Codex failed the first cross-language route and is excluded from the aggregate. The result supports rule-presence transfer, while showing that language-specific rule text is needed for stronger cross-language claims.}
+\label{fig:crosslang}
+\end{figure}
 
 \section{Discussion}
 
@@ -366,6 +390,13 @@ This suggests a practical design principle: \emph{rule presence and CWE coverage
 
 Across 2{,}160 valid trials, the claim that \emph{having a security rule} reduces vulnerability is supported without exception. All 6 models show $p < 0.001$ when either rule framing is pooled against control, and both individual framings reduce vulnerability in every model. Practitioners reading this paper should not overthink the phrasing of rules in \texttt{CLAUDE.md}, \texttt{AGENTS.md}, and \texttt{.cursorrules}. The first-order question is \emph{whether} a rule is present for the relevant CWE; polarity is a second-order concern with model-dependent direction.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{fig-rule-design-takeaway.png}
+\caption{Practical rule-design takeaway from the four-arm extension. The safest observed rule form states both the unsafe boundary and the safe replacement path.}
+\label{fig:rule-design}
+\end{figure}
+
 \subsection{Instruction Hierarchy Limits}
 
 The \texttt{http-url} prompt embeds an explicit \texttt{http://} URL in the user prompt. On several models (notably the GPT-family models and Haiku 4.5), control vulnerability is near-100\% and rules reduce this only partially. This is an instruction-hierarchy problem~\citep{wallace2024hierarchy}, not a framing problem: when the user explicitly requests an insecure pattern, no system-level rule reliably overrides it. This failure mode is orthogonal to polarity and affects all rule-based approaches.
@@ -384,7 +415,7 @@ The pilot identified a \emph{double-priming interaction} as the mechanism behind
 
 \textbf{Detection granularity.} Regex-based vulnerability detection can false-negative on semantically equivalent insecure patterns (e.g., \texttt{new Function()} for CWE-94) and false-positive on prose-only refusals that quote unsafe strings. A 60-row full-output validation audit found both issues and the runner has been patched for future extensions. Because the original 2{,}160-trial files preserve only code previews, the current numerical tables should be treated as the final replication plus a detector-validation audit, not as a full manual review of every output.
 
-\textbf{Ecological validity.} The main 2{,}160-trial replication prompts explicitly request insecure APIs. Naturalistic developer prompts often do not. Section~\ref{sec:nonapi} addresses this limitation with 1{,}080 non-API-naming trials. The result is prompt-class dependent: dynamic formula evaluation remains high-risk without API-name priming, while hash and token prompts are inert without explicit unsafe API names. This extension is still single-turn and does not cover realistic repository patch workflows.
+\textbf{Ecological validity.} The main 2{,}160-trial replication prompts explicitly request insecure APIs. Naturalistic developer prompts often do not. Section~\ref{sec:nonapi} addresses this limitation with 1{,}080 non-API-naming trials. The result is prompt-class dependent: dynamic formula evaluation remains high-risk without API-name priming, while hash and token prompts are inert without explicit unsafe API names. Section~\ref{sec:crosslang} adds a bounded Python/Go portability check, but the extension reuses partly JavaScript-oriented rule text and should not be read as a full language-specific secure-coding benchmark. These extensions are still single-turn and do not cover realistic repository patch workflows.
 
 \textbf{Single-turn setting.} Current LLM coding agents are multi-turn. A tool-use trace where the agent iteratively writes, tests, and revises code may show different framing dynamics.
 
@@ -551,6 +582,16 @@ This paper makes two contributions, one experimental and one methodological.
 \textbf{Broader pattern.} A single striking result in a 10-trial-per-cell pilot should not be treated as load-bearing---this is true of the original Wegner-style backfire claim, and it is true of the case study reported here. Both are starting points for systematic investigation, not endpoints. We release all data, orchestration code, and incident evidence at \url{https://github.com/adhit-r/dont-say-never} to enable further replication of either contribution.
 
 \appendix
+
+\section{Visual Summary}
+\label{sec:visual-summary}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig-evidence-stack-infographic.png}
+\caption{Compact evidence stack across the main replication and two extensions. This figure summarizes the three empirical layers used in the paper: rule-presence replication, non-API prompt-class analysis, and four-arm information-content decomposition.}
+\label{fig:evidence-stack}
+\end{figure}
 
 \section{Incident Evidence Archive}
 \label{sec:incident}
