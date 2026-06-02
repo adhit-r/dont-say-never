@@ -245,6 +245,14 @@ This separates "model avoided the banned token" from "model produced secure usab
 
 Priority: critical for claim validity.
 
+Current status:
+
+- Suite added to `experiments/scripts/pro-six-model-replication.py` as `control-baselines`.
+- Plan added at `experiments/CONTROL_BASELINE_EXTENSION_PLAN.md`.
+- Summary script added at `experiments/scripts/summarize-control-baselines.py`.
+- First checkpoint completed: `gpt-5.4-mini / eval-usage / neutral-control` yielded 8/20 vulnerable outputs with 0 errors.
+- Remaining target: 1,420 new rows.
+
 Reviewer objection addressed:
 
 > "Your control says not to add extra validation or security, so the rule effect may be an artifact of overriding an anti-security instruction."

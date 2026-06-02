@@ -16,7 +16,7 @@ The robust finding is simpler:
 
 > Targeted security rules reduce vulnerable code generation across all six tested coding agents. The polarity of the rule, prohibition vs safe-alternative framing, is not a reliable general-purpose safety lever.
 
-The repository also includes a completed **1,080-trial non-API-naming extension**, a completed **2,160-row four-arm decomposition**, and a bounded **1,200-row cross-language extension** across five completed models. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension stress-tests Python and Go portability, with GPT-5.3 Codex excluded due to route errors.
+The repository also includes a completed **1,080-trial non-API-naming extension**, a completed **2,160-row four-arm decomposition**, a bounded **1,200-row cross-language extension** across five completed models, and a started **control-baseline extension**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension stress-tests Python and Go portability, with GPT-5.3 Codex excluded due to route errors. The control-baseline extension tests whether the original control was too adversarial by adding neutral and generic secure-coding controls.
 
 ## Final Dataset
 
@@ -63,10 +63,13 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Non-API extension data | `experiments/data/pro-replication/non-api/` |
 | Four-arm add-on data | `experiments/data/pro-replication/four-arm-addons/` |
 | Cross-language extension data | `experiments/data/pro-replication/cross-language/` |
+| Control-baseline extension data | `experiments/data/pro-replication/control-baselines/` |
 | Final runner | `experiments/scripts/pro-six-model-replication.py` |
 | Non-API analysis | `experiments/analysis/non-api-extension-summary.md` |
 | Four-arm analysis | `experiments/analysis/four-arm-extension-summary.md` |
 | Cross-language analysis | `experiments/analysis/cross-language-extension-summary.md` |
+| Control-baseline analysis | `experiments/analysis/control-baselines-summary.md` |
+| Control-baseline plan | `experiments/CONTROL_BASELINE_EXTENSION_PLAN.md` |
 | Detector validation artifacts | `experiments/validation/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
 | Aggregate figure | `figures/fig-pro-gpt-vs-claude-bars.png` |
@@ -78,6 +81,7 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Rule-design takeaway figure | `figures/fig-rule-design-takeaway.png` |
 | Evidence-stack infographic | `figures/fig-evidence-stack-infographic.png` |
 | Cross-language figure | `figures/fig-pro-cross-language.png` |
+| Control-baseline figure | `figures/fig-control-baselines.png` |
 | Incident evidence archive | `incidents/2026-04-15-copilot-quota/` |
 
 ## Reproducing Figures
@@ -106,7 +110,7 @@ Required before submission:
 
 - Resolve venue choice.
 - Consider narrowing the title to "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Advantage" unless equivalence testing is added.
-- Add neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
+- Complete neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
 - Add full-output/functional-correctness validation, or keep claims bounded to insecure API use under detector-counted snippets.
 - Add hierarchical/equivalence statistics and multiple-testing correction for exploratory cell-level claims.
 - Decide whether the bidirectional instruction-decay incident is a main contribution or an appendix/second paper.

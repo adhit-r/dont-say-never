@@ -50,9 +50,9 @@
 
 ## Controls and Statistics
 
-- [ ] Add a neutral helpful-assistant control.
+- [ ] Complete a neutral helpful-assistant control.
 - [ ] Keep the current fast-prototyping/no-extra-security control as an adversarial baseline, not the only control.
-- [ ] Add a generic secure-coding control.
+- [ ] Complete a generic secure-coding control.
 - [ ] Add hierarchical logistic regression or Bayesian hierarchical modeling.
 - [ ] Add confidence intervals/effect sizes for all aggregate claims.
 - [ ] Add multiple-testing correction for exploratory per-cell tests.
