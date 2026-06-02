@@ -1,0 +1,102 @@
+# Artifact Freeze Checklist
+
+Date: 2026-06-02
+
+This checklist defines what must be true before publishing a Zenodo v2 artifact for the reframed paper.
+
+## Freeze Blockers
+
+- [ ] Worktree is clean.
+- [ ] Final commit hash is recorded in `ARTIFACT_COMMIT.txt`.
+- [ ] `LICENSE` exists and clarifies code/data and paper licensing.
+- [ ] `CITATION.cff` exists.
+- [ ] `.zenodo.json` exists.
+- [ ] Dependency/environment file exists (`requirements.txt`, `pyproject.toml`, or `environment.yml`).
+- [ ] `ARTIFACT_README.md` exists with reproduction commands and claim boundaries.
+- [ ] `experiments/data/pro-replication/control-baselines/` is either completed or clearly labeled partial.
+- [ ] `experiments/data/pro-replication/cross-language/gpt-5.3-codex.json` is labeled as route-error evidence only.
+- [ ] Four-arm add-on files are deduplicated/validated before calling the add-on exactly balanced.
+- [ ] `paper/arxiv/paper.pdf` is rebuilt from the current `paper.tex`.
+
+## Include In Zenodo v2
+
+- `README.md`
+- `ARTIFACT_README.md`
+- `ARTIFACT_COMMIT.txt`
+- `SHA256SUMS`
+- `LICENSE`
+- `CITATION.cff`
+- `.zenodo.json`
+- `research/SUBMISSION_CHECKLIST.md`
+- `research/REVIEWER_CRITIQUE_ACTION_PLAN.md`
+- `research/STRENGTHENING_ROADMAP.md`
+- `paper/arxiv/paper.tex`
+- `paper/arxiv/paper.pdf`
+- `paper/arxiv/abstract.txt`
+- `paper/arxiv/references.bib`
+- `experiments/data/pro-replication/main/`
+- `experiments/data/pro-replication/non-api/`
+- `experiments/data/pro-replication/four-arm-addons/`
+- `experiments/data/pro-replication/cross-language/`
+- `experiments/data/pro-replication/control-baselines/` if labeled partial
+- `experiments/data/pro-replication/smoke-tests.json`
+- `experiments/data/pro-replication/quota-ledger.jsonl`
+- `experiments/data/pro-replication/openrouter-claude-ledger.jsonl`
+- `experiments/validation/`
+- `experiments/analysis/`
+- `experiments/scripts/`
+- `figures/fig-pro-gpt-vs-claude-bars.png`
+- `figures/fig-pro-polarity-heatmap.png`
+- `figures/fig-pro-control-baseline-heatmap.png`
+- `figures/fig-pro-non-api-control.png`
+- `figures/fig-four-arm-decomposition.png`
+- `figures/fig-four-arm-model-heatmap.png`
+- `figures/fig-rule-design-takeaway.png`
+- `figures/fig-evidence-stack-infographic.png`
+- `figures/fig-pro-cross-language.png`
+- `figures/fig-control-baselines.png`
+- `figures/generate-pro-replication-figures.py`
+- `incidents/2026-04-15-copilot-quota/` only if the incident remains as appendix evidence
+
+## Exclude From Bundle
+
+- `.git/`
+- `.claude/settings.local.json`
+- `.playwright-mcp/`
+- `.DS_Store`
+- `__pycache__/`
+- `paper/arxiv/Archive.zip` unless rebuilt and documented as the exact paper-source package
+
+## Commands Before Freeze
+
+```bash
+cd /Users/adhi/axonome/llm-framing-paper
+git diff --exit-code
+git rev-parse HEAD > ARTIFACT_COMMIT.txt
+python3.11 experiments/scripts/pro-six-model-replication.py summary
+python3.11 experiments/scripts/hierarchical-framing-stats.py
+python3.11 experiments/scripts/summarize-non-api-extension.py
+python3.11 experiments/scripts/summarize-four-arm-extension.py
+python3.11 experiments/scripts/summarize-cross-language-extension.py
+python3.11 experiments/scripts/summarize-control-baselines.py
+python3.11 experiments/scripts/summarize-combined-detector-validation.py
+python3.11 experiments/scripts/classify-functional-refusal-validation.py
+python3.11 figures/generate-pro-replication-figures.py
+find README.md ARTIFACT_FREEZE_CHECKLIST.md research paper/arxiv experiments/data/pro-replication experiments/validation experiments/analysis experiments/scripts figures incidents/2026-04-15-copilot-quota -type f \
+  ! -path '*/__pycache__/*' ! -name '.DS_Store' \
+  -print0 | sort -z | xargs -0 shasum -a 256 > SHA256SUMS
+```
+
+## Zenodo Metadata
+
+- Title: `Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage`
+- Creator: `Adhithya Rajasekaran`
+- ORCID: `0009-0004-1682-7958`
+- Relation: supersedes pilot DOI `10.5281/zenodo.19509466`
+- License: split code/data vs paper if needed
+- Notes:
+  - main 2,160-row JSON preserves `code_preview`, not full generated outputs;
+  - full-output validation is a 60-row rerun slice;
+  - control-baseline extension is partial unless completed before freeze;
+  - cross-language GPT-5.3 Codex file is route-error evidence only.
+

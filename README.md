@@ -1,6 +1,6 @@
-# Rules Work, Polarity Doesn't
+# Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage
 
-**A Multi-Model Replication of Security Rule Framing Effects in LLM Coding Agents**
+**A Multi-Model Replication in LLM Coding Agents**
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19509466.svg)](https://doi.org/10.5281/zenodo.19509466)
 
@@ -14,7 +14,7 @@ This repository contains a 2,160-trial empirical replication study on persistent
 
 The robust finding is simpler:
 
-> Targeted security rules reduce vulnerable code generation across all six tested coding agents. The polarity of the rule, prohibition vs safe-alternative framing, is not a reliable general-purpose safety lever.
+> Targeted security rules reduce detector-counted insecure API use across all six tested coding agents. Positive framing has no consistent aggregate advantage over prohibition framing in this benchmark.
 
 The repository also includes a completed **1,080-trial non-API-naming extension**, a completed **2,160-row four-arm decomposition**, a bounded **1,200-row cross-language extension** across five completed models, and a started **control-baseline extension**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension stress-tests Python and Go portability, with GPT-5.3 Codex excluded due to route errors. The control-baseline extension tests whether the original control was too adversarial by adding neutral and generic secure-coding controls.
 
@@ -33,7 +33,7 @@ The repository also includes a completed **1,080-trial non-API-naming extension*
 | Finding | Evidence |
 | --- | --- |
 | Rule injection works. | Control vulnerability rates of 48-87% fall to 2-23% when rule conditions are pooled. Fisher's exact p < 0.001 in all 6 models. |
-| Polarity does not generalize. | Negative vs positive framing is not significant for any model in aggregate. |
+| Positive framing has no consistent aggregate advantage. | Negative vs positive framing is not significant for any model in aggregate; the statistics companion estimates a positive-vs-negative odds ratio near 1.0. |
 | The pilot backfire does not replicate. | No cell in the final 36-cell replication reproduces the pilot's 50%-vs-20% prohibition backfire. |
 | Local heterogeneity remains. | Some prompt/model cells move in opposite directions, so rule wording should be tested against the target agent stack. |
 | Non-API risk is prompt-class dependent. | Formula evaluation remains high-risk without naming `eval()` (85/120 control vulnerable), while hash/token prompts are 0/720 vulnerable. |
@@ -74,6 +74,8 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Statistics JSON export | `experiments/analysis/hierarchical-framing-stats.json` |
 | Detector validation artifacts | `experiments/validation/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
+| Functional/refusal validation | `experiments/validation/functional-refusal/functional-refusal-summary.md` |
+| Artifact freeze checklist | `ARTIFACT_FREEZE_CHECKLIST.md` |
 | Aggregate figure | `figures/fig-pro-gpt-vs-claude-bars.png` |
 | Polarity heatmap | `figures/fig-pro-polarity-heatmap.png` |
 | Control baseline heatmap | `figures/fig-pro-control-baseline-heatmap.png` |
@@ -111,11 +113,12 @@ Promising empirical paper, but not yet submission-ready for a rigorous venue. A 
 Required before submission:
 
 - Resolve venue choice.
-- Consider narrowing the title to "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Advantage" unless equivalence testing is added.
+- Adopt the title "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage" unless equivalence testing is added.
 - Complete neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
 - Add full-output/functional-correctness validation, or keep claims bounded to insecure API use under detector-counted snippets.
+- Add manual functional task-satisfaction labels; the current classifier separates refusal/no-code and security labels but cannot certify functional correctness.
 - Add a full hierarchical/equivalence analysis if making equivalence claims; the current statistics companion already adds Wilson CIs, effect sizes, FDR correction, and regularized fixed-effect sensitivity models.
-- Decide whether the bidirectional instruction-decay incident is a main contribution or an appendix/second paper.
+- Demote the bidirectional instruction-decay incident to an appendix note or separate paper; do not frame it as a main contribution.
 - Verify every cited work exists and is accurately described.
 - Fix LaTeX overfull table/reference warnings before submission.
 - Freeze repository artifacts and publish Zenodo v2.

@@ -45,7 +45,7 @@
 - [ ] Main study has a full-output rerun or the submission explicitly limits claims to detector-counted previews plus validation slices.
 - [ ] Semantic detectors are added where practical: AST, Semgrep, ESLint/security rules, or custom taint-style checks.
 - [ ] Functional correctness is measured separately from vulnerability labels.
-- [ ] Refusal/no-code outputs are reported separately from secure functional outputs.
+- [x] Refusal/no-code outputs are reported separately from secure functional outputs.
 - [ ] Manual annotation is blinded for at least a stratified sample.
 
 ## Controls and Statistics
@@ -65,6 +65,7 @@
 - [ ] Record accepted model IDs, provider routes, CLI/API versions, and decoding settings.
 - [ ] Archive exact prompts, system prompts, project rule files, retry logs, and raw outputs where available.
 - [ ] Publish a Zenodo v2 artifact bundle with expected hashes and reproduction commands.
+- [x] Artifact freeze checklist exists.
 
 ## Venue-Specific
 

@@ -210,6 +210,16 @@ This turns the paper from "regex-counted prompt outputs" into a more defensible 
 
 Priority: critical for a stronger conference or TMLR submission.
 
+Current status:
+
+- Offline classifier added at `experiments/scripts/classify-functional-refusal-validation.py`.
+- Generated outputs:
+  - `experiments/validation/functional-refusal/functional-refusal-classifications.jsonl`
+  - `experiments/validation/functional-refusal/functional-refusal-labels.csv`
+  - `experiments/validation/functional-refusal/functional-refusal-summary.md`
+- Current 60-row validation slice: 20 manually vulnerable, 40 manually non-vulnerable, 2 refusal/no-code.
+- All 60 rows still need manual functional task-satisfaction labels. TypeScript compile checks were not run because `tsc` is not installed.
+
 Reviewer objection addressed:
 
 > "The main dataset preserves only previews, so outputs cannot be audited, compiled, semantically analyzed, or checked for task satisfaction."

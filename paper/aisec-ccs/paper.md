@@ -1,11 +1,11 @@
-# Rules Work, Polarity Doesn't: A Multi-Model Replication of Security Rule Framing Effects in LLM Coding Agents
+# Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage
 
 **Adhithya Rajasekaran**
 Axonome — adhithya@axonome.xyz — ORCID [0009-0004-1682-7958](https://orcid.org/0009-0004-1682-7958)
 
 ## Abstract
 
-System-prompt rules are widely used to steer LLM coding agents away from insecure patterns. A popular heuristic, rooted in Wegner's ironic-process theory and reinforced by prompt-engineering folklore, holds that prohibition framing ("NEVER use `eval()`") activates the forbidden behavior, while positive alternatives ("Always use `JSON.parse()`") avoid this rebound. A 645-trial pilot motivated this prediction with one descriptive model-prompt anomaly. We report a balanced 6-model replication across 3 OpenAI Codex/GPT models and 3 Anthropic Claude models. Across 6 vulnerability-eliciting prompts, 3 conditions, and 20 trials per cell, we collect 2,160 valid trials with zero final errors. Rule injection reliably reduces vulnerability in every model; control rates of 48-87% fall to 2-23% when the two rule conditions are pooled (Fisher's exact p < 0.001 in all 6 models). Framing polarity does not generalize: negative-vs-positive framing is not significant for any model in aggregate. The pilot's isolated prohibition backfire does not reproduce across the broader 36-cell replication. A 1,080-trial non-API-naming extension shows a more nuanced ecological-validity result: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are inert without naming MD5 or `Math.random()`.
+System-prompt rules are widely used to steer LLM coding agents away from insecure patterns. A popular heuristic, rooted in Wegner's ironic-process theory and reinforced by prompt-engineering folklore, holds that prohibition framing ("NEVER use `eval()`") activates the forbidden behavior, while positive alternatives ("Always use `JSON.parse()`") avoid this rebound. A 645-trial pilot motivated this prediction with one descriptive model-prompt anomaly. We report a balanced 6-model replication across 3 OpenAI Codex/GPT models and 3 Anthropic Claude models. Across 6 vulnerability-eliciting prompts, 3 conditions, and 20 trials per cell, we collect 2,160 valid trials with zero final errors. Rule injection reliably reduces detector-counted insecure API use in every model; control rates of 48-87% fall to 2-23% when the two rule conditions are pooled (Fisher's exact p < 0.001 in all 6 models). Positive framing has no consistent aggregate advantage: negative-vs-positive framing is not significant for any model in aggregate. The pilot's isolated prohibition backfire does not reproduce across the broader 36-cell replication. A 1,080-trial non-API-naming extension shows a more nuanced ecological-validity result: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are inert without naming MD5 or `Math.random()`.
 
 ## 1 Introduction
 
@@ -109,7 +109,7 @@ The main prompts explicitly name insecure APIs, so they represent adversarial or
 
 ## 6 Conclusion
 
-A 2,160-trial, 6-model replication plus a 1,080-trial non-API extension finds that security rules work, but polarity does not generalize. The paper supersedes the pilot's stronger "Don't Say Never" interpretation: prohibition-framed rules can fail locally, but the aggregate evidence does not support avoiding prohibition framing as a general LLM coding-agent security principle.
+A 2,160-trial, 6-model replication plus a 1,080-trial non-API extension finds that targeted security rules reduce detector-counted insecure API use, while positive framing has no consistent aggregate advantage over prohibition framing. The paper supersedes the pilot's stronger "Don't Say Never" interpretation: prohibition-framed rules can fail locally, but the aggregate evidence does not support avoiding prohibition framing as a general LLM coding-agent security principle.
 
 ## AI Tool Disclosure
 
