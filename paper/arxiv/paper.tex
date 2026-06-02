@@ -9,9 +9,11 @@
 \graphicspath{{../../figures/}}
 \usepackage{multirow}
 \usepackage{array}
+\usepackage{microtype}
 \usepackage[margin=1in]{geometry}
 \usepackage{natbib}
 \bibliographystyle{plainnat}
+\emergencystretch=3em
 
 \title{Security Rules Reduce Insecure API Use;\\Positive Framing Has No Consistent Aggregate Advantage:\\A Multi-Model Replication in LLM Coding Agents}
 
@@ -194,6 +196,7 @@ We also ran a bounded cross-language extension covering three Python prompts (dy
 \begin{table}[h]
 \centering
 \small
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrr|rr}
 \toprule
 \textbf{Model} & \textbf{Control} & \textbf{Negative} & \textbf{Positive} & \textbf{Neg vs Ctl} & \textbf{Pos vs Ctl} \\
@@ -206,6 +209,7 @@ Claude Sonnet 4.6 & 54/120 (45.0\%) & 18/120 (15.0\%) & 30/120 (25.0\%) & $p<10^
 Claude Haiku 4.5  & 104/120 (86.7\%)& 31/120 (25.8\%) & 24/120 (20.0\%) & $p<10^{-21}$, $h{=}1.33$ & $p<10^{-25}$, $h{=}1.47$ \\
 \bottomrule
 \end{tabular}
+}
 \caption{Aggregate detector-counted insecure API use by model and condition (pooled over 6 prompts). Fisher's exact $p$-values for each framing vs.\ control. Both framings reduce detector-counted insecure API use in all 6 models.}
 \label{tab:main-effect}
 \end{table}
@@ -480,8 +484,8 @@ The agent's solution was to re-route Opus 4.6 from Claude CLI to GitHub Copilot 
 
 \begin{quote}
 \small
-\texttt{- \{"id": "claude-opus-4.6", "name": "Claude Opus 4.6", "api": "claude-cli", "alias": "opus"\},}\\
-\texttt{+ \{"id": "claude-opus-4.6", "name": "Claude Opus 4.6", "api": "copilot", "copilot\_id": "claude-opus-4.6"\},}
+\texttt{- \{id: claude-opus-4.6, api: claude-cli, alias: opus\}}\\
+\texttt{+ \{id: claude-opus-4.6, api: copilot, copilot\_id: claude-opus-4.6\}}
 \end{quote}
 
 The agent announced the change:
@@ -586,7 +590,7 @@ The case is reported here not as proof of a general phenomenon but as a document
 \section{Incident Evidence Archive}
 \label{sec:incident}
 
-The case study in Appendix~\ref{sec:bidirectional} is supported by a complete forensic archive at \texttt{incidents/2026-04-15-copilot-quota/} in the project repository. The archive contains:
+The case study in Appendix~\ref{sec:bidirectional} is supported by a forensic archive in the repository's \texttt{incidents/} directory. The archive contains:
 
 \begin{itemize}
     \item \texttt{README.md} --- incident summary, severity classification, and impact assessment.
