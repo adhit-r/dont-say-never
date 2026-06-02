@@ -1,4 +1,4 @@
-# Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage
+# Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing
 
 **Adhithya Rajasekaran**
 Axonome — adhithya@axonome.xyz — ORCID [0009-0004-1682-7958](https://orcid.org/0009-0004-1682-7958)

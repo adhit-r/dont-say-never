@@ -1,5 +1,5 @@
 {
-  "title": "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage",
+  "title": "Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing",
   "description": "Artifact bundle for a multi-model replication study of security rule framing effects in LLM coding agents. The main 2,160-row benchmark shows that targeted CWE-specific security rules substantially reduce detector-counted insecure API use, while positive framing has no consistent aggregate advantage over prohibition framing. The artifact includes datasets, analysis scripts, figures, validation slices, and paper drafts. The main replication JSON files preserve code previews rather than full generated outputs; full-output validation is provided as a 60-row rerun slice.",
   "creators": [
     {

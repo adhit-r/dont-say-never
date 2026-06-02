@@ -8,7 +8,7 @@ Detailed strengthening plan: `research/STRENGTHENING_ROADMAP.md`.
 
 The strongest current framing is:
 
-**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage: A Multi-Model Replication in LLM Coding Agents**
+**Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing**
 
 Contribution type:
 

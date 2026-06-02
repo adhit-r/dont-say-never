@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this paper, dataset, or code, please cite it using the metadata below."
-title: "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage"
+title: "Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing"
 authors:
   - family-names: "Rajasekaran"
     given-names: "Adhithya"

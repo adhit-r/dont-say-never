@@ -36,7 +36,7 @@ Avoid stronger claims such as:
 
 Recommended title for submission:
 
-**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage: A Multi-Model Replication in LLM Coding Agents**
+**Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing**
 
 Why:
 

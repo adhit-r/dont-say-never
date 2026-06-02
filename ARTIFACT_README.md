@@ -2,7 +2,7 @@
 
 This artifact supports the paper:
 
-**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage**
+**Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing**
 
 Author: Adhithya Rajasekaran, Axonome, ORCID `0009-0004-1682-7958`
 

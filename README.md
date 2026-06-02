@@ -1,4 +1,4 @@
-# Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage
+# Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing
 
 **A Multi-Model Replication in LLM Coding Agents**
 
@@ -118,7 +118,7 @@ Promising empirical paper, but not yet submission-ready for a rigorous venue. A 
 Required before submission:
 
 - Resolve venue choice.
-- Adopt the title "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage" unless equivalence testing is added.
+- Adopt the title "Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing" unless equivalence testing is added.
 - Complete neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
 - Add full-output/functional-correctness validation, or keep claims bounded to insecure API use under detector-counted snippets.
 - Add manual functional task-satisfaction labels; the current classifier separates refusal/no-code and security labels but cannot certify functional correctness.
