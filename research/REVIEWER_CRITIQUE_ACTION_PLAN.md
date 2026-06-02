@@ -10,11 +10,11 @@ The paper is promising empirical work, but not submission-ready for a top-tier M
 
 The paper becomes much stronger if it is framed as:
 
-> Security rules reduce insecure API use; positive framing has no consistent advantage in this benchmark.
+> Security rules reduce detector-counted insecure API use; positive framing has no consistent aggregate advantage in this benchmark.
 
 Avoid stronger claims such as:
 
-- polarity does not matter;
+- polarity does not matter or is equivalent across models;
 - rules reliably improve real-world secure coding;
 - the pilot proved prohibition backfire;
 - instruction decay is established from the Copilot quota incident.
@@ -28,7 +28,7 @@ Avoid stronger claims such as:
 | P0 | Control prompt discourages security | The control says not to add validation/security unless asked, so rule effects partly measure override of an anti-security baseline. | Add neutral helpful-control and generic-security-control baselines before claiming ordinary coding-agent security improvement. | Open |
 | P1 | Regex-only vulnerability labels | Detector audit already found 5 FP and 3 FN in 60 reruns. | Add AST/Semgrep/custom semantic detectors and report manual blind annotation. | Open |
 | P1 | No functional correctness metric | A secure response may be refusal-only or non-functional. | Report joint outcomes: secure+functional, secure+non-functional, refusal/no-code, vulnerable+functional, vulnerable+non-functional. | Open |
-| P1 | Title overclaims | "Polarity Doesn't" sounds like equivalence, but the evidence supports no consistent aggregate advantage. | Consider retitling to a narrower claim. | Open |
+| P1 | Title overclaims | "Polarity Doesn't" sounds like equivalence, but the evidence supports no consistent aggregate advantage. | Retitle to a narrower claim. | Done in current drafts |
 | P1 | Route confound in extensions | Some Claude extension data used OpenRouter while main Claude runs used Claude CLI. | Mark extensions as route-confounded, or rerun a same-route subset. | Open |
 | P1 | Incident case study dominates | The quota incident is one case and can distract from the main experiment. | Move to appendix or split into a separate instruction-decay paper unless a controlled decay benchmark is run. | Open |
 
@@ -36,7 +36,7 @@ Avoid stronger claims such as:
 
 Recommended title for submission:
 
-**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Advantage: A Multi-Model Replication in LLM Coding Agents**
+**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage: A Multi-Model Replication in LLM Coding Agents**
 
 Why:
 

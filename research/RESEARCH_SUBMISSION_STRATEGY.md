@@ -8,7 +8,7 @@ Detailed strengthening plan: `research/STRENGTHENING_ROADMAP.md`.
 
 The strongest current framing is:
 
-**Rules Work, Polarity Doesn't: A Multi-Model Replication of Security Rule Framing Effects in LLM Coding Agents**
+**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage: A Multi-Model Replication in LLM Coding Agents**
 
 Contribution type:
 
@@ -21,9 +21,9 @@ Contribution type:
 
 | Strength | Why it matters |
 | --- | --- |
-| Clean main result | Rule injection reduces vulnerable code in all 6 tested models. This is easy to explain and actionable. |
+| Clean main result | Rule injection reduces detector-counted insecure API use in all 6 tested models. This is easy to explain and actionable. |
 | Balanced provider design | 3 OpenAI Codex/GPT models and 3 Anthropic Claude models make the paper stronger than a single-provider study. |
-| Full cell balance | 6 models x 6 prompts x 3 conditions x 20 trials = 2,160 valid trials with zero final errors. |
+| Full cell balance | 6 models x 6 prompts x 3 conditions x 20 trials = 2,160 valid orchestration rows with zero final route errors. |
 | Security relevance | Prompts map to recognizable CWE classes: dynamic execution, weak hashing, cleartext HTTP, insecure randomness. |
 | Self-correcting science | The paper explicitly supersedes the author's own pilot. This is a reviewer-positive story if written carefully. |
 | Reproducible artifacts | Data, runner, figures, and incident evidence exist locally and can be released. |

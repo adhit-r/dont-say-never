@@ -13,7 +13,7 @@
 \usepackage{natbib}
 \bibliographystyle{plainnat}
 
-\title{Security Rules Reduce Insecure API Use;\\Positive Framing Has No Consistent Advantage:\\A Multi-Model Replication in LLM Coding Agents}
+\title{Security Rules Reduce Insecure API Use;\\Positive Framing Has No Consistent Aggregate Advantage:\\A Multi-Model Replication in LLM Coding Agents}
 
 \author{Adhithya Rajasekaran\\
 Axonome\\
@@ -27,13 +27,13 @@ Axonome\\
 \maketitle
 
 \begin{abstract}
-System-prompt rules are widely used to steer LLM coding agents away from insecure patterns. A popular heuristic---rooted in Wegner's ironic-process theory~\citep{wegner1987paradoxical,wegner1994ironic} and reinforced by prompt-engineering folklore---holds that prohibition framing (``NEVER use \texttt{eval()}'') activates the forbidden behavior, while positive alternatives (``Always use \texttt{JSON.parse()}'') avoid this rebound. A 645-trial pilot across three models motivated this prediction with one descriptive (model, prompt) anomaly~\citep{rajasekaran2026dontsaynever}. We report a balanced provider replication across 3 OpenAI Codex/GPT models and 3 Anthropic Claude models. Across 6 models (GPT-5.4, GPT-5.4 Mini, GPT-5.3 Codex, Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5), 6 vulnerability-eliciting prompts spanning 4 CWE classes, 3 conditions, and 20 trials per cell, we collect 2{,}160 valid trials with zero final errors. We find: (1) targeted rule injection substantially reduces detector-counted insecure API use---control rates of 48--87\% fall to 2--23\% when the two rule conditions are pooled (Fisher's exact $p < 0.001$ in all 6 models); (2) positive framing shows no consistent aggregate advantage over prohibition framing---negative vs.\ positive framing is not significant for any model in aggregate, and a regularized fixed-effect sensitivity model estimates an odds ratio near 1.0; (3) the pilot's isolated 50\%-vs-20\% backfire does not reproduce across the broader 36-cell replication. Two extensions refine the interpretation: a 1{,}080-trial non-API extension shows that API-name priming is prompt-class dependent, and a 2{,}160-row four-arm decomposition (control reused; pure-negative, pure-positive, and combined add-ons newly collected) shows that combined rules are strongest while pure-positive guidance is not uniformly safer. The dominant and robust effect is the presence and information content of a targeted security rule; negative-vs-positive wording is a model- and prompt-dependent second-order factor. We release the detector-counted dataset, orchestration code, figures, and supporting evidence.
+System-prompt rules are widely used to steer LLM coding agents away from insecure patterns. A popular heuristic---rooted in Wegner's ironic-process theory~\citep{wegner1987paradoxical,wegner1994ironic} and reinforced by prompt-engineering folklore---holds that prohibition framing (``NEVER use \texttt{eval()}'') activates the forbidden behavior, while positive alternatives (``Always use \texttt{JSON.parse()}'') avoid this rebound. A 645-trial pilot across three models motivated this prediction with one descriptive (model, prompt) anomaly~\citep{rajasekaran2026dontsaynever}. We report a balanced provider replication across 3 OpenAI Codex/GPT models and 3 Anthropic Claude models. Across 6 models (GPT-5.4, GPT-5.4 Mini, GPT-5.3 Codex, Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5), 6 vulnerability-eliciting prompts spanning 4 CWE classes, 3 conditions, and 20 trials per cell, we collect 2{,}160 valid orchestration rows with zero final route errors. Here, ``valid'' means the model call completed and produced an analyzable code preview; it does not certify functional correctness. We find: (1) targeted rule injection substantially reduces detector-counted insecure API use---control rates of 48--87\% fall to 2--23\% when the two rule conditions are pooled (Fisher's exact $p < 0.001$ in all 6 models); (2) positive framing shows no consistent aggregate advantage over prohibition framing---negative vs.\ positive framing is not significant for any model in aggregate, and a regularized fixed-effect sensitivity model estimates an odds ratio near 1.0; (3) the pilot's isolated 50\%-vs-20\% backfire does not reproduce across the broader 36-cell replication. Two extensions refine the interpretation: a 1{,}080-trial non-API extension shows that API-name priming is prompt-class dependent, and a 2{,}160-row four-arm decomposition (control reused; pure-negative, pure-positive, and combined add-ons newly collected) shows that combined rules are strongest while pure-positive guidance is not uniformly safer. The dominant and robust effect is the presence and information content of a targeted security rule; negative-vs-positive wording is a model- and prompt-dependent second-order factor. We release the detector-counted dataset, orchestration code, figures, and supporting evidence.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-AI coding agents---Claude Code, Codex, Cursor, GitHub Copilot, Goose---execute multi-step tasks guided by persistent instruction files~\citep{anthropic2025claude,openai2025codex,cursor2025rules,github2026copilot_docs,goose2026docs}. These markdown files (\texttt{CLAUDE.md}, \texttt{AGENTS.md}, \texttt{.cursorrules}) function as static constitutions consulted before each generation step. As AI-generated code carries vulnerabilities at concerning rates~\citep{pearce2022asleep,perry2023insecure}, instruction files have become the primary line of defense against recurring insecure patterns.
+AI coding agents---Claude Code, Codex, Cursor, GitHub Copilot, Goose---execute multi-step tasks guided by persistent instruction files~\citep{anthropic2025claude,openai2025codex,cursor2025rules,github2026copilot_docs,goose2026docs}. These markdown files (\texttt{CLAUDE.md}, \texttt{AGENTS.md}, \texttt{.cursorrules}) are a practical policy layer for steering models toward project conventions and away from recurring insecure patterns. As AI-generated code carries vulnerabilities at concerning rates~\citep{pearce2022asleep,perry2023insecure}, the design of these policy layers has become a software-security question.
 
 This raises a design question: \emph{how should security rules be phrased?} Common advice in technical writing and prompt engineering discourages negative framing, borrowing an intuition from cognitive psychology. Wegner's ironic-process theory~\citep{wegner1987paradoxical,wegner1994ironic} shows that humans told to \emph{not} think of a white bear exhibit \emph{increased} white-bear thoughts. Recent LLM work on negation sensitivity~\citep{elkins2026prohibitions}, the ``Pink Elephant'' problem~\citep{biderman2024pink,truong2025pink}, and adversarial priming~\citep{maus2025priming} provides plausible mechanistic grounds to expect the same pattern in language models.
 
@@ -45,7 +45,7 @@ However, the pilot carried structural weaknesses: $n = 10$ trials per cell (unde
 
 \subsection{The Replication}
 
-This paper reports a larger replication at 3$\times$ the scale of the pilot. We run 6 models, 6 prompts, 3 conditions, and 20 trials per cell ($n = 2{,}160$ valid trials; zero final errors). The design intentionally balances two provider stacks: three OpenAI Codex/GPT models via Codex CLI and three Anthropic Claude models via Claude CLI. We tested the specific claim from the pilot---that positive framing outperforms negative framing due to reduced ironic rebound---and the broader claim that targeted rule injection reduces detector-counted insecure API use.
+This paper reports a larger replication at 3$\times$ the scale of the pilot. We run 6 models, 6 prompts, 3 conditions, and 20 trials per cell ($n = 2{,}160$ valid orchestration rows; zero final route errors). The design intentionally balances two provider stacks: three OpenAI Codex/GPT models via Codex CLI and three Anthropic Claude models via Claude CLI. We tested the specific claim from the pilot---that positive framing outperforms negative framing due to reduced ironic rebound---and the broader claim that targeted rule injection reduces detector-counted insecure API use.
 
 \textbf{Findings.}
 
@@ -66,7 +66,7 @@ This paper reports a larger replication at 3$\times$ the scale of the pilot. We 
     \item A \emph{positive result}: targeted rule injection reduces detector-counted insecure API use across model families and framings.
     \item A 1{,}080-trial non-API-naming extension showing that API-name priming is task-dependent: unnecessary for dynamic-expression tasks, but necessary for the MD5 and insecure-random tasks tested here.
     \item A four-arm decomposition showing that information content, not positive polarity, best explains the remaining framing differences: combined constraints outperform either single-sided rule form.
-    \item A documented methodological case study, reported separately from the main causal claims, in which the AI agent orchestrating the experiments violated a persistent budget constraint during data collection. We treat this as appendix-supported motivation for future instruction-decay work, not as evidence of a general effect.
+    \item An appendix evidence archive documenting one AI-assisted workflow failure observed during data collection. We treat this as motivation for future instruction-decay work, not as evidence of a general effect and not as a main causal claim of the security-rule experiment.
 \end{enumerate}
 
 \section{Related Work}
@@ -127,7 +127,7 @@ Claude Sonnet 4.6  & Anthropic & Claude CLI (Max subscription)   & 360 \\
 Claude Haiku 4.5   & Anthropic & Claude CLI (Max subscription)   & 360 \\
 \bottomrule
 \end{tabular}
-\caption{Models tested. The final dataset uses a balanced provider design: three OpenAI Codex/GPT models and three Anthropic Claude models. All models contribute 360 valid trials. GPT-5.5 was requested initially but did not pass local Codex CLI smoke testing; GPT-5.4 Mini is the nearest available GPT-family substitute.}
+\caption{Models tested. The final dataset uses a balanced provider design: three OpenAI Codex/GPT models and three Anthropic Claude models. All models contribute 360 valid orchestration rows. GPT-5.5 was requested initially but did not pass local Codex CLI smoke testing; GPT-5.4 Mini is the nearest available GPT-family substitute.}
 \label{tab:models}
 \end{table}
 
@@ -170,7 +170,7 @@ After the 2{,}160-trial dataset was collected, we ran bounded full-output valida
 
 \subsection{Statistical Analysis}
 
-For each model we report vulnerability rates by condition (pooled over prompts) and per prompt. For the main claim (rule injection reduces vulnerability), we use Fisher's exact test comparing control vs.\ each framing. For the polarity claim (positive framing $<$ negative framing), we use Fisher's exact comparing negative vs.\ positive. Effect sizes are reported as Cohen's $h$.
+For each model we report detector-counted insecure API rates by condition (pooled over prompts) and per prompt. For the main claim (rule injection reduces detector-counted insecure API use), we use Fisher's exact test comparing control vs.\ each framing. For the polarity claim (positive framing $<$ negative framing), we use Fisher's exact comparing negative vs.\ positive. Effect sizes are reported as Cohen's $h$.
 
 \subsection{Non-API-Naming Extension}
 
@@ -206,16 +206,16 @@ Claude Sonnet 4.6 & 54/120 (45.0\%) & 18/120 (15.0\%) & 30/120 (25.0\%) & $p<10^
 Claude Haiku 4.5  & 104/120 (86.7\%)& 31/120 (25.8\%) & 24/120 (20.0\%) & $p<10^{-21}$, $h{=}1.33$ & $p<10^{-25}$, $h{=}1.47$ \\
 \bottomrule
 \end{tabular}
-\caption{Aggregate vulnerability by model and condition (pooled over 6 prompts). Fisher's exact $p$-values for each framing vs.\ control. Both framings reduce vulnerability in all 6 models.}
+\caption{Aggregate detector-counted insecure API use by model and condition (pooled over 6 prompts). Fisher's exact $p$-values for each framing vs.\ control. Both framings reduce detector-counted insecure API use in all 6 models.}
 \label{tab:main-effect}
 \end{table}
 
-Table~\ref{tab:main-effect} shows that both negative and positive framing reduce vulnerability compared to control in all 6 models. Figure~\ref{fig:rule-injection} visualizes this pattern: in every model, both framing bars are substantially shorter than the control bar.
+Table~\ref{tab:main-effect} shows that both negative and positive framing reduce detector-counted insecure API use compared to control in all 6 models. Figure~\ref{fig:rule-injection} visualizes this pattern: in every model, both framing bars are substantially shorter than the control bar.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig-pro-gpt-vs-claude-bars.png}
-\caption{Aggregate vulnerability rates by model and framing condition (pooled over 6 prompts, 20 trials each). Both negative (prohibition) and positive (alternative-suggestion) framing reduce vulnerability relative to control in all 6 models.}
+\caption{Aggregate detector-counted insecure API rates by model and framing condition (pooled over 6 prompts, 20 trials each). Both negative (prohibition) and positive (alternative-suggestion) framing reduce insecure API use relative to control in all 6 models.}
 \label{fig:rule-injection}
 \end{figure}
 
@@ -301,7 +301,7 @@ Signing token, no API name     & 0/120 (0.0\%)  & 0/120 (0.0\%)  & 0/120 (0.0\%)
 \label{tab:nonapi}
 \end{table}
 
-For the formula evaluator, pooled rule injection reduces vulnerability from 85/120 (70.8\%) to 76/240 (31.7\%; Fisher's exact $p=2.88\times10^{-12}$, Cohen's $h=0.805$). Polarity now matters strongly and in the opposite direction from the original Wegner prediction: negative framing produces 21/120 vulnerable outputs (17.5\%) while positive framing produces 55/120 (45.8\%; Fisher's exact $p=3.58\times10^{-6}$). This result is driven by model-specific differences: Claude Haiku 4.5 remains 20/20 vulnerable under all three formula-evaluator conditions, while GPT-5.4, GPT-5.3 Codex, Claude Opus 4.6, and Claude Sonnet 4.6 sharply reduce vulnerability under negative framing.
+For the formula evaluator, pooled rule injection reduces detector-counted insecure API use from 85/120 (70.8\%) to 76/240 (31.7\%; Fisher's exact $p=2.88\times10^{-12}$, Cohen's $h=0.805$). Polarity now matters strongly and in the opposite direction from the original Wegner prediction: negative framing produces 21/120 detector-counted vulnerable outputs (17.5\%) while positive framing produces 55/120 (45.8\%; Fisher's exact $p=3.58\times10^{-6}$). This result is driven by model-specific differences: Claude Haiku 4.5 remains 20/20 detector-counted vulnerable under all three formula-evaluator conditions, while GPT-5.4, GPT-5.3 Codex, Claude Opus 4.6, and Claude Sonnet 4.6 sharply reduce detector-counted insecure API use under negative framing.
 
 \begin{figure}[t]
 \centering
@@ -388,7 +388,7 @@ This suggests a practical design principle: \emph{rule presence and CWE coverage
 
 \subsection{Rule Injection as the Robust Effect}
 
-Across 2{,}160 valid trials, targeted security rules substantially reduce detector-counted insecure API use. All 6 models show $p < 0.001$ when either rule framing is pooled against control, and both individual framings reduce vulnerability in every model. Practitioners reading this paper should not over-index on Wegner-based positive-vs-negative wording heuristics. The first-order question is \emph{whether} a concrete rule is present for the relevant CWE; positive-vs-negative polarity is a second-order concern with model-dependent direction.
+Across 2{,}160 valid orchestration rows, targeted security rules substantially reduce detector-counted insecure API use. All 6 models show $p < 0.001$ when either rule framing is pooled against control, and both individual framings reduce detector-counted insecure API use in every model. Practitioners reading this paper should not over-index on Wegner-based positive-vs-negative wording heuristics. The first-order question is \emph{whether} a concrete rule is present for the relevant CWE; positive-vs-negative polarity is a second-order concern with model-dependent direction.
 
 \begin{figure}[t]
 \centering
@@ -399,7 +399,7 @@ Across 2{,}160 valid trials, targeted security rules substantially reduce detect
 
 \subsection{Instruction Hierarchy Limits}
 
-The \texttt{http-url} prompt embeds an explicit \texttt{http://} URL in the user prompt. On several models (notably the GPT-family models and Haiku 4.5), control vulnerability is near-100\% and rules reduce this only partially. This is an instruction-hierarchy problem~\citep{wallace2024hierarchy}, not a framing problem: when the user explicitly requests an insecure pattern, no system-level rule reliably overrides it. This failure mode is orthogonal to polarity and affects all rule-based approaches.
+The \texttt{http-url} prompt embeds an explicit \texttt{http://} URL in the user prompt. On several models (notably the GPT-family models and Haiku 4.5), control-condition detector-counted insecure API use is near-100\% and rules reduce this only partially. This is an instruction-hierarchy problem~\citep{wallace2024hierarchy}, not a framing problem: in this benchmark, the tested rules do not reliably override an explicit user request for an insecure pattern. This failure mode is orthogonal to polarity and affects the rule-based approaches tested here.
 
 \subsection{Relation to the Pilot}
 
@@ -419,7 +419,17 @@ The pilot identified a \emph{double-priming interaction} as the mechanism behind
 
 \textbf{Single-turn setting.} Current LLM coding agents are multi-turn. A tool-use trace where the agent iteratively writes, tests, and revises code may show different framing dynamics.
 
-\section{Methodological Case Study: Instruction-Following Failure During Data Collection}
+\section{Conclusion}
+
+This paper's main contribution is experimental: a 6-model, 2{,}160-row replication that tests two claims. The first---that targeted rule injection reduces detector-counted insecure API use---holds robustly ($p < 0.001$ in all 6 models when either rule framing is pooled against control). The second, derived from Wegner's ironic-process theory and reported in a prior pilot---that positive framing outperforms negative framing because it avoids re-activating the forbidden concept---does not replicate. No aggregate negative-vs-positive comparison is statistically significant, and the fixed-effect sensitivity analysis estimates a positive-vs-negative odds ratio near 1.0. A 1{,}080-trial non-API extension further shows that prompt semantics matter: formula-evaluation tasks remain vulnerable without explicit API names, while hash and token tasks become inert in this prompt set. A completed four-arm decomposition then separates polarity from information content: combined rules are strongest overall (6.0\% vulnerable), followed by pure-negative rules (10.4\%) and pure-positive rules (19.3\%). The practical recommendation follows: concrete security rules in \texttt{CLAUDE.md}, \texttt{AGENTS.md}, and \texttt{.cursorrules} reduce detector-counted insecure API use in this benchmark; positive-vs-negative wording is not a reliable improvement lever. Where phrasing matters, it can move in either direction depending on model and prompt, so practitioners should favor clear coverage and concrete safe alternatives over Wegner-based heuristics.
+
+\textbf{Methodological note.} Appendix~\ref{sec:bidirectional} reports a single-case observation from the AI-assisted data-collection workflow: a persistent budget constraint, stated and acknowledged, was violated 70 conversational turns later (54{,}424 intervening tokens, $\sim$5 hours wall-clock), with quantifiable cost. We do not generalize from $n = 1$. The case is retained as documented motivation for future instruction-decay experiments, not as a main empirical result.
+
+\textbf{Broader pattern.} A single striking result in a 10-trial-per-cell pilot should not be treated as load-bearing---this is true of the original Wegner-style backfire claim, and it is true of the workflow case study retained in the appendix. Both are starting points for systematic investigation, not endpoints. We release the dataset, orchestration code, analysis scripts, figures, and incident evidence at \url{https://github.com/adhit-r/dont-say-never} to enable further replication.
+
+\appendix
+
+\section{Appendix Note: Instruction-Following Failure During Data Collection}
 \label{sec:bidirectional}
 
 \subsection{Documented Incident}
@@ -518,7 +528,7 @@ The 204 saved trials were retained as partial evidence. The remaining 156 trials
 
 \subsection{Connection to the Main Thesis}
 
-Section~\ref{sec:results} reports that rule injection robustly reduces vulnerability across 6 models (Fisher's exact $p < 0.001$ in all 6, Cohen's $h = 0.37$--$1.54$). The case study reports that a single rule, robustly stated and explicitly acknowledged, was violated under context growth.
+Section~\ref{sec:results} reports that rule injection robustly reduces detector-counted insecure API use across 6 models (Fisher's exact $p < 0.001$ in all 6, Cohen's $h = 0.37$--$1.54$). The case study reports that a single rule, robustly stated and explicitly acknowledged, was violated under context growth.
 
 We propose distinguishing two failure modes:
 
@@ -563,18 +573,6 @@ The case study suggests several mitigations for AI-assisted coding and research 
 
 The case is reported here not as proof of a general phenomenon but as a documented existence proof, in the same spirit as the original 50\%-vs-20\% pilot finding (Section~\ref{sec:intro}) was reported as an existence proof of one (model, prompt) cell's instability. Both are starting points for systematic investigation, not endpoints.
 
-\section{Conclusion}
-
-This paper makes two contributions, one experimental and one methodological.
-
-\textbf{Experimental.} A 6-model, 2{,}160-trial replication tests two claims. The first---that targeted rule injection reduces detector-counted insecure API use---holds robustly ($p < 0.001$ in all 6 models when either rule framing is pooled against control). The second, derived from Wegner's ironic-process theory and reported in a prior pilot---that positive framing outperforms negative framing because it avoids re-activating the forbidden concept---does not replicate. No aggregate negative-vs-positive comparison is statistically significant, and the fixed-effect sensitivity analysis estimates a positive-vs-negative odds ratio near 1.0. A 1{,}080-trial non-API extension further shows that prompt semantics matter: formula-evaluation tasks remain vulnerable without explicit API names, while hash and token tasks become inert in this prompt set. A completed four-arm decomposition then separates polarity from information content: combined rules are strongest overall (6.0\% vulnerable), followed by pure-negative rules (10.4\%) and pure-positive rules (19.3\%). The practical recommendation follows: concrete security rules in \texttt{CLAUDE.md}, \texttt{AGENTS.md}, and \texttt{.cursorrules} reduce detector-counted insecure API use in this benchmark; positive-vs-negative wording is not a reliable improvement lever. Where phrasing matters, it can move in either direction depending on model and prompt, so practitioners should favor clear coverage and concrete safe alternatives over Wegner-based heuristics.
-
-\textbf{Methodological note.} Section~\ref{sec:bidirectional} reports a single-case observation from the AI-assisted data-collection workflow: a persistent budget constraint, stated and acknowledged, was violated 70 conversational turns later (54{,}424 intervening tokens, $\sim$5 hours wall-clock), with quantifiable cost. We do not generalize from $n = 1$. The case is retained as documented motivation for future instruction-decay experiments, not as a main empirical result.
-
-\textbf{Broader pattern.} A single striking result in a 10-trial-per-cell pilot should not be treated as load-bearing---this is true of the original Wegner-style backfire claim, and it is true of the workflow case study reported here. Both are starting points for systematic investigation, not endpoints. We release the dataset, orchestration code, analysis scripts, figures, and incident evidence at \url{https://github.com/adhit-r/dont-say-never} to enable further replication.
-
-\appendix
-
 \section{Visual Summary}
 \label{sec:visual-summary}
 
@@ -588,7 +586,7 @@ This paper makes two contributions, one experimental and one methodological.
 \section{Incident Evidence Archive}
 \label{sec:incident}
 
-The case study in Section~\ref{sec:bidirectional} is supported by a complete forensic archive at \texttt{incidents/2026-04-15-copilot-quota/} in the project repository. The archive contains:
+The case study in Appendix~\ref{sec:bidirectional} is supported by a complete forensic archive at \texttt{incidents/2026-04-15-copilot-quota/} in the project repository. The archive contains:
 
 \begin{itemize}
     \item \texttt{README.md} --- incident summary, severity classification, and impact assessment.
@@ -596,26 +594,26 @@ The case study in Section~\ref{sec:bidirectional} is supported by a complete for
     \item \texttt{instructions-vs-actions.md} --- verbatim transcript excerpts showing the constraint statement, the agent's acknowledgment, and the subsequent contradicting action, with the diff of the script change that introduced the violation.
     \item \texttt{proof-data.md} --- per-cell trial counts and quota math, independently verifiable from the JSON snapshot.
     \item \texttt{claude-opus-4.6-incident-snapshot.json} --- the actual experiment data file as it stood at the moment of incident detection (204 trials, 612 Premium requests consumed). Preserved unmodified.
-    \item \texttt{mitigation.md} --- recovery actions taken and the proposed mitigations summarized in Section~\ref{sec:bidirectional}.
+    \item \texttt{mitigation.md} --- recovery actions taken and the proposed mitigations summarized in Appendix~\ref{sec:bidirectional}.
 \end{itemize}
 
 The Opus 4.6 results in Section~\ref{sec:results} use the final 360-trial Claude CLI dataset. The incident-era 204-trial snapshot is preserved for auditability but is not used as a separate model condition in the final six-model analysis.
 
-\section{Baseline Vulnerability Rates}
+\section{Baseline Detector-Counted Insecure API Rates}
 \label{sec:baselines}
 
-Figure~\ref{fig:baselines} shows the control-condition (no-rule) vulnerability rate for each (model, prompt) cell. Baseline rates vary dramatically---from 0\% (GPT-5.4 and GPT-5.4 Mini on \texttt{eval-usage}; Opus 4.6 and Sonnet 4.6 on \texttt{http-url}) to 100\% (several \texttt{weak-hash}, \texttt{md5-hash}, and \texttt{insecure-random} cells). This heterogeneity underscores why aggregate analyses alone are insufficient: a rule that ``reduces vulnerability by 60\%'' in aggregate may be ceiling-limited on some cells and floor-limited on others.
+Figure~\ref{fig:baselines} shows the control-condition (no-rule) detector-counted insecure API rate for each (model, prompt) cell. Baseline rates vary dramatically---from 0\% (GPT-5.4 and GPT-5.4 Mini on \texttt{eval-usage}; Opus 4.6 and Sonnet 4.6 on \texttt{http-url}) to 100\% (several \texttt{weak-hash}, \texttt{md5-hash}, and \texttt{insecure-random} cells). This heterogeneity underscores why aggregate analyses alone are insufficient: a rule that reduces detector-counted insecure API use by 60\% in aggregate may be ceiling-limited on some cells and floor-limited on others.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{fig-pro-control-baseline-heatmap.png}
-\caption{Control-condition vulnerability rates by model and prompt in the final 2{,}160-trial replication. Darker cells indicate higher baseline vulnerability before any security rule is injected.}
+\caption{Control-condition detector-counted insecure API rates by model and prompt in the final 2{,}160-row replication. Darker cells indicate higher baseline insecure API use before any security rule is injected.}
 \label{fig:baselines}
 \end{figure}
 
 \section*{Acknowledgments}
 
-The author designed all experiments, formulated hypotheses, interpreted results, and drew all scientific conclusions. Claude Code (Anthropic) was used as a programming assistant for writing experiment-orchestration scripts and as a drafting aid during manuscript preparation. All generated text was reviewed and substantially revised by the author. Section~\ref{sec:bidirectional} documents and analyzes a specific failure of the AI-assisted workflow encountered during this project; Appendix~\ref{sec:incident} contains the supporting evidence archive.
+The author designed all experiments, formulated hypotheses, interpreted results, and drew all scientific conclusions. Claude Code (Anthropic) was used as a programming assistant for writing experiment-orchestration scripts and as a drafting aid during manuscript preparation. All generated text was reviewed and substantially revised by the author. Appendix~\ref{sec:bidirectional} documents and analyzes a specific failure of the AI-assisted workflow encountered during this project; Appendix~\ref{sec:incident} contains the supporting evidence archive.
 
 \bibliography{references}
 

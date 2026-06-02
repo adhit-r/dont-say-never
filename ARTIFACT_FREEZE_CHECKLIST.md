@@ -8,11 +8,11 @@ This checklist defines what must be true before publishing a Zenodo v2 artifact 
 
 - [ ] Worktree is clean.
 - [ ] Final commit hash is recorded in `ARTIFACT_COMMIT.txt`.
-- [ ] `LICENSE` exists and clarifies code/data and paper licensing.
-- [ ] `CITATION.cff` exists.
-- [ ] `.zenodo.json` exists.
-- [ ] Dependency/environment file exists (`requirements.txt`, `pyproject.toml`, or `environment.yml`).
-- [ ] `ARTIFACT_README.md` exists with reproduction commands and claim boundaries.
+- [x] `LICENSE` exists and clarifies code/data and paper licensing.
+- [x] `CITATION.cff` exists.
+- [x] `.zenodo.json` exists.
+- [x] Dependency/environment file exists (`requirements.txt`, `pyproject.toml`, or `environment.yml`).
+- [x] `ARTIFACT_README.md` exists with reproduction commands and claim boundaries.
 - [ ] `experiments/data/pro-replication/control-baselines/` is either completed or clearly labeled partial.
 - [ ] `experiments/data/pro-replication/cross-language/gpt-5.3-codex.json` is labeled as route-error evidence only.
 - [ ] Four-arm add-on files are deduplicated/validated before calling the add-on exactly balanced.
@@ -30,6 +30,7 @@ This checklist defines what must be true before publishing a Zenodo v2 artifact 
 - `research/SUBMISSION_CHECKLIST.md`
 - `research/REVIEWER_CRITIQUE_ACTION_PLAN.md`
 - `research/STRENGTHENING_ROADMAP.md`
+- `experiments/validation/functional-refusal/FUNCTIONAL_LABELING_GUIDE.md`
 - `paper/arxiv/paper.tex`
 - `paper/arxiv/paper.pdf`
 - `paper/arxiv/abstract.txt`
@@ -71,7 +72,7 @@ This checklist defines what must be true before publishing a Zenodo v2 artifact 
 
 ```bash
 cd /Users/adhi/axonome/llm-framing-paper
-git diff --exit-code
+test -z "$(git status --porcelain=v1 --untracked-files=all)"
 git rev-parse HEAD > ARTIFACT_COMMIT.txt
 python3.11 experiments/scripts/pro-six-model-replication.py summary
 python3.11 experiments/scripts/hierarchical-framing-stats.py
@@ -82,7 +83,7 @@ python3.11 experiments/scripts/summarize-control-baselines.py
 python3.11 experiments/scripts/summarize-combined-detector-validation.py
 python3.11 experiments/scripts/classify-functional-refusal-validation.py
 python3.11 figures/generate-pro-replication-figures.py
-find README.md ARTIFACT_FREEZE_CHECKLIST.md research paper/arxiv experiments/data/pro-replication experiments/validation experiments/analysis experiments/scripts figures incidents/2026-04-15-copilot-quota -type f \
+find README.md ARTIFACT_README.md ARTIFACT_FREEZE_CHECKLIST.md ARTIFACT_COMMIT.txt LICENSE CITATION.cff .zenodo.json requirements.txt research paper/arxiv experiments/data/pro-replication experiments/validation experiments/analysis experiments/scripts figures incidents/2026-04-15-copilot-quota -type f \
   ! -path '*/__pycache__/*' ! -name '.DS_Store' \
   -print0 | sort -z | xargs -0 shasum -a 256 > SHA256SUMS
 ```
@@ -99,4 +100,3 @@ find README.md ARTIFACT_FREEZE_CHECKLIST.md research paper/arxiv experiments/dat
   - full-output validation is a 60-row rerun slice;
   - control-baseline extension is partial unless completed before freeze;
   - cross-language GPT-5.3 Codex file is route-error evidence only.
-

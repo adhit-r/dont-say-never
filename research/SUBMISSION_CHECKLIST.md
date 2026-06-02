@@ -8,9 +8,9 @@
 - [x] The paper does not claim detector validation beyond what artifacts support.
 - [x] The instruction-decay incident is marked as a case study, not a general result.
 - [x] The pilot 5/10 vs 2/10 cell is no longer described as statistically significant.
-- [ ] Title does not imply statistical equivalence unless equivalence testing is added.
-- [ ] Abstract says "no consistent aggregate advantage" rather than "polarity does not matter" if submitting to a rigorous venue.
-- [ ] Incident case study is appendix-only or separate-paper material unless a controlled decay benchmark is added.
+- [x] Title does not imply statistical equivalence unless equivalence testing is added.
+- [x] Abstract says "no consistent aggregate advantage" rather than "polarity does not matter" if submitting to a rigorous venue.
+- [x] Incident case study is appendix-only or separate-paper material unless a controlled decay benchmark is added.
 
 ## Dataset
 
@@ -66,6 +66,7 @@
 - [ ] Archive exact prompts, system prompts, project rule files, retry logs, and raw outputs where available.
 - [ ] Publish a Zenodo v2 artifact bundle with expected hashes and reproduction commands.
 - [x] Artifact freeze checklist exists.
+- [x] Release metadata files exist: `LICENSE`, `CITATION.cff`, `.zenodo.json`, `requirements.txt`, and `ARTIFACT_README.md`.
 
 ## Venue-Specific
 

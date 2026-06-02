@@ -40,8 +40,8 @@ AI coding agents increasingly receive safety rules via system prompts and instru
 But does the \textit{phrasing} of these rules matter---and can it backfire?
 Drawing on Wegner's Ironic Process Theory, which predicts that thought suppression paradoxically increases the accessibility of the suppressed thought, we test whether prohibition-framed rules (``NEVER use \texttt{eval()}'') increase vulnerability rates compared to alternative-suggestion framing (``Always use \texttt{JSON.parse()}'').
 In a two-phase experiment (210 trials, 6 prompts, 4 CWEs, Claude Sonnet~4), we find:
-(1)~on one prompt where the rule names the same API the prompt requests, prohibition framing \textit{doubles} the vulnerability rate over baseline (50\% vs.\ 20\%, $p{=}0.033$);
-(2)~alternative-suggestion framing eliminates the vulnerability entirely on that prompt (0\%, $p{=}0.016$ vs.\ prohibition);
+(1)~on one prompt where the rule names the same API the prompt requests, prohibition framing descriptively increases the detector-counted insecure API rate over baseline (50\% vs.\ 20\%; not significant vs.\ control under Fisher's exact test);
+(2)~alternative-suggestion framing produces 0/10 detector-counted insecure outputs on that prompt;
 (3)~across all 6 prompts, the framing effect does \textit{not} generalize---aggregate vulnerability rates are 14\% (prohibition) vs.\ 24\% (suggestion), with no significant difference ($p{=}0.73$);
 (4)~one CWE shows the \textit{opposite} direction (prohibition 0\%, suggestion 30\%);
 (5)~the dominant effect is rule injection itself, reducing vulnerability from 59\% to 14--24\% regardless of framing ($p{<}0.001$).
@@ -180,10 +180,9 @@ Suggestion (``Always use Y'')           & 10 & 0 & \textbf{0\%} \\
 
 Prohibition framing more than doubled the vulnerability rate over control (50\% vs.\ 20\%).
 Suggestion framing eliminated vulnerabilities entirely (0/10).
-Fisher's exact test: suggestion vs.\ prohibition, $p{=}0.016$ (one-tailed).
-Prohibition vs.\ control, $p{=}0.175$ (not significant at $\alpha{=}0.05$, but directionally consistent with the paradoxical worsening hypothesis).
+Fisher's exact test: prohibition vs.\ control, $p{=}0.175$ one-tailed and $p{\approx}0.350$ two-tailed. This cell is a descriptive anomaly and motivation for replication, not inferential evidence of a significant prohibition backfire.
 
-The result is striking: a rule intended to prevent \texttt{eval()} usage made the model \textit{more likely} to use it than having no rule at all.
+The result is striking but underpowered: a rule intended to prevent \texttt{eval()} usage made the model descriptively more likely to use it than having no rule at all.
 
 \subsection{Phase 2: Generalization Fails}
 
@@ -263,8 +262,8 @@ This is a priming effect, not a suppression-monitoring effect.
 
 \subsection{Effect Sizes and Practical Significance}
 
-The \textit{practically significant} finding is that rule injection reduces vulnerability rates from 59\% to 14--24\% regardless of framing.
-This represents a 2.5--4$\times$ reduction in vulnerability introduction rates.
+The \textit{practically significant} finding in this pilot draft is that rule injection reduces detector-counted insecure API rates from 59\% to 14--24\% regardless of framing.
+This represents a 2.5--4$\times$ reduction in detector-counted insecure API introduction rates.
 The framing choice is a second-order optimization: it matters on specific prompts (notably those involving explicit API names like \texttt{eval}), but the first-order decision---whether to inject rules at all---dominates.
 
 % ============================================================================
@@ -285,7 +284,7 @@ The framing choice is a second-order optimization: it matters on specific prompt
 Based on our findings, we offer the following guidance for practitioners who write safety rules for AI coding agents:
 
 \begin{enumerate}
-    \item \textbf{Inject rules.} The first-order effect is clear: having rules reduces vulnerability rates by 2.5--4$\times$. Any framing is far better than no rules.
+    \item \textbf{Inject rules.} The first-order effect is clear: having rules reduces detector-counted insecure API rates by 2.5--4$\times$ in this pilot draft. Any framing is far better than no rules in this benchmark.
     \item \textbf{Prefer suggestion framing for API-specific rules.} For rules that prohibit a specific API (\texttt{eval}, \texttt{exec}, \texttt{Math.random}), name the safe alternative first: ``Always use \texttt{JSON.parse()} for structured data'' rather than ``NEVER use \texttt{eval()}.'' This avoids double priming when prompts also name the API.
     \item \textbf{Either framing works for pattern-level rules.} For rules about general patterns (weak hashing, insecure randomness) where the prompt is unlikely to name a specific API, the framing choice does not significantly affect outcomes.
     \item \textbf{Watch for explicit-API prompts.} The failure mode concentrates on prompts that explicitly request the unsafe API. When a user says ``use \texttt{eval()},'' system-level rules of any framing have reduced effectiveness.
@@ -295,10 +294,10 @@ Based on our findings, we offer the following guidance for practitioners who wri
 \section{Conclusion}
 
 We set out to test whether prohibition-framed safety rules paradoxically increase unsafe code generation in LLMs, motivated by Wegner's Ironic Process Theory.
-Our results tell a nuanced story: on one specific prompt, the paradoxical worsening is real and statistically significant (50\% vs.\ 20\% baseline, mitigated to 0\% by suggestion framing).
+Our results tell a nuanced story: on one specific prompt, the paradoxical worsening is descriptively visible but underpowered (50\% vs.\ 20\% baseline, mitigated to 0\% by suggestion framing).
 But the effect does not generalize across prompts and CWEs.
 
-The dominant finding is positive: rule injection reduces vulnerability rates from 59\% to 14--24\% regardless of framing ($p{<}0.001$).
+The dominant finding is positive: rule injection reduces detector-counted insecure API rates from 59\% to 14--24\% regardless of framing ($p{<}0.001$).
 Safety rules work.
 The mechanism behind the narrow paradoxical worsening is better explained by token-level double priming than by ironic process theory: it occurs when both the user prompt and the safety rule name the same unsafe API.
 

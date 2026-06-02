@@ -2,13 +2,9 @@
 
 Current date: 2026-05-29
 
-Working title:
+Current reviewer-safe title:
 
-**Rules Work, Polarity Doesn't: A Multi-Model Replication of Security Rule Framing Effects in LLM Coding Agents**
-
-Reviewer-safe candidate title:
-
-**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Advantage: A Multi-Model Replication in LLM Coding Agents**
+**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage: A Multi-Model Replication in LLM Coding Agents**
 
 ## Goal
 
@@ -42,12 +38,12 @@ Final dataset:
 - 6 prompts
 - 3 conditions
 - 20 trials per cell
-- 2,160 valid trials
+- 2,160 valid orchestration rows
 - 0 final errors
 
 Main result:
 
-- Targeted security rules reduce vulnerability across every tested model.
+- Targeted security rules reduce detector-counted insecure API use across every tested model.
 - Positive vs negative polarity does not generalize.
 
 This result is publishable, but the stronger version needs validation and decomposition.

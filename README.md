@@ -25,7 +25,7 @@ The repository also includes a completed **1,080-trial non-API-naming extension*
 - **Prompts:** 6 vulnerability-eliciting prompts
 - **CWE classes:** CWE-94, CWE-328, CWE-319, CWE-338
 - **Conditions:** control, negative framing, positive framing
-- **Trials:** 6 models x 6 prompts x 3 conditions x 20 trials = **2,160 valid trials**
+- **Trials:** 6 models x 6 prompts x 3 conditions x 20 trials = **2,160 valid orchestration rows**
 - **Final errors:** 0
 
 ## Key Findings
@@ -50,7 +50,7 @@ Current validation slice:
 - Patched detector on labeled reruns: 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: strong replication with a 60-row full-output detector-validation slice, a completed 1,080-trial non-API extension, a completed four-arm decomposition using the patched detector, and a bounded 1,200-row cross-language extension.
+Current paper status: bounded replication with a 60-row full-output detector-validation slice, a completed 1,080-trial non-API extension, a completed four-arm decomposition using the patched detector, and a bounded 1,200-row cross-language extension.
 
 ## Main Artifacts
 
@@ -63,7 +63,7 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Non-API extension data | `experiments/data/pro-replication/non-api/` |
 | Four-arm add-on data | `experiments/data/pro-replication/four-arm-addons/` |
 | Cross-language extension data | `experiments/data/pro-replication/cross-language/` |
-| Control-baseline extension data | `experiments/data/pro-replication/control-baselines/` |
+| Control-baseline extension data (partial) | `experiments/data/pro-replication/control-baselines/` |
 | Final runner | `experiments/scripts/pro-six-model-replication.py` |
 | Non-API analysis | `experiments/analysis/non-api-extension-summary.md` |
 | Four-arm analysis | `experiments/analysis/four-arm-extension-summary.md` |
@@ -75,7 +75,12 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Detector validation artifacts | `experiments/validation/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
 | Functional/refusal validation | `experiments/validation/functional-refusal/functional-refusal-summary.md` |
+| Functional labeling guide | `experiments/validation/functional-refusal/FUNCTIONAL_LABELING_GUIDE.md` |
 | Artifact freeze checklist | `ARTIFACT_FREEZE_CHECKLIST.md` |
+| Artifact README | `ARTIFACT_README.md` |
+| Citation metadata | `CITATION.cff` |
+| Zenodo metadata draft | `.zenodo.json` |
+| Python dependencies | `requirements.txt` |
 | Aggregate figure | `figures/fig-pro-gpt-vs-claude-bars.png` |
 | Polarity heatmap | `figures/fig-pro-polarity-heatmap.png` |
 | Control baseline heatmap | `figures/fig-pro-control-baseline-heatmap.png` |
@@ -125,7 +130,7 @@ Required before submission:
 
 ## Origin
 
-This research emerged from CodeCoach experiments in which scanner findings were converted into persistent coding-agent rules. A narrow pilot case suggested a prohibition-framing backfire. This repository contains the larger replication showing that rule presence, not polarity, is the robust security effect.
+This research emerged from CodeCoach experiments in which scanner findings were converted into persistent coding-agent rules. A narrow pilot case suggested a prohibition-framing backfire. This repository contains the larger replication showing that targeted rule presence, not positive-vs-negative polarity, is the robust detector-counted effect in this benchmark.
 
 ## License
 

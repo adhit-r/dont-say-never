@@ -1,0 +1,38 @@
+{
+  "title": "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage",
+  "description": "Artifact bundle for a multi-model replication study of security rule framing effects in LLM coding agents. The main 2,160-row benchmark shows that targeted CWE-specific security rules substantially reduce detector-counted insecure API use, while positive framing has no consistent aggregate advantage over prohibition framing. The artifact includes datasets, analysis scripts, figures, validation slices, and paper drafts. The main replication JSON files preserve code previews rather than full generated outputs; full-output validation is provided as a 60-row rerun slice.",
+  "creators": [
+    {
+      "name": "Rajasekaran, Adhithya",
+      "affiliation": "Axonome",
+      "orcid": "0009-0004-1682-7958"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "version": "v2.0.0-rc1",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "access_right": "open",
+  "keywords": [
+    "LLM coding agents",
+    "secure code generation",
+    "instruction following",
+    "security rules",
+    "prompt framing",
+    "software security",
+    "empirical AI security"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.19509466",
+      "relation": "isNewVersionOf",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://github.com/adhit-r/dont-say-never",
+      "relation": "isSupplementedBy",
+      "scheme": "url"
+    }
+  ],
+  "notes": "Mixed-license artifact. Code and data are MIT licensed; manuscript text and figures are CC BY 4.0 unless a venue-specific submitted version requires different terms. The Zenodo metadata license is CC BY 4.0 because this record is publication/preprint-first; see LICENSE for component-level terms. Control-baseline data are partial unless completed before final v2 freeze. Cross-language GPT-5.3 Codex rows are route-error evidence only."
+}

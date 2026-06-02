@@ -5,7 +5,7 @@ Axonome — adhithya@axonome.xyz — ORCID [0009-0004-1682-7958](https://orcid.o
 
 ## Abstract
 
-System-prompt rules are widely used to steer LLM coding agents away from insecure patterns. A popular heuristic, rooted in Wegner's ironic-process theory and reinforced by prompt-engineering folklore, holds that prohibition framing ("NEVER use `eval()`") activates the forbidden behavior, while positive alternatives ("Always use `JSON.parse()`") avoid this rebound. A 645-trial pilot motivated this prediction with one descriptive model-prompt anomaly. We report a balanced 6-model replication across 3 OpenAI Codex/GPT models and 3 Anthropic Claude models. Across 6 vulnerability-eliciting prompts, 3 conditions, and 20 trials per cell, we collect 2,160 valid trials with zero final errors. Rule injection reliably reduces detector-counted insecure API use in every model; control rates of 48-87% fall to 2-23% when the two rule conditions are pooled (Fisher's exact p < 0.001 in all 6 models). Positive framing has no consistent aggregate advantage: negative-vs-positive framing is not significant for any model in aggregate. The pilot's isolated prohibition backfire does not reproduce across the broader 36-cell replication. A 1,080-trial non-API-naming extension shows a more nuanced ecological-validity result: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are inert without naming MD5 or `Math.random()`.
+System-prompt rules are widely used to steer LLM coding agents away from insecure patterns. A popular heuristic, rooted in Wegner's ironic-process theory and reinforced by prompt-engineering folklore, holds that prohibition framing ("NEVER use `eval()`") activates the forbidden behavior, while positive alternatives ("Always use `JSON.parse()`") avoid this rebound. A 645-trial pilot motivated this prediction with one descriptive model-prompt anomaly. We report a balanced 6-model replication across 3 OpenAI Codex/GPT models and 3 Anthropic Claude models. Across 6 vulnerability-eliciting prompts, 3 conditions, and 20 trials per cell, we collect 2,160 valid orchestration rows with zero final route errors. Here, valid means the model call completed and produced an analyzable code preview; it does not certify functional correctness. Rule injection reliably reduces detector-counted insecure API use in every model; control rates of 48-87% fall to 2-23% when the two rule conditions are pooled (Fisher's exact p < 0.001 in all 6 models). Positive framing has no consistent aggregate advantage: negative-vs-positive framing is not significant for any model in aggregate. The pilot's isolated prohibition backfire does not reproduce across the broader 36-cell replication. A 1,080-trial non-API-naming extension shows a more nuanced ecological-validity result: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are inert without naming MD5 or `Math.random()`.
 
 ## 1 Introduction
 
@@ -17,7 +17,7 @@ This paper tests whether that finding survives a larger replication. It does not
 
 ## 2 Method
 
-We run a 6 model × 6 prompt × 3 condition × 20 trial design: 2,160 valid trials.
+We run a 6 model x 6 prompt x 3 condition x 20 trial design: 2,160 valid orchestration rows. Valid rows are completed model calls with analyzable code previews, not certified functionally correct solutions.
 
 Models:
 
@@ -97,7 +97,7 @@ Formula evaluation remains high-risk without naming `eval()` because the task se
 
 ## 4 Discussion
 
-The pilot's Wegner-motivated prediction does not replicate. A prohibition rule is not generally more dangerous than a positive alternative. The more robust pattern is simpler: if a relevant security rule exists, models are less likely to generate vulnerable code.
+The pilot's Wegner-motivated prediction does not replicate. A prohibition rule is not generally more dangerous than a positive alternative. The more robust pattern is simpler: if a relevant security rule exists, models are less likely to generate detector-counted insecure API use.
 
 The result is not a claim that phrasing never matters. Polarity effects occur locally. Claude Sonnet trends worse under positive framing; Claude Haiku trends better; GPT-5.4 Mini is exactly tied in aggregate. These effects are model- and prompt-specific, not a portable rule-writing heuristic.
 
@@ -105,7 +105,7 @@ The strongest practitioner takeaway is therefore: add targeted rules for the rel
 
 ## 5 Limitations
 
-The main prompts explicitly name insecure APIs, so they represent adversarial or high-pressure coding requests rather than ordinary development traffic. The non-API extension partially addresses this: formula evaluation remains high-risk without API names, while hash and token tasks become inert. Detection is regex-based, although applied consistently across conditions and after comment stripping. The experiment is single-turn, while real coding agents often work across multi-turn edit-test loops. The final model set is limited to the tested Codex/GPT and Claude CLI models; GPT-5.5 was requested but did not pass local smoke testing.
+The main prompts explicitly name insecure APIs, so they represent adversarial or high-pressure coding requests rather than ordinary development traffic. The non-API extension partially addresses this: formula evaluation remains high-risk without API names, while hash and token tasks become inert. Detection is regex-based, although applied consistently across conditions and after comment stripping. Non-vulnerable outputs are not automatically functional; the current validation separates refusal/no-code and security labels, but manual task-satisfaction labels remain future work. The experiment is single-turn, while real coding agents often work across multi-turn edit-test loops. The final model set is limited to the tested Codex/GPT and Claude CLI models; GPT-5.5 was requested but did not pass local smoke testing.
 
 ## 6 Conclusion
 

@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this paper, dataset, or code, please cite it using the metadata below."
+title: "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage"
+authors:
+  - family-names: "Rajasekaran"
+    given-names: "Adhithya"
+    email: "adhithya@axonome.xyz"
+    orcid: "https://orcid.org/0009-0004-1682-7958"
+date-released: "2026-06-02"
+version: "v2.0.0-rc1"
+repository-code: "https://github.com/adhit-r/dont-say-never"
+url: "https://github.com/adhit-r/dont-say-never"
+abstract: "A multi-model replication study showing that targeted security rules reduce detector-counted insecure API use in LLM coding agents, while positive framing has no consistent aggregate advantage over prohibition framing in the tested benchmark."
+license: "MIT AND CC-BY-4.0"
