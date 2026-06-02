@@ -7,6 +7,10 @@
 - [x] The paper does not claim that rule wording never matters.
 - [x] The paper does not claim detector validation beyond what artifacts support.
 - [x] The instruction-decay incident is marked as a case study, not a general result.
+- [x] The pilot 5/10 vs 2/10 cell is no longer described as statistically significant.
+- [ ] Title does not imply statistical equivalence unless equivalence testing is added.
+- [ ] Abstract says "no consistent aggregate advantage" rather than "polarity does not matter" if submitting to a rigorous venue.
+- [ ] Incident case study is appendix-only or separate-paper material unless a controlled decay benchmark is added.
 
 ## Dataset
 
@@ -38,6 +42,29 @@
 - [x] Detector limitations are disclosed: prose-only HTTP false positives and `Function(...)` CWE-94 false negatives.
 - [x] Paper says original 2,160-row files contain previews only, unless raw full outputs are recovered.
 - [x] Patched detector is used for all new non-API, four-arm, or cross-language extensions.
+- [ ] Main study has a full-output rerun or the submission explicitly limits claims to detector-counted previews plus validation slices.
+- [ ] Semantic detectors are added where practical: AST, Semgrep, ESLint/security rules, or custom taint-style checks.
+- [ ] Functional correctness is measured separately from vulnerability labels.
+- [ ] Refusal/no-code outputs are reported separately from secure functional outputs.
+- [ ] Manual annotation is blinded for at least a stratified sample.
+
+## Controls and Statistics
+
+- [ ] Add a neutral helpful-assistant control.
+- [ ] Keep the current fast-prototyping/no-extra-security control as an adversarial baseline, not the only control.
+- [ ] Add a generic secure-coding control.
+- [ ] Add hierarchical logistic regression or Bayesian hierarchical modeling.
+- [ ] Add confidence intervals/effect sizes for all aggregate claims.
+- [ ] Add multiple-testing correction for exploratory per-cell tests.
+- [ ] Add equivalence testing before making any equivalence claim about positive vs negative framing.
+- [ ] Document prompt order/randomization and trial independence assumptions.
+
+## Reproducibility
+
+- [ ] Freeze exact commit hash for submission.
+- [ ] Record accepted model IDs, provider routes, CLI/API versions, and decoding settings.
+- [ ] Archive exact prompts, system prompts, project rule files, retry logs, and raw outputs where available.
+- [ ] Publish a Zenodo v2 artifact bundle with expected hashes and reproduction commands.
 
 ## Venue-Specific
 

@@ -6,17 +6,33 @@ Working title:
 
 **Rules Work, Polarity Doesn't: A Multi-Model Replication of Security Rule Framing Effects in LLM Coding Agents**
 
+Reviewer-safe candidate title:
+
+**Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Advantage: A Multi-Model Replication in LLM Coding Agents**
+
 ## Goal
 
 Upgrade the current 2,160-trial paper from a solid empirical replication into a stronger submission package for AISec/TMLR/JISA, and a possible later proper-conference version.
 
-The paper is already credible as a workshop or journal-style empirical result. The goal of this roadmap is to fix the predictable reviewer objections:
+The paper is already credible as a workshop or journal-style empirical result, but a reviewer-style audit on 2026-06-02 identified several top-tier blockers that must be tracked explicitly. The goal of this roadmap is to fix the predictable reviewer objections:
 
 1. "This is only prompt engineering."
 2. "The prompts name the insecure APIs, so the setting is artificial."
 3. "Regex detectors may be wrong."
 4. "Positive and negative framings differ in information content, not just polarity."
 5. "The instruction-decay case study is interesting but distracts from the main paper."
+6. "The control condition discourages security, so the rule effect may be an artifact of overriding an anti-security instruction."
+7. "The title and abstract imply equivalence or universality without equivalence testing."
+8. "The dataset is not fully auditable because the main 2,160 rows preserve previews rather than full outputs."
+
+## Immediate Corrections From Reviewer Critique
+
+Status as of 2026-06-02:
+
+- The pilot 5/10 vs 2/10 backfire cell was previously over-interpreted. Recomputed Fisher's exact test for the stated table gives two-sided `p approx. 0.350` and one-sided `p approx. 0.175`, not `p=0.016`. The paper must treat this as a descriptive anomaly and motivation only.
+- The current control prompt is adversarial because it discourages extra validation/security unless asked. Keep it, but rename it as a fast-prototyping or adversarial baseline and add neutral/generic-security controls before claiming ordinary coding-agent security improvement.
+- "Polarity doesn't" is too strong unless supported by equivalence testing. The safer claim is: positive framing shows no consistent aggregate advantage over prohibition framing in this benchmark.
+- The instruction-decay/quota incident is useful but should not become a second main claim unless backed by a controlled decay experiment.
 
 ## Current Baseline
 
@@ -189,6 +205,67 @@ Deliverables:
 Paper impact:
 
 This turns the paper from "regex-counted prompt outputs" into a more defensible security measurement study.
+
+## Work Package B2: Full-Output and Functional Correctness Rerun
+
+Priority: critical for a stronger conference or TMLR submission.
+
+Reviewer objection addressed:
+
+> "The main dataset preserves only previews, so outputs cannot be audited, compiled, semantically analyzed, or checked for task satisfaction."
+
+Design:
+
+1. Preserve full raw model output and extracted code for every row.
+2. Add output categories:
+   - refusal/no-code;
+   - secure but non-functional;
+   - secure and functional;
+   - vulnerable but non-functional;
+   - vulnerable and functional.
+3. Add per-prompt smoke tests where feasible:
+   - TypeScript/JavaScript parsing and minimal unit tests;
+   - Python AST parsing and minimal unit tests;
+   - Go compile/test checks for Go snippets.
+4. Use patched detectors from the start.
+
+Minimum version:
+
+- 360-row stratified full-output rerun with blind manual labels and functional labels.
+
+Strong version:
+
+- full 2,160-row rerun with full outputs, semantic detectors, and functional correctness.
+
+Paper impact:
+
+This separates "model avoided the banned token" from "model produced secure usable code," which is the difference between a prompt-output study and a security measurement paper.
+
+## Work Package B3: Neutral and Generic-Security Controls
+
+Priority: critical for claim validity.
+
+Reviewer objection addressed:
+
+> "Your control says not to add extra validation or security, so the rule effect may be an artifact of overriding an anti-security instruction."
+
+Design:
+
+Add:
+
+1. Neutral helpful coding assistant control.
+2. Current fast-prototyping/no-extra-security control, retained as adversarial baseline.
+3. Generic secure-code control.
+
+Interpretation:
+
+- Current control vs rules: targeted rules override fast-prototyping pressure.
+- Neutral control vs rules: targeted rules improve ordinary coding-agent output.
+- Generic secure control vs CWE-specific rules: targeted persistent rules beat broad security advice.
+
+Paper impact:
+
+This is one of the biggest upgrades because it directly protects the core "rules work" claim.
 
 ## Work Package C: Four-Arm Decomposition
 
@@ -384,6 +461,32 @@ Controlled design:
 This could become:
 
 **Instruction Decay in Long-Context Coding Agents**
+
+## Work Package H: Hierarchical and Equivalence Statistics
+
+Priority: high for TMLR; medium-high for AISec/JISA.
+
+Reviewer objection addressed:
+
+> "Non-significance is not equivalence, and per-cell Fisher tests are exploratory without multiple-testing correction."
+
+Tasks:
+
+1. Add aggregate confidence intervals and effect sizes for rule vs control and positive vs negative.
+2. Add FDR or Bonferroni correction for per-cell tests.
+3. Add mixed-effects logistic regression or Bayesian hierarchical modeling:
+
+```text
+vulnerable ~ condition + provider + cwe + api_named + language
+           + condition:provider + condition:cwe
+           + (1 | model) + (1 | prompt)
+```
+
+4. If the title keeps a strong polarity claim, add equivalence testing with a pre-specified smallest effect size of interest.
+
+Paper impact:
+
+This moves the paper from cell-count reporting to reviewer-grade statistical inference.
 
 ## Recommended Execution Order
 

@@ -100,13 +100,16 @@ The strongest path is no longer a poster submission. Treat this as a full empiri
 
 ## Current Readiness
 
-Ready for a submission polish pass, not yet camera-ready.
+Promising empirical paper, but not yet submission-ready for a rigorous venue. A reviewer-style audit on 2026-06-02 identified several blockers that should be resolved before TMLR/AISec/JISA submission.
 
 Required before submission:
 
 - Resolve venue choice.
+- Consider narrowing the title to "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Advantage" unless equivalence testing is added.
+- Add neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
+- Add full-output/functional-correctness validation, or keep claims bounded to insecure API use under detector-counted snippets.
+- Add hierarchical/equivalence statistics and multiple-testing correction for exploratory cell-level claims.
 - Decide whether the bidirectional instruction-decay incident is a main contribution or an appendix/second paper.
-- Integrate the completed four-arm decomposition into the manuscript's results/discussion.
 - Verify every cited work exists and is accurately described.
 - Fix LaTeX overfull table/reference warnings before submission.
 - Freeze repository artifacts and publish Zenodo v2.
