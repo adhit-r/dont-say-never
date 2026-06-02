@@ -1,0 +1,1565 @@
+{
+  "coverage": {
+    "main_valid": 2160,
+    "main_errors": 0
+  },
+  "headline_counts": {
+    "control": {
+      "vuln": 445,
+      "total": 720,
+      "rate": 0.6180555555555556,
+      "wilson_low": 0.582027952950568,
+      "wilson_high": 0.6528300601837974
+    },
+    "negative": {
+      "vuln": 109,
+      "total": 720,
+      "rate": 0.15138888888888888,
+      "wilson_low": 0.12706185529024525,
+      "wilson_high": 0.17941624710121715
+    },
+    "positive": {
+      "vuln": 121,
+      "total": 720,
+      "rate": 0.16805555555555557,
+      "wilson_low": 0.14252030535478455,
+      "wilson_high": 0.19711422242035298
+    },
+    "any_rule": {
+      "vuln": 230,
+      "total": 1440,
+      "rate": 0.1597222222222222,
+      "wilson_low": 0.141709023061527,
+      "wilson_high": 0.17954616171774518
+    }
+  },
+  "primary_contrasts": [
+    {
+      "contrast": "any_rule_minus_control",
+      "a": "any_rule",
+      "b": "control",
+      "risk_difference": [
+        -0.45833333333333337,
+        -0.49855238175208483,
+        -0.4181142849145819
+      ],
+      "risk_difference_label": "-45.8 pp [-49.9, -41.8]",
+      "odds_ratio": [
+        0.11775518274210278,
+        0.0958397714229613,
+        0.1446819296076069
+      ],
+      "odds_ratio_label": "0.118 [0.096, 0.145]",
+      "fisher_p": 6.268183291798498e-102
+    },
+    {
+      "contrast": "positive_minus_negative",
+      "a": "positive",
+      "b": "negative",
+      "risk_difference": [
+        0.01666666666666669,
+        -0.021167706676120772,
+        0.05450104000945415
+      ],
+      "risk_difference_label": "1.7 pp [-2.1, 5.5]",
+      "odds_ratio": [
+        1.1317993304923053,
+        0.8538871513419855,
+        1.500162782036987
+      ],
+      "odds_ratio_label": "1.132 [0.854, 1.500]",
+      "fisher_p": 0.4288397011700288
+    }
+  ],
+  "fixed_effect_models": [
+    {
+      "target": "rule_present",
+      "n": 2160,
+      "events": 675,
+      "ridge": 0.25,
+      "converged": true,
+      "message": "Optimization terminated successfully.",
+      "coef": -1.1666207367481332,
+      "se": 0.26362453002184105,
+      "p": 9.630309502295376e-06,
+      "odds_ratio": 0.3114175269677697,
+      "or_low": 0.18575534592353737,
+      "or_high": 0.5220892869626582,
+      "note": "Regularized fixed-effect logistic sensitivity model with model and prompt indicators; not a full Bayesian hierarchical model."
+    },
+    {
+      "target": "positive_vs_negative",
+      "n": 1440,
+      "events": 230,
+      "ridge": 0.25,
+      "converged": true,
+      "message": "Optimization terminated successfully.",
+      "coef": 0.010664659418635605,
+      "se": 0.31163864671156266,
+      "p": 0.9727007332362341,
+      "odds_ratio": 1.0107217295964663,
+      "or_low": 0.5487309183499001,
+      "or_high": 1.8616746031924383,
+      "note": "Regularized fixed-effect logistic sensitivity model with model and prompt indicators; not a full Bayesian hierarchical model."
+    }
+  ],
+  "exploratory_tests": [
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4",
+      "prompt_id": "eval-usage",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4",
+      "prompt_id": "eval-usage",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4",
+      "prompt_id": "md5-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 12,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0733264184224412e-07,
+      "q_bh": 2.972288543323683e-07
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4",
+      "prompt_id": "md5-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 10,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 2,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.013814147851967652,
+      "q_bh": 0.29810064453387947
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4",
+      "prompt_id": "http-url",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 28,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 19,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.04334756321283958,
+      "q_bh": 0.06502134481925936
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4",
+      "prompt_id": "http-url",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 13,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 15,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.7310941471119448,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4",
+      "prompt_id": "insecure-random",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 5,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.0028387743174417635,
+      "q_bh": 0.005109793771395174
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4",
+      "prompt_id": "insecure-random",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4",
+      "prompt_id": "eval-dynamic",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 2,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 2,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.5947788817455678,
+      "q_bh": 0.7137346580946814
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4",
+      "prompt_id": "eval-dynamic",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4",
+      "prompt_id": "weak-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.3855846718909774e-16,
+      "q_bh": 1.0735131023509398e-15
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4",
+      "prompt_id": "weak-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "eval-usage",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "eval-usage",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "md5-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 22,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 19,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.0013318691317845497,
+      "q_bh": 0.0025235415128549363
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "md5-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 14,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 8,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.11096953702747578,
+      "q_bh": 0.499362916623641
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "http-url",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 25,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 19,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.011358661610546467,
+      "q_bh": 0.019471991332365372
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "http-url",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 12,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 13,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "insecure-random",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.3855846718909774e-16,
+      "q_bh": 1.0735131023509398e-15
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "insecure-random",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "eval-dynamic",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 7,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 4,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "eval-dynamic",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 6,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.09147609147609148,
+      "q_bh": 0.499362916623641
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "weak-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.3855846718909774e-16,
+      "q_bh": 1.0735131023509398e-15
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.4-mini",
+      "prompt_id": "weak-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "eval-usage",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 2,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.10734463276836159,
+      "q_bh": 0.1486310299869622
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "eval-usage",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "md5-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 5,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 12,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.00023337809424183657,
+      "q_bh": 0.0004942124348650658
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "md5-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 4,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.3416493416493417,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "http-url",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 18,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 18,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.0007770288508631374,
+      "q_bh": 0.0015540577017262747
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "http-url",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 11,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 7,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.34064371475988253,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "insecure-random",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 17,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.9440500435806554e-12,
+      "q_bh": 1.1776200174322621e-11
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "insecure-random",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "eval-dynamic",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 4,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 12,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 8.227583271787588e-05,
+      "q_bh": 0.00018512062361522073
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "eval-dynamic",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 4,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.10602910602910605,
+      "q_bh": 0.499362916623641
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "weak-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.3855846718909774e-16,
+      "q_bh": 1.0735131023509398e-15
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "gpt-5.3-codex",
+      "prompt_id": "weak-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "eval-usage",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "eval-usage",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "md5-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 15,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.9146095431448493e-10,
+      "q_bh": 9.538722141201325e-10
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "md5-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "http-url",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 4,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.29086304305474375,
+      "q_bh": 0.37396676964181347
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "http-url",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 4,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.10602910602910605,
+      "q_bh": 0.499362916623641
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "insecure-random",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 14,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.2345339830777175e-09,
+      "q_bh": 6.703601949233153e-09
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "insecure-random",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "eval-dynamic",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 9,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.136158960668516e-05,
+      "q_bh": 2.7267815056044383e-05
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "eval-dynamic",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "weak-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.3855846718909774e-16,
+      "q_bh": 1.0735131023509398e-15
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-opus-4.6",
+      "prompt_id": "weak-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "eval-usage",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 6,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 9,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.02419978745277914,
+      "q_bh": 0.038868907691311835
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "eval-usage",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 6,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.0201960201960202,
+      "q_bh": 0.29810064453387947
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "md5-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 2,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "md5-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "http-url",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 2,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.5480225988700564,
+      "q_bh": 0.6803039158386908
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "http-url",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "insecure-random",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.3855846718909774e-16,
+      "q_bh": 1.0735131023509398e-15
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "insecure-random",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "eval-dynamic",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 2,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 4,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.08864717982193142,
+      "q_bh": 0.12765193894358123
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "eval-dynamic",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 2,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.4871794871794873,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "weak-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 36,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.2908630430547438,
+      "q_bh": 0.37396676964181347
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-sonnet-4.6",
+      "prompt_id": "weak-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 16,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.10602910602910606,
+      "q_bh": 0.499362916623641
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "eval-usage",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 1,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 13,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.809972526292951e-07,
+      "q_bh": 4.6542150676104455e-07
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "eval-usage",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "md5-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.3855846718909774e-16,
+      "q_bh": 1.0735131023509398e-15
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "md5-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "http-url",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 22,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 17,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.024832913247227008,
+      "q_bh": 0.038868907691311835
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "http-url",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 7,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 15,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 0.02484172037782329,
+      "q_bh": 0.29810064453387947
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "insecure-random",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 0,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 20,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 2.3855846718909774e-16,
+      "q_bh": 1.0735131023509398e-15
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "insecure-random",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "eval-dynamic",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 31,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 16,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "eval-dynamic",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 15,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 16,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    },
+    {
+      "family": "cell_rule_vs_control",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "weak-hash",
+      "contrast": "any_rule_vs_control",
+      "a": {
+        "name": "any_rule",
+        "vuln": 1,
+        "total": 40,
+        "errors": 0
+      },
+      "b": {
+        "name": "control",
+        "vuln": 18,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 3.726521815960896e-12,
+      "q_bh": 1.3415478537459224e-11
+    },
+    {
+      "family": "cell_positive_vs_negative",
+      "model_id": "claude-haiku-4.5",
+      "prompt_id": "weak-hash",
+      "contrast": "positive_vs_negative",
+      "a": {
+        "name": "positive",
+        "vuln": 1,
+        "total": 20,
+        "errors": 0
+      },
+      "b": {
+        "name": "negative",
+        "vuln": 0,
+        "total": 20,
+        "errors": 0
+      },
+      "p": 1.0,
+      "q_bh": 1.0
+    }
+  ],
+  "control_baseline_coverage": {
+    "valid": 20,
+    "errors": 0,
+    "target_new_rows": 1440,
+    "conditions": {
+      "neutral-control": {
+        "vuln": 8,
+        "total": 20,
+        "errors": 0
+      },
+      "generic-security-control": {
+        "vuln": 0,
+        "total": 0,
+        "errors": 0
+      }
+    }
+  }
+}

@@ -70,6 +70,8 @@ Current paper status: strong replication with a 60-row full-output detector-vali
 | Cross-language analysis | `experiments/analysis/cross-language-extension-summary.md` |
 | Control-baseline analysis | `experiments/analysis/control-baselines-summary.md` |
 | Control-baseline plan | `experiments/CONTROL_BASELINE_EXTENSION_PLAN.md` |
+| Statistics companion | `experiments/analysis/hierarchical-framing-stats.md` |
+| Statistics JSON export | `experiments/analysis/hierarchical-framing-stats.json` |
 | Detector validation artifacts | `experiments/validation/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
 | Aggregate figure | `figures/fig-pro-gpt-vs-claude-bars.png` |
@@ -112,7 +114,7 @@ Required before submission:
 - Consider narrowing the title to "Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Advantage" unless equivalence testing is added.
 - Complete neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
 - Add full-output/functional-correctness validation, or keep claims bounded to insecure API use under detector-counted snippets.
-- Add hierarchical/equivalence statistics and multiple-testing correction for exploratory cell-level claims.
+- Add a full hierarchical/equivalence analysis if making equivalence claims; the current statistics companion already adds Wilson CIs, effect sizes, FDR correction, and regularized fixed-effect sensitivity models.
 - Decide whether the bidirectional instruction-decay incident is a main contribution or an appendix/second paper.
 - Verify every cited work exists and is accurately described.
 - Fix LaTeX overfull table/reference warnings before submission.

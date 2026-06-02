@@ -54,8 +54,8 @@
 - [ ] Keep the current fast-prototyping/no-extra-security control as an adversarial baseline, not the only control.
 - [ ] Complete a generic secure-coding control.
 - [ ] Add hierarchical logistic regression or Bayesian hierarchical modeling.
-- [ ] Add confidence intervals/effect sizes for all aggregate claims.
-- [ ] Add multiple-testing correction for exploratory per-cell tests.
+- [x] Add confidence intervals/effect sizes for all aggregate claims.
+- [x] Add multiple-testing correction for exploratory per-cell tests.
 - [ ] Add equivalence testing before making any equivalence claim about positive vs negative framing.
 - [ ] Document prompt order/randomization and trial independence assumptions.
 

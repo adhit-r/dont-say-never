@@ -474,6 +474,15 @@ This could become:
 
 Priority: high for TMLR; medium-high for AISec/JISA.
 
+Current status:
+
+- Statistics companion added at `experiments/scripts/hierarchical-framing-stats.py`.
+- Generated report: `experiments/analysis/hierarchical-framing-stats.md`.
+- Generated machine-readable export: `experiments/analysis/hierarchical-framing-stats.json`.
+- Completed: Wilson confidence intervals, headline risk differences, Haldane-corrected odds ratios, Fisher tests, and Benjamini-Hochberg FDR correction for exploratory per-cell tests.
+- Completed as sensitivity analysis: regularized fixed-effect logistic models with provider, CWE, treatment interactions, model indicators, and prompt indicators.
+- Still open: full Bayesian hierarchical modeling or equivalence testing. Avoid equivalence-style wording unless that work is added.
+
 Reviewer objection addressed:
 
 > "Non-significance is not equivalence, and per-cell Fisher tests are exploratory without multiple-testing correction."
