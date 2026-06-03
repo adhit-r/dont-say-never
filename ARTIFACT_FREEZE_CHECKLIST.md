@@ -1,22 +1,22 @@
 # Artifact Freeze Checklist
 
-Date: 2026-06-02
+Date: 2026-06-03
 
 This checklist defines what must be true before publishing a Zenodo v2 artifact for the reframed paper.
 
 ## Freeze Blockers
 
-- [ ] Worktree is clean.
-- [ ] Final commit hash is recorded in `ARTIFACT_COMMIT.txt`.
+- [x] Source worktree was clean before freeze manifest generation.
+- [x] Source commit hash is recorded in `ARTIFACT_COMMIT.txt`.
 - [x] `LICENSE` exists and clarifies code/data and paper licensing.
 - [x] `CITATION.cff` exists.
 - [x] `.zenodo.json` exists.
 - [x] Dependency/environment file exists (`requirements.txt`, `pyproject.toml`, or `environment.yml`).
 - [x] `ARTIFACT_README.md` exists with reproduction commands and claim boundaries.
-- [ ] `experiments/data/pro-replication/control-baselines/` is either completed or clearly labeled partial.
-- [ ] `experiments/data/pro-replication/cross-language/gpt-5.3-codex.json` is labeled as route-error evidence only.
-- [ ] Four-arm add-on files are deduplicated/validated before calling the add-on exactly balanced.
-- [ ] `paper/arxiv/paper.pdf` is rebuilt from the current `paper.tex`.
+- [x] `experiments/data/pro-replication/control-baselines/` is clearly labeled partial.
+- [x] `experiments/data/pro-replication/cross-language/gpt-5.3-codex.json` is labeled as route-error evidence only.
+- [x] Four-arm add-on files are summarized as complete valid add-on rows with retained error rows disclosed.
+- [x] `paper/arxiv/paper.pdf` is rebuilt from the current `paper.tex`.
 
 ## Include In Zenodo v2
 
@@ -90,13 +90,13 @@ find README.md ARTIFACT_README.md ARTIFACT_FREEZE_CHECKLIST.md ARTIFACT_COMMIT.t
 
 ## Zenodo Metadata
 
-- Title: `Security Rules Reduce Insecure API Use; Positive Framing Has No Consistent Aggregate Advantage`
+- Title: `Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing`
 - Creator: `Adhithya Rajasekaran`
 - ORCID: `0009-0004-1682-7958`
 - Relation: supersedes pilot DOI `10.5281/zenodo.19509466`
 - License: split code/data vs paper if needed
 - Notes:
   - main 2,160-row JSON preserves `code_preview`, not full generated outputs;
-  - full-output validation is a 60-row rerun slice;
-  - control-baseline extension is partial unless completed before freeze;
+  - full-output validation is a 60-row rerun slice with manual functional labels;
+  - control-baseline extension is partial;
   - cross-language GPT-5.3 Codex file is route-error evidence only.

@@ -18,7 +18,7 @@ Supported by the current artifact:
 - positive framing has no consistent aggregate advantage over prohibition framing in the tested benchmark;
 - exploratory per-cell effects are heterogeneous and should be interpreted with multiple-testing correction;
 - the non-API extension shows prompt-class-dependent behavior in this prompt set;
-- the four-arm extension is consistent with an information-content explanation, pending final deduplication and balance validation before any exact-balanced claim.
+- the four-arm extension is consistent with an information-content explanation; valid add-on rows are complete and retained error rows are disclosed in the summary.
 
 Not supported without further work:
 
