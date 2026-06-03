@@ -7,3 +7,6 @@ node_modules/
 .env
 .playwright-mcp/
 experiments/data/pro-replication/.pro-replication.lock
+
+# Local release bundles
+dist/
