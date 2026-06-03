@@ -213,8 +213,13 @@ Current status:
   - `experiments/validation/functional-refusal/functional-refusal-classifications.jsonl`
   - `experiments/validation/functional-refusal/functional-refusal-labels.csv`
   - `experiments/validation/functional-refusal/functional-refusal-summary.md`
-- Current 60-row validation slice: 20 manually vulnerable, 40 manually non-vulnerable, 2 refusal/no-code.
-- All 60 rows still need manual functional task-satisfaction labels. TypeScript compile checks were not run because `tsc` is not installed.
+- Current 60-row validation slice: 20 manually vulnerable, 40 manually non-vulnerable.
+- Manual task-satisfaction labels are complete for the 60-row slice:
+  - 34 secure+functional;
+  - 20 vulnerable+functional;
+  - 4 secure+nonfunctional;
+  - 2 refusal/no-code.
+- TypeScript compile checks were not run because `tsc` is not installed; functional labels are manual task-satisfaction labels, not compile-proof labels.
 
 Reviewer objection addressed:
 

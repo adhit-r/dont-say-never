@@ -3,7 +3,7 @@
 This offline classifier summarizes the existing 60 full-output validation reruns. It does not classify the original 2,160-row main dataset, because those rows preserve previews rather than full generated outputs.
 
 - Total rows: 60
-- Rows needing manual functional review: 60
+- Rows needing manual functional review: 0
 - TypeScript compiler available: no
 - Go compiler available: yes
 
@@ -11,8 +11,9 @@ This offline classifier summarizes the existing 60 full-output validation reruns
 
 | Value | Count |
 | --- | ---: |
-| secure+functional-unlabeled | 38 |
-| vulnerable+functional-unlabeled | 20 |
+| secure+functional | 34 |
+| vulnerable+functional | 20 |
+| secure+nonfunctional | 4 |
 | refusal/no-code | 2 |
 
 ## Compile/Syntax Status
@@ -50,7 +51,8 @@ This offline classifier summarizes the existing 60 full-output validation reruns
 
 - `refusal/no-code` is high-confidence automated classification.
 - `code-uncompilable` means generated code exists but local syntax/compile checking failed.
-- `secure+functional-unlabeled` and `vulnerable+functional-unlabeled` require human task-satisfaction labels before they can support functional-correctness claims.
+- Manual functional labels are complete for this 60-row validation slice.
+- Manual functional labels are read from the existing functional CSV when present, then this script recomputes the final categories.
 - TypeScript rows are marked `not_run` when `tsc` is unavailable; this is expected on systems without a TypeScript toolchain.
 
 ## Outputs

@@ -50,7 +50,7 @@ Current validation slice:
 - Patched detector on labeled reruns: 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: bounded replication with a 60-row full-output detector-validation slice, a completed 1,080-trial non-API extension, a completed four-arm decomposition using the patched detector, and a bounded 1,200-row cross-language extension.
+Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a completed four-arm decomposition using the patched detector, and a bounded 1,200-row cross-language extension.
 
 ## Main Artifacts
 
@@ -120,8 +120,8 @@ Required before submission:
 - Resolve venue choice.
 - Adopt the title "Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing" unless equivalence testing is added.
 - Complete neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
-- Add full-output/functional-correctness validation, or keep claims bounded to insecure API use under detector-counted snippets.
-- Add manual functional task-satisfaction labels; the current classifier separates refusal/no-code and security labels but cannot certify functional correctness.
+- Keep full-study claims bounded to detector-counted insecure API use under code previews; only the 60-row full-output slice has manual task-satisfaction labels.
+- Expand functional task-satisfaction labels beyond the current 60-row slice if making full-dataset functional-correctness claims.
 - Add a full hierarchical/equivalence analysis if making equivalence claims; the current statistics companion already adds Wilson CIs, effect sizes, FDR correction, and regularized fixed-effect sensitivity models.
 - Demote the bidirectional instruction-decay incident to an appendix note or separate paper; do not frame it as a main contribution.
 - Verify every cited work exists and is accurately described.

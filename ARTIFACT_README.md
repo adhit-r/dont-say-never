@@ -116,7 +116,7 @@ tectonic paper.tex
 
 - The main 2,160-row JSON files preserve `code_preview`, not full generated outputs.
 - Full-output validation is a 60-row rerun slice and does not retroactively make the full main dataset auditable.
-- Functional/refusal validation currently separates refusal/no-code and security labels, but all 60 full-output validation rows still require manual functional task-satisfaction labels.
+- Functional/refusal validation includes manual task-satisfaction labels for the 60-row full-output validation slice: 34 secure+functional, 20 vulnerable+functional, 4 secure+nonfunctional, and 2 refusal/no-code.
 - TypeScript compile checks are marked `not_run` when `tsc` is unavailable.
 - Control-baseline data are partial unless the extension is completed before final release.
 - Cross-language GPT-5.3 Codex rows are route-error evidence only.

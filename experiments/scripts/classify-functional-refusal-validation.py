@@ -75,6 +75,19 @@ def read_labels(path: Path) -> dict[str, dict]:
     return {row["rerun_id"]: row for row in csv.DictReader(path.open())}
 
 
+def read_existing_functional_labels() -> dict[str, dict]:
+    if not OUT_CSV.exists():
+        return {}
+    return {
+        row["rerun_id"]: {
+            "manual_functional_label": row.get("manual_functional_label", ""),
+            "manual_functional_confidence": row.get("manual_functional_confidence", ""),
+            "manual_functional_notes": row.get("manual_functional_notes", ""),
+        }
+        for row in csv.DictReader(OUT_CSV.open())
+    }
+
+
 def is_code_like(code: str) -> bool:
     if not code or not code.strip():
         return False
@@ -155,16 +168,18 @@ def final_category(security_vulnerable: bool | None, manual_functional_label: st
 
 def classify() -> list[dict]:
     rows: list[dict] = []
+    existing_functional = read_existing_functional_labels()
     for source in INPUTS:
         labels = read_labels(source["labels"])
         for row in read_jsonl(source["results"]):
             label = labels.get(row["rerun_id"], {})
+            functional_label = existing_functional.get(row["rerun_id"], {})
             code = row.get("code") or ""
             raw = row.get("raw_response") or ""
             refusal = refusal_or_no_code(raw, code)
             compile_status, compile_error = compile_check(row.get("language", ""), code)
             security_vulnerable = bool_label(label.get("manual_label", row.get("manual_label", "")))
-            manual_functional_label = label.get("manual_functional_label", "")
+            manual_functional_label = functional_label.get("manual_functional_label", "")
             classified = {
                 "lane": source["lane"],
                 "sample_id": row.get("sample_id"),
@@ -184,8 +199,8 @@ def classify() -> list[dict]:
                 "manual_security_confidence": label.get("manual_confidence", row.get("manual_confidence", "")),
                 "manual_security_notes": label.get("manual_notes", row.get("manual_notes", "")),
                 "manual_functional_label": manual_functional_label,
-                "manual_functional_confidence": label.get("manual_functional_confidence", ""),
-                "manual_functional_notes": label.get("manual_functional_notes", ""),
+                "manual_functional_confidence": functional_label.get("manual_functional_confidence", ""),
+                "manual_functional_notes": functional_label.get("manual_functional_notes", ""),
             }
             classified["final_category"] = final_category(
                 security_vulnerable,
@@ -227,7 +242,7 @@ def write_outputs(rows: list[dict]) -> None:
         "final_category",
     ]
     with OUT_CSV.open("w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -247,11 +262,13 @@ def make_summary(rows: list[dict]) -> str:
     by_lane = Counter(r["lane"] for r in rows)
     by_model = Counter(r["model_id"] for r in rows)
     security = Counter(r["manual_security_label"] or "missing" for r in rows)
-    needs_manual = [
-        r
-        for r in rows
-        if r["final_category"].endswith("functional-unlabeled") or r["compile_status"] == "not_run"
-    ]
+    needs_manual = [r for r in rows if r["final_category"].endswith("functional-unlabeled")]
+
+    functional_status = (
+        "- Manual functional labels are complete for this 60-row validation slice."
+        if not needs_manual
+        else "- `secure+functional-unlabeled` and `vulnerable+functional-unlabeled` require human task-satisfaction labels before they can support functional-correctness claims."
+    )
 
     lines = [
         "# Functional/Refusal Validation Summary",
@@ -287,7 +304,8 @@ def make_summary(rows: list[dict]) -> str:
         "",
         "- `refusal/no-code` is high-confidence automated classification.",
         "- `code-uncompilable` means generated code exists but local syntax/compile checking failed.",
-        "- `secure+functional-unlabeled` and `vulnerable+functional-unlabeled` require human task-satisfaction labels before they can support functional-correctness claims.",
+        functional_status,
+        "- Manual functional labels are read from the existing functional CSV when present, then this script recomputes the final categories.",
         "- TypeScript rows are marked `not_run` when `tsc` is unavailable; this is expected on systems without a TypeScript toolchain.",
         "",
         "## Outputs",
