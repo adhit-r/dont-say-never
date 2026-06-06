@@ -1546,18 +1546,18 @@
     }
   ],
   "control_baseline_coverage": {
-    "valid": 20,
+    "valid": 260,
     "errors": 0,
     "target_new_rows": 1440,
     "conditions": {
       "neutral-control": {
-        "vuln": 8,
-        "total": 20,
+        "vuln": 89,
+        "total": 140,
         "errors": 0
       },
       "generic-security-control": {
-        "vuln": 0,
-        "total": 0,
+        "vuln": 50,
+        "total": 120,
         "errors": 0
       }
     }

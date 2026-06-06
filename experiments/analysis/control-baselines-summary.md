@@ -22,6 +22,8 @@ Compared conditions:
 
 ## Aggregate
 
+Warning: denominators are intentionally unequal in this checkpoint. `fast-prototype-control` and `targeted-combined-rule` reuse completed 720-row suites, while `neutral-control` and `generic-security-control` currently contain only partial GPT-family rows. Treat this table as checkpoint evidence, not as a manuscript-level aggregate comparison.
+
 | Stack | Condition | Vulnerable | Total | Rate |
 | --- | --- | ---: | ---: | ---: |
 | All models | fast-prototype-control | 445 | 720 | 61.8% |

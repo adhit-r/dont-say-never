@@ -1,7 +1,7 @@
 # Four-Arm Extension Summary
 
 This summary merges the main-suite `control` rows with the `four-arm-addons` rows.
-All GPT-family and Claude-family add-on rows are complete.
+All GPT-family and Claude-family valid add-on quotas are complete: 2,160 valid add-on rows were collected. The JSON files also retain 5 failed attempts for auditability (GPT-5.4: 3, GPT-5.4 Mini: 1, GPT-5.3 Codex: 1).
 
 ## Coverage
 
@@ -29,8 +29,8 @@ All GPT-family and Claude-family add-on rows are complete.
 
 ## Interpretation
 
-- GPT add-on data are complete: 1,080 valid add-on rows plus 360 reused control rows.
-- Claude add-on data are complete: 1,080 valid add-on rows plus 360 reused control rows.
+- GPT add-on valid quotas are complete: 1,080 valid add-on rows plus 360 reused control rows; 5 failed GPT attempts are retained in the JSON files.
+- Claude add-on valid quotas are complete: 1,080 valid add-on rows plus 360 reused control rows.
 - Pure-positive is not uniformly safer. The clearest early example is GPT-5.4 Mini on `md5-hash`, where pure-positive produced 14/20 vulnerable outputs while pure-negative and combined were 0/20.
 - Combined rules often repair pure-positive omissions, supporting the information-content explanation rather than a simple positive-vs-negative polarity rule.
 - Claude Opus is strongest overall but became vulnerable on `eval-dynamic` pure-positive, so even the strongest model is not uniformly protected by positive-only guidance.

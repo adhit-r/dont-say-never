@@ -47,7 +47,7 @@ However, the pilot carried structural weaknesses: $n = 10$ trials per cell (unde
 
 \subsection{The Replication}
 
-This paper reports a larger replication at 3$\times$ the scale of the pilot. We run 6 models, 6 prompts, 3 conditions, and 20 trials per cell ($n = 2{,}160$ valid orchestration rows; zero final route errors). The design intentionally balances two provider stacks: three OpenAI Codex/GPT models via Codex CLI and three Anthropic Claude models via Claude CLI. We tested the specific claim from the pilot---that positive framing outperforms negative framing due to reduced ironic rebound---and the broader claim that targeted rule injection reduces detector-counted insecure API use.
+This paper reports a larger replication at 3$\times$ the scale of the pilot. We run 6 models, 6 prompts, 3 conditions, and 20 trials per cell ($n = 2{,}160$ valid orchestration rows; zero final route errors). The design intentionally balances two model families: three OpenAI Codex/GPT models and three Anthropic Claude models. GPT-family rows were newly collected through Codex CLI; Claude-family rows use the completed Claude replication files, with the Opus 4.6 file retaining the documented mixed-provenance recovery from the data-collection incident. We tested the specific claim from the pilot---that positive framing outperforms negative framing due to reduced ironic rebound---and the broader claim that targeted rule injection reduces detector-counted insecure API use.
 
 \textbf{Findings.}
 
@@ -114,26 +114,26 @@ The runner executes cells in a deterministic resumable order: model, prompt, con
     \item \textbf{Positive (alternative-suggestion) framing.} Control prompt + rule. Example for CWE-94: ``Always parse dynamic data with \texttt{JSON.parse()} and always invoke subprocesses with a fixed argument list (\texttt{execFile(cmd, [args])}). These safe constructions replace direct execution of dynamic strings and eliminate the code-injection class of bugs at the source.''
 \end{itemize}
 
-Rules are injected via the model-native instruction mechanism. Claude models receive rules through \texttt{claude -p --append-system-prompt} with tools disabled. GPT-family models receive rules through a real \texttt{AGENTS.md} file in an ephemeral Codex workdir and are invoked with \texttt{codex exec --sandbox read-only --ephemeral}. GitHub Copilot, OpenRouter, and Codex quota-heavy reroutes are not used in the final dataset.
+Rules are injected via the model-native instruction mechanism. GPT-family models receive rules through a real \texttt{AGENTS.md} file in an ephemeral Codex workdir and are invoked with \texttt{codex exec --sandbox read-only --ephemeral}. Claude-family rows were imported from the completed Claude replication files that used the same prompt set, condition set, trial count, and detectors; the Opus 4.6 file retains a documented mixed-provenance recovery note because 204 incident-era valid trials were later completed through a corrected Claude CLI pathway. OpenRouter is used only for later validation/extension rows, not for the main 2{,}160-row result.
 
 \subsection{Models}
 
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{llll}
+\begin{tabular}{llp{0.42\textwidth}r}
 \toprule
 \textbf{Model} & \textbf{Provider} & \textbf{Access Pathway} & \textbf{Valid Trials} \\
 \midrule
 GPT-5.4            & OpenAI    & Codex CLI (Pro subscription)    & 360 \\
 GPT-5.4 Mini       & OpenAI    & Codex CLI (Pro subscription)    & 360 \\
 GPT-5.3 Codex      & OpenAI    & Codex CLI (Pro subscription)    & 360 \\
-Claude Opus 4.6    & Anthropic & Claude CLI (Max subscription)   & 360 \\
-Claude Sonnet 4.6  & Anthropic & Claude CLI (Max subscription)   & 360 \\
-Claude Haiku 4.5   & Anthropic & Claude CLI (Max subscription)   & 360 \\
+Claude Opus 4.6    & Anthropic & Completed Claude replication; mixed-provenance recovery disclosed & 360 \\
+Claude Sonnet 4.6  & Anthropic & Completed Claude replication & 360 \\
+Claude Haiku 4.5   & Anthropic & Completed Claude replication & 360 \\
 \bottomrule
 \end{tabular}
-\caption{Models tested. The final dataset uses a balanced provider design: three OpenAI Codex/GPT models and three Anthropic Claude models. All models contribute 360 valid orchestration rows. GPT-5.5 was requested initially but did not pass local Codex CLI smoke testing; GPT-5.4 Mini is the nearest available GPT-family substitute.}
+\caption{Models tested. The final dataset uses a balanced model-family design: three OpenAI Codex/GPT models and three Anthropic Claude models. All models contribute 360 valid orchestration rows. GPT-5.5 was requested initially but did not pass local Codex CLI smoke testing; GPT-5.4 Mini is the nearest available GPT-family substitute.}
 \label{tab:models}
 \end{table}
 
@@ -185,7 +185,7 @@ After validating the patched detector, we ran an ecological-validity extension t
 \subsection{Four-Arm Decomposition}
 \label{sec:fourarm-method}
 
-The main replication compares negative framing against positive framing, but those conditions differ in both polarity and information content: negative rules name forbidden constructs, while positive rules name safe alternatives. To isolate this confound, we ran a four-arm extension with the same 6 models, 6 prompts, and 20 trials per cell. The extension reuses the main-suite control rows and adds three new arms: \emph{pure negative} (forbidden construct only), \emph{pure positive} (safe alternative only), and \emph{combined} (both forbidden construct and safe alternative). This adds 2{,}160 valid add-on rows. GPT-family add-ons ran through Codex CLI; Claude-family add-ons ran through OpenRouter because Claude CLI authentication was unavailable. All four-arm Claude rows completed after the OpenRouter key limit was raised.
+The main replication compares negative framing against positive framing, but those conditions differ in both polarity and information content: negative rules name forbidden constructs, while positive rules name safe alternatives. To isolate this confound, we ran a four-arm extension with the same 6 models, 6 prompts, and 20 trials per cell. The extension reuses the main-suite control rows and adds three new arms: \emph{pure negative} (forbidden construct only), \emph{pure positive} (safe alternative only), and \emph{combined} (both forbidden construct and safe alternative). This adds 2{,}160 valid add-on rows, with 5 retained failed attempts disclosed in the JSON summaries. GPT-family add-ons ran through Codex CLI; Claude-family add-ons ran through OpenRouter because Claude CLI authentication was unavailable. All valid four-arm Claude rows completed after the OpenRouter key limit was raised.
 
 \subsection{Cross-Language Extension}
 \label{sec:crosslang-method}
@@ -363,12 +363,12 @@ The effect is still not a universal law. GPT-5.4 Mini on \texttt{md5-hash} is 14
 \subsection{Cross-Language Extension}
 \label{sec:crosslang}
 
-The cross-language extension completed for five models (GPT-5.4, GPT-5.4 Mini, Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5), for 1{,}200 valid rows. GPT-5.3 Codex failed the first cross-language cell with route errors and is excluded from the cross-language aggregate. Across completed models, control vulnerability is 355/400 (88.8\%), negative framing reduces this to 115/400 (28.8\%), and positive framing reduces it to 153/400 (38.2\%). This supports the rule-presence claim outside TypeScript-like prompts, but also exposes portability limits: Python MD5 and insecure-random cells remain high-risk because the current rule templates still name JavaScript/Node safe alternatives in places.
+The cross-language extension completed for five models (GPT-5.4, GPT-5.4 Mini, Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5), for 1{,}200 valid rows. GPT-5.3 Codex failed the first cross-language cell with route errors and is excluded from the cross-language aggregate. Across completed models, control vulnerability is 355/400 (88.8\%), negative framing reduces this to 115/400 (28.8\%), and positive framing reduces it to 153/400 (38.2\%). This is directional evidence consistent with rule-presence transfer outside TypeScript-like prompts, but it also exposes portability limits: Python MD5 and insecure-random cells remain high-risk because the current rule templates still name JavaScript/Node safe alternatives in places.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{fig-pro-cross-language.png}
-\caption{Cross-language extension across five completed models. GPT-5.3 Codex failed the first cross-language route and is excluded from the aggregate. The result supports rule-presence transfer, while showing that language-specific rule text is needed for stronger cross-language claims.}
+\caption{Cross-language extension across five completed models. GPT-5.3 Codex failed the first cross-language route and is excluded from the aggregate. The result is directional evidence consistent with rule-presence transfer, while showing that language-specific rule text is needed for stronger cross-language claims.}
 \label{fig:crosslang}
 \end{figure}
 
@@ -415,7 +415,7 @@ The pilot identified a \emph{double-priming interaction} as the mechanism behind
 
 \section{Limitations}
 
-\textbf{Model-generation gap.} Six models from three providers covers current-generation coding assistants but does not include open-weights frontier models (Llama 4, DeepSeek-V4) or GPT-4o-class OpenAI models. We did not re-run the pilot's older models (Claude Sonnet 4, GPT-5 via Codex CLI) due to ecosystem changes.
+\textbf{Model-generation gap.} Six models across two model families/provider stacks cover current-generation coding assistants but do not include open-weights frontier models (Llama 4, DeepSeek-V4) or GPT-4o-class OpenAI models. We did not re-run the pilot's older models (Claude Sonnet 4, GPT-5 via Codex CLI) due to ecosystem changes.
 
 \textbf{Specific model set.} The final replication uses current Claude CLI and Codex CLI models available to the author. GPT-5.5 was requested but unavailable through the local Codex smoke test, and is therefore not included. Results should be interpreted as a comparison between the tested OpenAI Codex/GPT and Anthropic Claude agent stacks, not as an exhaustive survey of all frontier coding models.
 
@@ -605,7 +605,7 @@ The case study in Appendix~\ref{sec:bidirectional} is supported by a forensic ar
     \item \texttt{mitigation.md} --- recovery actions taken and the proposed mitigations summarized in Appendix~\ref{sec:bidirectional}.
 \end{itemize}
 
-The Opus 4.6 results in Section~\ref{sec:results} use the final 360-trial Claude CLI dataset. The incident-era 204-trial snapshot is preserved for auditability but is not used as a separate model condition in the final six-model analysis.
+The Opus 4.6 results in Section~\ref{sec:results} use the final 360-trial mixed-provenance recovery dataset documented in \texttt{experiments/data/pro-replication/main/claude-opus-4.6.json}. The incident-era 204-trial snapshot is preserved for auditability but is not used as a separate model condition in the final six-model analysis.
 
 \section{Baseline Detector-Counted Insecure API Rates}
 \label{sec:baselines}

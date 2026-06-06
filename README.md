@@ -16,12 +16,12 @@ The robust finding is simpler:
 
 > Targeted security rules reduce detector-counted insecure API use across all six tested coding agents. Positive framing has no consistent aggregate advantage over prohibition framing in this benchmark.
 
-The repository also includes a completed **1,080-trial non-API-naming extension**, a completed **2,160-row four-arm decomposition**, a bounded **1,200-row cross-language extension** across five completed models, and a partial **260-row control-baseline extension**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension stress-tests Python and Go portability, with GPT-5.3 Codex excluded due to route errors. The control-baseline extension tests whether the original control was too adversarial by adding neutral and generic secure-coding controls; current GPT-only rows are preliminary and incomplete.
+The repository also includes a completed **1,080-trial non-API-naming extension**, a **2,160-valid-row four-arm decomposition with 5 retained failed attempts disclosed**, a bounded **1,200-row cross-language extension** across five completed models, and a partial **260-row control-baseline extension**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension is directional evidence for Python/Go portability, with GPT-5.3 Codex excluded due to route errors and language-specific rule text still needed. The control-baseline extension tests whether the original control was too adversarial by adding neutral and generic secure-coding controls; current GPT-only rows are preliminary and incomplete.
 
 ## Final Dataset
 
 - **Models:** GPT-5.4, GPT-5.4 Mini, GPT-5.3 Codex, Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 4.5
-- **Provider stacks:** 3 OpenAI Codex/GPT models via Codex CLI, 3 Anthropic Claude models via Claude CLI
+- **Provider stacks:** 3 OpenAI Codex/GPT models via Codex CLI, 3 Anthropic Claude model files from the completed Claude replication; Opus 4.6 has documented mixed-provenance recovery
 - **Prompts:** 6 vulnerability-eliciting prompts
 - **CWE classes:** CWE-94, CWE-328, CWE-319, CWE-338
 - **Conditions:** control, negative framing, positive framing
@@ -51,7 +51,7 @@ Current validation slice:
 - Structural detector audit on the same 60 rows: 20 TP, 40 TN, 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a completed four-arm decomposition using the patched detector, and a bounded 1,200-row cross-language extension.
+Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a 2,160-valid-row four-arm decomposition with retained failed attempts disclosed, a bounded 1,200-row cross-language extension, and a partial 260-row GPT-only control-baseline checkpoint.
 
 ## Main Artifacts
 

@@ -82,10 +82,10 @@ Per-cell tests are exploratory. Use FDR-adjusted `q` values for interpretation; 
 
 ## Control-Baseline Extension Coverage
 
-- Valid new rows: 20/1440
+- Valid new rows: 260/1440
 - Error rows: 0
-- Neutral control: 8/20 vulnerable
-- Generic security control: 0/0 vulnerable
+- Neutral control: 89/140 vulnerable
+- Generic security control: 50/120 vulnerable
 
 This extension is too incomplete for manuscript-level claims. Current rows are checkpoint evidence only.
 
