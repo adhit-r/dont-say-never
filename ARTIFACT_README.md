@@ -14,7 +14,7 @@ Prior pilot DOI, linked as the superseded pilot: `10.5281/zenodo.19509466`
 
 ## Commit and Manifest Semantics
 
-`ARTIFACT_COMMIT.txt` records the source-content commit immediately before the manifest-refresh commit. The subsequent manifest commit updates `ARTIFACT_COMMIT.txt`, `SHA256SUMS`, and the ignored local zip sidecar. This avoids the impossible self-reference of requiring a tracked file to contain the hash of the commit that contains that file. For a release audit, treat the pushed repository `HEAD`, the root `SHA256SUMS`, and `dist/dont-say-never-zenodo-v2-artifact.zip.sha256` as the final package surface; treat `ARTIFACT_COMMIT.txt` as the content-source pointer.
+`ARTIFACT_COMMIT.txt` records the source-content commit immediately before a manifest-refresh commit. The subsequent manifest commit updates `ARTIFACT_COMMIT.txt` and `SHA256SUMS`. This avoids the impossible self-reference of requiring a tracked file to contain the hash of the commit that contains that file. For a source audit, treat the pushed repository `HEAD` plus the root `SHA256SUMS` as the current package surface; treat `ARTIFACT_COMMIT.txt` as the content-source pointer. The `dist/dont-say-never-zenodo-v2-artifact.zip.sha256` sidecar documents the previously published Zenodo v2 zip and should be regenerated only when a new zip bundle is intentionally built.
 
 ## Claim Boundary
 

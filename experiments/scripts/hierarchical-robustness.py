@@ -22,7 +22,6 @@ import random
 import statistics
 from collections import defaultdict
 from dataclasses import dataclass
-from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -35,6 +34,7 @@ EXPECTED_ROWS = 2160
 EXPECTED_STRATA = 36
 BOOTSTRAPS = 20000
 SEED = 0
+GENERATED_AT = "reproducible"
 
 
 @dataclass(frozen=True)
@@ -83,7 +83,7 @@ def blocked(reason: str) -> dict:
     return {
         "status": "blocked",
         "reason": reason,
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": GENERATED_AT,
     }
 
 
@@ -340,7 +340,7 @@ def build_report(data_root: Path) -> dict:
 
     return {
         "status": "ok",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": GENERATED_AT,
         "data_root": str(data_root),
         "rows": len(rows),
         "valid_rows": len(valid_rows),

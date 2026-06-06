@@ -897,7 +897,7 @@
   ],
   "data_root": "/Users/adhi/axonome/llm-framing-paper/experiments/data/pro-replication/main",
   "errors": 0,
-  "generated_at": "2026-06-06T20:59:05.406802+00:00",
+  "generated_at": "reproducible",
   "rows": 2160,
   "seed": 0,
   "status": "ok",
