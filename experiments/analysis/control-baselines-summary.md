@@ -13,8 +13,8 @@ Compared conditions:
 
 | Model | Fast prototype | Neutral | Generic secure | Targeted CWE rule | Errors |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `gpt-5.4` | 66/120 | 0/0 | 0/0 | 1/120 | 0 |
-| `gpt-5.4-mini` | 82/120 | 8/20 | 0/0 | 6/120 | 0 |
+| `gpt-5.4` | 66/120 | 39/60 | 36/60 | 1/120 | 0 |
+| `gpt-5.4-mini` | 82/120 | 50/80 | 14/60 | 6/120 | 0 |
 | `gpt-5.3-codex` | 81/120 | 0/0 | 0/0 | 4/120 | 0 |
 | `claude-opus-4.6` | 58/120 | 0/0 | 0/0 | 1/120 | 0 |
 | `claude-sonnet-4.6` | 54/120 | 0/0 | 0/0 | 10/120 | 0 |
@@ -25,12 +25,12 @@ Compared conditions:
 | Stack | Condition | Vulnerable | Total | Rate |
 | --- | --- | ---: | ---: | ---: |
 | All models | fast-prototype-control | 445 | 720 | 61.8% |
-| All models | neutral-control | 8 | 20 | 40.0% |
-| All models | generic-security-control | 0 | 0 | pending |
+| All models | neutral-control | 89 | 140 | 63.6% |
+| All models | generic-security-control | 50 | 120 | 41.7% |
 | All models | targeted-combined-rule | 43 | 720 | 6.0% |
 | GPT family | fast-prototype-control | 229 | 360 | 63.6% |
-| GPT family | neutral-control | 8 | 20 | 40.0% |
-| GPT family | generic-security-control | 0 | 0 | pending |
+| GPT family | neutral-control | 89 | 140 | 63.6% |
+| GPT family | generic-security-control | 50 | 120 | 41.7% |
 | GPT family | targeted-combined-rule | 11 | 360 | 3.1% |
 | Claude family | fast-prototype-control | 216 | 360 | 60.0% |
 | Claude family | neutral-control | 0 | 0 | pending |

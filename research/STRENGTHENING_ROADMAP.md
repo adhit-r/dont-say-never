@@ -35,7 +35,7 @@ Status as of commit `d87b509` plus the current checklist update pass.
 | Four-arm decomposition | Done | 100% | `experiments/data/pro-replication/four-arm-addons/`; combined rules strongest | None for current claim |
 | Non-API extension | Done | 100% | `experiments/data/pro-replication/non-api/`; 1,080 valid, 0 errors | Optional larger prompt set |
 | Cross-language extension | Partial but useful | 70% | 5 models complete; GPT-5.3 Codex route-error only | Language-specific rules and GPT-5.3 route recovery |
-| Neutral/generic control extension | Started | 10% | `gpt-5.4-mini / eval-usage / neutral-control` has 20 rows | Complete neutral + generic controls |
+| Neutral/generic control extension | Partial GPT checkpoint | 18% full / 36% GPT-only | 260 valid rows: GPT-5.4 has 120/240, GPT-5.4 Mini has 140/240, 0 errors | Complete GPT-5.3 route or finish stable GPT subset; Claude controls need non-CLI route |
 | Statistics | Solid but not final TMLR | 75% | Wilson CIs, odds ratios, FDR, regularized fixed-effect sensitivity | Full Bayesian/hierarchical model or equivalence tests |
 | Reproducibility package | Zenodo-ready | 95% | `dist/dont-say-never-zenodo-v2-artifact.zip`; `SHA256SUMS`; metadata files | Publish Zenodo v2 DOI |
 | Venue packaging | Not started | 15% | Strategy/checklist exists | ACM/TMLR/JISA template conversion |
@@ -43,7 +43,7 @@ Status as of commit `d87b509` plus the current checklist update pass.
 Overall readiness:
 
 - Zenodo v2 artifact: **95%**. Remaining step is upload/publish DOI.
-- AISec/JISA-style empirical paper: **70%**. Strong enough after Zenodo, stronger if neutral/generic controls are completed.
+- AISec/JISA-style empirical paper: **72%**. Strong enough after Zenodo, stronger if neutral/generic controls are completed.
 - TMLR submission: **60%**. Needs anonymization, stronger instruction-following framing, and ideally hierarchical/equivalence analysis.
 - Proper full-conference version: **45%**. Needs multi-turn agent workflow and larger blinded/full-output validation.
 
@@ -302,8 +302,13 @@ Current status:
 - Suite added to `experiments/scripts/pro-six-model-replication.py` as `control-baselines`.
 - Plan added at `experiments/CONTROL_BASELINE_EXTENSION_PLAN.md`.
 - Summary script added at `experiments/scripts/summarize-control-baselines.py`.
-- First checkpoint completed: `gpt-5.4-mini / eval-usage / neutral-control` yielded 8/20 vulnerable outputs with 0 errors.
-- Remaining target: 1,420 new rows.
+- Current checkpoint completed: 260 valid rows, 139 vulnerable, 0 errors.
+  - `gpt-5.4`: 120/240 rows complete; 75/120 vulnerable.
+  - `gpt-5.4-mini`: 140/240 rows complete; 64/140 vulnerable.
+  - `gpt-5.3-codex`: current Codex CLI smoke fails; route-blocked for this suite.
+- Full six-model remaining target: 1,180 rows.
+- GPT-only remaining target, excluding currently blocked GPT-5.3 Codex: 220 rows.
+- Preliminary pattern: neutral controls are comparable to the fast-prototyping baseline in sampled GPT cells; generic secure-coding advice helps in some cells but is much weaker than targeted CWE-specific combined rules.
 
 Reviewer objection addressed:
 
