@@ -51,7 +51,7 @@ Current validation slice:
 - Structural detector audit on the same 60 rows: 20 TP, 40 TN, 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a 2,160-valid-row four-arm decomposition with retained failed attempts disclosed, a bounded 1,200-row cross-language extension, and a partial 480-row GPT-family control-baseline checkpoint.
+Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a 2,160-valid-row four-arm decomposition with retained failed attempts disclosed, a bounded 1,200-row cross-language extension, and a partial 480-row GPT-family control-baseline checkpoint. A deterministic 360-row full-output validation plan now exists, but it has not been run yet.
 
 ## Main Artifacts
 
@@ -74,7 +74,9 @@ Current paper status: bounded replication with a 60-row full-output detector and
 | Statistics companion | `experiments/analysis/hierarchical-framing-stats.md` |
 | Statistics JSON export | `experiments/analysis/hierarchical-framing-stats.json` |
 | Polarity equivalence strata | `experiments/analysis/polarity-equivalence-strata.csv` |
+| Opus provenance sensitivity | `experiments/analysis/opus-provenance-sensitivity.md` |
 | Detector validation artifacts | `experiments/validation/` |
+| Full-output 360 validation plan | `experiments/validation/full-output-360/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
 | Semantic detector audit | `experiments/validation/semantic-detector-audit.md` |
 | Functional/refusal validation | `experiments/validation/functional-refusal/functional-refusal-summary.md` |

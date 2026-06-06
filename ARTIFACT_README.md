@@ -51,6 +51,8 @@ Main replication:
 - `experiments/analysis/hierarchical-framing-stats.md`
 - `experiments/analysis/hierarchical-framing-stats.json`
 - `experiments/analysis/polarity-equivalence-strata.csv`
+- `experiments/analysis/opus-provenance-sensitivity.md`
+- `experiments/analysis/opus-provenance-sensitivity.json`
 
 Extensions:
 
@@ -70,6 +72,7 @@ Validation:
 - `experiments/validation/reruns/`
 - `experiments/validation/openrouter-claude-reruns/`
 - `experiments/validation/functional-refusal/`
+- `experiments/validation/full-output-360/` (planned 360-row fresh rerun; not yet executed)
 
 Figures:
 
@@ -112,6 +115,9 @@ python3.11 experiments/scripts/summarize-control-baselines.py
 python3.11 experiments/scripts/summarize-combined-detector-validation.py
 python3.11 experiments/scripts/semantic-detector-audit.py
 python3.11 experiments/scripts/classify-functional-refusal-validation.py
+python3.11 experiments/scripts/build-full-output-validation-plan.py
+python3.11 experiments/scripts/summarize-full-output-validation.py
+python3.11 experiments/scripts/opus-provenance-sensitivity.py
 python3.11 figures/generate-pro-replication-figures.py
 ```
 
@@ -126,6 +132,7 @@ tectonic paper.tex
 
 - The main 2,160-row JSON files preserve `code_preview`, not full generated outputs.
 - Full-output validation is a 60-row rerun slice and does not retroactively make the full main dataset auditable.
+- The 360-row full-output validation plan is included as a future rerun plan; it currently has 360 planned rows and 0 completed rerun rows.
 - The structural detector audit has 0 mismatches on the 60-row manually labeled full-output slice, but it is not a full AST/Semgrep proof over all 2,160 rows.
 - Functional/refusal validation includes manual task-satisfaction labels for the 60-row full-output validation slice: 34 secure+functional, 20 vulnerable+functional, 4 secure+nonfunctional, and 2 refusal/no-code.
 - TypeScript compile checks are marked `not_run` when `tsc` is unavailable.

@@ -37,8 +37,8 @@ Reviewer-safe positioning:
 | Functional/refusal validation | Bounded slice | 70% | 60 manually task-labeled rows | Compile/unit checks or larger full-output rerun |
 | Cross-language extension | Partial but useful | 70% | 5 models complete; GPT-5.3 Codex route-error only | Language-specific rules and GPT-5.3 recovery |
 | Neutral/generic control extension | Partial GPT checkpoint | 33% full / 67% GPT-only | 480 valid rows; GPT-5.4 and GPT-5.4 Mini complete; GPT-5.3 route-blocked | Claude controls and/or route recovery |
-| Opus provenance sensitivity | Not done | 0% | Incident archive exists | Exclude-Opus / clean-route sensitivity table |
-| Full-output rerun | Not done | 0% | Runner patched for future full code | 360-row or 2,160-row rerun |
+| Opus provenance sensitivity | Done | 100% | `experiments/analysis/opus-provenance-sensitivity.md`; leave-Opus conclusions unchanged | Optional clean-route-only Opus split if recoverable |
+| Full-output rerun | Plan built | 20% | `experiments/validation/full-output-360/plan.jsonl`; 360 balanced planned rows | Execute rerun, label outputs, summarize detector validity |
 | Multi-turn agent workflow | Not started | 0% | Plan exists conceptually | New repo-task benchmark |
 | Venue packaging | Not started | 15% | Strategy/checklist exists | TMLR/ACM/JISA conversion |
 
@@ -125,22 +125,27 @@ Claim impact:
 
 ### P2: Opus 4.6 Mixed-Provenance Sensitivity
 
+Status: completed for the no-new-model-call exclusion check.
+
 Problem:
 
 The Opus 4.6 row has documented mixed provenance from the data-collection incident and recovery. Transparency is good, but a reviewer may ask whether the headline result depends on those rows.
 
-Action:
-
-Add sensitivity analyses:
+Completed action:
 
 1. Main results excluding Claude Opus 4.6.
 2. Provider-stack aggregates excluding Opus 4.6.
-3. If trial-level provenance is recoverable, clean-route-only Opus table.
+3. Equivalence and fixed-effect sensitivity rerun without Opus.
+
+Result:
+
+- Rule presence remains strong after excluding Opus 4.6.
+- Positive-vs-prohibition remains non-headline and practically equivalent within the benchmark-level +/-5 percentage-point margin.
 
 Acceptance criteria:
 
-- `experiments/analysis/opus-provenance-sensitivity.md`
-- one appendix table showing that rule-presence and polarity conclusions do not depend on Opus 4.6.
+- `experiments/analysis/opus-provenance-sensitivity.md` completed.
+- `experiments/analysis/opus-provenance-sensitivity.json` completed.
 
 Claim impact:
 
