@@ -26,7 +26,7 @@ Contribution type:
 | Full cell balance | 6 models x 6 prompts x 3 conditions x 20 trials = 2,160 valid orchestration rows with zero final route errors. |
 | Security relevance | Prompts map to recognizable CWE classes: dynamic execution, weak hashing, cleartext HTTP, insecure randomness. |
 | Self-correcting science | The paper explicitly supersedes the author's own pilot. This is a reviewer-positive story if written carefully. |
-| Reproducible artifacts | Data, runner, figures, and incident evidence exist locally and can be released. |
+| Reproducible artifacts | Data, runner, figures, incident evidence, and Zenodo v2 release metadata are available. |
 
 ## Research Weaknesses
 
@@ -147,7 +147,7 @@ Risk:
 2. Rebuild `paper/arxiv/paper.pdf`.
 3. Decide whether Section 6 remains in the main paper.
 4. Add detector validation: manually audit a stratified sample of outputs.
-5. Freeze final data and publish Zenodo v2.
+5. Keep Zenodo v2 and repository manifests synchronized after any paper or analysis update.
 
 ### If targeting AISec
 

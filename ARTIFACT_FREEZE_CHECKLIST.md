@@ -31,6 +31,7 @@ This checklist defines what must be true before publishing a Zenodo v2 artifact 
 - `research/REVIEWER_CRITIQUE_ACTION_PLAN.md`
 - `research/STRENGTHENING_ROADMAP.md`
 - `experiments/validation/functional-refusal/FUNCTIONAL_LABELING_GUIDE.md`
+- `paper/ARCHIVE_README.md`
 - `paper/arxiv/paper.tex`
 - `paper/arxiv/paper.pdf`
 - `paper/arxiv/abstract.txt`
@@ -76,6 +77,7 @@ test -z "$(git status --porcelain=v1 --untracked-files=all)"
 git rev-parse HEAD > ARTIFACT_COMMIT.txt
 python3.11 experiments/scripts/pro-six-model-replication.py summary
 python3.11 experiments/scripts/hierarchical-framing-stats.py
+python3.11 experiments/scripts/hierarchical-robustness.py
 python3.11 experiments/scripts/summarize-non-api-extension.py
 python3.11 experiments/scripts/summarize-four-arm-extension.py
 python3.11 experiments/scripts/summarize-cross-language-extension.py
@@ -84,7 +86,7 @@ python3.11 experiments/scripts/summarize-combined-detector-validation.py
 python3.11 experiments/scripts/semantic-detector-audit.py
 python3.11 experiments/scripts/classify-functional-refusal-validation.py
 python3.11 figures/generate-pro-replication-figures.py
-find README.md ARTIFACT_README.md ARTIFACT_FREEZE_CHECKLIST.md ARTIFACT_COMMIT.txt LICENSE CITATION.cff .zenodo.json requirements.txt research paper/arxiv experiments/data/pro-replication experiments/validation experiments/analysis experiments/scripts figures incidents/2026-04-15-copilot-quota -type f \
+find README.md ARTIFACT_README.md ARTIFACT_FREEZE_CHECKLIST.md ARTIFACT_COMMIT.txt LICENSE CITATION.cff .zenodo.json requirements.txt research paper/ARCHIVE_README.md paper/arxiv experiments/data/pro-replication experiments/validation experiments/analysis experiments/scripts figures incidents/2026-04-15-copilot-quota -type f \
   ! -path '*/__pycache__/*' ! -name '.DS_Store' ! -path 'paper/arxiv/Archive.zip' \
   -print0 | sort -z | xargs -0 shasum -a 256 > SHA256SUMS
 ```

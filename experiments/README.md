@@ -1,4 +1,15 @@
-# Experiments: Cross-Agent Security Knowledge Transfer
+# Legacy Experiments: Cross-Agent Security Knowledge Transfer
+
+This file describes the original CodeCoach / "Scan, Learn, Prevent" experiment lane. It is retained for historical context only.
+
+The active manuscript and current replication artifact for the framing paper live in:
+
+- `paper/arxiv/paper.tex`
+- `paper/arxiv/paper.pdf`
+- `experiments/data/pro-replication/`
+- `experiments/analysis/`
+
+Do not treat the `output/` draft references below as submission sources for the current paper.
 
 Research experiments supporting the paper "Scan, Learn, Prevent" and AGNTCon 2026 talk submission.
 

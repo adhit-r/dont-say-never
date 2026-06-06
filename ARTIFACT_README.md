@@ -39,6 +39,7 @@ Not supported without further work:
 
 Main paper:
 
+- `paper/ARCHIVE_README.md`
 - `paper/arxiv/paper.tex`
 - `paper/arxiv/paper.pdf`
 - `paper/arxiv/abstract.txt`

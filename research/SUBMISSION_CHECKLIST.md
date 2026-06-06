@@ -56,7 +56,7 @@
 - [ ] Add hierarchical logistic regression or Bayesian hierarchical modeling.
 - [x] Add confidence intervals/effect sizes for all aggregate claims.
 - [x] Add multiple-testing correction for exploratory per-cell tests.
-- [ ] Add equivalence testing before making any equivalence claim about positive vs negative framing.
+- [x] Add equivalence testing before making any equivalence claim about positive vs negative framing.
 - [x] Document prompt order/randomization and trial independence assumptions.
 
 ## Reproducibility
@@ -64,7 +64,7 @@
 - [x] Freeze exact commit hash for submission.
 - [x] Record accepted model IDs, provider routes, CLI/API versions, and decoding settings.
 - [x] Archive exact prompts, system prompts, project rule files, retry logs, and raw outputs where available.
-- [ ] Publish a Zenodo v2 artifact bundle with expected hashes and reproduction commands.
+- [x] Publish a Zenodo v2 artifact bundle with expected hashes and reproduction commands.
 - [x] Artifact freeze checklist exists.
 - [x] Release metadata files exist: `LICENSE`, `CITATION.cff`, `.zenodo.json`, `requirements.txt`, and `ARTIFACT_README.md`.
 
@@ -95,6 +95,6 @@
 ## Release
 
 - [x] Commit final artifacts.
-- [ ] Tag a release candidate.
-- [ ] Publish Zenodo v2 after paper freeze.
-- [ ] Update README DOI note after Zenodo v2 publication.
+- [x] Tag a release candidate (`v2.0.0`; published artifact tag, not necessarily current HEAD).
+- [x] Publish Zenodo v2 after paper freeze.
+- [x] Update README DOI note after Zenodo v2 publication.
