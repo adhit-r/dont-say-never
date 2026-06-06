@@ -10,6 +10,10 @@ Repository: `https://github.com/adhit-r/dont-say-never`
 
 Prior pilot DOI, to be linked from Zenodo v2 with `isNewVersionOf`: `10.5281/zenodo.19509466`
 
+## Commit and Manifest Semantics
+
+`ARTIFACT_COMMIT.txt` records the source-content commit immediately before the manifest-refresh commit. The subsequent manifest commit updates `ARTIFACT_COMMIT.txt`, `SHA256SUMS`, and the ignored local zip sidecar. This avoids the impossible self-reference of requiring a tracked file to contain the hash of the commit that contains that file. For a release audit, treat the pushed repository `HEAD`, the root `SHA256SUMS`, and `dist/dont-say-never-zenodo-v2-artifact.zip.sha256` as the final package surface; treat `ARTIFACT_COMMIT.txt` as the content-source pointer.
+
 ## Claim Boundary
 
 Supported by the current artifact:
