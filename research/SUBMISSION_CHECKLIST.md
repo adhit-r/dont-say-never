@@ -42,7 +42,7 @@
 - [x] Detector limitations are disclosed: prose-only HTTP false positives and `Function(...)` CWE-94 false negatives.
 - [x] Paper says original 2,160-row files contain previews only, unless raw full outputs are recovered.
 - [x] Patched detector is used for all new non-API, four-arm, or cross-language extensions.
-- [ ] Main study has a full-output rerun or the submission explicitly limits claims to detector-counted previews plus validation slices.
+- [x] Main study has a full-output rerun or the submission explicitly limits claims to detector-counted previews plus validation slices.
 - [x] Semantic detectors are added where practical: structural patched-detector audit over the 60-row full-output validation slice; no claim of full AST/Semgrep coverage.
 - [x] Functional correctness is measured separately from vulnerability labels for the 60-row full-output validation slice.
 - [x] Refusal/no-code outputs are reported separately from secure functional outputs.
@@ -51,7 +51,7 @@
 ## Controls and Statistics
 
 - [ ] Complete a neutral helpful-assistant control.
-- [ ] Keep the current fast-prototyping/no-extra-security control as an adversarial baseline, not the only control.
+- [x] Keep the current fast-prototyping/no-extra-security control as an adversarial baseline, not the only control.
 - [ ] Complete a generic secure-coding control.
 - [ ] Add hierarchical logistic regression or Bayesian hierarchical modeling.
 - [x] Add confidence intervals/effect sizes for all aggregate claims.
@@ -61,9 +61,9 @@
 
 ## Reproducibility
 
-- [ ] Freeze exact commit hash for submission.
-- [ ] Record accepted model IDs, provider routes, CLI/API versions, and decoding settings.
-- [ ] Archive exact prompts, system prompts, project rule files, retry logs, and raw outputs where available.
+- [x] Freeze exact commit hash for submission.
+- [x] Record accepted model IDs, provider routes, CLI/API versions, and decoding settings.
+- [x] Archive exact prompts, system prompts, project rule files, retry logs, and raw outputs where available.
 - [ ] Publish a Zenodo v2 artifact bundle with expected hashes and reproduction commands.
 - [x] Artifact freeze checklist exists.
 - [x] Release metadata files exist: `LICENSE`, `CITATION.cff`, `.zenodo.json`, `requirements.txt`, and `ARTIFACT_README.md`.

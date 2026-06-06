@@ -1,6 +1,6 @@
 # Strengthening Roadmap
 
-Current date: 2026-05-29
+Current date: 2026-06-06
 
 Current reviewer-safe title:
 
@@ -20,6 +20,39 @@ The paper is already credible as a workshop or journal-style empirical result, b
 6. "The control condition discourages security, so the rule effect may be an artifact of overriding an anti-security instruction."
 7. "The title and abstract imply equivalence or universality without equivalence testing."
 8. "The dataset is not fully auditable because the main 2,160 rows preserve previews rather than full outputs."
+
+## Progress Board
+
+Status as of commit `d87b509` plus the current checklist update pass.
+
+| Lane | Status | Progress | Evidence | Remaining blocker |
+| --- | --- | ---: | --- | --- |
+| Core 2,160-trial replication | Done | 100% | `experiments/data/pro-replication/main/`; 6 models x 360 valid rows, 0 errors | None for Zenodo v2 |
+| Paper/PDF artifact | Done | 100% | `paper/arxiv/paper.tex`, `paper/arxiv/paper.pdf`; rebuilt with `tectonic` | Venue template later |
+| Figures and infographics | Done | 95% | `figures/fig-pro-*.png`, four-arm figures, evidence-stack infographic | Optional visual polish only |
+| Detector validation | Strong bounded slice | 75% | 60 full-output reruns, combined summary, semantic detector audit with 0 patched mismatches | 180/360 blinded sample for stronger conference claim |
+| Functional/refusal validation | Bounded slice done | 70% | 60 manually task-labeled rows: 34 secure+functional, 20 vulnerable+functional, 4 secure+nonfunctional, 2 refusal/no-code | Compile/unit checks or larger full-output rerun |
+| Four-arm decomposition | Done | 100% | `experiments/data/pro-replication/four-arm-addons/`; combined rules strongest | None for current claim |
+| Non-API extension | Done | 100% | `experiments/data/pro-replication/non-api/`; 1,080 valid, 0 errors | Optional larger prompt set |
+| Cross-language extension | Partial but useful | 70% | 5 models complete; GPT-5.3 Codex route-error only | Language-specific rules and GPT-5.3 route recovery |
+| Neutral/generic control extension | Started | 10% | `gpt-5.4-mini / eval-usage / neutral-control` has 20 rows | Complete neutral + generic controls |
+| Statistics | Solid but not final TMLR | 75% | Wilson CIs, odds ratios, FDR, regularized fixed-effect sensitivity | Full Bayesian/hierarchical model or equivalence tests |
+| Reproducibility package | Zenodo-ready | 95% | `dist/dont-say-never-zenodo-v2-artifact.zip`; `SHA256SUMS`; metadata files | Publish Zenodo v2 DOI |
+| Venue packaging | Not started | 15% | Strategy/checklist exists | ACM/TMLR/JISA template conversion |
+
+Overall readiness:
+
+- Zenodo v2 artifact: **95%**. Remaining step is upload/publish DOI.
+- AISec/JISA-style empirical paper: **70%**. Strong enough after Zenodo, stronger if neutral/generic controls are completed.
+- TMLR submission: **60%**. Needs anonymization, stronger instruction-following framing, and ideally hierarchical/equivalence analysis.
+- Proper full-conference version: **45%**. Needs multi-turn agent workflow and larger blinded/full-output validation.
+
+Next recommended parallel work:
+
+1. **Release lane**: publish Zenodo v2, then update DOI in README/CITATION.
+2. **Controls lane**: complete neutral helpful-assistant and generic secure-coding controls.
+3. **Stats lane**: add full hierarchical or equivalence testing only if the venue requires it.
+4. **Agentic lane**: design multi-turn workflow as a separate extension, not a Zenodo blocker.
 
 ## Immediate Corrections From Reviewer Critique
 
@@ -163,6 +196,11 @@ Current status:
   - CWE-94 false negatives when a model used `Function(...)` / `new Function(...)` instead of literal `eval(...)`.
 - The runner has been patched for future runs to treat refusal-only prose as no generated code and to count JavaScript `Function` constructors as CWE-94 dynamic execution.
 - Combined status: 60 manually labeled full-output reruns; recorded detector labels had 5 false positives and 3 false negatives; patched detector had 0 observed mismatches in this slice.
+- Semantic detector audit completed:
+  - `experiments/scripts/semantic-detector-audit.py`
+  - `experiments/validation/semantic-detector-audit.md`
+  - result on the 60-row full-output slice: 20 TP, 40 TN, 0 FP, 0 FN.
+  - scope boundary: structural sanity audit over observed failure modes, not full AST/Semgrep coverage over all 2,160 rows.
 
 Reviewer objection addressed:
 
@@ -188,7 +226,9 @@ Recommended sample:
 
 Immediate next validation step:
 
-- Use the patched detector from the start in the next non-API or four-arm extension.
+- For Zenodo v2: no blocker; current detector validation is adequate if claims remain bounded to detector-counted insecure API use plus a 60-row full-output validation slice.
+- For AISec/JISA: consider expanding the manual slice to 180 rows only if reviewers or target formatting allow.
+- For TMLR/proper conference: run a 360-row blinded full-output validation slice with functional labels.
 - Do not update the paper's final 2,160-trial numerical claims from validation reruns alone; use validation to justify detector limitations, detector fixes, and the next full-code extension.
 
 Deliverables:
@@ -196,6 +236,7 @@ Deliverables:
 - `experiments/validation/detector-validation-sample.jsonl`
 - `experiments/validation/detector-validation-labels.csv`
 - `experiments/validation/detector-validation-summary.md`
+- `experiments/validation/semantic-detector-audit.md`
 - table in paper: detector precision by CWE class.
 
 Paper impact:
