@@ -73,6 +73,7 @@ Current paper status: bounded replication with a 60-row full-output detector and
 | Control-baseline plan | `experiments/CONTROL_BASELINE_EXTENSION_PLAN.md` |
 | Statistics companion | `experiments/analysis/hierarchical-framing-stats.md` |
 | Statistics JSON export | `experiments/analysis/hierarchical-framing-stats.json` |
+| Stratum-bootstrap robustness | `experiments/analysis/hierarchical-robustness.md` |
 | Polarity equivalence strata | `experiments/analysis/polarity-equivalence-strata.csv` |
 | Opus provenance sensitivity | `experiments/analysis/opus-provenance-sensitivity.md` |
 | Detector validation artifacts | `experiments/validation/` |

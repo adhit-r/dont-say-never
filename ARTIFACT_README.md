@@ -33,7 +33,7 @@ Not supported without further work:
 - rules make coding agents generally secure;
 - non-vulnerable outputs are necessarily functional;
 - the original fast-prototyping control proves ordinary coding-agent improvement;
-- the instruction-decay incident is a general result.
+- the Copilot quota incident establishes a general instruction-decay effect.
 
 ## Artifact Map
 
@@ -50,6 +50,8 @@ Main replication:
 - `experiments/scripts/pro-six-model-replication.py`
 - `experiments/analysis/hierarchical-framing-stats.md`
 - `experiments/analysis/hierarchical-framing-stats.json`
+- `experiments/analysis/hierarchical-robustness.md`
+- `experiments/analysis/hierarchical-robustness.json`
 - `experiments/analysis/polarity-equivalence-strata.csv`
 - `experiments/analysis/opus-provenance-sensitivity.md`
 - `experiments/analysis/opus-provenance-sensitivity.json`
@@ -108,6 +110,7 @@ Regenerate analysis summaries:
 ```bash
 python3.11 experiments/scripts/pro-six-model-replication.py summary
 python3.11 experiments/scripts/hierarchical-framing-stats.py
+python3.11 experiments/scripts/hierarchical-robustness.py
 python3.11 experiments/scripts/summarize-non-api-extension.py
 python3.11 experiments/scripts/summarize-four-arm-extension.py
 python3.11 experiments/scripts/summarize-cross-language-extension.py

@@ -161,10 +161,22 @@ Current statistics are strong enough for the preprint:
 - FDR correction;
 - regularized fixed-effect sensitivity model;
 - random-effects equivalence test over 36 model-prompt strata.
+- stratum-bootstrap robustness over the 36 model-prompt cells.
 
 But a TMLR or stronger empirical venue may expect a model that respects the data hierarchy.
 
-Action:
+Completed no-new-model-call action:
+
+1. Bootstrap the main rule-injection and positive-vs-negative contrasts over the 36 model-prompt strata.
+2. Estimate a Mantel-Haenszel-style common odds ratio for each contrast.
+3. Store machine-readable and human-readable summaries.
+
+Result:
+
+- Rule injection remains strongly negative after stratifying by model and prompt: -45.8 percentage points, 95% CI [-58.5, -33.3], common OR 0.056 [0.028, 0.101].
+- Positive-vs-negative remains null-compatible: +1.7 percentage points, 95% CI [-3.1, +6.4], common OR 1.255 [0.647, 2.590].
+
+Remaining optional action:
 
 Add a mixed-effects logistic or Bayesian hierarchical model:
 
@@ -182,11 +194,18 @@ vulnerable ~ polarity
            + (1 | model) + (1 | prompt)
 ```
 
-Acceptance criteria:
+Completed acceptance criteria:
+
+- `experiments/scripts/hierarchical-robustness.py`;
+- `experiments/analysis/hierarchical-robustness.md`;
+- `experiments/analysis/hierarchical-robustness.json`;
+- paper reports this as a robustness companion.
+
+Optional future acceptance criteria:
 
 - `experiments/scripts/mixed_effects_framing_model.py` or R script;
 - `experiments/analysis/mixed-effects-framing-model.md`;
-- paper reports this as primary statistical model or robustness check.
+- paper reports this as a stronger statistical model or robustness check.
 
 Claim impact:
 

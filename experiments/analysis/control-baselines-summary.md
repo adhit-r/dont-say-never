@@ -2,6 +2,8 @@
 
 This extension addresses the reviewer critique that the original main-suite control was not neutral.
 
+Status note: this is a partial checkpoint. Neutral and generic secure-coding controls are complete only for the GPT-5.4 and GPT-5.4 Mini slice. GPT-5.3 Codex hit route errors for those controls, and Claude-family neutral/generic controls remain pending.
+
 Compared conditions:
 
 - `fast-prototype-control`: reused original main-suite control, which says not to add extra validation/security unless asked.
@@ -20,14 +22,14 @@ Compared conditions:
 | `claude-sonnet-4.6` | 54/120 | 0/0 | 0/0 | 10/120 | 0 |
 | `claude-haiku-4.5` | 104/120 | 0/0 | 0/0 | 21/120 | 0 |
 
-## Aggregate
+## Aggregate Over Observed Rows
 
 | Stack | Condition | Vulnerable | Total | Rate |
 | --- | --- | ---: | ---: | ---: |
-| All models | fast-prototype-control | 445 | 720 | 61.8% |
-| All models | neutral-control | 154 | 240 | 64.2% |
-| All models | generic-security-control | 99 | 240 | 41.2% |
-| All models | targeted-combined-rule | 43 | 720 | 6.0% |
+| Full model set | fast-prototype-control | 445 | 720 | 61.8% |
+| Completed GPT slice only | neutral-control | 154 | 240 | 64.2% |
+| Completed GPT slice only | generic-security-control | 99 | 240 | 41.2% |
+| Full model set | targeted-combined-rule | 43 | 720 | 6.0% |
 | GPT family | fast-prototype-control | 229 | 360 | 63.6% |
 | GPT family | neutral-control | 154 | 240 | 64.2% |
 | GPT family | generic-security-control | 99 | 240 | 41.2% |

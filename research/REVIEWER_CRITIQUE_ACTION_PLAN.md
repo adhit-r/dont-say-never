@@ -17,7 +17,7 @@ Avoid stronger claims such as:
 - polarity does not matter or is equivalent across models;
 - rules reliably improve real-world secure coding;
 - the pilot proved prohibition backfire;
-- instruction decay is established from the Copilot quota incident.
+- the Copilot quota incident establishes a general instruction-decay effect.
 
 ## Critical Fixes Before Any Submission
 
