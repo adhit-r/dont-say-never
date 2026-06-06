@@ -81,6 +81,7 @@ python3.11 experiments/scripts/summarize-four-arm-extension.py
 python3.11 experiments/scripts/summarize-cross-language-extension.py
 python3.11 experiments/scripts/summarize-control-baselines.py
 python3.11 experiments/scripts/summarize-combined-detector-validation.py
+python3.11 experiments/scripts/semantic-detector-audit.py
 python3.11 experiments/scripts/classify-functional-refusal-validation.py
 python3.11 figures/generate-pro-replication-figures.py
 find README.md ARTIFACT_README.md ARTIFACT_FREEZE_CHECKLIST.md ARTIFACT_COMMIT.txt LICENSE CITATION.cff .zenodo.json requirements.txt research paper/arxiv experiments/data/pro-replication experiments/validation experiments/analysis experiments/scripts figures incidents/2026-04-15-copilot-quota -type f \

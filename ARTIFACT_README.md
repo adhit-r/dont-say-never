@@ -58,6 +58,7 @@ Extensions:
 Validation:
 
 - `experiments/validation/detector-validation-combined-summary.md`
+- `experiments/validation/semantic-detector-audit.md`
 - `experiments/validation/reruns/`
 - `experiments/validation/openrouter-claude-reruns/`
 - `experiments/validation/functional-refusal/`
@@ -101,6 +102,7 @@ python3.11 experiments/scripts/summarize-four-arm-extension.py
 python3.11 experiments/scripts/summarize-cross-language-extension.py
 python3.11 experiments/scripts/summarize-control-baselines.py
 python3.11 experiments/scripts/summarize-combined-detector-validation.py
+python3.11 experiments/scripts/semantic-detector-audit.py
 python3.11 experiments/scripts/classify-functional-refusal-validation.py
 python3.11 figures/generate-pro-replication-figures.py
 ```
@@ -116,6 +118,7 @@ tectonic paper.tex
 
 - The main 2,160-row JSON files preserve `code_preview`, not full generated outputs.
 - Full-output validation is a 60-row rerun slice and does not retroactively make the full main dataset auditable.
+- The structural detector audit has 0 mismatches on the 60-row manually labeled full-output slice, but it is not a full AST/Semgrep proof over all 2,160 rows.
 - Functional/refusal validation includes manual task-satisfaction labels for the 60-row full-output validation slice: 34 secure+functional, 20 vulnerable+functional, 4 secure+nonfunctional, and 2 refusal/no-code.
 - TypeScript compile checks are marked `not_run` when `tsc` is unavailable.
 - Control-baseline data are partial unless the extension is completed before final release.

@@ -48,6 +48,7 @@ Current validation slice:
 - 30 GPT-family rows and 30 Claude-family rows.
 - Recorded detector labels on labeled reruns: 5 FP, 3 FN.
 - Patched detector on labeled reruns: 0 FP, 0 FN.
+- Structural detector audit on the same 60 rows: 20 TP, 40 TN, 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
 Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a completed four-arm decomposition using the patched detector, and a bounded 1,200-row cross-language extension.
@@ -74,6 +75,7 @@ Current paper status: bounded replication with a 60-row full-output detector and
 | Statistics JSON export | `experiments/analysis/hierarchical-framing-stats.json` |
 | Detector validation artifacts | `experiments/validation/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
+| Semantic detector audit | `experiments/validation/semantic-detector-audit.md` |
 | Functional/refusal validation | `experiments/validation/functional-refusal/functional-refusal-summary.md` |
 | Functional labeling guide | `experiments/validation/functional-refusal/FUNCTIONAL_LABELING_GUIDE.md` |
 | Artifact freeze checklist | `ARTIFACT_FREEZE_CHECKLIST.md` |

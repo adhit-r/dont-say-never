@@ -43,7 +43,7 @@
 - [x] Paper says original 2,160-row files contain previews only, unless raw full outputs are recovered.
 - [x] Patched detector is used for all new non-API, four-arm, or cross-language extensions.
 - [ ] Main study has a full-output rerun or the submission explicitly limits claims to detector-counted previews plus validation slices.
-- [ ] Semantic detectors are added where practical: AST, Semgrep, ESLint/security rules, or custom taint-style checks.
+- [x] Semantic detectors are added where practical: structural patched-detector audit over the 60-row full-output validation slice; no claim of full AST/Semgrep coverage.
 - [x] Functional correctness is measured separately from vulnerability labels for the 60-row full-output validation slice.
 - [x] Refusal/no-code outputs are reported separately from secure functional outputs.
 - [ ] Manual annotation is blinded for at least a stratified sample.
@@ -57,7 +57,7 @@
 - [x] Add confidence intervals/effect sizes for all aggregate claims.
 - [x] Add multiple-testing correction for exploratory per-cell tests.
 - [ ] Add equivalence testing before making any equivalence claim about positive vs negative framing.
-- [ ] Document prompt order/randomization and trial independence assumptions.
+- [x] Document prompt order/randomization and trial independence assumptions.
 
 ## Reproducibility
 
