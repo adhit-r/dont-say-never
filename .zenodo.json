@@ -9,7 +9,7 @@
     }
   ],
   "license": "cc-by-4.0",
-  "version": "v2.0.0-rc1",
+  "version": "v2.0.0",
   "upload_type": "publication",
   "publication_type": "preprint",
   "access_right": "open",
@@ -34,5 +34,5 @@
       "scheme": "url"
     }
   ],
-  "notes": "Mixed-license artifact. Code and data are MIT licensed; manuscript text and figures are CC BY 4.0 unless a venue-specific submitted version requires different terms. The Zenodo metadata license is CC BY 4.0 because this record is publication/preprint-first; see LICENSE for component-level terms. Control-baseline data are partial unless completed before final v2 freeze. Cross-language GPT-5.3 Codex rows are route-error evidence only."
+  "notes": "Mixed-license artifact. Code and data are MIT licensed; manuscript text and figures are CC BY 4.0 unless a venue-specific submitted version requires different terms. The Zenodo metadata license is CC BY 4.0 because this record is publication/preprint-first; see LICENSE for component-level terms. Control-baseline data are partial: GPT-5.4 and GPT-5.4 Mini are complete for the checkpoint, GPT-5.3 Codex is route-blocked for this suite, and Claude-family neutral/generic rows are pending. Cross-language GPT-5.3 Codex rows are route-error evidence only."
 }

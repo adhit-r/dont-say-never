@@ -2,11 +2,11 @@
 
 **A Multi-Model Replication in LLM Coding Agents**
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19509466.svg)](https://doi.org/10.5281/zenodo.19509466)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20574220.svg)](https://doi.org/10.5281/zenodo.20574220)
 
 **Author:** [Adhithya Rajasekaran](https://orcid.org/0009-0004-1682-7958) (adhithya@axonome.xyz)
 
-**Status:** active manuscript. The Zenodo DOI currently points to the pilot version; publish a new Zenodo version only after the 2,160-trial paper is frozen.
+**Status:** Zenodo v2 published at https://doi.org/10.5281/zenodo.20574220. The earlier pilot remains available at https://doi.org/10.5281/zenodo.19509466.
 
 ## Summary
 
@@ -129,7 +129,7 @@ Required before submission:
 - Demote the bidirectional instruction-decay incident to an appendix note or separate paper; do not frame it as a main contribution.
 - Verify every cited work exists and is accurately described.
 - Fix LaTeX overfull table/reference warnings before submission.
-- Freeze repository artifacts and publish Zenodo v2.
+- Zenodo v2 published at `10.5281/zenodo.20574220`; next venue-specific work should use this DOI unless submitting anonymously.
 
 ## Origin
 

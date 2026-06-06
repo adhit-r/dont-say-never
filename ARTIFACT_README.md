@@ -8,7 +8,9 @@ Author: Adhithya Rajasekaran, Axonome, ORCID `0009-0004-1682-7958`
 
 Repository: `https://github.com/adhit-r/dont-say-never`
 
-Prior pilot DOI, to be linked from Zenodo v2 with `isNewVersionOf`: `10.5281/zenodo.19509466`
+Zenodo v2 DOI: `10.5281/zenodo.20574220`
+
+Prior pilot DOI, linked as the superseded pilot: `10.5281/zenodo.19509466`
 
 ## Commit and Manifest Semantics
 
