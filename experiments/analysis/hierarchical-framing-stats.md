@@ -42,6 +42,21 @@ Interpretation:
 - `positive_vs_negative` estimates positive framing vs negative framing among rule rows only.
 - Because this is a regularized fixed-effect sensitivity model, use it to support claim discipline, not as a substitute for a full Bayesian hierarchical analysis.
 
+## Positive-vs-Negative Practical Equivalence Test
+
+This pre-specified equivalence sensitivity test treats each model-prompt pair as a stratum and estimates the positive-framing minus prohibition-framing risk difference with a DerSimonian-Laird random-effects model. The equivalence margin is +/-5 percentage points.
+
+| Estimate | Value |
+| --- | ---: |
+| Strata | 36 |
+| Random-effects risk difference | 1.2 pp |
+| 90% CI | -1.5 to 3.9 pp |
+| Tau | 5.4 pp |
+| TOST p | 0.00952 |
+| Equivalent within +/-5 pp | True |
+
+Interpretation: positive and prohibition framing are practically equivalent in aggregate within this benchmark-level margin, but per-cell effects remain heterogeneous. This is not a claim that the framings are identical for every model, prompt, CWE, or production workflow.
+
 ## Exploratory Per-Cell Tests With BH-FDR Correction
 
 Per-cell tests are exploratory. Use FDR-adjusted `q` values for interpretation; do not use isolated uncorrected cells as headline evidence.
@@ -82,10 +97,10 @@ Per-cell tests are exploratory. Use FDR-adjusted `q` values for interpretation; 
 
 ## Control-Baseline Extension Coverage
 
-- Valid new rows: 260/1440
-- Error rows: 0
-- Neutral control: 89/140 vulnerable
-- Generic security control: 50/120 vulnerable
+- Valid new rows: 480/1440
+- Error rows: 3
+- Neutral control: 154/240 vulnerable
+- Generic security control: 99/240 vulnerable
 
 This extension is too incomplete for manuscript-level claims. Current rows are checkpoint evidence only.
 
@@ -93,11 +108,11 @@ This extension is too incomplete for manuscript-level claims. Current rows are c
 
 Supported:
 
-> Rule presence substantially reduced detector-counted insecure API use in the main benchmark. Positive framing showed no consistent aggregate advantage over prohibition framing; exploratory cell-level polarity effects were heterogeneous and should be interpreted with FDR correction.
+> Rule presence substantially reduced detector-counted insecure API use in the main benchmark. Positive framing showed no consistent aggregate advantage over prohibition framing; in a stratified random-effects sensitivity analysis, positive and prohibition framing were practically equivalent in aggregate within a pre-specified +/-5 percentage-point margin. Exploratory cell-level polarity effects remained heterogeneous and should be interpreted with FDR correction.
 
 Not supported without more work:
 
-- Positive and negative framing are equivalent.
+- Positive and negative framing are identical in every model-prompt cell.
 - Rules reliably improve real-world secure coding.
 - The current fast-prototyping control alone proves ordinary coding-agent improvement.
 - The instruction-decay incident is a general result.

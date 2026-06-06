@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import math
+import csv
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -33,6 +34,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = ROOT / "experiments" / "data" / "pro-replication"
 OUT_MD = ROOT / "experiments" / "analysis" / "hierarchical-framing-stats.md"
 OUT_JSON = ROOT / "experiments" / "analysis" / "hierarchical-framing-stats.json"
+OUT_EQUIV_CSV = ROOT / "experiments" / "analysis" / "polarity-equivalence-strata.csv"
 
 MODELS = [
     "gpt-5.4",
@@ -292,6 +294,93 @@ def exploratory_tests(main_rows: list[dict]) -> list[dict]:
     return tests
 
 
+def polarity_equivalence(main_rows: list[dict], margin: float = 0.05) -> dict:
+    """Random-effects equivalence test for positive vs negative framing.
+
+    The unit of analysis is the model x prompt stratum. The effect is the
+    absolute risk difference, positive-framing minus negative-framing. Variance
+    uses Agresti-Caffo smoothing so zero-event cells remain defined. The pooled
+    estimate uses the DerSimonian-Laird random-effects estimator.
+    """
+    valid = valid_rows(main_rows)
+    strata = []
+    for model in MODELS:
+        for prompt in MAIN_PROMPTS:
+            rows = [r for r in valid if r["model_id"] == model and r["prompt_id"] == prompt]
+            negative = count(r for r in rows if r["condition"] == "negative-framing")
+            positive = count(r for r in rows if r["condition"] == "positive-framing")
+            if not negative.total or not positive.total:
+                continue
+
+            pos_rate = positive.rate
+            neg_rate = negative.rate
+            diff = pos_rate - neg_rate
+            pos_ac = (positive.vuln + 1) / (positive.total + 2)
+            neg_ac = (negative.vuln + 1) / (negative.total + 2)
+            variance = (
+                pos_ac * (1 - pos_ac) / (positive.total + 2)
+                + neg_ac * (1 - neg_ac) / (negative.total + 2)
+            )
+            strata.append({
+                "model_id": model,
+                "prompt_id": prompt,
+                "positive_vuln": positive.vuln,
+                "positive_total": positive.total,
+                "negative_vuln": negative.vuln,
+                "negative_total": negative.total,
+                "positive_rate": pos_rate,
+                "negative_rate": neg_rate,
+                "risk_difference": diff,
+                "variance_agresti_caffo": variance,
+            })
+
+    if not strata:
+        raise ValueError("No positive-vs-negative strata found")
+
+    effects = np.array([s["risk_difference"] for s in strata], dtype=float)
+    variances = np.array([s["variance_agresti_caffo"] for s in strata], dtype=float)
+    weights = 1 / variances
+    fixed = float(np.sum(weights * effects) / np.sum(weights))
+    q = float(np.sum(weights * (effects - fixed) ** 2))
+    k = len(strata)
+    c = float(np.sum(weights) - np.sum(weights**2) / np.sum(weights))
+    tau2 = max(0.0, (q - (k - 1)) / c) if c > 0 else 0.0
+    random_weights = 1 / (variances + tau2)
+    delta = float(np.sum(random_weights * effects) / np.sum(random_weights))
+    se = float(math.sqrt(1 / np.sum(random_weights)))
+    ci90_low = float(delta - norm.ppf(0.95) * se)
+    ci90_high = float(delta + norm.ppf(0.95) * se)
+    z_lower = (delta + margin) / se
+    z_upper = (delta - margin) / se
+    p_lower = float(1 - norm.cdf(z_lower))
+    p_upper = float(norm.cdf(z_upper))
+    tost_p = max(p_lower, p_upper)
+
+    for s, w in zip(strata, random_weights):
+        s["random_effect_weight"] = float(w)
+
+    return {
+        "contrast": "positive_minus_negative",
+        "method": "DerSimonian-Laird random-effects meta-analysis over model_id x prompt_id strata",
+        "effect": "absolute risk difference in vulnerable-output rate",
+        "margin_risk_difference": margin,
+        "strata_count": k,
+        "fixed_effect_delta": fixed,
+        "q": q,
+        "tau2": tau2,
+        "tau": float(math.sqrt(tau2)),
+        "delta_hat": delta,
+        "se": se,
+        "ci90_low": ci90_low,
+        "ci90_high": ci90_high,
+        "tost_p_lower": p_lower,
+        "tost_p_upper": p_upper,
+        "tost_p": tost_p,
+        "equivalent_within_margin": bool(ci90_low > -margin and ci90_high < margin),
+        "strata": strata,
+    }
+
+
 def control_baseline_coverage() -> dict:
     rows = load_suite("control-baselines")
     valid = valid_rows(rows)
@@ -381,6 +470,7 @@ def make_markdown(report: dict) -> str:
             f"{m['or_low']:.3f}-{m['or_high']:.3f} | {m['p']:.3g} | {m['converged']} |"
         )
 
+    eq = report["polarity_equivalence"]
     lines += [
         "",
         "Interpretation:",
@@ -388,6 +478,21 @@ def make_markdown(report: dict) -> str:
         "- `rule_present` estimates any targeted rule vs control in the main dataset.",
         "- `positive_vs_negative` estimates positive framing vs negative framing among rule rows only.",
         "- Because this is a regularized fixed-effect sensitivity model, use it to support claim discipline, not as a substitute for a full Bayesian hierarchical analysis.",
+        "",
+        "## Positive-vs-Negative Practical Equivalence Test",
+        "",
+        "This pre-specified equivalence sensitivity test treats each model-prompt pair as a stratum and estimates the positive-framing minus prohibition-framing risk difference with a DerSimonian-Laird random-effects model. The equivalence margin is +/-5 percentage points.",
+        "",
+        "| Estimate | Value |",
+        "| --- | ---: |",
+        f"| Strata | {eq['strata_count']} |",
+        f"| Random-effects risk difference | {100*eq['delta_hat']:.1f} pp |",
+        f"| 90% CI | {100*eq['ci90_low']:.1f} to {100*eq['ci90_high']:.1f} pp |",
+        f"| Tau | {100*eq['tau']:.1f} pp |",
+        f"| TOST p | {eq['tost_p']:.3g} |",
+        f"| Equivalent within +/-5 pp | {eq['equivalent_within_margin']} |",
+        "",
+        "Interpretation: positive and prohibition framing are practically equivalent in aggregate within this benchmark-level margin, but per-cell effects remain heterogeneous. This is not a claim that the framings are identical for every model, prompt, CWE, or production workflow.",
         "",
         "## Exploratory Per-Cell Tests With BH-FDR Correction",
         "",
@@ -437,11 +542,11 @@ def make_markdown(report: dict) -> str:
         "",
         "Supported:",
         "",
-        "> Rule presence substantially reduced detector-counted insecure API use in the main benchmark. Positive framing showed no consistent aggregate advantage over prohibition framing; exploratory cell-level polarity effects were heterogeneous and should be interpreted with FDR correction.",
+        "> Rule presence substantially reduced detector-counted insecure API use in the main benchmark. Positive framing showed no consistent aggregate advantage over prohibition framing; in a stratified random-effects sensitivity analysis, positive and prohibition framing were practically equivalent in aggregate within a pre-specified +/-5 percentage-point margin. Exploratory cell-level polarity effects remained heterogeneous and should be interpreted with FDR correction.",
         "",
         "Not supported without more work:",
         "",
-        "- Positive and negative framing are equivalent.",
+        "- Positive and negative framing are identical in every model-prompt cell.",
         "- Rules reliably improve real-world secure coding.",
         "- The current fast-prototyping control alone proves ordinary coding-agent improvement.",
         "- The instruction-decay incident is a general result.",
@@ -487,6 +592,7 @@ def main() -> None:
         "headline_counts": {k: count_json(v) for k, v in counts.items()},
         "primary_contrasts": contrasts,
         "fixed_effect_models": fixed_models,
+        "polarity_equivalence": polarity_equivalence(main_rows_all),
         "exploratory_tests": exploratory_tests(main_rows_all),
         "control_baseline_coverage": control_baseline_coverage(),
     }
@@ -494,8 +600,14 @@ def main() -> None:
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(report, indent=2))
     OUT_MD.write_text(make_markdown(report))
+    strata = report["polarity_equivalence"]["strata"]
+    with OUT_EQUIV_CSV.open("w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=list(strata[0].keys()))
+        writer.writeheader()
+        writer.writerows(strata)
     print(f"Wrote {OUT_MD}")
     print(f"Wrote {OUT_JSON}")
+    print(f"Wrote {OUT_EQUIV_CSV}")
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ The paper is already credible as a workshop or journal-style empirical result, b
 
 ## Progress Board
 
-Status as of commit `d87b509` plus the current checklist update pass.
+Status as of the 2026-06-06 strengthening pass.
 
 | Lane | Status | Progress | Evidence | Remaining blocker |
 | --- | --- | ---: | --- | --- |
@@ -35,23 +35,23 @@ Status as of commit `d87b509` plus the current checklist update pass.
 | Four-arm decomposition | Done | 100% | `experiments/data/pro-replication/four-arm-addons/`; combined rules strongest | None for current claim |
 | Non-API extension | Done | 100% | `experiments/data/pro-replication/non-api/`; 1,080 valid, 0 errors | Optional larger prompt set |
 | Cross-language extension | Partial but useful | 70% | 5 models complete; GPT-5.3 Codex route-error only | Language-specific rules and GPT-5.3 route recovery |
-| Neutral/generic control extension | Partial GPT checkpoint | 18% full / 36% GPT-only | 260 valid rows: GPT-5.4 has 120/240, GPT-5.4 Mini has 140/240, 0 errors | Complete GPT-5.3 route or finish stable GPT subset; Claude controls need non-CLI route |
-| Statistics | Solid but not final TMLR | 75% | Wilson CIs, odds ratios, FDR, regularized fixed-effect sensitivity | Full Bayesian/hierarchical model or equivalence tests |
+| Neutral/generic control extension | Partial GPT checkpoint | 33% full / 67% GPT-only | 480 valid rows: GPT-5.4 and GPT-5.4 Mini complete; GPT-5.3 Codex route-blocked with 3 errors | Claude controls need non-CLI route; GPT-5.3 route recovery optional |
+| Statistics | Strong sensitivity package | 90% | Wilson CIs, odds ratios, FDR, regularized fixed-effect sensitivity, random-effects practical-equivalence test | Full Bayesian model only if a venue requests it |
 | Reproducibility package | Zenodo-ready | 95% | `dist/dont-say-never-zenodo-v2-artifact.zip`; `SHA256SUMS`; metadata files | Publish Zenodo v2 DOI |
 | Venue packaging | Not started | 15% | Strategy/checklist exists | ACM/TMLR/JISA template conversion |
 
 Overall readiness:
 
 - Zenodo v2 artifact: **95%**. Remaining step is upload/publish DOI.
-- AISec/JISA-style empirical paper: **72%**. Strong enough after Zenodo, stronger if neutral/generic controls are completed.
-- TMLR submission: **60%**. Needs anonymization, stronger instruction-following framing, and ideally hierarchical/equivalence analysis.
+- AISec/JISA-style empirical paper: **76%**. Strong enough after Zenodo, stronger if neutral/generic controls are completed.
+- TMLR submission: **68%**. Needs anonymization and stronger instruction-following framing; the random-effects equivalence sensitivity analysis is now implemented.
 - Proper full-conference version: **45%**. Needs multi-turn agent workflow and larger blinded/full-output validation.
 
 Next recommended parallel work:
 
 1. **Release lane**: publish Zenodo v2, then update DOI in README/CITATION.
 2. **Controls lane**: complete neutral helpful-assistant and generic secure-coding controls.
-3. **Stats lane**: add full hierarchical or equivalence testing only if the venue requires it.
+3. **Stats lane**: keep the implemented equivalence claim bounded; add a full Bayesian model only if the venue requires it.
 4. **Agentic lane**: design multi-turn workflow as a separate extension, not a Zenodo blocker.
 
 ## Immediate Corrections From Reviewer Critique
@@ -60,7 +60,7 @@ Status as of 2026-06-02:
 
 - The pilot 5/10 vs 2/10 backfire cell was previously over-interpreted. Recomputed Fisher's exact test for the stated table gives two-sided `p approx. 0.350` and one-sided `p approx. 0.175`, not `p=0.016`. The paper must treat this as a descriptive anomaly and motivation only.
 - The current control prompt is adversarial because it discourages extra validation/security unless asked. Keep it, but rename it as a fast-prototyping or adversarial baseline and add neutral/generic-security controls before claiming ordinary coding-agent security improvement.
-- "Polarity doesn't" is too strong unless supported by equivalence testing. The safer claim is: positive framing shows no consistent aggregate advantage over prohibition framing in this benchmark.
+- "Polarity doesn't" is too strong as a universal claim. The current supported claim is: positive framing shows no consistent aggregate advantage over prohibition framing, and the aggregate positive-vs-prohibition contrast is practically equivalent within a pre-specified +/-5 percentage-point benchmark-level margin.
 - The instruction-decay/quota incident is useful but should not become a second main claim unless backed by a controlled decay experiment.
 
 ## Current Baseline
@@ -302,12 +302,12 @@ Current status:
 - Suite added to `experiments/scripts/pro-six-model-replication.py` as `control-baselines`.
 - Plan added at `experiments/CONTROL_BASELINE_EXTENSION_PLAN.md`.
 - Summary script added at `experiments/scripts/summarize-control-baselines.py`.
-- Current checkpoint completed: 260 valid rows, 139 vulnerable, 0 errors.
-  - `gpt-5.4`: 120/240 rows complete; 75/120 vulnerable.
-  - `gpt-5.4-mini`: 140/240 rows complete; 64/140 vulnerable.
-  - `gpt-5.3-codex`: current Codex CLI smoke fails; route-blocked for this suite.
-- Full six-model remaining target: 1,180 rows.
-- GPT-only remaining target, excluding currently blocked GPT-5.3 Codex: 220 rows.
+- Current checkpoint completed: 480 valid rows, 253 vulnerable, 3 retained route errors.
+  - `gpt-5.4`: 240/240 rows complete; 134/240 vulnerable.
+  - `gpt-5.4-mini`: 240/240 rows complete; 119/240 vulnerable.
+  - `gpt-5.3-codex`: current Codex CLI route failed for this suite; 0 valid rows, 3 errors.
+- Full six-model remaining target: 960 rows.
+- GPT-only remaining target, excluding currently blocked GPT-5.3 Codex: 0 rows for the stable GPT-5.4/GPT-5.4 Mini subset.
 - Preliminary pattern: neutral controls are comparable to the fast-prototyping baseline in sampled GPT cells; generic secure-coding advice helps in some cells but is much weaker than targeted CWE-specific combined rules.
 
 Reviewer objection addressed:

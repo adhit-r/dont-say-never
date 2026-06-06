@@ -20,13 +20,14 @@ Supported by the current artifact:
 
 - targeted CWE-specific security rules reduce detector-counted insecure API use in the main 2,160-row benchmark;
 - positive framing has no consistent aggregate advantage over prohibition framing in the tested benchmark;
+- positive and prohibition framing are practically equivalent in aggregate within a pre-specified +/-5 percentage-point benchmark-level margin, with local model-prompt heterogeneity;
 - exploratory per-cell effects are heterogeneous and should be interpreted with multiple-testing correction;
 - the non-API extension shows prompt-class-dependent behavior in this prompt set;
 - the four-arm extension is consistent with an information-content explanation; valid add-on rows are complete and retained error rows are disclosed in the summary.
 
 Not supported without further work:
 
-- positive and negative framing are equivalent;
+- positive and negative framing are identical or interchangeable in every model-prompt cell;
 - rules make coding agents generally secure;
 - non-vulnerable outputs are necessarily functional;
 - the original fast-prototyping control proves ordinary coding-agent improvement;
@@ -47,6 +48,7 @@ Main replication:
 - `experiments/scripts/pro-six-model-replication.py`
 - `experiments/analysis/hierarchical-framing-stats.md`
 - `experiments/analysis/hierarchical-framing-stats.json`
+- `experiments/analysis/polarity-equivalence-strata.csv`
 
 Extensions:
 
@@ -125,6 +127,6 @@ tectonic paper.tex
 - The structural detector audit has 0 mismatches on the 60-row manually labeled full-output slice, but it is not a full AST/Semgrep proof over all 2,160 rows.
 - Functional/refusal validation includes manual task-satisfaction labels for the 60-row full-output validation slice: 34 secure+functional, 20 vulnerable+functional, 4 secure+nonfunctional, and 2 refusal/no-code.
 - TypeScript compile checks are marked `not_run` when `tsc` is unavailable.
-- Control-baseline data are partial unless the extension is completed before final release.
+- Control-baseline data are partial: GPT-5.4 and GPT-5.4 Mini have complete neutral/generic rows, GPT-5.3 Codex is route-blocked for this suite, and Claude-family neutral/generic rows are pending.
 - Cross-language GPT-5.3 Codex rows are route-error evidence only.
 - Claude-family extension data that used OpenRouter should be interpreted with route-confound caution.

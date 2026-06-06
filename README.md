@@ -16,7 +16,7 @@ The robust finding is simpler:
 
 > Targeted security rules reduce detector-counted insecure API use across all six tested coding agents. Positive framing has no consistent aggregate advantage over prohibition framing in this benchmark.
 
-The repository also includes a completed **1,080-trial non-API-naming extension**, a **2,160-valid-row four-arm decomposition with 5 retained failed attempts disclosed**, a bounded **1,200-row cross-language extension** across five completed models, and a partial **260-row control-baseline extension**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension is directional evidence for Python/Go portability, with GPT-5.3 Codex excluded due to route errors and language-specific rule text still needed. The control-baseline extension tests whether the original control was too adversarial by adding neutral and generic secure-coding controls; current GPT-only rows are preliminary and incomplete.
+The repository also includes a completed **1,080-trial non-API-naming extension**, a **2,160-valid-row four-arm decomposition with 5 retained failed attempts disclosed**, a bounded **1,200-row cross-language extension** across five completed models, and a partial **480-row GPT-family control-baseline extension**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension is directional evidence for Python/Go portability, with GPT-5.3 Codex excluded due to route errors and language-specific rule text still needed. The control-baseline extension tests whether the original control was too adversarial by adding neutral and generic secure-coding controls; GPT-5.4 and GPT-5.4 Mini are complete for this checkpoint, GPT-5.3 Codex is route-blocked, and Claude-family neutral/generic controls remain pending.
 
 ## Final Dataset
 
@@ -33,7 +33,7 @@ The repository also includes a completed **1,080-trial non-API-naming extension*
 | Finding | Evidence |
 | --- | --- |
 | Rule injection works. | Control vulnerability rates of 48-87% fall to 2-23% when rule conditions are pooled. Fisher's exact p < 0.001 in all 6 models. |
-| Positive framing has no consistent aggregate advantage. | Negative vs positive framing is not significant for any model in aggregate; the statistics companion estimates a positive-vs-negative odds ratio near 1.0. |
+| Positive framing has no consistent aggregate advantage. | Negative vs positive framing is not significant for any model in aggregate; the statistics companion estimates a positive-minus-negative random-effects risk difference of +1.2 percentage points (90% CI -1.5 to +3.9), inside a +/-5 percentage-point practical-equivalence margin. |
 | The pilot backfire does not replicate. | No cell in the final 36-cell replication reproduces the pilot's 50%-vs-20% prohibition backfire. |
 | Local heterogeneity remains. | Some prompt/model cells move in opposite directions, so rule wording should be tested against the target agent stack. |
 | Non-API risk is prompt-class dependent. | Formula evaluation remains high-risk without naming `eval()` (85/120 control vulnerable), while hash/token prompts are 0/720 vulnerable. |
@@ -51,7 +51,7 @@ Current validation slice:
 - Structural detector audit on the same 60 rows: 20 TP, 40 TN, 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a 2,160-valid-row four-arm decomposition with retained failed attempts disclosed, a bounded 1,200-row cross-language extension, and a partial 260-row GPT-only control-baseline checkpoint.
+Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a 2,160-valid-row four-arm decomposition with retained failed attempts disclosed, a bounded 1,200-row cross-language extension, and a partial 480-row GPT-family control-baseline checkpoint.
 
 ## Main Artifacts
 
@@ -73,6 +73,7 @@ Current paper status: bounded replication with a 60-row full-output detector and
 | Control-baseline plan | `experiments/CONTROL_BASELINE_EXTENSION_PLAN.md` |
 | Statistics companion | `experiments/analysis/hierarchical-framing-stats.md` |
 | Statistics JSON export | `experiments/analysis/hierarchical-framing-stats.json` |
+| Polarity equivalence strata | `experiments/analysis/polarity-equivalence-strata.csv` |
 | Detector validation artifacts | `experiments/validation/` |
 | Combined validation summary | `experiments/validation/detector-validation-combined-summary.md` |
 | Semantic detector audit | `experiments/validation/semantic-detector-audit.md` |
@@ -124,7 +125,7 @@ Required before submission:
 - Complete neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
 - Keep full-study claims bounded to detector-counted insecure API use under code previews; only the 60-row full-output slice has manual task-satisfaction labels.
 - Expand functional task-satisfaction labels beyond the current 60-row slice if making full-dataset functional-correctness claims.
-- Add a full hierarchical/equivalence analysis if making equivalence claims; the current statistics companion already adds Wilson CIs, effect sizes, FDR correction, and regularized fixed-effect sensitivity models.
+- Keep equivalence claims bounded to the current random-effects sensitivity analysis: aggregate positive-vs-prohibition practical equivalence within +/-5 percentage points, with local heterogeneity.
 - Demote the bidirectional instruction-decay incident to an appendix note or separate paper; do not frame it as a main contribution.
 - Verify every cited work exists and is accurately described.
 - Fix LaTeX overfull table/reference warnings before submission.

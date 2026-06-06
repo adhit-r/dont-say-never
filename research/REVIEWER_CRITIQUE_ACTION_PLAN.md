@@ -128,17 +128,17 @@ The pilot's 5/10 vs 2/10 table is not significant:
 
 Use this as a self-correction point, not a weakness to hide.
 
-### Avoid Non-Significance as Equivalence
+### Bound the Equivalence Claim
 
 Current claim should be:
 
-> Positive framing showed no consistent aggregate advantage over negative framing in this benchmark.
+> Positive framing showed no consistent aggregate advantage over negative framing in this benchmark. A random-effects equivalence sensitivity analysis over model-prompt strata supports aggregate practical equivalence within a pre-specified +/-5 percentage-point margin, while local heterogeneity remains.
 
 Do not claim:
 
-> Positive and negative framing are equivalent.
+> Positive and negative framing are identical or interchangeable in every model-prompt cell.
 
-To make equivalence claims, add:
+Completed for the current draft:
 
 - pre-specified smallest effect size of interest;
 - two one-sided tests or Bayesian equivalence analysis;
