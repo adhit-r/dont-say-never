@@ -14,7 +14,7 @@ Prior pilot DOI, linked as the superseded pilot: `10.5281/zenodo.19509466`
 
 ## Commit and Manifest Semantics
 
-`ARTIFACT_COMMIT.txt` records the source-content commit immediately before a manifest-refresh commit. The subsequent manifest commit updates `ARTIFACT_COMMIT.txt` and `SHA256SUMS`. This avoids the impossible self-reference of requiring a tracked file to contain the hash of the commit that contains that file. For a source audit, treat the pushed repository `HEAD` plus the root `SHA256SUMS` as the current package surface; treat `ARTIFACT_COMMIT.txt` as the content-source pointer. The `dist/dont-say-never-zenodo-v2-artifact.zip.sha256` sidecar documents the previously published Zenodo v2 zip and should be regenerated only when a new zip bundle is intentionally built.
+`ARTIFACT_COMMIT.txt` records the source-content commit immediately before a manifest-refresh commit. The subsequent manifest commit updates `ARTIFACT_COMMIT.txt` and `SHA256SUMS`. This avoids the impossible self-reference of requiring a tracked file to contain the hash of the commit that contains that file. For a source audit, treat the pushed repository `HEAD` plus the root `SHA256SUMS` as the current package surface; treat `ARTIFACT_COMMIT.txt` as the content-source pointer. The `scripts/build-zenodo-v2-artifact.sh` helper rebuilds the Zenodo v2 zip from the `SHA256SUMS` file surface and rewrites `dist/dont-say-never-zenodo-v2-artifact.zip.sha256`; use it when intentionally refreshing the bundle.
 
 ## Claim Boundary
 
@@ -94,6 +94,11 @@ Incident evidence, if retained in the manuscript appendix:
 
 - `incidents/2026-04-15-copilot-quota/`
 
+Release helpers:
+
+- `scripts/check-release-consistency.py`
+- `scripts/build-zenodo-v2-artifact.sh`
+
 ## Reproduction Commands
 
 Use Python 3.11. Install the small Python dependency set:
@@ -104,7 +109,7 @@ python3.11 -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-These requirements reproduce analysis summaries and figures only. Re-running model collection additionally requires Codex CLI, Claude CLI or OpenRouter credentials, and Node/TypeScript tooling for legacy scripts; model collection is not part of the frozen reproduction path.
+These requirements reproduce analysis summaries, consistency checks, and figures only. Re-running model collection additionally requires Codex CLI, Claude CLI or OpenRouter credentials, and Node/TypeScript tooling for legacy scripts; model collection is not part of the frozen reproduction path.
 
 Regenerate analysis summaries:
 
@@ -123,6 +128,13 @@ python3.11 experiments/scripts/build-full-output-validation-plan.py
 python3.11 experiments/scripts/summarize-full-output-validation.py
 python3.11 experiments/scripts/opus-provenance-sensitivity.py
 python3.11 figures/generate-pro-replication-figures.py
+python3.11 scripts/check-release-consistency.py
+```
+
+Rebuild the frozen Zenodo v2 zip and sidecar checksum:
+
+```bash
+bash scripts/build-zenodo-v2-artifact.sh
 ```
 
 Build the paper PDF if `tectonic` is installed:

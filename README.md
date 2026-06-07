@@ -16,7 +16,7 @@ The robust finding is simpler:
 
 > Targeted security rules reduce detector-counted insecure API use across all six tested coding agents. Positive framing has no consistent aggregate advantage over prohibition framing in this benchmark.
 
-The repository also includes a completed **1,080-trial non-API-naming extension**, a **2,160-valid-row four-arm decomposition with 5 retained failed attempts disclosed**, a bounded **1,200-row cross-language extension** across five completed models, and a partial **480-row GPT-family control-baseline extension**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension is directional evidence for Python/Go portability, with GPT-5.3 Codex excluded due to route errors and language-specific rule text still needed. The control-baseline extension tests whether the original control was too adversarial by adding neutral and generic secure-coding controls; GPT-5.4 and GPT-5.4 Mini are complete for this checkpoint, GPT-5.3 Codex is route-blocked, and Claude-family neutral/generic controls remain pending.
+The repository also includes a completed **1,080-trial non-API-naming extension**, a **2,160-valid-row four-arm decomposition with 5 retained failed attempts disclosed**, a bounded **1,200-row cross-language extension** across five completed models, and a partial **480-row GPT-family control-baseline extension**. The non-API extension shows that removing explicit insecure API names does not make all prompts safe: formula-evaluation tasks remain vulnerable without naming `eval()`, while hash and token prompts are 0/720 vulnerable without naming MD5 or `Math.random()`. The four-arm decomposition separates pure prohibition, pure alternative guidance, and combined guidance. The cross-language extension is directional evidence for Python/Go portability, with GPT-5.3 Codex excluded due to route errors and language-specific rule text still needed. The control-baseline extension tests whether the original control was too adversarial by adding neutral and generic secure-coding controls; GPT-5.4 and GPT-5.4 Mini are complete for this checkpoint, GPT-5.3 Codex is route-blocked, and Claude-family neutral/generic controls remain pending. The robustness companion analyses are complete, and the incident archive is kept out of the main claim surface for venue packaging.
 
 ## Final Dataset
 
@@ -51,7 +51,7 @@ Current validation slice:
 - Structural detector audit on the same 60 rows: 20 TP, 40 TN, 0 FP, 0 FN.
 - OpenRouter Claude validation cost: about `$0.1896`.
 
-Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a 2,160-valid-row four-arm decomposition with retained failed attempts disclosed, a bounded 1,200-row cross-language extension, and a partial 480-row GPT-family control-baseline checkpoint. A deterministic 360-row full-output validation plan now exists, but it has not been run yet.
+Current paper status: bounded replication with a 60-row full-output detector and functional-validation slice, a completed 1,080-trial non-API extension, a 2,160-valid-row four-arm decomposition with retained failed attempts disclosed, a bounded 1,200-row cross-language extension, and a partial 480-row GPT-family control-baseline checkpoint. The robustness companion is complete, the incident material is appendix-only for submission packaging, and a deterministic 360-row full-output validation plan now exists but has not been run yet.
 
 ## Main Artifacts
 
@@ -127,6 +127,7 @@ Required before submission:
 - Adopt the title "Targeted Security Rules Reduce Insecure API Use in LLM Coding Agents: A Multi-Model Study of Positive vs. Prohibition Framing" unless equivalence testing is added.
 - Complete neutral and generic-security controls, or clearly label the current control as an adversarial fast-prototyping baseline.
 - Keep full-study claims bounded to detector-counted insecure API use under code previews; only the 60-row full-output slice has manual task-satisfaction labels.
+- Keep the archive/incident material appendix-only or separate-paper material in venue-specific copies.
 - Expand functional task-satisfaction labels beyond the current 60-row slice if making full-dataset functional-correctness claims.
 - Keep equivalence claims bounded to the current random-effects sensitivity analysis: aggregate positive-vs-prohibition practical equivalence within +/-5 percentage points, with local heterogeneity.
 - Demote the bidirectional instruction-decay incident to an appendix note or separate paper; do not frame it as a main contribution.

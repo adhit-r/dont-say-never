@@ -47,6 +47,8 @@ This checklist defines what must be true before publishing a Zenodo v2 artifact 
 - `experiments/validation/`
 - `experiments/analysis/`
 - `experiments/scripts/`
+- `scripts/check-release-consistency.py`
+- `scripts/build-zenodo-v2-artifact.sh`
 - `figures/fig-pro-gpt-vs-claude-bars.png`
 - `figures/fig-pro-polarity-heatmap.png`
 - `figures/fig-pro-control-baseline-heatmap.png`
@@ -86,10 +88,14 @@ python3.11 experiments/scripts/summarize-combined-detector-validation.py
 python3.11 experiments/scripts/semantic-detector-audit.py
 python3.11 experiments/scripts/classify-functional-refusal-validation.py
 python3.11 figures/generate-pro-replication-figures.py
-find README.md ARTIFACT_README.md ARTIFACT_FREEZE_CHECKLIST.md ARTIFACT_COMMIT.txt LICENSE CITATION.cff .zenodo.json requirements.txt research paper/ARCHIVE_README.md paper/arxiv experiments/data/pro-replication experiments/validation experiments/analysis experiments/scripts figures incidents/2026-04-15-copilot-quota -type f \
+python3.11 scripts/check-release-consistency.py
+find README.md ARTIFACT_README.md ARTIFACT_FREEZE_CHECKLIST.md ARTIFACT_COMMIT.txt LICENSE CITATION.cff .zenodo.json requirements.txt research paper/ARCHIVE_README.md paper/arxiv experiments/data/pro-replication experiments/validation experiments/analysis experiments/scripts scripts figures incidents/2026-04-15-copilot-quota -type f \
   ! -path '*/__pycache__/*' ! -name '.DS_Store' ! -path 'paper/arxiv/Archive.zip' \
   -print0 | sort -z | xargs -0 shasum -a 256 > SHA256SUMS
+bash scripts/build-zenodo-v2-artifact.sh
 ```
+
+The zip helper rebuilds `dist/dont-say-never-zenodo-v2-artifact.zip` from the exact `SHA256SUMS` surface, excluding `.DS_Store`, `__pycache__`, and `paper/arxiv/Archive.zip`, then writes `dist/dont-say-never-zenodo-v2-artifact.zip.sha256`.
 
 ## Zenodo Metadata
 

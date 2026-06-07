@@ -14,7 +14,7 @@ The core result is strong and useful:
 
 > Concrete, targeted security rules substantially reduce detector-counted insecure API use in this benchmark; positive wording does not consistently outperform prohibition wording; rule information content appears more important than polarity.
 
-The main weakness is not the headline result. The headline result is probably directionally real. The main weakness is measurement validity: the original 2,160-trial dataset preserves code previews rather than full outputs, and the 60-row full-output validation audit found that the original recorded detector labels had 5 false positives and 3 false negatives before patching.
+The main weakness is not the headline result. The headline result is probably directionally real. The main weakness is measurement validity: the original 2,160-trial dataset preserves code previews rather than full outputs, and the 60-row full-output validation audit found that the original recorded detector labels had 5 false positives and 3 false negatives before patching. Zenodo v2 is already frozen, the archive material has been quarantined to appendix/separate-paper use, and the remaining work is submission packaging plus validation/control completion.
 
 Reviewer-safe positioning:
 
@@ -27,6 +27,7 @@ Reviewer-safe positioning:
 | Lane | Status | Progress | Evidence | Remaining blocker |
 | --- | --- | ---: | --- | --- |
 | Zenodo v2 release | Done | 100% | DOI `10.5281/zenodo.20574220`; tag `v2.0.0` | None |
+| Release/archive cleanup | Done | 100% | v2 package frozen; incident evidence kept appendix-only or separate-paper material | None |
 | Core 2,160-trial replication | Done | 100% | `experiments/data/pro-replication/main/`; 6 models x 360 valid rows, 0 errors | Full-output audit still bounded |
 | Paper/PDF artifact | Done | 100% | `paper/arxiv/paper.tex`, `paper/arxiv/paper.pdf` | Venue template later |
 | Figures and infographics | Done | 95% | `figures/fig-pro-*.png`, four-arm figures, evidence-stack infographic | Optional visual polish only |
@@ -40,12 +41,12 @@ Reviewer-safe positioning:
 | Opus provenance sensitivity | Done | 100% | `experiments/analysis/opus-provenance-sensitivity.md`; leave-Opus conclusions unchanged | Optional clean-route-only Opus split if recoverable |
 | Full-output rerun | Plan built | 20% | `experiments/validation/full-output-360/plan.jsonl`; 360 balanced planned rows | Execute rerun, label outputs, summarize detector validity |
 | Multi-turn agent workflow | Not started | 0% | Plan exists conceptually | New repo-task benchmark |
-| Venue packaging | Not started | 15% | Strategy/checklist exists | TMLR/ACM/JISA conversion |
+| Venue packaging | In progress | 35% | Strategy/checklist exists; v2 and robustness docs aligned | TMLR/ACM/JISA conversion |
 
 Overall readiness:
 
 - Zenodo v2 artifact: **100%**.
-- AISec/JISA-style empirical paper: **76%**.
+- AISec/JISA-style empirical paper: **78%**.
 - TMLR submission: **65%**.
 - Proper full-conference version: **40%**.
 
@@ -308,6 +309,13 @@ Status: done.
 - Git tag: `v2.0.0`
 - Community submission can be added separately.
 
+### Archive Cleanup
+
+Status: done for submission packaging.
+
+- Incident evidence is kept out of the main claim surface and treated as appendix-only or separate-paper material.
+- The current release package is frozen around the Zenodo v2 artifact and companion validation/robustness outputs.
+
 ### JISA
 
 Best near-term journal route if we keep claims applied and bounded.
@@ -364,7 +372,8 @@ Target: AISec/JISA-ready.
 2. Add Opus-exclusion sensitivity.
 3. Add mixed-effects or Bayesian model if cheap.
 4. Update paper limitations and detector-validity section.
-5. Produce AISec/JISA draft.
+5. Keep the incident archive appendix-only in venue-specific copies.
+6. Produce AISec/JISA draft.
 
 ### Phase 2: Upgrade Ecological Validity
 

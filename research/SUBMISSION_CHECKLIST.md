@@ -48,11 +48,18 @@
 - [x] Refusal/no-code outputs are reported separately from secure functional outputs.
 - [ ] Manual annotation is blinded for at least a stratified sample.
 
+## Next Actions
+
+- [ ] Run the 360-row full-output validation plan and fold the patched-detector summary into the paper.
+- [ ] Finish or explicitly freeze the neutral helpful-assistant and generic secure-coding controls for the chosen venue path.
+- [ ] Prepare venue-specific copies: AISec/JISA keep the incident material appendix-only; TMLR anonymizes author, repo, DOI, and incident references.
+
 ## Controls and Statistics
 
 - [ ] Complete a neutral helpful-assistant control.
 - [x] Keep the current fast-prototyping/no-extra-security control as an adversarial baseline, not the only control.
 - [ ] Complete a generic secure-coding control.
+- [x] Stratum-bootstrap / Mantel-Haenszel robustness companion is complete and cited in the paper.
 - [ ] Add hierarchical logistic regression or Bayesian hierarchical modeling.
 - [x] Add confidence intervals/effect sizes for all aggregate claims.
 - [x] Add multiple-testing correction for exploratory per-cell tests.
